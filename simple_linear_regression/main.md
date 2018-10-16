@@ -94,7 +94,7 @@ Regression models describe the effect that *explanatory* variables (also called 
 
 Regression analysis has numerous areas of applications.  A partial list would include economics, finance, business, law, meteorology, medicine, biology, chemistry, engineering, physics, education, sports, history, sociology, and psychology.  
 
-While studying natural inheritance in 1886, scientist Francis Galton collected data on heights of parents and adult children.  He noticed the tendency for tall (or short) parents to have tall (or short) children, but not as tall (or short) on average as their parents.  Galton called this phenomenon the “Law of Universal Regression” for the average heights of adult children tended to “regress” to the mean of the population.  Galton modeled a son’s adult height (y) as a function of mid-parent height (x), and the term *regression model* was coined[[^]](https://www.deepdyve.com/lp/wiley/francis-galton-and-regression-to-the-mean-rkELkMmOVt). 
+While studying natural inheritance in 1886, scientist Francis Galton collected data on heights of parents and adult children.  He noticed the tendency for tall (or short) parents to have tall (or short) children, but not as tall (or short) on average as their parents.  Galton called this phenomenon the “Law of Universal Regression” for the average heights of adult children tended to “regress” to the mean of the population.  Galton modeled a son’s adult height ($y$) as a function of mid-parent height ($x$), and the term *regression model* was coined[[^]](https://www.deepdyve.com/lp/wiley/francis-galton-and-regression-to-the-mean-rkELkMmOVt). 
 
 An exercise physiologist might use regression analysis to develop an equation for predicting the expected number of calories a person will burn while exercising on a treadmill.  The response variable is the number of calories burned (calculated from the amount of oxygen consumed), and the predictor variables might include duration of exercise (minutes), percentage of time spent at their target heart rate, average speed (mph), age (years), gender, and body mass index (BMI).
 
@@ -115,7 +115,7 @@ In its simplest form regression is used to determine the relationship between tw
 
 ## The Straight-Line Probabilistic Model
 
-An important consideration in merchandising a product is the amount of money spent on advertising.  Suppose you want to model the monthly sales revenue y of a department store as a function of the monthly advertising expenditure x.  The first question to be answered is this:  Do you think an exact (deterministic) relationship exists between these two variables?  That is, can the exact value of sales revenue be predicted if the advertising expenditure is specified?  This is not possible for several reasons.  Sales depend on many variables other than advertising expenditure – for example, time of year, state of the general economy, inventory, and price structure.  However, even if many variables are included in the model, it is still unlikely that we can predict the monthly sales *exactly.*  There will almost certainly be some variation in sales due strictly to **random phenomena** that cannot be modeled or explained.
+An important consideration in merchandising a product is the amount of money spent on advertising.  Suppose you want to model the monthly sales revenue $y$ of a department store as a function of the monthly advertising expenditure $x$.  The first question to be answered is this:  Do you think an exact (deterministic) relationship exists between these two variables?  That is, can the exact value of sales revenue be predicted if the advertising expenditure is specified?  This is not possible for several reasons.  Sales depend on many variables other than advertising expenditure – for example, time of year, state of the general economy, inventory, and price structure.  However, even if many variables are included in the model, it is still unlikely that we can predict the monthly sales *exactly.*  There will almost certainly be some variation in sales due strictly to **random phenomena** that cannot be modeled or explained.
 
 Consequently, we need to propose a probabilistic model for sales revenue that accounts for this random variation: $y = E(y) + ε$.  The random error component $ε$, represents all unexplained variations in sales caused by important but omitted variables or by unexplainable random phenomena.
 
@@ -128,7 +128,7 @@ The value denoted by $β_0$ is called the *intercept*, and that of $β_1$ is cal
 
 ## Fitting the Model: The Method of Least Squares
 
-The goal is to use our sample data to estimate the regression parameters, yielding the estimates $\hat{\beta}_0$ and $\hat{\beta}_1$; this is referred to as *fitting* the linear model.  This is equivalent to finding the straight line that gives the *best fit* of the points in the scatterplot of the response versus the predictor variable.  In this case, the data comprise n pairs of observations for each individual.  The fitted model of interest concerns the mean response value, denoted $\hat{y}$ for a specific value of the predictor, $x$, and is written as follows:  $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x$.
+The goal is to use our sample data to estimate the regression parameters, yielding the estimates $\hat{\beta}_0$ and $\hat{\beta}_1$; this is referred to as *fitting* the linear model.  This is equivalent to finding the straight line that gives the *best fit* of the points in the scatterplot of the response versus the predictor variable.  In this case, the data comprise $n$ pairs of observations for each individual.  The fitted model of interest concerns the mean response value, denoted $\hat{y}$ for a specific value of the predictor, $x$, and is written as follows:  $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x$.
 
 We estimate the parameters using the *least squares method*, which gives the line that minimizes the sum of squares of the *vertical differences* from each point to the line.  The vertical distances represent the errors in the response variable.  These errors can be obtained as $ε_i = y_i- \hat{\beta}_0 - \hat{\beta}_1 x_i,\; i=1, 2, \cdots,n$.  The sum of squares of these distances (often referred to as residuals) can then be written as $SSR = \sum_{i=1}^{i=n} ε_i^2 = \sum_{i=1}^{i=n}(y_i- \hat{\beta}_0 - \hat{\beta}_1 x_i)^2$.
 The values of $\hat{\beta}_0$ and $\hat{\beta}_1$ that minimize SSR are given by
@@ -155,7 +155,7 @@ These vertical distances are called the *ordinary least squares residuals*.  One
 
 In R, the basic function for fitting a linear model is `lm()`[[^]](https://www.r-bloggers.com/r-tutorial-series-simple-linear-regression/).  The format is
 
-```r
+```
 myfit <- lm(formula, data)
 ```
 
@@ -181,7 +181,7 @@ Suppose you want to predict weight from height.  Having an equation for predicti
 
 Figure 2.  Simple linear regression model for predicting weight from height.
 
-From the output, we see that the prediction equation is $\widehat{\mathrm{Weight}}= -87.52+3.45 × \mathrm{Height}$.  Because a height of $0$ is impossible, we wouldn’t try to give a physical interpretation to the intercept.  It merely becomes an adjustment constant. The estimate of the slope ($3.45$) indicates that there’s an expected increase of $3.45$ pounds of weight for every $1$ inch increase in height.
+From the output, we see that the prediction equation is $\widehat{\mathrm{Weight}}= -87.52+3.45 × \mathrm{Height}$.  Because a height of 0 is impossible, we wouldn’t try to give a physical interpretation to the intercept.  It merely becomes an adjustment constant. The estimate of the slope (3.45) indicates that there’s an expected increase of 3.45 pounds of weight for every 1 inch increase in height.
 
 We’ve printed out the actual, predicted, and residual values (figure 3).  The `fitted( )` and `residuals( )` functions applied to the object returned by lm( ) list the predicted and residual values, respectively, in a fitted model.
 
@@ -244,13 +244,13 @@ The validity of the conclusions you can draw based on the model $y= β_0+ β_1 x
 - The errors associated with any two different observations are independent.  That is, the error associated with one value of $y$ has no effect on the errors associated with other $y$ values.
 
 The $ε$ term represents random error.  In other words, you assume that any raw value of the response is owed to a linear change in a given value of $x$, plus or minus some random, *residual* variation or normally distributed *noise*.
-The implications of the first three assumptions can be seen in figure 7, which shows distributions of errors for three particular values of $x$, namely $x_1$, $x_2$, and $x_3$.  Note that the relative frequency distributions of the errors are normal, with a mean of $0$, and a constant variance $σ^2$ (all the distributions shown have the same amount of spread or variability) [[^]](https://saylordotorg.github.io/text_introductory-statistics/s14-correlation-and-regression.html).
+The implications of the first three assumptions can be seen in figure 7, which shows distributions of errors for three particular values of $x$, namely $x_1$, $x_2$, and $x_3$.  Note that the relative frequency distributions of the errors are normal, with a mean of 0, and a constant variance $σ^2$ (all the distributions shown have the same amount of spread or variability) [[^]](https://saylordotorg.github.io/text_introductory-statistics/s14-correlation-and-regression.html).
 
 ![Figure 7](images/fig7.jpg)
 
 Figure 7.  The probability distribution of $ε$.
 
-Let’s return to the basic extractor function `summary()` as shown in figure 2 and repeated in figure 8 for our example of predicting weight from height for a sample of $15$ adult females.  
+Let’s return to the basic extractor function `summary()` as shown in figure 2 and repeated in figure 8 for our example of predicting weight from height for a sample of 15 adult females.  
 
 ![Figure 8](images/fig8.png)
 
@@ -260,13 +260,13 @@ The following portion of the output gives a superficial view of the distribution
  
 ![Figure 8b](images/fig8b.png)
 
-The mean of the residuals is zero by definition, so the median should not be far from zero, and the minimum and maximum should be roughly equal in absolute value.  In this example, the absolute value of the maximum is considerably greater than that of the minimum.  However, in view of the small number of observations ($15$), this is not really something to worry about.
+The mean of the residuals is zero by definition, so the median should not be far from zero, and the minimum and maximum should be roughly equal in absolute value.  In this example, the absolute value of the maximum is considerably greater than that of the minimum.  However, in view of the small number of observations (15), this is not really something to worry about.
 
 Following is the residual variation, an expression of the variation of the observations around the regression line, estimating the model parameter $σ$.
 
 ![Figure 8c](images/fig8c.png)
 
-Since the residual standard error measures the spread of the distribution of $y$-values about the least squares line and these errors are assumed to be normally distributed, we should not be surprised to find that most (about $95\%$) of the observations lie within $2(1.525) = 3.05$ of the least squares line.  For this example, $14$ of the $15$ data points fall within $3.05$ of the least squares line.
+Since the residual standard error measures the spread of the distribution of $y$-values about the least squares line and these errors are assumed to be normally distributed, we should not be surprised to find that most (about 95%) of the observations lie within $2(1.525) = 3.05$ of the least squares line.  For this example, 14 of the 15 data points fall within 3.05 of the least squares line.
 The value of the residual standard error will be utilized in tests of model adequacy, in evaluating model parameters, and in providing measures of reliability for future predictions.
 
 ## Assessing the Accuracy of the Coefficient Estimates
@@ -307,17 +307,17 @@ To the `confint()` function you pass your model object as the first argument and
 
 ![Figure 10](images/fig10.png)
 
-Figure 10.  Use of `confint()` function to construct $95\%$ confidence intervals for the regression coefficients.
+Figure 10.  Use of `confint()` function to construct 95% confidence intervals for the regression coefficients.
 
-Figure 10 indicates that you should be $95$ percent confident the true value of $β_1$ lies somewhere between $3.25$ and $3.65$ (to $2$ decimal places).  The exclusion of the null value of zero reflects the statistically significant result from earlier.
+Figure 10 indicates that you should be 95 percent confident the true value of $β_1$ lies somewhere between $3.25$ and 3.65 (to 2 decimal places).  The exclusion of the null value of zero reflects the statistically significant result from earlier.
 
 #### Activity 3:  
 
-Referring to the linear model relating distance to speed using the `cars` dataset, construct the $90\%$ confidence intervals for the $y$-intercept and the slope.
+Referring to the linear model relating distance to speed using the `cars` dataset, construct the 90% confidence intervals for the $y$-intercept and the slope.
 
 ## Using the Model for Estimation and Prediction
 
-We’ll now look at using our fitted model for predictive purposes.  The ability to fit a statistical model means that you not only can understand and quantify the nature of relationships in your data (like the estimated $3.45$ pound increase in mean weight per $1$ inch increase in height) but can also *predict* values of the outcome of interest, even where you haven’t actually observed the values of any explanatory variables in the original data set.  As with any statistic, though, there is always a need to accompany any point estimates or predictions with a measure of spread.
+We’ll now look at using our fitted model for predictive purposes.  The ability to fit a statistical model means that you not only can understand and quantify the nature of relationships in your data (like the estimated 3.45 pound increase in mean weight per 1 inch increase in height) but can also *predict* values of the outcome of interest, even where you haven’t actually observed the values of any explanatory variables in the original data set.  As with any statistic, though, there is always a need to accompany any point estimates or predictions with a measure of spread.
 
 ### Confidence Interval or Prediction Interval?
  
