@@ -635,7 +635,7 @@ One of the basic assumptions of the regression model is the independence of the 
 
 $$D=\frac{\sum^n_{i=2}(e_i-e_{i-1})^2}{\sum^n_{i=2}e_i^2}, \\[2em]  \textrm{with } e_i = \textrm{ residual at the time period } i$$
 
-The numerator represents the squared difference between two successive residuals, summed from the second value to the nth value and the denominator represents the sum of the squared residuals.
+The numerator represents the squared difference between two successive residuals, summed from the second value to the $n$th value and the denominator represents the sum of the squared residuals.
 
 The Durbin-Watson statistic is always between 0 and 4. A value of 2 means that there is no autocorrelation in the sample. Values from 0 to less than 2 indicate positive autocorrelation and values from more than 2 to 4 indicate negative autocorrelation.
 
@@ -643,7 +643,7 @@ Next, we need to determine when the autocorrelation is large enough to conclude 
  
 ![Figure 36b](images/fig36b.png)
 
-In the table above, two values are shown for each combination of $α$ (level of significance), $n$ (sample size), and $k$ (number of independent variables in the model). The first value, $d_L$, represents the lower critical value.  If $D$ is below $d_L$, we conclude that there is evidence of positive autocorrelation among the residuals. If this occurs, the least-squares method used in this model is inappropriate, and we should use alternative methods. The second value, $d_U$, represents the upper critical value of $D$, above which we would conclude that there is no evidence of positive autocorrelation among the residuals. If $D$ is between $d_L$ and $d_U$, we are unable to arrive at a definite conclusion.
+In the table above, two values are shown for each combination of $\alpha$ (level of significance), $n$ (sample size), and $k$ (number of independent variables in the model). The first value, $d_L$, represents the lower critical value.  If $D$ is below $d_L$, we conclude that there is evidence of positive autocorrelation among the residuals. If this occurs, the least-squares method used in this model is inappropriate, and we should use alternative methods. The second value, $d_U$, represents the upper critical value of $D$, above which we would conclude that there is no evidence of positive autocorrelation among the residuals. If $D$ is between $d_L$ and $d_U$, we are unable to arrive at a definite conclusion.
 
 #### Example:
 
