@@ -117,20 +117,20 @@ In its simplest form regression is used to determine the relationship between tw
 
 An important consideration in merchandising a product is the amount of money spent on advertising.  Suppose you want to model the monthly sales revenue $y$ of a department store as a function of the monthly advertising expenditure $x$.  The first question to be answered is this:  Do you think an exact (deterministic) relationship exists between these two variables?  That is, can the exact value of sales revenue be predicted if the advertising expenditure is specified?  This is not possible for several reasons.  Sales depend on many variables other than advertising expenditure – for example, time of year, state of the general economy, inventory, and price structure.  However, even if many variables are included in the model, it is still unlikely that we can predict the monthly sales *exactly.*  There will almost certainly be some variation in sales due strictly to **random phenomena** that cannot be modeled or explained.
 
-Consequently, we need to propose a probabilistic model for sales revenue that accounts for this random variation: $y = E(y) + ε$.  The random error component $ε$, represents all unexplained variations in sales caused by important but omitted variables or by unexplainable random phenomena.
+Consequently, we need to propose a probabilistic model for sales revenue that accounts for this random variation: $y = E(y) + \varepsilon$.  The random error component $\varepsilon$, represents all unexplained variations in sales caused by important but omitted variables or by unexplainable random phenomena.
 
-In this module, we consider the simplest of probabilistic models – a **simple linear regression model.**  The relationship between a response variable $y$ and a predictor variable $x$ is postulated as a straight-line model:  $y= β_0 + β_1 x + ε$, where $β_0$ and $β_1$ are constants called the *model regression coefficients* or *parameters*, and $ε$ is a random disturbance or error.  It is assumed that in the range of the observations studied, the linear equation provides an acceptable approximation to the true relation between $y$ and $x$.  In other words, $y$ is approximately a linear function of $x$, and $ε$ measures the discrepancy in that approximation.  In particular $ε$ contains no systematic information for determining $y$ that is not already captured in $x$.
+In this module, we consider the simplest of probabilistic models – a **simple linear regression model.**  The relationship between a response variable $y$ and a predictor variable $x$ is postulated as a straight-line model:  $y= \beta_0 + \beta_1 x + \varepsilon$, where $\beta_0$ and $\beta_1$ are constants called the *model regression coefficients* or *parameters*, and $\varepsilon$ is a random disturbance or error.  It is assumed that in the range of the observations studied, the linear equation provides an acceptable approximation to the true relation between $y$ and $x$.  In other words, $y$ is approximately a linear function of $x$, and $\varepsilon$ measures the discrepancy in that approximation.  In particular $\varepsilon$ contains no systematic information for determining $y$ that is not already captured in $x$.
 
-The value denoted by $β_0$ is called the *intercept*, and that of $β_1$ is called the *slope*.  Together, they are also referred to as the *regression coefficients* and are interpreted as follows:
+The value denoted by $\beta_0$ is called the *intercept*, and that of $\beta_1$ is called the *slope*.  Together, they are also referred to as the *regression coefficients* and are interpreted as follows:
 
-- The intercept, $β_0$, is interpreted as the expected value of the response variable when the value of predictor variable $x$ is set to zero. 
-- Generally, the slope, $β_1$, is the focus of interest.  This is interpreted as the change in the mean response ($y$) for each one-unit increase in the predictor ($x$).  When the slope is positive, the regression line increases from left to right (the mean response is higher when the predictor is higher); when the slope is negative, the line decreases from left to right (the mean response is lower when the predictor is higher).  When the slope is zero, this implies that the predictor has no effect on the value of the response.  The more extreme the value of $β_1$ (that is, away from zero), the steeper the increasing or decreasing line becomes.
+- The intercept, $\beta_0$, is interpreted as the expected value of the response variable when the value of predictor variable $x$ is set to zero. 
+- Generally, the slope, $\beta_1$, is the focus of interest.  This is interpreted as the change in the mean response ($y$) for each one-unit increase in the predictor ($x$).  When the slope is positive, the regression line increases from left to right (the mean response is higher when the predictor is higher); when the slope is negative, the line decreases from left to right (the mean response is lower when the predictor is higher).  When the slope is zero, this implies that the predictor has no effect on the value of the response.  The more extreme the value of $\beta_1$ (that is, away from zero), the steeper the increasing or decreasing line becomes.
 
 ## Fitting the Model: The Method of Least Squares
 
 The goal is to use our sample data to estimate the regression parameters, yielding the estimates $\hat{\beta}_0$ and $\hat{\beta}_1$; this is referred to as *fitting* the linear model.  This is equivalent to finding the straight line that gives the *best fit* of the points in the scatterplot of the response versus the predictor variable.  In this case, the data comprise $n$ pairs of observations for each individual.  The fitted model of interest concerns the mean response value, denoted $\hat{y}$ for a specific value of the predictor, $x$, and is written as follows:  $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x$.
 
-We estimate the parameters using the *least squares method*, which gives the line that minimizes the sum of squares of the *vertical differences* from each point to the line.  The vertical distances represent the errors in the response variable.  These errors can be obtained as $ε_i = y_i- \hat{\beta}_0 - \hat{\beta}_1 x_i,\; i=1, 2, \cdots,n$.  The sum of squares of these distances (often referred to as residuals) can then be written as $SSR = \sum_{i=1}^{i=n} ε_i^2 = \sum_{i=1}^{i=n}(y_i- \hat{\beta}_0 - \hat{\beta}_1 x_i)^2$.
+We estimate the parameters using the *least squares method*, which gives the line that minimizes the sum of squares of the *vertical differences* from each point to the line.  The vertical distances represent the errors in the response variable.  These errors can be obtained as $\varepsilon_i = y_i- \hat{\beta}_0 - \hat{\beta}_1 x_i,\; i=1, 2, \cdots,n$.  The sum of squares of these distances (often referred to as residuals) can then be written as $SSR = \sum_{i=1}^{i=n} \varepsilon_i^2 = \sum_{i=1}^{i=n}(y_i- \hat{\beta}_0 - \hat{\beta}_1 x_i)^2$.
 The values of $\hat{\beta}_0$ and $\hat{\beta}_1$ that minimize SSR are given by
 
 $$\hat{\beta}_1 = \frac{\sum(y_i- y)  (x_i- x)}{\sum(x_i- x)^2}$$
@@ -237,18 +237,18 @@ For the model fit in Activity 1, create a plot connecting the actual observation
 
 Model Assumptions
 
-The validity of the conclusions you can draw based on the model $y= β_0+ β_1 x+ ε$ is critically dependent on the assumptions made about $ε$, which are defined as follows:
-- The value of $ε$ is assumed to be normally distributed such that $ε \sim N(0,σ)$.
-- That $ε$ is centered (that is, has a mean of) zero.
-- The variance of $ε$, $σ^2$, is constant.
+The validity of the conclusions you can draw based on the model $y= \beta_0+ \beta_1 x+ \varepsilon$ is critically dependent on the assumptions made about $\varepsilon$, which are defined as follows:
+- The value of $\varepsilon$ is assumed to be normally distributed such that $\varepsilon \sim N(0,\sigma)$.
+- That $\varepsilon$ is centered (that is, has a mean of) zero.
+- The variance of $\varepsilon$, $\sigma^2$, is constant.
 - The errors associated with any two different observations are independent.  That is, the error associated with one value of $y$ has no effect on the errors associated with other $y$ values.
 
-The $ε$ term represents random error.  In other words, you assume that any raw value of the response is owed to a linear change in a given value of $x$, plus or minus some random, *residual* variation or normally distributed *noise*.
-The implications of the first three assumptions can be seen in figure 7, which shows distributions of errors for three particular values of $x$, namely $x_1$, $x_2$, and $x_3$.  Note that the relative frequency distributions of the errors are normal, with a mean of 0, and a constant variance $σ^2$ (all the distributions shown have the same amount of spread or variability) [[^]](https://saylordotorg.github.io/text_introductory-statistics/s14-correlation-and-regression.html).
+The $\varepsilon$ term represents random error.  In other words, you assume that any raw value of the response is owed to a linear change in a given value of $x$, plus or minus some random, *residual* variation or normally distributed *noise*.
+The implications of the first three assumptions can be seen in figure 7, which shows distributions of errors for three particular values of $x$, namely $x_1$, $x_2$, and $x_3$.  Note that the relative frequency distributions of the errors are normal, with a mean of 0, and a constant variance $\sigma^2$ (all the distributions shown have the same amount of spread or variability) [[^]](https://saylordotorg.github.io/text_introductory-statistics/s14-correlation-and-regression.html).
 
 ![Figure 7](images/fig7.jpg)
 
-Figure 7.  The probability distribution of $ε$.
+Figure 7.  The probability distribution of $\varepsilon$.
 
 Let’s return to the basic extractor function `summary()` as shown in figure 2 and repeated in figure 8 for our example of predicting weight from height for a sample of 15 adult females.  
 
@@ -262,7 +262,7 @@ The following portion of the output gives a superficial view of the distribution
 
 The mean of the residuals is zero by definition, so the median should not be far from zero, and the minimum and maximum should be roughly equal in absolute value.  In this example, the absolute value of the maximum is considerably greater than that of the minimum.  However, in view of the small number of observations (15), this is not really something to worry about.
 
-Following is the residual variation, an expression of the variation of the observations around the regression line, estimating the model parameter $σ$.
+Following is the residual variation, an expression of the variation of the observations around the regression line, estimating the model parameter $\sigma$.
 
 ![Figure 8c](images/fig8c.png)
 
@@ -276,22 +276,22 @@ The estimated slope and intercept will deviate somewhat from the true values due
 
 ### Hypothesis Tests on the Coefficients
 
-It is usually of prime interest to test the null hypothesis that $β_1 = 0$ since that would imply that the line was horizontal and thus that the $y$’s have a distribution that is the same, whatever the value of $x$, implying there is no statistically significant linear relationship between $x$ and $y$.  You can compute a $t$ test for that hypothesis simply by dividing the estimate by its standard error
+It is usually of prime interest to test the null hypothesis that $\beta_1 = 0$ since that would imply that the line was horizontal and thus that the $y$’s have a distribution that is the same, whatever the value of $x$, implying there is no statistically significant linear relationship between $x$ and $y$.  You can compute a $t$ test for that hypothesis simply by dividing the estimate by its standard error
 
 $$t=\frac{\hat{\beta}_1}{s.e.(\hat\beta_1)}$$
 
-which follows a $t$ distribution on $n$-$2$ degrees of freedom if the true $β_1$ is zero.  A similar test can be calculated for whether the intercept is zero, but you should be aware that it is often a meaningless hypothesis either because there is no natural reason to believe that the line should go through the origin or because it would involve an extrapolation far outside the range of data.
+which follows a $t$ distribution on $n$-$2$ degrees of freedom if the true $\beta_1$ is zero.  A similar test can be calculated for whether the intercept is zero, but you should be aware that it is often a meaningless hypothesis either because there is no natural reason to believe that the line should go through the origin or because it would involve an extrapolation far outside the range of data.
 
 Let’s now focus on the way the estimated regression coefficients are reported in R.  The first column of the coefficients table (figure 9) contains the point estimates of the intercept and slope (the intercept is labeled as such, and the slope is labeled after the name of the predictor variable in the data frame); the table also includes estimates of the standard errors of these statistics.  The standardized t value and a $p$-value are reported for each parameter.  These represent the results of a two-tailed hypothesis test formally defined as
 
-$$H_0: β_j  = 0 \\
-H_a: β_j \neq 0$$
+$$H_0: \beta_j  = 0 \\
+H_a: \beta_j \neq 0$$
 
 where $j=0$ for the intercept and $j=1$ for the slope, using standard regression notation.
 
 Focus on the row of results for the predictor in figure 9.  With a null value of zero, truth of $H_0$ implies that the predictor has no effect on the response.  The claim here is interested in whether there is *any effect* of the explanatory variable, not the direction of this effect, so $H_a$ is two-sided (via $\neq$).  As with any hypothesis test, the smaller the $p$-value, the stronger the evidence against $H_0$.  With a small $p$-value $(1.09 × 10^{-14})$ attached to this particular test statistic (which you can confirm using the formula $t=\frac{3.45-0}{0.09114}=37.85$), you’d therefore conclude there is strong evidence *against* the claim that the predictor has no effect on the mean level of the response. That means there is a statistically significant linear relationship between the predictor and the response.
 
-The same test is carried out for the intercept, but the test for the slope parameter $β_1$ is typically more interesting (since rejection of the null hypothesis for $β_0$ simply indicates evidence that the regression line does not strike the vertical axis at zero), especially when the observed data don’t include $x=0$, as is the case here.
+The same test is carried out for the intercept, but the test for the slope parameter $\beta_1$ is typically more interesting (since rejection of the null hypothesis for $\beta_0$ simply indicates evidence that the regression line does not strike the vertical axis at zero), especially when the observed data don’t include $x=0$, as is the case here.
 
 ![Figure 9](images/fig9.png)
 
@@ -309,7 +309,7 @@ To the `confint()` function you pass your model object as the first argument and
 
 Figure 10.  Use of `confint()` function to construct 95% confidence intervals for the regression coefficients.
 
-Figure 10 indicates that you should be 95 percent confident the true value of $β_1$ lies somewhere between $3.25$ and 3.65 (to 2 decimal places).  The exclusion of the null value of zero reflects the statistically significant result from earlier.
+Figure 10 indicates that you should be 95 percent confident the true value of $\beta_1$ lies somewhere between $3.25$ and 3.65 (to 2 decimal places).  The exclusion of the null value of zero reflects the statistically significant result from earlier.
 
 #### Activity 3:  
 
@@ -323,7 +323,7 @@ We’ll now look at using our fitted model for predictive purposes.  The ability
  
 The fitted regression equation can be used for prediction.  We distinguish between two types of predictions:
 1. The prediction of the value of the response variable $y$ which corresponds to any chosen value, $x_0$, of the predictor variable. 
-1. The estimation of the mean response $μ_0$, when $x= x_0$. 
+1. The estimation of the mean response $\mu_0$, when $x= x_0$. 
 
 For the first case, the predicted value $\hat{y}_0$ is
 
@@ -337,7 +337,7 @@ Hence, the confidence limits for the predicted value with confidence coefficient
 
 $$\hat{y}_0\pm t_{(n-2,\alpha/2)}s.e.(\hat{y}_0)$$
 
-For the second case, the mean response $μ_0$ is estimated by
+For the second case, the mean response $\mu_0$ is estimated by
 
 $$\hat\mu_0 = \hat\beta_0 + \hat\beta_1 x_0$$
 
@@ -345,11 +345,11 @@ The standard error of this estimate is
 
 $$s.e.(\hat\mu_0) = \hat\sigma\sqrt{\frac{1}{n}+\frac{(x_0-\bar{x})^2}{\sum(x_i-\bar{x})^2}}$$
 
-from which it follows that the confidence limits for $μ_0$ with confidence coefficient $(1- α)$ are given by
+from which it follows that the confidence limits for $\mu_0$ with confidence coefficient $(1- α)$ are given by
 
 $$\hat\mu_0 \pm t_{(n-2,\alpha/2)}s.e.(\hat\mu_0)$$
 
-Note that the point estimate of $μ_0$ is identical to the predicted response $\hat{y}_0$.  The standard error of $\hat\mu_0$ is, however, smaller than the standard error of $\hat{y}_0$.  Intuitively, this makes sense.  There is greater uncertainty (variability) in predicting one observation (the next observation) than in estimating the mean response when $x= x_0$.  The averaging that is implied in the mean response reduced the variability and uncertainty associated with the estimate.
+Note that the point estimate of $\mu_0$ is identical to the predicted response $\hat{y}_0$.  The standard error of $\hat\mu_0$ is, however, smaller than the standard error of $\hat{y}_0$.  Intuitively, this makes sense.  There is greater uncertainty (variability) in predicting one observation (the next observation) than in estimating the mean response when $x= x_0$.  The averaging that is implied in the mean response reduced the variability and uncertainty associated with the estimate.
 
 A *prediction interval (PI)* for an observed response is different from the confidence interval (CI) in terms of context.  Where CIs are used to describe the variability of the *mean* response, a PI is used to provide the possible range of values that an *individual realization* of the response variable might take, given $x$.  This distinction is subtle but important:  the CI corresponds to a mean, and the PI corresponds to an individual observation.
 
@@ -635,7 +635,7 @@ One of the basic assumptions of the regression model is the independence of the 
 
 $$D=\frac{\sum^n_{i=2}(e_i-e_{i-1})^2}{\sum^n_{i=2}e_i^2}, \\[2em]  \textrm{with } e_i = \textrm{ residual at the time period } i$$
 
-The numerator represents the squared difference between two successive residuals, summed from the second value to the nth value and the denominator represents the sum of the squared residuals.
+The numerator represents the squared difference between two successive residuals, summed from the second value to the $n$th value and the denominator represents the sum of the squared residuals.
 
 The Durbin-Watson statistic is always between 0 and 4. A value of 2 means that there is no autocorrelation in the sample. Values from 0 to less than 2 indicate positive autocorrelation and values from more than 2 to 4 indicate negative autocorrelation.
 
@@ -643,7 +643,7 @@ Next, we need to determine when the autocorrelation is large enough to conclude 
  
 ![Figure 36b](images/fig36b.png)
 
-In the table above, two values are shown for each combination of $α$ (level of significance), $n$ (sample size), and $k$ (number of independent variables in the model). The first value, $d_L$, represents the lower critical value.  If $D$ is below $d_L$, we conclude that there is evidence of positive autocorrelation among the residuals. If this occurs, the least-squares method used in this model is inappropriate, and we should use alternative methods. The second value, $d_U$, represents the upper critical value of $D$, above which we would conclude that there is no evidence of positive autocorrelation among the residuals. If $D$ is between $d_L$ and $d_U$, we are unable to arrive at a definite conclusion.
+In the table above, two values are shown for each combination of $\alpha$ (level of significance), $n$ (sample size), and $k$ (number of independent variables in the model). The first value, $d_L$, represents the lower critical value.  If $D$ is below $d_L$, we conclude that there is evidence of positive autocorrelation among the residuals. If this occurs, the least-squares method used in this model is inappropriate, and we should use alternative methods. The second value, $d_U$, represents the upper critical value of $D$, above which we would conclude that there is no evidence of positive autocorrelation among the residuals. If $D$ is between $d_L$ and $d_U$, we are unable to arrive at a definite conclusion.
 
 #### Example:
 
@@ -651,58 +651,73 @@ To illustrate positive autocorrelation, consider the case of a package delivery 
 
 
 Week|	Customers|	Sales|		Week|	Customers|	Sales
---|--|--|--|--|--
-1|	794	9.33		8	875	11.49
-2|	799	8.26		9	880	12.07
-3|	837	7.48		10	905	12.55
-4|	855	9.08		11	886	11.92
-5|	845	9.83		12	843	10.27
-6|	844	10.09		13	904	11.8
-7|	863	11.01		14	950	12.15
-				15	841	9.64
+:--:|:--:|--:|:--:|:--:|--:
+1|	794	| 9.33	|	8	| 875|	11.49
+2|	799	| 8.26	|	9	| 880|	12.07
+3|	837	| 7.48	|	10	| 905|	12.55
+4|	855	| 9.08	|	11	| 886|	11.92
+5|	845	| 9.83	|	12	| 843|	10.27
+6|	844	| 10.09	|	13	| 904|	11.80
+7|	863	| 11.01	|	14	| 950|	12.15
+| |	|			|	15	| 841|	9.64
 
-In R, the car package provides a function for the Durbin-Watson test to detect serially correlated errors.  After installing the car package, figure 37 demonstrates the use of the durbinWatsonTest( ) function for the above example applied to the simple linear regression model with sales as the response variable and customers as the predictor variable where the data was collected sequentially for 15 weeks.  As shown in figure 37, D = 0.8830.  In addition, a p-value is shown for the test statistic.  With D being well less than 2, we see that the p-value is relatively small. 
- 
+In R, the `car` package provides a function for the Durbin-Watson test to detect serially correlated errors.  After installing the `car` package, figure 37 demonstrates the use of the `durbinWatsonTest()` function for the above example applied to the simple linear regression model with sales as the response variable and customers as the predictor variable where the data was collected sequentially for 15 weeks.  As shown in figure 37, $D = 0.8830$.  In addition, a $p$-value is shown for the test statistic.  With $D$ being well less than 2, we see that the $p$-value is relatively small. 
+
+![Figure 37](images/fig37.png)
+
 Figure 37.  Use of durbinWatsonTest() function in R.
-The significant p-value (p=0.016) suggests autocorrelation and a violation of an independence of errors.  The presence of correlated errors distorts estimates of standard errors, confidence intervals, and statistical tests, and therefore we should re-estimate the equation.  When autocorrelated errors are indicated, as in this example, two approaches may be followed.  These are (1) work with transformed variables, or (2) introduce additional variables that have time-ordered effects. 
-Activity 10:  A pharmaceutical company introduced a new cold medicine.  It is sold across the United States.  Monthly sales for the first two years the product was on the market are reported in the following table.
-YEAR	MONTH	t	SALES	YEAR	MONTH	t	SALES
-1	Jan.	1	3394	2	Jan.	13	4568
-1	Feb.	2	4010	2	Feb.	14	3710
-1	Mar.	3	924	2	Mar.	15	1675
-1	Apr.	4	205	2	Apr.	16	999
-1	May	5	293	2	May	17	986
-1	Jun.	6	1130	2	Jun.	18	1786
-1	Jul.	7	1116	2	Jul.	19	2253
-1	Aug.	8	4009	2	Aug.	20	5237
-1	Sep.	9	5692	2	Sep.	21	6679
-1	Oct.	10	3458	2	Oct.	22	4116
-1	Nov.	11	2849	2	Nov.	23	4109
-1	Dec.	12	3470	2	Dec.	24	5124
 
-	Consider the simple linear regression model, y_t= β_0+ β_1 t, where y_t is the sales in month t.  Fit the simple linear model to the data.
-	Use the Durbin-Watson test to formally test for correlated errors.
+The significant $p$-value ($p=0.016$) suggests autocorrelation and a violation of an independence of errors.  The presence of correlated errors distorts estimates of standard errors, confidence intervals, and statistical tests, and therefore we should re-estimate the equation.  When autocorrelated errors are indicated, as in this example, two approaches may be followed.  These are (1) work with transformed variables, or (2) introduce additional variables that have time-ordered effects. 
 
-Final Assessment
-	trees is a standard built-in dataset in R.  You can access this dataset simply by typing in trees in your R console. This data set provides measurements of the girth, height and volume of timber in 31 felled black cherry trees. Note that girth is the diameter of the tree (in inches) measured at 4 ft 6 in above the ground.    Height is measured in feet.  The first six observations are shown below.
+#### Activity 10:  
+
+A pharmaceutical company introduced a new cold medicine.  It is sold across the United States.  Monthly sales for the first two years the product was on the market are reported in the following table.
+
+YEAR|	MONTH|	t|	SALES|	YEAR|	MONTH|	t|	SALES|
+:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+1|	Jan.|	1|	3394|	2|	Jan.|	13|	4568
+1|	Feb.|	2|	4010|	2|	Feb.|	14|	3710
+1|	Mar.|	3|	924	|	2|	Mar.|	15|	1675
+1|	Apr.|	4|	205	|	2|	Apr.|	16|	999
+1|	May.|	5|	293	|	2|	May.|	17|	986
+1|	Jun.|	6|	1130|	2|	Jun.|	18|	1786
+1|	Jul.|	7|	1116|	2|	Jul.|	19|	2253
+1|	Aug.|	8|	4009|	2|	Aug.|	20|	5237
+1|	Sep.|	9|	5692|	2|	Sep.|	21|	6679
+1|	Oct.|	10|	3458|	2|	Oct.|	22|	4116
+1|	Nov.|	11|	2849|	2|	Nov.|	23|	4109
+1|	Dec.|	12|	3470|	2|	Dec.|	24|	5124
+
+1. Consider the simple linear regression model, $y_t= \beta_0+ \beta_1 t$, where $y_t$ is the sales in month $t$.  Fit the simple linear model to the data.
+2. Use the Durbin-Watson test to formally test for correlated errors.
+
+## Final Assessment
+
+`trees` is a standard built-in dataset in R.  You can access this dataset simply by typing `trees` in your R console. This data set provides measurements of the girth, height and volume of timber in 31 felled black cherry trees. Note that girth is the diameter of the tree (in inches) measured at 4 ft 6 in above the ground.    Height is measured in feet.  The first six observations are shown below.
+
+![Figure 37b](images/fig37b.png)
  
-The goal of this exercise is to build a simple regression model that we can use to predict height (Height) by establishing a statistically significant linear relationship with girth.
-	Construct a scatter plot to visualize the linear relationship between the predictor and response.
-	Find the least squares linear regression equation for predicting the height from girth.  
-	Apply the summary( ) function to the object returned by lm( ) in (b).
-	Find the actual, predicted, and residual values of height.
-	Plot the regression line on the scatter plot created in (a).
-	Referring to the linear model relating height to girth using the trees dataset, construct the 99% confidence intervals for the y-intercept and the slope.
-	Use the regression equation relating height to girth, calculate the point estimates of height for girths of 8.5 and 10.6 inches.  Calculate the estimates directly using the regression equation.
-	For the trees data, construct 95% confidence intervals for girths of 8.5 and 10.6 inches.
-	For the trees data, construct 95% prediction intervals for girths of 8.5 and 10.6 inches.
-	Determine the Pearson correlation coefficient for the height and girth variables in the trees dataset.
-	For the linear regression model relating cherry tree height to girth, construct the four standard diagnostic plots.
+1. The goal of this exercise is to build a simple regression model that we can use to predict height (Height) by establishing a statistically significant linear relationship with girth.
+	- (a) Construct a scatter plot to visualize the linear relationship between the predictor and response.
+	- (b) Find the least squares linear regression equation for predicting the height from girth.  
+	- (c) Apply the `summary()` function to the object returned by `lm()` in (b).
+	- (d) Find the actual, predicted, and residual values of height.
+	- (e) Plot the regression line on the scatter plot created in (a).
+2. Referring to the linear model relating height to girth using the `trees` dataset, construct the 99% confidence intervals for the y-intercept and the slope.
+3. Use the regression equation relating height to girth, calculate the point estimates of height for girths of 8.5 and 10.6 inches.  Calculate the estimates directly using the regression equation.
+4. For the `trees` data, construct 95% confidence intervals for girths of 8.5 and 10.6 inches.
+5. For the `trees` data, construct 95% prediction intervals for girths of 8.5 and 10.6 inches.
+6. Determine the Pearson correlation coefficient for the height and girth variables in the `trees` dataset.
+7. For the linear regression model relating cherry tree height to girth, construct the four standard diagnostic plots.
 
  
-References:
+## References:
+
 Berenson, M. L.  Basic Business Statistics, 13th Edition, Pearson.
+
 Montgomery, D.C., Peck, E.A., Vining,G.G.  Introduction to Linear Regression Analysis, Fifth Edition, Wiley.   
+
 Senn, S.  “Francis Galton and regression to the mean,” Significance, Volume 8, No. 3, September 2011, The Royal Statistical Society.
+
 Weisberg, S.  Applied Linear Regression, Fourth Edition, Wiley.
 
