@@ -1,5 +1,9 @@
 # MNSCU Web Templates
 
+## Color
+
+MNSCU Blue: #003C66
+
 ## Protocol
 
 1. copy Word content into markdown file
@@ -13,3 +17,10 @@
 1. change body to div with same class
     - `<body class="markdown-body">` &rarr; `<div class="markdown-body">`
 1. paste into D2L
+
+
+## Pandoc protocol 
+
+```bash
+pandoc -f docx -t markdown logistic-regression.docx -o tmp.md
+```
