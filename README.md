@@ -24,3 +24,14 @@ MNSCU Blue: #003C66
 ```bash
 pandoc -f docx -t markdown logistic-regression.docx -o tmp.md
 ```
+
+## Installing Pandoc
+
+[https://pandoc.org/installing.html](Pandoc install page)
+[https://github.com/jgm/pandoc/releases/tag/2.4](Pandoc release page)
+[https://github.com/jgm/pandoc/releases/download/2.4/pandoc-2.4-windows-x86_64.msi](actual install file used 11/6/2018)
+
+## Hugo
+
+```bash
+hugo new site hugo_test
