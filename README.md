@@ -35,3 +35,5 @@ pandoc -f docx -t markdown logistic-regression.docx -o tmp.md
 
 ```bash
 hugo new site hugo_test
+```
+
