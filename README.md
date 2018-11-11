@@ -16,7 +16,31 @@ MNSCU Blue: #003C66
     - keep warning div on either side of the pasted in content
 1. change body to div with same class
     - `<body class="markdown-body">` &rarr; `<div class="markdown-body">`
-1. paste into D2L
+1. ~~paste into D2L~~ copy or download [template file](includes/metroTemplate.html)
+1. paste in script and stylesheets:
+    ```html
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+    <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+    ```
+1. find all `<h2>` tags and create `<a name="id-name">` so they look like this:
+    ```html
+    <h2 data-line="35" class="code-line code-line code-line code-line" id="resources"><a name="resources"></a>Resources</h2>
+    ```
+1. Create the sidebar links by copying out all the anchors to get somthing like:
+    ```html
+    <li><a href="#learning-objectives">Learning Objectives</a></li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#supplementary-materials">Supplementary Materials</a>Supplementary Materials</li>
+    <li><a href="#resources">Resources</a>Resources</li>
+    ```
+    - use emmet to quickly wrap things in li elements. 
+    > F1 >  
+    > Emmet: Wrap individual lines with abbreviation
+1. 
 
 
 ## Pandoc protocol 
