@@ -1,0 +1,462 @@
+html,
+body,
+footer,
+header,
+leftSideBar {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+font {
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+}
+
+body,
+p,
+ol,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 150%;
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+}
+
+
+/*-------------------------------------------------------------
+|                          Headings                           |
+-------------------------------------------------------------*/
+
+h1,
+h4,
+h5,
+h6 {
+    color: #00447C;
+}
+
+h2 {
+    color: #0067B1;
+}
+
+h3 {
+    color: #565656;
+}
+
+h1 {
+    font-size: 2.25em;
+}
+
+h2 {
+    font-size: 1.75em;
+}
+
+h3 {
+    font-size: 1.25em;
+}
+
+h4,
+h5,
+h6 {
+    font-size: 1em;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+h6 {
+    font-weight: lighter;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+    color: #353535;
+}
+
+img {
+    margin: 2.5px;
+    border: medium none;
+}
+#couInfo > p {
+    font-size: 1.25em;
+    color: #565656;
+
+}
+
+
+/*-------------------------------------------------------------
+|                          Tables                             |
+-------------------------------------------------------------*/
+
+table {
+    border: 1px solid #353535;
+    border-collapse: collapse;
+    margin: 5px;
+}
+
+td,
+th {
+    border: 1px solid #353535;
+    line-height: 120%;
+    padding: 0.2em;
+    font-size: 1em;
+}
+
+tfoot tr td {
+    border-color: inherit;
+    font-style: italic;
+    color: cadetblue;
+    background: rgba(191,191,191,.05);
+}
+
+tbody tr:nth-child(2n+1) {
+    background: none repeat scroll 0 0 #EEEEEE;
+}
+
+tbody tr:hover {
+    background: none repeat scroll 0 0 #DDDDDD;
+}
+
+.noborder {
+    border: none;
+}
+
+.nosideborder,
+.nosideborders {
+    border-right: none;
+    border-left: none;
+}
+
+.topborderonly {
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+}
+
+.noleftborder {
+    border-left: none;
+}
+
+.norightborder {
+    border-right: none;
+}
+
+.whitesides {
+    border-left-color: white;
+    border-right-color: white;
+}
+
+
+
+/*-------------------------------------------------------------
+|                           Lists                             |
+-------------------------------------------------------------*/
+
+ul {
+    list-style-type: disc;
+}
+
+ul ul {
+    list-style-type: circle;
+}
+
+ul ul ul {
+    list-style-type: square;
+}
+
+ul ul ul ul {
+    list-style-type: disc;
+}
+
+ul ul ul ul ul {
+    list-style-type: circle;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+ol ol {
+    list-style-type: lower-alpha;
+}
+
+ol ol ol {
+    list-style-type: lower-roman;
+}
+
+ol ol ol ol {
+    list-style-type: decimal;
+}
+
+ol ol ol ol ol {
+    list-style-type: lower-alpha;
+}
+
+ol ol ol ol ol ol {
+    list-style-type: lower-roman;
+}
+
+
+/*-------------------------------------------------------------
+|                           Links                             |
+-------------------------------------------------------------*/
+
+a img {
+    border: none;
+}
+
+a:link,
+a:visited {
+    color: #0062B3;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #00447C;
+    text-decoration: underline;
+}
+
+
+/*-------------------------------------------------------------
+|                         Containers                          |
+-------------------------------------------------------------*/
+
+#pageContainer {
+    width: 100%;
+    margin: 0 auto;
+    /*box-shadow: 0 1px 3px black;
+	-ms-box-shadow:  0 1px 3px black;*/
+    background: #FFF;
+    /* For browsers that do not support gradients */
+    background: -moz-linear-gradient(top, rgba(30, 87, 153, .05) 0%, rgba(125, 185, 232, 0) 25%, rgba(125, 185, 232, 0) 75%, rgba(30, 87, 153, .05) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(30, 87, 153, .05) 0%, rgba(125, 185, 232, 0) 25%, rgba(125, 185, 232, 0) 75%, rgba(30, 87, 153, .05) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(30, 87, 153, .05) 0%, rgba(125, 185, 232, 0) 25%, rgba(125, 185, 232, 0) 75%, rgba(30, 87, 153, .05) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+#mainContent {
+    position: relative;
+    margin-left: 230px;
+    background: white;
+    padding: 0 1% 1% 1%;
+    line-height: 20px;
+}
+
+#mainContent h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+}
+
+#leftSideBar {
+    background: none;
+    background-image: url(images/photos/Metrostate3.jpg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100%;
+    width: 200px;
+    float: left;
+    padding-top: 180px;
+    padding-right: 1%;
+    padding-left: 1%;
+    font-size: 1em;
+    line-height: 100%;
+}
+
+#leftSideBar ul {
+    list-style-type: none;
+}
+
+#leftSideBar ul ul {
+    list-style-type: none;
+}
+
+#leftSideBar ol {
+    list-style-type: none;
+}
+
+#leftSideBar ol ol {
+    list-style-type: none;
+}
+
+#header {
+    height: auto;
+    background: #FFF;
+    /*box-shadow: 0 1px 3px black;
+	-ms-box-shadow:  0 1px 3px black;*/
+    font-size: 2.2em;
+    font-variant: small-caps;
+    font-weight: bold;
+    color: #0062B3;
+    text-align: left;
+    line-height: 100%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    padding-left: 0px;
+    padding-right: 30px;
+    z-index: 4;
+}
+
+#footer {
+    clear: both;
+    background: #FFF;
+    background-image: url(images/icons/footer.svg);
+    background-repeat: no-repeat;
+    background-position: 99%;
+    height: 20px;
+    padding-top: 2px;
+    padding-right: 5px;
+    color: #FFF;
+    text-align: left;
+}
+
+#pageContainer .toTop {
+    position: fixed;
+    background: none;
+    background-color: #00447C;
+    border-color: none;
+    border-radius: 0em 0em 0.5em 0.5em;
+    -webkit-transform: 0em 0em 0.5em 0.5em;
+    -moz-transform: 0em 0em 0.5em 0.5em;
+    -ms-transform: 0em 0em 0.5em 0.5em;
+    -o-transform: 0em 0em 0.5em 0.5em;
+    border-style: none none none none;
+    border-width: small;
+    box-shadow: 0 1px 0px black;
+    -webkit-transform: 0 1px 0px black;
+    -moz-transform: 0 1px 0px black;
+    -ms-transform: 0 1px 0px black;
+    -o-transform: 0 1px 0px black;
+    color: white;
+    font-size: small;
+    font-weight: bold;
+    margin-left: -42px;
+    padding: 0.2em 0.2em 0.2em 0.2em;
+    text-align: center;
+    top: 70%;
+    width: 8em;
+    z-index: 5;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+}
+
+.toTop a:link {
+    color: #FFF;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.toTop a:visited {
+    color: #FFF;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.toTop a:hover {
+    text-decoration: none;
+}
+
+
+/*-------------------------------------------------------------
+                     Print Media Query                        |
+-------------------------------------------------------------*/
+
+@media print {
+    /* Font Specifications */
+    font {
+        font-family: Arial;
+        font-size: 12px;
+        color: black;
+    }
+    /* Defining spacing between lines */
+    body,
+    p,
+    ol,
+    ul,
+    li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 120%;
+    }
+    /* Body Specifications */
+    body {
+        text-align: left;
+    }
+    #pageContainer {
+        width: 100%;
+        margin: 0 auto;
+    }
+    /* Header Section Specs     */
+    #header {
+        height: 50px;
+        font-size: 120%;
+        font-variant: small-caps;
+        font-weight: bold;
+        color: black;
+        text-align: left;
+        line-height: 100%;
+        padding-top: 2%;
+        padding-left: 30px;
+        padding-right: 30px;
+        z-index: 4;
+    }
+    #leftSideBar {
+        display: none;
+    }
+    /* Content Area Specifications */
+    #mainContent {
+        display: block;
+        position: inherit;
+        margin-left: 30px;
+        background: none;
+        padding: 1%;
+        line-height: 120%;
+    }
+    #mainContent h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+        margin: 0;
+        padding: 0;
+        padding-bottom: 1em;
+    }
+    #printDiv {
+        display: none;
+    }
+    #pageContainer .toTop {
+        display: none;
+    }
+    #topPage {
+        display: none;
+    }
+    #footer {
+        display: none;
+    }
+}
