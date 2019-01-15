@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Simple Linear Regression</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js" type="text/javascript"></script>
+  <script src="inc/metroScript.js" type="text/javascript"></script>
+
+  <!--LaTex Includes-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  #leftSideBar {
+      background-color: #003C66;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: 100%;
+      min-height: 100%;
+      width: 200px;
+      float: left;
+      padding-top: 10px;
+      padding-right: 1%;
+      padding-left: 1%;
+      font-size: 1em;
+      line-height: 100%;
+      color: white;
+  }
+  
+  #leftSideBar a {
+      color: white;
+      text-decoration: none;
+  }
+  
+  #leftSideBar li {
+      margin:0 0 1em 0;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+<div id="leftSideBar">
+<img src="images/ITCoE_white200px.png">
+<!---
+  <h2 style="color:white;">Sections</h2>
+-->
+<hr style="color: white;">
+<ul>
+  <li><h2 style="color: white;">Sections</h2></li>
+</ul>
+<hr style="color: white;">
+<ul>
+<!--- Place sidebar links here like this:
+    <li><a href="#learning-objectives">Learning Objectives</a></li>
+-->
+<!--- end sidebar -->
+</ul>
+<div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png" width="32" type="image" height="32" /></div>
+<hr style="color: white;">
+<img src="images/mnstate_white200px.png">
+</div>
+<div id="mainContent">
+  <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+  
+  <!--- Place body content here -->
+  <h3 id="learning-objective-one-construct-dot-charts">Learning Objective One: Construct Dot Charts</h3>
+  <p><em><strong>Introduction</strong></em></p>
+  <p>A dot chart shows the number of counts for each category using dots. Typically, the horizontal axis shows the categories, and the vertical axis shows the number of counts. A dot chart usually shows the total number of individuals in each group.</p>
+  <p><em><strong>Knowledge</strong></em></p>
+  <p>The R function of creating a dot chart is</p>
+  <p>dotchart(x, labels=NULL, groups=NULL, gdata=NULL, cex=par(“cex”), pt.cex=cex, pch=21, gpch=21, bg=par(“bg”), color=par(“fg”), gcolor=par(“fg”), lcolor=”gray”, xlim, main= NULL, xlab=NULL, ylab=NULL)</p>
+  <p>The arguments are:</p>
+  <ul>
+  <li><p>x: a vector or matrix of values of the data</p></li>
+  <li><p>labels: a vector of labels for each point</p></li>
+  <li><p>groups: an optional factor indicating how the elements of x are grouped</p></li>
+  <li><p>gdata: data values for the groups</p></li>
+  <li><p>cex: the character size to be used</p></li>
+  <li><p>pt.cex: the cex to be applied to plooting symbols.</p></li>
+  <li><p>pch: the plotting character or symbol to be used</p></li>
+  <li><p>gpch: the plotting character or symbol to be used for group values</p></li>
+  <li><p>bg: the background color of plotting characters or symbols to be used</p></li>
+  <li><p>color: the color(s) to be used for points and labels</p></li>
+  <li><p>gcolor: the single color to be used for group labels and values</p></li>
+  <li><p>lcolor: the color to be used for the horizontal lines</p></li>
+  <li><p>xlim: horizontal range for the plot</p></li>
+  <li><p>main: title for the plot</p></li>
+  <li><p>xlab: axis label for the x-axis</p></li>
+  <li><p>ylab: axis label for the y-axis</p></li>
+  </ul>
+  <p><em><strong>Key Points to Remember</strong></em></p>
+  <p>A <strong>dot chart</strong> shows the frequencies for each category of a categorical variable. The R function is <strong>dotchart()</strong>.</p>
+  <p>When creating a dot plot, we need to make sure the horizontal axis starts from 0 using xlim=c(0, ). A common deceptive graph is a graph with the axis scale starting at some value greater than zero that exaggerates the differences between categories.</p>
+  <p><em><strong>Practice and Reflection</strong></em></p>
+  <p><em><strong>Practice</strong></em></p>
+  <p>Example 1: A survey records the number of households in each of the following category: single, couple, family of three or more. The data is shown in the table below:</p>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>Type of family</th>
+  <th>Number of households</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>Single</td>
+  <td>120</td>
+  </tr>
+  <tr class="even">
+  <td>Couple</td>
+  <td>100</td>
+  </tr>
+  <tr class="odd">
+  <td>Family of three or more</td>
+  <td>80</td>
+  </tr>
+  </tbody>
+  </table>
+  <p>Generate a dot plot</p>
+  <p>The R code is</p>
+  <p><img src="./media/image2.png" style="width:5.89583in;height:0.625in" /></p>
+  <p>The dot chart is shown in figure 2 below</p>
+  <p><img src="./media/image3.jpeg" style="width:5.45347in;height:2.58333in" /></p>
+  <p>Figure 2. Dot chart of the household distribution.</p>
+  <p>The horizontal axis shows the frequencies for each type of family, and the vertical axis shows the three categories of the variable, type of family.</p>
+  <p><em><strong>Reflection</strong></em></p>
+  <p>Activity 1: The table below records the color of 20 M&amp;M candies. Generate a table to show the number of candies for each color, and then generate a dot chart to represent the data by counts.</p>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>red</th>
+  <th>red</th>
+  <th>yellow</th>
+  <th>yellow</th>
+  <th>yellow</th>
+  <th>red</th>
+  <th>black</th>
+  <th>blue</th>
+  <th>blue</th>
+  <th>red</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>orange</td>
+  <td>black</td>
+  <td>yellow</td>
+  <td>blue</td>
+  <td>black</td>
+  <td>orange</td>
+  <td>yellow</td>
+  <td>black</td>
+  <td>red</td>
+  <td>orange</td>
+  </tr>
+  </tbody>
+  </table>
+  <p><em><strong>Assessments</strong></em></p>
+  <ol type="1">
+  <li><p>The dataset below shows the hair color of ten girls, generate a dot chart to show the frequency of hair color. Show the labels of x- and y-axis and title of the graph.</p></li>
+  </ol>
+  <table>
+  <tbody>
+  <tr class="odd">
+  <td>Brown</td>
+  <td>Black</td>
+  <td>Black</td>
+  <td>Blond</td>
+  <td>Blond</td>
+  <td>Brown</td>
+  <td>Blond</td>
+  <td>Blond</td>
+  <td>Blond</td>
+  <td>Red</td>
+  </tr>
+  </tbody>
+  </table>
+  <ol start="2" type="1">
+  <li><p>Using the following data set of paint color shown in a painting competition to generate a dot plot showing the frequencies of each color. Label the x-axis as Counts and y-axis Color. Use the solid dots (pch=16), and color the dots the same as the label. For example, a red point should be colored as red.</p></li>
+  </ol>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>yellow</th>
+  <th>grey</th>
+  <th>red</th>
+  <th>blue</th>
+  <th>green</th>
+  <th>black</th>
+  <th>grey</th>
+  <th>red</th>
+  <th>red</th>
+  <th>black</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>black</td>
+  <td>black</td>
+  <td>green</td>
+  <td>blue</td>
+  <td>blue</td>
+  <td>black</td>
+  <td>yellow</td>
+  <td>grey</td>
+  <td>black</td>
+  <td>grey</td>
+  </tr>
+  </tbody>
+  </table>
+
+
+<!--- end body -->
+  <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+<div id="footer">Where life and learning meet.</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Simple Linear Regression</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js" type="text/javascript"></script>
+  <script src="inc/metroScript.js" type="text/javascript"></script>
+
+  <!--LaTex Includes-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  #leftSideBar {
+      background-color: #003C66;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: 100%;
+      min-height: 100%;
+      width: 200px;
+      float: left;
+      padding-top: 10px;
+      padding-right: 1%;
+      padding-left: 1%;
+      font-size: 1em;
+      line-height: 100%;
+      color: white;
+  }
+  
+  #leftSideBar a {
+      color: white;
+      text-decoration: none;
+  }
+  
+  #leftSideBar li {
+      margin:0 0 1em 0;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+<div id="leftSideBar">
+<img src="images/ITCoE_white200px.png">
+<!---
+  <h2 style="color:white;">Sections</h2>
+-->
+<hr style="color: white;">
+<ul>
+  <li><h2 style="color: white;">Sections</h2></li>
+</ul>
+<hr style="color: white;">
+<ul>
+<!--- Place sidebar links here like this:
+    <li><a href="#learning-objectives">Learning Objectives</a></li>
+-->
+
+</ul>
+<div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png" width="32" type="image" height="32" /></div>
+<hr style="color: white;">
+<img src="images/mnstate_white200px.png">
+</div>
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!--- Place body content here -->
+<h4 id="learning-objective-five-construct-mosaic-plots">Learning Objective Five: Construct Mosaic plots</h4>
+<p><em><strong>Introduction</strong></em></p>
+<p>A mosaic plot shows the relationship between two qualitative variables. The mosaic plot is based on conditional probability.</p>
+<p><em><strong>Knowledge</strong></em></p>
+<p>To illustrate how a mosaic plot is generated, we use an example from a data set called Berkeley 1973 Admissions data (NCSS.com). This data is of interest, because it was used to show that males were admitted at a higher rate than females. From figure 8 below (from ncss.com), the widths of the boxes are proportional to the percentage of females and males. There are 41% of females and 59% of males among the applicants. The heights of the boxes are proportional to the percentage admitted. There are 45% of the male applicants admitted, and 30% of the female applicants admitted (Figure 8). The boxes for admitted females and males are colored blue and the boxes for not admitted females and males are colored pink. By construction, the percent for each gender is the width of the box, and the area of each box is proportional to the corresponding cell frequency.</p>
+<p><embed src="./media/image13.png" style="width:4.68705in;height:3.4in" /></p>
+<p>Figure 8. Mosaic plot of the relationship between gender and admission.</p>
+<p>To generate a mosaic plot, we need to firstly install the R package vcd. The mosaic plot function is</p>
+<p>mosaic(x, condvar = )</p>
+<ul>
+<li><p>x: the table or formula</p></li>
+<li><p>condvar: vector of integers or character strings indicating conditioning variables, if any. The table will be permuted to order them first.</p></li>
+</ul>
+<p><em><strong>Key Points to Remember</strong></em></p>
+<p>A <strong>mosaic plot</strong> shows the relationship between two categorical variables using colored boxes. The height and width of the boxes proportionally represent each variable value for each category.</p>
+<p>The R function is <strong>mosaic()</strong> with the installation of the package vcd first.</p>
+<p><em><strong>Practice and Reflection</strong></em></p>
+<p><em><strong>Practice</strong></em></p>
+<p>In example 5, we will plot the relationship between eye color and hair color from the R dataset HairEyeColor. The R code is</p>
+<p><img src="./media/image14.png" style="width:3.72917in;height:0.5in" /></p>
+<p>The mosaic plot is shown in figure 9</p>
+<p><img src="./media/image15.jpeg" style="width:5.11475in;height:3in" /></p>
+<p>Figure 9. The mosaic plot of the relationship between eye color and hair color for males and females.</p>
+<p>From figure 9, we observe that most of the males are in brown hair and brown eyes in the sample (the largest rectangle for male), and most of the females have brown hair and brown eyes (the largest rectangle for female).</p>
+<p><em><strong>Reflection</strong></em></p>
+<p>Activity 5: the data below shows a random sample of 400 University of Iowa undergraduate students. The students were classified according to gender and the college in which they are enrolled (Hogg &amp; Tanis, 2006).</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Business</th>
+<th>Engineering</th>
+<th>Liberal Arts</th>
+<th>Nursing</th>
+<th>Pharmacy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td>21</td>
+<td>16</td>
+<td>145</td>
+<td>2</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td>14</td>
+<td>4</td>
+<td>175</td>
+<td>13</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p><em><strong>Assessment</strong></em></p>
+<p>In 1912 the luxury liner Titanic, on its first voyage across the Atlantic, struck an iceberg and sank. Some passengers got off the ship in lifeboats, but many died. The two-way table gives information about adult passengers who lived and who died, by class of travel.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Survival Status</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Class of Travel</td>
+<td>Survived</td>
+<td>Died</td>
+</tr>
+<tr class="even">
+<td>First class</td>
+<td>197</td>
+<td>122</td>
+</tr>
+<tr class="odd">
+<td>Second class</td>
+<td>94</td>
+<td>167</td>
+</tr>
+<tr class="even">
+<td>Third class</td>
+<td>151</td>
+<td>476</td>
+</tr>
+</tbody>
+</table>
+<p>Generate a mosaic plot to show the relationship between survival status and the class of travel.</p>
+<!--- end body -->
+  <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+<div id="footer">Where life and learning meet.</div>
+</div>
+</div>
+</body>
+</html>

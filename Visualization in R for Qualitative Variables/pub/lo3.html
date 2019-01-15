@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Simple Linear Regression</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js" type="text/javascript"></script>
+  <script src="inc/metroScript.js" type="text/javascript"></script>
+
+  <!--LaTex Includes-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  #leftSideBar {
+      background-color: #003C66;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: 100%;
+      min-height: 100%;
+      width: 200px;
+      float: left;
+      padding-top: 10px;
+      padding-right: 1%;
+      padding-left: 1%;
+      font-size: 1em;
+      line-height: 100%;
+      color: white;
+  }
+  
+  #leftSideBar a {
+      color: white;
+      text-decoration: none;
+  }
+  
+  #leftSideBar li {
+      margin:0 0 1em 0;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+<div id="leftSideBar">
+<img src="images/ITCoE_white200px.png">
+<!---
+  <h2 style="color:white;">Sections</h2>
+-->
+<hr style="color: white;">
+<ul>
+  <li><h2 style="color: white;">Sections</h2></li>
+</ul>
+<hr style="color: white;">
+<ul>
+<!--- Place sidebar links here like this:
+    <li><a href="#learning-objectives">Learning Objectives</a></li>
+-->
+
+<!-- end sidebar -->
+</ul>
+<div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png" width="32" type="image" height="32" /></div>
+<hr style="color: white;">
+<img src="images/mnstate_white200px.png">
+</div>
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!--- Place body content here -->
+<h4 id="learning-objective-three-construct-stacked-bar-charts">Learning Objective Three: Construct Stacked Bar Charts</h4>
+<p><em><strong>Introduction</strong></em></p>
+<p>Stacked bar chart shows several measurements for one individual. A stacked bar has several layers, with each layer representing one variable. A stacked bar is used to represent more than one variables for each category.</p>
+<p><em><strong>Knowledge</strong></em></p>
+<p>The R function is the same as the barplot function, with the argument <em>beside=FALSE</em>. The R function is</p>
+<p>barplot(x, width=1, space=NULL, names.arg=NULL, legend.text=NULL, beside=FALSE, horiz=FALSE, density=NULL, angle=45, col=NULL, border=par(“fg”), main=NULL, xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL, inside=TRUE)</p>
+<p>The arguments were introduced in the previous learning objective (learning objective two).</p>
+<p><em><strong>Key Points to Remember</strong></em></p>
+<p>A <strong>stacked bar plot</strong> shows measurements of multiple variables for each individual (or category). When plotting the stacked bar, we still need to use ylim=c(0, ) to make the y-axis start from 0. The R function is <strong>barplot()</strong> with the argument beside=FALSE.</p>
+<p><em><strong>Practice and Reflection</strong></em></p>
+<p><em><strong>Practice</strong></em></p>
+<p>Example 3: The following data listed the height (in cm.), weight (in lb.), and circumference (in cm.) of three types of trees. Use stack bar to represent each type of tree.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tree</th>
+<th>Height (cm)</th>
+<th>Weight (lb)</th>
+<th>Circumference (cm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maple</td>
+<td>210</td>
+<td>100</td>
+<td>70</td>
+</tr>
+<tr class="even">
+<td>Pine</td>
+<td>320</td>
+<td>130</td>
+<td>69</td>
+</tr>
+<tr class="odd">
+<td>Oak</td>
+<td>290</td>
+<td>109</td>
+<td>89</td>
+</tr>
+<tr class="even">
+<td>Poplar</td>
+<td>410</td>
+<td>180</td>
+<td>90</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/image6.png" style="width:5.84375in;height:2.33333in" /></p>
+<p>The bar chart is shown in figure 4 below</p>
+<p><img src="./media/image7.jpeg" style="width:5.45349in;height:3in" /></p>
+<p>Figure 4. The stacked bar plot of trees’ height, weight and circumference. The x-axis shows the four types of trees. The y-axis shows the measurements of height (black), weight (grey), and circumference (light grey).</p>
+<p><em><strong>Reflection</strong></em> Activity 3: The data below recorded five samples and the two values associated with each sample. Make a stacked bar plot to show the data.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Sample</th>
+<th>Value1</th>
+<th>Value2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>7</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><em><strong>Assessment</strong></em></p>
+<p>We are interested in investigating the percentage of children who have been immunized and the corresponding mortality rate for children under five in a country. The table listed the data of the percentage of immunized children and the mortality rate for a randomly chosen 9 countries.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Percentage immunized</th>
+<th>Mortality rate per 1000 births</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bolivia</td>
+<td>77</td>
+<td>118</td>
+</tr>
+<tr class="even">
+<td>Cambodia</td>
+<td>32</td>
+<td>184</td>
+</tr>
+<tr class="odd">
+<td>China</td>
+<td>94</td>
+<td>43</td>
+</tr>
+<tr class="even">
+<td>Czech Republic</td>
+<td>99</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>Egypt</td>
+<td>89</td>
+<td>55</td>
+</tr>
+<tr class="even">
+<td>Ethiopia</td>
+<td>13</td>
+<td>208</td>
+</tr>
+<tr class="odd">
+<td>Mexico</td>
+<td>91</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td>Senegal</td>
+<td>47</td>
+<td>145</td>
+</tr>
+<tr class="odd">
+<td>Turkey</td>
+<td>76</td>
+<td>87</td>
+</tr>
+</tbody>
+</table>
+<p>Generate a stacked bar plot to show the percentage immunized and mortality rate for each country; Title the graph as “immunization and mortality rate of nine countries”.</p>
+
+<!--- end body -->
+  <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+<div id="footer">Where life and learning meet.</div>
+</div>
+</div>
+</body>
+</html>
