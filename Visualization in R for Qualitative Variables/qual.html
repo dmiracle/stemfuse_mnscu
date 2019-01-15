@@ -1,0 +1,581 @@
+<h1 id="module-visualization-in-r-for-qualitative-variables">Module Visualization in R for Qualitative Variables</h1>
+<h1 id="introduction-and-learning-objective">Introduction and Learning Objective</h1>
+<p>Introduction</p>
+<p>Data visualization helps us to interpret a dataset. It helps us to observe the patterns of data, identify outliers and influential points, and understand important features of the data. Exploratory data visualization helps to see the details of the data. For example, if we use the R function plot(ChickWeight$Time, ChickWeight$weight) to explore the Chick Weight data as following, then we can see the weight vary with time, and the weight deviates more through time (figure 1).</p>
+<p><img src="./media/image1.jpeg" style="width:4.74805in;height:3in" /></p>
+<p>Figure 1. Explore the Chick Weight data in R.</p>
+<p>The way a variable is presented graphically should be adapted to the type of variable. For a qualitative variable, dot charts, bar charts, stacked bar charts, and pie charts are commonly used. In this module, we will introduce different R functions for plotting qualitative variables.</p>
+<p>Learning Objectives</p>
+<p>After this module, students will be able to</p>
+<ul>
+<li><p>Generate dot plot</p></li>
+<li><p>Generate pie chart</p></li>
+<li><p>Generate bar chart</p></li>
+<li><p>Generate histogram</p></li>
+<li><p>Generate mosaic plot</p></li>
+</ul>
+<h3 id="learning-objective-one-construct-dot-charts">Learning Objective One: Construct Dot Charts</h3>
+<p><em><strong>Introduction</strong></em></p>
+<p>A dot chart shows the number of counts for each category using dots. Typically, the horizontal axis shows the categories, and the vertical axis shows the number of counts. A dot chart usually shows the total number of individuals in each group.</p>
+<p><em><strong>Knowledge</strong></em></p>
+<p>The R function of creating a dot chart is</p>
+<p>dotchart(x, labels=NULL, groups=NULL, gdata=NULL, cex=par(“cex”), pt.cex=cex, pch=21, gpch=21, bg=par(“bg”), color=par(“fg”), gcolor=par(“fg”), lcolor=”gray”, xlim, main= NULL, xlab=NULL, ylab=NULL)</p>
+<p>The arguments are:</p>
+<ul>
+<li><p>x: a vector or matrix of values of the data</p></li>
+<li><p>labels: a vector of labels for each point</p></li>
+<li><p>groups: an optional factor indicating how the elements of x are grouped</p></li>
+<li><p>gdata: data values for the groups</p></li>
+<li><p>cex: the character size to be used</p></li>
+<li><p>pt.cex: the cex to be applied to plooting symbols.</p></li>
+<li><p>pch: the plotting character or symbol to be used</p></li>
+<li><p>gpch: the plotting character or symbol to be used for group values</p></li>
+<li><p>bg: the background color of plotting characters or symbols to be used</p></li>
+<li><p>color: the color(s) to be used for points and labels</p></li>
+<li><p>gcolor: the single color to be used for group labels and values</p></li>
+<li><p>lcolor: the color to be used for the horizontal lines</p></li>
+<li><p>xlim: horizontal range for the plot</p></li>
+<li><p>main: title for the plot</p></li>
+<li><p>xlab: axis label for the x-axis</p></li>
+<li><p>ylab: axis label for the y-axis</p></li>
+</ul>
+<p><em><strong>Key Points to Remember</strong></em></p>
+<p>A <strong>dot chart</strong> shows the frequencies for each category of a categorical variable. The R function is <strong>dotchart()</strong>.</p>
+<p>When creating a dot plot, we need to make sure the horizontal axis starts from 0 using xlim=c(0, ). A common deceptive graph is a graph with the axis scale starting at some value greater than zero that exaggerates the differences between categories.</p>
+<p><em><strong>Practice and Reflection</strong></em></p>
+<p><em><strong>Practice</strong></em></p>
+<p>Example 1: A survey records the number of households in each of the following category: single, couple, family of three or more. The data is shown in the table below:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Type of family</th>
+<th>Number of households</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single</td>
+<td>120</td>
+</tr>
+<tr class="even">
+<td>Couple</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>Family of three or more</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+<p>Generate a dot plot</p>
+<p>The R code is</p>
+<p><img src="./media/image2.png" style="width:5.89583in;height:0.625in" /></p>
+<p>The dot chart is shown in figure 2 below</p>
+<p><img src="./media/image3.jpeg" style="width:5.45347in;height:2.58333in" /></p>
+<p>Figure 2. Dot chart of the household distribution.</p>
+<p>The horizontal axis shows the frequencies for each type of family, and the vertical axis shows the three categories of the variable, type of family.</p>
+<p><em><strong>Reflection</strong></em></p>
+<p>Activity 1: The table below records the color of 20 M&amp;M candies. Generate a table to show the number of candies for each color, and then generate a dot chart to represent the data by counts.</p>
+<table>
+<thead>
+<tr class="header">
+<th>red</th>
+<th>red</th>
+<th>yellow</th>
+<th>yellow</th>
+<th>yellow</th>
+<th>red</th>
+<th>black</th>
+<th>blue</th>
+<th>blue</th>
+<th>red</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>orange</td>
+<td>black</td>
+<td>yellow</td>
+<td>blue</td>
+<td>black</td>
+<td>orange</td>
+<td>yellow</td>
+<td>black</td>
+<td>red</td>
+<td>orange</td>
+</tr>
+</tbody>
+</table>
+<p><em><strong>Assessments</strong></em></p>
+<ol type="1">
+<li><p>The dataset below shows the hair color of ten girls, generate a dot chart to show the frequency of hair color. Show the labels of x- and y-axis and title of the graph.</p></li>
+</ol>
+<table>
+<tbody>
+<tr class="odd">
+<td>Brown</td>
+<td>Black</td>
+<td>Black</td>
+<td>Blond</td>
+<td>Blond</td>
+<td>Brown</td>
+<td>Blond</td>
+<td>Blond</td>
+<td>Blond</td>
+<td>Red</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><p>Using the following data set of paint color shown in a painting competition to generate a dot plot showing the frequencies of each color. Label the x-axis as Counts and y-axis Color. Use the solid dots (pch=16), and color the dots the same as the label. For example, a red point should be colored as red.</p></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>yellow</th>
+<th>grey</th>
+<th>red</th>
+<th>blue</th>
+<th>green</th>
+<th>black</th>
+<th>grey</th>
+<th>red</th>
+<th>red</th>
+<th>black</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>black</td>
+<td>black</td>
+<td>green</td>
+<td>blue</td>
+<td>blue</td>
+<td>black</td>
+<td>yellow</td>
+<td>grey</td>
+<td>black</td>
+<td>grey</td>
+</tr>
+</tbody>
+</table>
+<h4 id="learning-objective-two-construct-bar-charts">Learning Objective Two: Construct Bar Charts</h4>
+<p><em><strong>Introduction</strong></em></p>
+<p>Bar chart shows the number of counts in each category as bars. It is similar to a dot chart. Instead of using dots to represent the frequencies, a bar chart uses bars to represent the counts. The x-axis is the category, and the y-axis is the count.</p>
+<p><em><strong>Knowledge</strong></em></p>
+<p>The R function for bar chart is</p>
+<p>barplot(x, width=1, space=NULL, names.arg=NULL, legend.text=NULL, beside=FALSE, horiz=FALSE, density=NULL, angle=45, col=NULL, border=par(“fg”), main=NULL, xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL, inside=TRUE)</p>
+<p>Arguments:</p>
+<ul>
+<li><p>x: a vector or matrix of values showing the data</p></li>
+<li><p>width: optional vector of bar width</p></li>
+<li><p>space: the amount of space left before each bar. May be given as a single value or one value per bar</p></li>
+<li><p>names.arg: a vector of names to be plotted below each bar or group of bars.</p></li>
+<li><p>legend.text: a vector of text used to construct a legend for the plot, or a logical indicating whether a legend should be included</p></li>
+<li><p>beside: a logical value. If FALSE, the columns of x are portrayed as stacked bars, and if TRUE the columns are portrayed as juxtaposed bars</p></li>
+<li><p>horiz: a logical value. If FALSE, the bars are drawn vertically with the first bar to the left. If TRUE, the bars are drawn horizontally with the first at the bottom</p></li>
+<li><p>density: a vector giving the density of shading lines, in lines per inch, for the bars or bar components. The default value of NULL means that no shading lines are drawn.</p></li>
+<li><p>angle: the slope of shading lines, given as an angle in degrees for the bars or bar components</p></li>
+<li><p>border: the color be used for the border of the bars. Use border=NA to omit borders</p></li>
+<li><p>main: title of the plot</p></li>
+<li><p>xlab: label of the x-axis</p></li>
+<li><p>ylab: label of the y-axis</p></li>
+<li><p>xlim: limits for the x-axis</p></li>
+<li><p>ylim: limits for the y-axis</p></li>
+<li><p>inside: a logical value. If TRUE, the lines which divide adjacent bars will be drawn</p></li>
+</ul>
+<p><em><strong>Key Points to Remember</strong></em></p>
+<p>A <strong>bar chart</strong> shows the frequencies of each category of a categorical variable, with the x-axis showing the categories and y-axis showing the frequencies. The R function is <strong>barplot()</strong>.</p>
+<p>When plotting a bar chart, we need to make sure the y-axis starts from zero to accurately show the difference between categories.</p>
+<p><em><strong>Practice and Reflection</strong></em></p>
+<p><em><strong>Practice</strong></em></p>
+<p>Example 2: Use the data in example 1, create a bar chart. The R code is</p>
+<p><img src="./media/image4.png" style="width:5.98958in;height:0.77083in" /></p>
+<p>The ylim=c(0,120) guarantees the graph starts from 0 for the y-axis. The bar chart is shown in figure 3 below.</p>
+<p><img src="./media/image5.jpeg" style="width:4.85386in;height:2.3125in" /></p>
+<p>Figure 3. Bar chart of the household distribution.</p>
+<p><em><strong>Reflections</strong></em></p>
+<p>Activity 2: Use the data in activity 1, create a bar chart to show the frequencies of each color of the M&amp;M candy.</p>
+<p><em><strong>Assessments</strong></em></p>
+<p>We are interested in investigating the relationship between the percentage of children who have been immunized and the corresponding mortality rate for children under five in a country. The table listed the data of the percentage of immunized children and the mortality rate for a randomly chosen 9 countries.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Percentage immunized</th>
+<th>Mortality rate per 1000 births</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bolivia</td>
+<td>77</td>
+<td>118</td>
+</tr>
+<tr class="even">
+<td>Cambodia</td>
+<td>32</td>
+<td>184</td>
+</tr>
+<tr class="odd">
+<td>China</td>
+<td>94</td>
+<td>43</td>
+</tr>
+<tr class="even">
+<td>Czech Republic</td>
+<td>99</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>Egypt</td>
+<td>89</td>
+<td>55</td>
+</tr>
+<tr class="even">
+<td>Ethiopia</td>
+<td>13</td>
+<td>208</td>
+</tr>
+<tr class="odd">
+<td>Mexico</td>
+<td>91</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td>Senegal</td>
+<td>47</td>
+<td>145</td>
+</tr>
+<tr class="odd">
+<td>Turkey</td>
+<td>76</td>
+<td>87</td>
+</tr>
+</tbody>
+</table>
+<p>Generate a bar plot to show the percentage immunized for each country; Title the graph as “immunization rate of nine countries”; Label the y-axis as “percent immunized”.</p>
+<h4 id="learning-objective-three-construct-stacked-bar-charts">Learning Objective Three: Construct Stacked Bar Charts</h4>
+<p><em><strong>Introduction</strong></em></p>
+<p>Stacked bar chart shows several measurements for one individual. A stacked bar has several layers, with each layer representing one variable. A stacked bar is used to represent more than one variables for each category.</p>
+<p><em><strong>Knowledge</strong></em></p>
+<p>The R function is the same as the barplot function, with the argument <em>beside=FALSE</em>. The R function is</p>
+<p>barplot(x, width=1, space=NULL, names.arg=NULL, legend.text=NULL, beside=FALSE, horiz=FALSE, density=NULL, angle=45, col=NULL, border=par(“fg”), main=NULL, xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL, inside=TRUE)</p>
+<p>The arguments were introduced in the previous learning objective (learning objective two).</p>
+<p><em><strong>Key Points to Remember</strong></em></p>
+<p>A <strong>stacked bar plot</strong> shows measurements of multiple variables for each individual (or category). When plotting the stacked bar, we still need to use ylim=c(0, ) to make the y-axis start from 0. The R function is <strong>barplot()</strong> with the argument beside=FALSE.</p>
+<p><em><strong>Practice and Reflection</strong></em></p>
+<p><em><strong>Practice</strong></em></p>
+<p>Example 3: The following data listed the height (in cm.), weight (in lb.), and circumference (in cm.) of three types of trees. Use stack bar to represent each type of tree.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tree</th>
+<th>Height (cm)</th>
+<th>Weight (lb)</th>
+<th>Circumference (cm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Maple</td>
+<td>210</td>
+<td>100</td>
+<td>70</td>
+</tr>
+<tr class="even">
+<td>Pine</td>
+<td>320</td>
+<td>130</td>
+<td>69</td>
+</tr>
+<tr class="odd">
+<td>Oak</td>
+<td>290</td>
+<td>109</td>
+<td>89</td>
+</tr>
+<tr class="even">
+<td>Poplar</td>
+<td>410</td>
+<td>180</td>
+<td>90</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/image6.png" style="width:5.84375in;height:2.33333in" /></p>
+<p>The bar chart is shown in figure 4 below</p>
+<p><img src="./media/image7.jpeg" style="width:5.45349in;height:3in" /></p>
+<p>Figure 4. The stacked bar plot of trees’ height, weight and circumference. The x-axis shows the four types of trees. The y-axis shows the measurements of height (black), weight (grey), and circumference (light grey).</p>
+<p><em><strong>Reflection</strong></em> Activity 3: The data below recorded five samples and the two values associated with each sample. Make a stacked bar plot to show the data.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Sample</th>
+<th>Value1</th>
+<th>Value2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>7</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><em><strong>Assessment</strong></em></p>
+<p>We are interested in investigating the percentage of children who have been immunized and the corresponding mortality rate for children under five in a country. The table listed the data of the percentage of immunized children and the mortality rate for a randomly chosen 9 countries.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Percentage immunized</th>
+<th>Mortality rate per 1000 births</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bolivia</td>
+<td>77</td>
+<td>118</td>
+</tr>
+<tr class="even">
+<td>Cambodia</td>
+<td>32</td>
+<td>184</td>
+</tr>
+<tr class="odd">
+<td>China</td>
+<td>94</td>
+<td>43</td>
+</tr>
+<tr class="even">
+<td>Czech Republic</td>
+<td>99</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>Egypt</td>
+<td>89</td>
+<td>55</td>
+</tr>
+<tr class="even">
+<td>Ethiopia</td>
+<td>13</td>
+<td>208</td>
+</tr>
+<tr class="odd">
+<td>Mexico</td>
+<td>91</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td>Senegal</td>
+<td>47</td>
+<td>145</td>
+</tr>
+<tr class="odd">
+<td>Turkey</td>
+<td>76</td>
+<td>87</td>
+</tr>
+</tbody>
+</table>
+<p>Generate a stacked bar plot to show the percentage immunized and mortality rate for each country; Title the graph as “immunization and mortality rate of nine countries”.</p>
+<h4 id="learning-objective-four-construct-pie-charts">Learning Objective Four: Construct Pie Charts</h4>
+<p><em><strong>Introduction</strong></em></p>
+<p>Pie chart is used to show the proportions (or counts) of categories. A pie chart is a very common graph that depicts quantitative data as slices of a circle, in which the size of each slice is proportional to the frequency count for the category. Although pie charts are common, they are not very effective.</p>
+<p><em><strong>Knowledge</strong></em></p>
+<p>The R function is</p>
+<p>pie(x, labels=names(x), clockwise=FALSE, density=NULL, angle=45, main=NULL, col=variable)</p>
+<p>The arguments are:</p>
+<ul>
+<li><p>x: a vector of non-negative numerical quantities. The values in x are displayed as the areas of pie slices</p></li>
+<li><p>labels: one or more expressions or character strings giving names for the slices.</p></li>
+<li><p>clockwise: logical indicating if slices are drawn clockwise or counter clockwise; FALSE is the default setting</p></li>
+<li><p>density: the density of shading lines, in lines per inch. The default value of NULL means that no shading lines are drawn.</p></li>
+<li><p>angel: the slope of shading lines, given as an angle in degrees.</p></li>
+<li><p>main: title of the graph</p></li>
+<li><p>col: color; if col=names(x), then the color of the pie matches the legend</p></li>
+</ul>
+<p><em><strong>Key Points to Remember</strong></em></p>
+<p>A <strong>pie chart</strong> displays the frequency or relative frequency of each category of a qualitative variable. The R function is <strong>pie()</strong>. A pie chart is not very visually effective in showing the difference between categories, and is not recommended.</p>
+<p><em><strong>Practice and Reflection</strong></em></p>
+<p><em><strong>Practice</strong></em></p>
+<p>Example 4: A bag of M&amp;M candies has six color: red, blue, green, yellow, black, and orange. In a sample of 200 candies in a bag, there are 60 red, 30 blue, 20 green, 25 yellow, 40 black and 25 orange. Make a pie chart to show the number of each color. Make another pie chart to show the percentage of each color. The R code is</p>
+<p><img src="./media/image8.png" style="width:6.5in;height:2.63542in" /></p>
+<p>The pie chart is shown in figure 6 below</p>
+<p><img src="./media/image9.jpeg" style="width:5.08604in;height:3in" /></p>
+<p>Figure 6.a. Pie chart to show the distribution of the six color</p>
+<p><img src="./media/image10.jpeg" style="width:5.08604in;height:3in" /></p>
+<p>Figure 6.b. Pie chart to show the distribution of the six color in percentage</p>
+<p>Normally, a bar chart shows the data more effectively than a pie chart with a more accurate scale. For example, the data below shows the number of stolen boats in a recent year. Let us compare the bar chart and pie chart reprinting the same data (Triola, 2018)</p>
+<table>
+<thead>
+<tr class="header">
+<th>Boat type</th>
+<th>Number stolen</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Jet Ski</td>
+<td>1400</td>
+</tr>
+<tr class="even">
+<td>Motor Boat</td>
+<td>1000</td>
+</tr>
+<tr class="odd">
+<td>Utility Boat</td>
+<td>400</td>
+</tr>
+<tr class="even">
+<td>Inboard</td>
+<td>200</td>
+</tr>
+<tr class="odd">
+<td>Sail Boat</td>
+<td>70</td>
+</tr>
+</tbody>
+</table>
+<p>A bar chart is shown in figure 7.a, and a pie chart is shown in figure 7.b.</p>
+<p><img src="./media/image11.jpeg" style="width:3.12017in;height:2.6in" /><img src="./media/image12.jpeg" style="width:3.2528in;height:2.7in" /></p>
+<p>Figure 7.a. Bar chart of boat stolen data Figure 7.b. Pie chart of boat stolen data</p>
+<p>From figure 7, a bar chart does a better job of showing the relative sizes of different types of boat stolen and the trend. A bar chart effectively shows the difference among categories with only one color, while the differences among the utility boat, in board, and sail boat are not very easy to tell from a pie chart.</p>
+<p><em><strong>Reflection</strong></em></p>
+<p>Activity 4: A survey was conducted to study the political affiliation distribution. Among the 300 people surveyed, 101 of them are Republicans, 129 are Democrats, and 70 are others. Generate a pie chart to show the political affiliation distribution.</p>
+<p><em><strong>Assessment</strong></em></p>
+<p>Using the following data set of paint color shown in a painting competition to generate a pie chart showing the frequencies of each color. Title the graph. Match the legend with the color.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>blue</td>
+<td>black</td>
+<td>red</td>
+<td>red</td>
+<td>grey</td>
+<td>red</td>
+<td>blue</td>
+<td>green</td>
+<td>black</td>
+<td>black</td>
+<td>red</td>
+<td>red</td>
+<td>black</td>
+</tr>
+</tbody>
+</table>
+<h4 id="learning-objective-five-construct-mosaic-plots">Learning Objective Five: Construct Mosaic plots</h4>
+<p><em><strong>Introduction</strong></em></p>
+<p>A mosaic plot shows the relationship between two qualitative variables. The mosaic plot is based on conditional probability.</p>
+<p><em><strong>Knowledge</strong></em></p>
+<p>To illustrate how a mosaic plot is generated, we use an example from a data set called Berkeley 1973 Admissions data (NCSS.com). This data is of interest, because it was used to show that males were admitted at a higher rate than females. From figure 8 below (from ncss.com), the widths of the boxes are proportional to the percentage of females and males. There are 41% of females and 59% of males among the applicants. The heights of the boxes are proportional to the percentage admitted. There are 45% of the male applicants admitted, and 30% of the female applicants admitted (Figure 8). The boxes for admitted females and males are colored blue and the boxes for not admitted females and males are colored pink. By construction, the percent for each gender is the width of the box, and the area of each box is proportional to the corresponding cell frequency.</p>
+<p><embed src="./media/image13.emf" style="width:4.68705in;height:3.4in" /></p>
+<p>Figure 8. Mosaic plot of the relationship between gender and admission.</p>
+<p>To generate a mosaic plot, we need to firstly install the R package vcd. The mosaic plot function is</p>
+<p>mosaic(x, condvar = )</p>
+<ul>
+<li><p>x: the table or formula</p></li>
+<li><p>condvar: vector of integers or character strings indicating conditioning variables, if any. The table will be permuted to order them first.</p></li>
+</ul>
+<p><em><strong>Key Points to Remember</strong></em></p>
+<p>A <strong>mosaic plot</strong> shows the relationship between two categorical variables using colored boxes. The height and width of the boxes proportionally represent each variable value for each category.</p>
+<p>The R function is <strong>mosaic()</strong> with the installation of the package vcd first.</p>
+<p><em><strong>Practice and Reflection</strong></em></p>
+<p><em><strong>Practice</strong></em></p>
+<p>In example 5, we will plot the relationship between eye color and hair color from the R dataset HairEyeColor. The R code is</p>
+<p><img src="./media/image14.png" style="width:3.72917in;height:0.5in" /></p>
+<p>The mosaic plot is shown in figure 9</p>
+<p><img src="./media/image15.jpeg" style="width:5.11475in;height:3in" /></p>
+<p>Figure 9. The mosaic plot of the relationship between eye color and hair color for males and females.</p>
+<p>From figure 9, we observe that most of the males are in brown hair and brown eyes in the sample (the largest rectangle for male), and most of the females have brown hair and brown eyes (the largest rectangle for female).</p>
+<p><em><strong>Reflection</strong></em></p>
+<p>Activity 5: the data below shows a random sample of 400 University of Iowa undergraduate students. The students were classified according to gender and the college in which they are enrolled (Hogg &amp; Tanis, 2006).</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Business</th>
+<th>Engineering</th>
+<th>Liberal Arts</th>
+<th>Nursing</th>
+<th>Pharmacy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td>21</td>
+<td>16</td>
+<td>145</td>
+<td>2</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td>14</td>
+<td>4</td>
+<td>175</td>
+<td>13</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p><em><strong>Assessment</strong></em></p>
+<p>In 1912 the luxury liner Titanic, on its first voyage across the Atlantic, struck an iceberg and sank. Some passengers got off the ship in lifeboats, but many died. The two-way table gives information about adult passengers who lived and who died, by class of travel.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Survival Status</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Class of Travel</td>
+<td>Survived</td>
+<td>Died</td>
+</tr>
+<tr class="even">
+<td>First class</td>
+<td>197</td>
+<td>122</td>
+</tr>
+<tr class="odd">
+<td>Second class</td>
+<td>94</td>
+<td>167</td>
+</tr>
+<tr class="even">
+<td>Third class</td>
+<td>151</td>
+<td>476</td>
+</tr>
+</tbody>
+</table>
+<p>Generate a mosaic plot to show the relationship between survival status and the class of travel.</p>

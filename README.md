@@ -30,7 +30,7 @@ MNSCU Blue: #003C66
     ```html
     <h2 data-line="35" class="code-line code-line code-line code-line" id="resources"><a name="resources"></a>Resources</h2>
     ```
-1. Create the sidebar links by copying out all the anchors to get somthing like:
+1. Create the sidebar links by copying out all the anchors to get something like:
     ```html
     <li><a href="#learning-objectives">Learning Objectives</a></li>
     <li><a href="#requirements">Requirements</a></li>
