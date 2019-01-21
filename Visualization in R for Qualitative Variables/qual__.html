@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Simple Linear Regression</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js" type="text/javascript"></script>
+  <script src="inc/metroScript.js" type="text/javascript"></script>
+
+  <!--LaTex Includes-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  #leftSideBar {
+      background-color: #003C66;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: 100%;
+      min-height: 100%;
+      width: 200px;
+      float: left;
+      padding-top: 10px;
+      padding-right: 1%;
+      padding-left: 1%;
+      font-size: 1em;
+      line-height: 100%;
+      color: white;
+  }
+  
+  #leftSideBar a {
+      color: white;
+      text-decoration: none;
+  }
+  
+  #leftSideBar li {
+      margin:0 0 1em 0;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+<div id="leftSideBar">
+<img src="images/ITCoE_white200px.png">
+<!---
+  <h2 style="color:white;">Sections</h2>
+-->
+<hr style="color: white;">
+<ul>
+  <li><h2 style="color: white;">Sections</h2></li>
+</ul>
+<hr style="color: white;">
+<ul>
+<!--- Place sidebar links here like this:
+    <li><a href="#learning-objectives">Learning Objectives</a></li>
+-->
+
+<!--- end sidebar -->
+</ul>
+<div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png" width="32" type="image" height="32" /></div>
+<hr style="color: white;">
+<img src="images/mnstate_white200px.png">
+</div>
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!--- Place body content here -->
+
+<body class="markdown-body">
+  <h1 id="module-visualization-in-r-for-qualitative-variables" data-line="0" class="code-line">Module Visualization in R for Qualitative Variables</h1>
+  <h1 id="introduction-and-learning-objective" data-line="3" class="code-line">Introduction and Learning Objective</h1>
+  <p data-line="6" class="code-line">Introduction</p>
+  <p data-line="8" class="code-line">Data visualization helps us to interpret a dataset. It helps us to
+  observe the patterns of data, identify outliers and influential points,
+  and understand important features of the data. Exploratory data
+  visualization helps to see the details of the data. For example, if we
+  use the R function plot(ChickWeight$Time, ChickWeight$weight) to
+  explore the Chick Weight data as following, then we can see the weight
+  vary with time, and the weight deviates more through time (figure 1).</p>
+  <p data-line="16" class="code-line"><img src="/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image1.jpeg" alt="" class="loading" id="image-hash-7b1351d6be330e20f638d726550d9f55078f6a420ea060babfc2eab00095ca26">{width=&quot;4.74805227471566in&quot; height=&quot;3.0in&quot;}</p>
+  <p data-line="18" class="code-line">Figure 1. Explore the Chick Weight data in R.</p>
+  <p data-line="20" class="code-line">The way a variable is presented graphically should be adapted to the
+  type of variable. For a qualitative variable, dot charts, bar charts,
+  stacked bar charts, and pie charts are commonly used. In this module, we
+  will introduce different R functions for plotting qualitative variables.</p>
+  <p data-line="25" class="code-line">Learning Objectives</p>
+  <p data-line="27" class="code-line">After this module, students will be able to</p>
+  <ul>
+  <li data-line="29" class="code-line">
+  <p data-line="29" class="code-line">Generate dot plot</p>
+  </li>
+  <li data-line="31" class="code-line">
+  <p data-line="31" class="code-line">Generate pie chart</p>
+  </li>
+  <li data-line="33" class="code-line">
+  <p data-line="33" class="code-line">Generate bar chart</p>
+  </li>
+  <li data-line="35" class="code-line">
+  <p data-line="35" class="code-line">Generate histogram</p>
+  </li>
+  <li data-line="37" class="code-line">
+  <p data-line="37" class="code-line">Generate mosaic plot</p>
+  </li>
+  </ul>
+  <h3 id="learning-objective-one-construct-dot-charts" data-line="39" class="code-line">Learning Objective One: Construct Dot Charts</h3>
+  <p data-line="41" class="code-line"><em><strong>Introduction</strong></em></p>
+  <p data-line="43" class="code-line">A dot chart shows the number of counts for each category using dots.
+  Typically, the horizontal axis shows the categories, and the vertical
+  axis shows the number of counts. A dot chart usually shows the total
+  number of individuals in each group.</p>
+  <p data-line="48" class="code-line"><em><strong>Knowledge</strong></em></p>
+  <p data-line="50" class="code-line">The R function of creating a dot chart is</p>
+  <p data-line="52" class="code-line">dotchart(x, labels=NULL, groups=NULL, gdata=NULL, cex=par(&quot;cex&quot;),
+  pt.cex=cex, pch=21, gpch=21, bg=par(&quot;bg&quot;), color=par(&quot;fg&quot;),
+  gcolor=par(&quot;fg&quot;), lcolor=&quot;gray&quot;, xlim, main= NULL, xlab=NULL, ylab=NULL)</p>
+  <p data-line="56" class="code-line">The arguments are:</p>
+  <ul>
+  <li data-line="58" class="code-line">
+  <p data-line="58" class="code-line">x: a vector or matrix of values of the data</p>
+  </li>
+  <li data-line="60" class="code-line">
+  <p data-line="60" class="code-line">labels: a vector of labels for each point</p>
+  </li>
+  <li data-line="62" class="code-line">
+  <p data-line="62" class="code-line">groups: an optional factor indicating how the elements of x are
+  grouped</p>
+  </li>
+  <li data-line="65" class="code-line">
+  <p data-line="65" class="code-line">gdata: data values for the groups</p>
+  </li>
+  <li data-line="67" class="code-line">
+  <p data-line="67" class="code-line">cex: the character size to be used</p>
+  </li>
+  <li data-line="69" class="code-line">
+  <p data-line="69" class="code-line">pt.cex: the cex to be applied to plooting symbols.</p>
+  </li>
+  <li data-line="71" class="code-line">
+  <p data-line="71" class="code-line">pch: the plotting character or symbol to be used</p>
+  </li>
+  <li data-line="73" class="code-line">
+  <p data-line="73" class="code-line">gpch: the plotting character or symbol to be used for group values</p>
+  </li>
+  <li data-line="75" class="code-line">
+  <p data-line="75" class="code-line">bg: the background color of plotting characters or symbols to be
+  used</p>
+  </li>
+  <li data-line="78" class="code-line">
+  <p data-line="78" class="code-line">color: the color(s) to be used for points and labels</p>
+  </li>
+  <li data-line="80" class="code-line">
+  <p data-line="80" class="code-line">gcolor: the single color to be used for group labels and values</p>
+  </li>
+  <li data-line="82" class="code-line">
+  <p data-line="82" class="code-line">lcolor: the color to be used for the horizontal lines</p>
+  </li>
+  <li data-line="84" class="code-line">
+  <p data-line="84" class="code-line">xlim: horizontal range for the plot</p>
+  </li>
+  <li data-line="86" class="code-line">
+  <p data-line="86" class="code-line">main: title for the plot</p>
+  </li>
+  <li data-line="88" class="code-line">
+  <p data-line="88" class="code-line">xlab: axis label for the x-axis</p>
+  </li>
+  <li data-line="90" class="code-line">
+  <p data-line="90" class="code-line">ylab: axis label for the y-axis</p>
+  </li>
+  </ul>
+  <p data-line="92" class="code-line"><em><strong>Key Points to Remember</strong></em></p>
+  <p data-line="94" class="code-line">A <strong>dot chart</strong> shows the frequencies for each category of a categorical
+  variable. The R function is <strong>dotchart()</strong>.</p>
+  <p data-line="97" class="code-line">When creating a dot plot, we need to make sure the horizontal axis
+  starts from 0 using xlim=c(0, ). A common deceptive graph is a graph
+  with the axis scale starting at some value greater than zero that
+  exaggerates the differences between categories.</p>
+  <p data-line="102" class="code-line"><em><strong>Practice and Reflection</strong></em></p>
+  <p data-line="104" class="code-line"><em><strong>Practice</strong></em></p>
+  <p data-line="106" class="code-line">Example 1: A survey records the number of households in each of the
+  following category: single, couple, family of three or more. The data is
+  shown in the table below:</p>
+  <p data-line="110" class="code-line">Type of family            Number of households</p>
+  <hr>
+  <p data-line="112" class="code-line">Single                    120
+  Couple                    100
+  Family of three or more   80</p>
+  <p data-line="116" class="code-line">Generate a dot plot</p>
+  <p data-line="118" class="code-line">The R code is</p>
+  <p data-line="120" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image2.png" alt="" class="loading" id="image-hash-c7f046e17f38ce0cb68acfbf07588b694db8931590edbe7bf6e307be7ab89d0b">{width=&quot;5.895833333333333in&quot; height=&quot;0.625in&quot;}</p>
+  <p data-line="122" class="code-line">The dot chart is shown in figure 2 below</p>
+  <p data-line="124" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image3.jpeg" alt="" class="loading" id="image-hash-b2ea8d01c45ac2348305487e52356d7f0f0b10190b7421b6fb0925fd3b59243f">{width=&quot;5.4534722222222225in&quot;
+  height=&quot;2.5833333333333335in&quot;}</p>
+  <p data-line="127" class="code-line">Figure 2. Dot chart of the household distribution.</p>
+  <p data-line="129" class="code-line">The horizontal axis shows the frequencies for each type of family, and
+  the vertical axis shows the three categories of the variable, type of
+  family.</p>
+  <p data-line="133" class="code-line"><em><strong>Reflection</strong></em></p>
+  <p data-line="135" class="code-line">Activity 1: The table below records the color of 20 M&amp;M candies.
+  Generate a table to show the number of candies for each color, and then
+  generate a dot chart to represent the data by counts.</p>
+  <p data-line="139" class="code-line">red      red     yellow   yellow   yellow   red      black    blue    blue   red</p>
+  <hr>
+  <p data-line="141" class="code-line">orange   black   yellow   blue     black    orange   yellow   black   red    orange</p>
+  <p data-line="143" class="code-line"><em><strong>Assessments</strong></em></p>
+  <ol>
+  <li data-line="145" class="code-line">The dataset below shows the hair color of ten girls, generate a dot
+  chart to show the frequency of hair color. Show the labels of x- and
+  y-axis and title of the graph.</li>
+  </ol>
+  <hr>
+  <p data-line="150" class="code-line">Brown   Black   Black   Blond   Blond   Brown   Blond   Blond   Blond   Red</p>
+  <hr>
+  <ol start="2">
+  <li data-line="153" class="code-line">Using the following data set of paint color shown in a painting
+  competition to generate a dot plot showing the frequencies of each
+  color. Label the x-axis as Counts and y-axis Color. Use the solid
+  dots (pch=16), and color the dots the same as the label. For
+  example, a red point should be colored as red.</li>
+  </ol>
+  <p data-line="159" class="code-line">yellow   grey    red     blue   green   black   grey     red    red     black</p>
+  <hr>
+  <p data-line="161" class="code-line">black    black   green   blue   blue    black   yellow   grey   black   grey</p>
+  <h4 id="learning-objective-two-construct-bar-charts" data-line="163" class="code-line">Learning Objective Two: Construct Bar Charts</h4>
+  <p data-line="165" class="code-line"><em><strong>Introduction</strong></em></p>
+  <p data-line="167" class="code-line">Bar chart shows the number of counts in each category as bars. It is
+  similar to a dot chart. Instead of using dots to represent the
+  frequencies, a bar chart uses bars to represent the counts. The x-axis
+  is the category, and the y-axis is the count.</p>
+  <p data-line="172" class="code-line"><em><strong>Knowledge</strong></em></p>
+  <p data-line="174" class="code-line">The R function for bar chart is</p>
+  <p data-line="176" class="code-line">barplot(x, width=1, space=NULL, names.arg=NULL, legend.text=NULL,
+  beside=FALSE, horiz=FALSE, density=NULL, angle=45, col=NULL,
+  border=par(&quot;fg&quot;), main=NULL, xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
+  inside=TRUE)</p>
+  <p data-line="181" class="code-line">Arguments:</p>
+  <ul>
+  <li data-line="183" class="code-line">
+  <p data-line="183" class="code-line">x: a vector or matrix of values showing the data</p>
+  </li>
+  <li data-line="185" class="code-line">
+  <p data-line="185" class="code-line">width: optional vector of bar width</p>
+  </li>
+  <li data-line="187" class="code-line">
+  <p data-line="187" class="code-line">space: the amount of space left before each bar. May be given as a
+  single value or one value per bar</p>
+  </li>
+  <li data-line="190" class="code-line">
+  <p data-line="190" class="code-line">names.arg: a vector of names to be plotted below each bar or group
+  of bars.</p>
+  </li>
+  <li data-line="193" class="code-line">
+  <p data-line="193" class="code-line">legend.text: a vector of text used to construct a legend for the
+  plot, or a logical indicating whether a legend should be included</p>
+  </li>
+  <li data-line="196" class="code-line">
+  <p data-line="196" class="code-line">beside: a logical value. If FALSE, the columns of x are portrayed as
+  stacked bars, and if TRUE the columns are portrayed as juxtaposed
+  bars</p>
+  </li>
+  <li data-line="200" class="code-line">
+  <p data-line="200" class="code-line">horiz: a logical value. If FALSE, the bars are drawn vertically with
+  the first bar to the left. If TRUE, the bars are drawn horizontally
+  with the first at the bottom</p>
+  </li>
+  <li data-line="204" class="code-line">
+  <p data-line="204" class="code-line">density: a vector giving the density of shading lines, in lines per
+  inch, for the bars or bar components. The default value of NULL
+  means that no shading lines are drawn.</p>
+  </li>
+  <li data-line="208" class="code-line">
+  <p data-line="208" class="code-line">angle: the slope of shading lines, given as an angle in degrees for
+  the bars or bar components</p>
+  </li>
+  <li data-line="211" class="code-line">
+  <p data-line="211" class="code-line">border: the color be used for the border of the bars. Use border=NA
+  to omit borders</p>
+  </li>
+  <li data-line="214" class="code-line">
+  <p data-line="214" class="code-line">main: title of the plot</p>
+  </li>
+  <li data-line="216" class="code-line">
+  <p data-line="216" class="code-line">xlab: label of the x-axis</p>
+  </li>
+  <li data-line="218" class="code-line">
+  <p data-line="218" class="code-line">ylab: label of the y-axis</p>
+  </li>
+  <li data-line="220" class="code-line">
+  <p data-line="220" class="code-line">xlim: limits for the x-axis</p>
+  </li>
+  <li data-line="222" class="code-line">
+  <p data-line="222" class="code-line">ylim: limits for the y-axis</p>
+  </li>
+  <li data-line="224" class="code-line">
+  <p data-line="224" class="code-line">inside: a logical value. If TRUE, the lines which divide adjacent
+  bars will be drawn</p>
+  </li>
+  </ul>
+  <p data-line="227" class="code-line"><em><strong>Key Points to Remember</strong></em></p>
+  <p data-line="229" class="code-line">A <strong>bar chart</strong> shows the frequencies of each category of a categorical
+  variable, with the x-axis showing the categories and y-axis showing the
+  frequencies. The R function is <strong>barplot()</strong>.</p>
+  <p data-line="233" class="code-line">When plotting a bar chart, we need to make sure the y-axis starts from
+  zero to accurately show the difference between categories.</p>
+  <p data-line="236" class="code-line"><em><strong>Practice and Reflection</strong></em></p>
+  <p data-line="238" class="code-line"><em><strong>Practice</strong></em></p>
+  <p data-line="240" class="code-line">Example 2: Use the data in example 1, create a bar chart. The R code is</p>
+  <p data-line="242" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image4.png" alt="" class="loading" id="image-hash-3c51732d93671451086ead4365c5f2b9ee57069bc6554f4a3f1e7d4748216b87">{width=&quot;5.989583333333333in&quot;
+  height=&quot;0.7708333333333334in&quot;}</p>
+  <p data-line="245" class="code-line">The ylim=c(0,120) guarantees the graph starts from 0 for the y-axis. The
+  bar chart is shown in figure 3 below.</p>
+  <p data-line="248" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image5.jpeg" alt="" class="loading" id="image-hash-813f596ee5a2a5a84cfdb7a68c6c60a3935bd3db2953b2ec02a92d9bad9a20fa">{width=&quot;4.853857174103237in&quot; height=&quot;2.3125in&quot;}</p>
+  <p data-line="250" class="code-line">Figure 3. Bar chart of the household distribution.</p>
+  <p data-line="252" class="code-line"><em><strong>Reflections</strong></em></p>
+  <p data-line="254" class="code-line">Activity 2: Use the data in activity 1, create a bar chart to show the
+  frequencies of each color of the M&amp;M candy.</p>
+  <p data-line="257" class="code-line"><em><strong>Assessments</strong></em></p>
+  <p data-line="259" class="code-line">We are interested in investigating the relationship between the
+  percentage of children who have been immunized and the corresponding
+  mortality rate for children under five in a country. The table listed
+  the data of the percentage of immunized children and the mortality rate
+  for a randomly chosen 9 countries.</p>
+  <p data-line="265" class="code-line">Country          Percentage immunized   Mortality rate per 1000 births</p>
+  <hr>
+  <p data-line="267" class="code-line">Bolivia          77                     118
+  Cambodia         32                     184
+  China            94                     43
+  Czech Republic   99                     12
+  Egypt            89                     55
+  Ethiopia         13                     208
+  Mexico           91                     33
+  Senegal          47                     145
+  Turkey           76                     87</p>
+  <p data-line="277" class="code-line">Generate a bar plot to show the percentage immunized for each country;
+  Title the graph as &quot;immunization rate of nine countries&quot;; Label the
+  y-axis as &quot;percent immunized&quot;.</p>
+  <h4 id="learning-objective-three-construct-stacked-bar-charts" data-line="281" class="code-line">Learning Objective Three: Construct Stacked Bar Charts</h4>
+  <p data-line="283" class="code-line"><em><strong>Introduction</strong></em></p>
+  <p data-line="285" class="code-line">Stacked bar chart shows several measurements for one individual. A
+  stacked bar has several layers, with each layer representing one
+  variable. A stacked bar is used to represent more than one variables for
+  each category.</p>
+  <p data-line="290" class="code-line"><em><strong>Knowledge</strong></em></p>
+  <p data-line="292" class="code-line">The R function is the same as the barplot function, with the argument
+  <em>beside=FALSE</em>. The R function is</p>
+  <p data-line="295" class="code-line">barplot(x, width=1, space=NULL, names.arg=NULL, legend.text=NULL,
+  beside=FALSE, horiz=FALSE, density=NULL, angle=45, col=NULL,
+  border=par(&quot;fg&quot;), main=NULL, xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
+  inside=TRUE)</p>
+  <p data-line="300" class="code-line">The arguments were introduced in the previous learning objective
+  (learning objective two).</p>
+  <p data-line="303" class="code-line"><em><strong>Key Points to Remember</strong></em></p>
+  <p data-line="305" class="code-line">A <strong>stacked bar plot</strong> shows measurements of multiple variables for each
+  individual (or category). When plotting the stacked bar, we still need
+  to use ylim=c(0, ) to make the y-axis start from 0. The R function is
+  <strong>barplot()</strong> with the argument beside=FALSE.</p>
+  <p data-line="310" class="code-line"><em><strong>Practice and Reflection</strong></em></p>
+  <p data-line="312" class="code-line"><em><strong>Practice</strong></em></p>
+  <p data-line="314" class="code-line">Example 3: The following data listed the height (in cm.), weight (in
+  lb.), and circumference (in cm.) of three types of trees. Use stack bar
+  to represent each type of tree.</p>
+  <p data-line="318" class="code-line">Tree     Height (cm)   Weight (lb)   Circumference (cm)</p>
+  <hr>
+  <p data-line="320" class="code-line">Maple    210           100           70
+  Pine     320           130           69
+  Oak      290           109           89
+  Poplar   410           180           90</p>
+  <p data-line="325" class="code-line">The R code is</p>
+  <p data-line="327" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image6.png" alt="" class="loading" id="image-hash-ad56b321701be707cd6fdf65014c3b9bb7e888626ef276ba6de52945f04c6210">{width=&quot;5.84375in&quot; height=&quot;2.3333333333333335in&quot;}</p>
+  <p data-line="329" class="code-line">The bar chart is shown in figure 4 below</p>
+  <p data-line="331" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image7.jpeg" alt="" class="loading" id="image-hash-ebc86553e068a2d67e2fa41804ec9b3c293c4d0098a9206e1a8fda5f5fa419c9">{width=&quot;5.453487532808399in&quot; height=&quot;3.0in&quot;}</p>
+  <p data-line="333" class="code-line">Figure 4. The stacked bar plot of trees' height, weight and
+  circumference. The x-axis shows the four types of trees. The y-axis
+  shows the measurements of height (black), weight (grey), and
+  circumference (light grey).</p>
+  <p data-line="338" class="code-line"><em><strong>Reflection</strong></em> Activity 3: The data below recorded five samples and
+  the two values associated with each sample. Make a stacked bar plot to
+  show the data.</p>
+  <p data-line="342" class="code-line">Sample   Value1   Value2</p>
+  <hr>
+  <p data-line="344" class="code-line">A        3        1
+  B        2        0
+  C        6        5
+  D        7        2
+  E        3        2</p>
+  <p data-line="350" class="code-line"><em><strong>Assessment</strong></em></p>
+  <p data-line="352" class="code-line">We are interested in investigating the percentage of children who have
+  been immunized and the corresponding mortality rate for children under
+  five in a country. The table listed the data of the percentage of
+  immunized children and the mortality rate for a randomly chosen 9
+  countries.</p>
+  <p data-line="358" class="code-line">Country          Percentage immunized   Mortality rate per 1000 births</p>
+  <hr>
+  <p data-line="360" class="code-line">Bolivia          77                     118
+  Cambodia         32                     184
+  China            94                     43
+  Czech Republic   99                     12
+  Egypt            89                     55
+  Ethiopia         13                     208
+  Mexico           91                     33
+  Senegal          47                     145
+  Turkey           76                     87</p>
+  <p data-line="370" class="code-line">Generate a stacked bar plot to show the percentage immunized and
+  mortality rate for each country; Title the graph as &quot;immunization and
+  mortality rate of nine countries&quot;.</p>
+  <h4 id="learning-objective-four-construct-pie-charts" data-line="374" class="code-line">Learning Objective Four: Construct Pie Charts</h4>
+  <p data-line="376" class="code-line"><em><strong>Introduction</strong></em></p>
+  <p data-line="378" class="code-line">Pie chart is used to show the proportions (or counts) of categories. A
+  pie chart is a very common graph that depicts quantitative data as
+  slices of a circle, in which the size of each slice is proportional to
+  the frequency count for the category. Although pie charts are common,
+  they are not very effective.</p>
+  <p data-line="384" class="code-line"><em><strong>Knowledge</strong></em></p>
+  <p data-line="386" class="code-line">The R function is</p>
+  <p data-line="388" class="code-line">pie(x, labels=names(x), clockwise=FALSE, density=NULL, angle=45,
+  main=NULL, col=variable)</p>
+  <p data-line="391" class="code-line">The arguments are:</p>
+  <ul>
+  <li data-line="393" class="code-line">
+  <p data-line="393" class="code-line">x: a vector of non-negative numerical quantities. The values in x
+  are displayed as the areas of pie slices</p>
+  </li>
+  <li data-line="396" class="code-line">
+  <p data-line="396" class="code-line">labels: one or more expressions or character strings giving names
+  for the slices.</p>
+  </li>
+  <li data-line="399" class="code-line">
+  <p data-line="399" class="code-line">clockwise: logical indicating if slices are drawn clockwise or
+  counter clockwise; FALSE is the default setting</p>
+  </li>
+  <li data-line="402" class="code-line">
+  <p data-line="402" class="code-line">density: the density of shading lines, in lines per inch. The
+  default value of NULL means that no shading lines are drawn.</p>
+  </li>
+  <li data-line="405" class="code-line">
+  <p data-line="405" class="code-line">angel: the slope of shading lines, given as an angle in degrees.</p>
+  </li>
+  <li data-line="407" class="code-line">
+  <p data-line="407" class="code-line">main: title of the graph</p>
+  </li>
+  <li data-line="409" class="code-line">
+  <p data-line="409" class="code-line">col: color; if col=names(x), then the color of the pie matches the
+  legend</p>
+  </li>
+  </ul>
+  <p data-line="412" class="code-line"><em><strong>Key Points to Remember</strong></em></p>
+  <p data-line="414" class="code-line">A <strong>pie chart</strong> displays the frequency or relative frequency of each
+  category of a qualitative variable. The R function is <strong>pie()</strong>. A pie
+  chart is not very visually effective in showing the difference between
+  categories, and is not recommended.</p>
+  <p data-line="419" class="code-line"><em><strong>Practice and Reflection</strong></em></p>
+  <p data-line="421" class="code-line"><em><strong>Practice</strong></em></p>
+  <p data-line="423" class="code-line">Example 4: A bag of M&amp;M candies has six color: red, blue, green, yellow,
+  black, and orange. In a sample of 200 candies in a bag, there are 60
+  red, 30 blue, 20 green, 25 yellow, 40 black and 25 orange. Make a pie
+  chart to show the number of each color. Make another pie chart to show
+  the percentage of each color. The R code is</p>
+  <p data-line="429" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image8.png" alt="" class="loading" id="image-hash-094b342d50a6f65e174ead21dd50075b81ea52e8be6a27465b4696db0330e5c9">{width=&quot;6.5in&quot; height=&quot;2.6354166666666665in&quot;}</p>
+  <p data-line="431" class="code-line">The pie chart is shown in figure 6 below</p>
+  <p data-line="433" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image9.jpeg" alt="" class="loading" id="image-hash-1d96588c6a75a57c3b7e0f93ab3e6228c59eb7f2eb55bbaf00cc61ba7a62ebeb">{width=&quot;5.086037839020123in&quot; height=&quot;3.0in&quot;}</p>
+  <p data-line="435" class="code-line">Figure 6.a. Pie chart to show the distribution of the six color</p>
+  <p data-line="437" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image10.jpeg" alt="" class="loading" id="image-hash-f4438fcbd35e5d2e6bfbf2eff9ee05b40491f526e809d774b03487a54ed23cdb">{width=&quot;5.086037839020123in&quot; height=&quot;3.0in&quot;}</p>
+  <p data-line="439" class="code-line">Figure 6.b. Pie chart to show the distribution of the six color in
+  percentage</p>
+  <p data-line="442" class="code-line">Normally, a bar chart shows the data more effectively than a pie chart
+  with a more accurate scale. For example, the data below shows the number
+  of stolen boats in a recent year. Let us compare the bar chart and pie
+  chart reprinting the same data (Triola, 2018)</p>
+  <p data-line="447" class="code-line">Boat type      Number stolen</p>
+  <hr>
+  <p data-line="449" class="code-line">Jet Ski        1400
+  Motor Boat     1000
+  Utility Boat   400
+  Inboard        200
+  Sail Boat      70</p>
+  <p data-line="455" class="code-line">A bar chart is shown in figure 7.a, and a pie chart is shown in figure
+  7.b.</p>
+  <p data-line="458" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image11.jpeg" alt="" class="loading" id="image-hash-2ec5a930323ae989da423e3d30f73472647dab073b2d480c17f578a6fc8422c5">{width=&quot;3.1201706036745405in&quot;
+  height=&quot;2.6in&quot;}<img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image12.jpeg" alt="" class="loading" id="image-hash-920eee0d3f0dff399aee5680502db84b2ca737f59fb4430684f804ab703fe756">{width=&quot;3.252804024496938in&quot;
+  height=&quot;2.7in&quot;}</p>
+  <p data-line="462" class="code-line">Figure 7.a. Bar chart of boat stolen data Figure 7.b. Pie chart of boat
+  stolen data</p>
+  <p data-line="465" class="code-line">From figure 7, a bar chart does a better job of showing the relative
+  sizes of different types of boat stolen and the trend. A bar chart
+  effectively shows the difference among categories with only one color,
+  while the differences among the utility boat, in board, and sail boat
+  are not very easy to tell from a pie chart.</p>
+  <p data-line="471" class="code-line"><em><strong>Reflection</strong></em></p>
+  <p data-line="473" class="code-line">Activity 4: A survey was conducted to study the political affiliation
+  distribution. Among the 300 people surveyed, 101 of them are
+  Republicans, 129 are Democrats, and 70 are others. Generate a pie chart
+  to show the political affiliation distribution.</p>
+  <p data-line="478" class="code-line"><em><strong>Assessment</strong></em></p>
+  <p data-line="480" class="code-line">Using the following data set of paint color shown in a painting
+  competition to generate a pie chart showing the frequencies of each
+  color. Title the graph. Match the legend with the color.</p>
+  <hr>
+  <p data-line="485" class="code-line">blue   black   red   red   grey   red   blue   green   black   black   red   red   black</p>
+  <hr>
+  <h4 id="learning-objective-five-construct-mosaic-plots" data-line="488" class="code-line">Learning Objective Five: Construct Mosaic plots</h4>
+  <p data-line="490" class="code-line"><em><strong>Introduction</strong></em></p>
+  <p data-line="492" class="code-line">A mosaic plot shows the relationship between two qualitative variables.
+  The mosaic plot is based on conditional probability.</p>
+  <p data-line="495" class="code-line"><em><strong>Knowledge</strong></em></p>
+  <p data-line="497" class="code-line">To illustrate how a mosaic plot is generated, we use an example from a
+  data set called Berkeley 1973 Admissions data (<a href="http://ncss.com/">NCSS.com</a>). This data is
+  of interest, because it was used to show that males were admitted at a
+  higher rate than females. From figure 8 below (from <a href="http://ncss.com/">ncss.com</a>), the
+  widths of the boxes are proportional to the percentage of females and
+  males. There are 41% of females and 59% of males among the applicants.
+  The heights of the boxes are proportional to the percentage admitted.
+  There are 45% of the male applicants admitted, and 30% of the female
+  applicants admitted (Figure 8). The boxes for admitted females and males
+  are colored blue and the boxes for not admitted females and males are
+  colored pink. By construction, the percent for each gender is the width
+  of the box, and the area of each box is proportional to the
+  corresponding cell frequency.</p>
+  <p data-line="511" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image13.emf" alt="" class="loading" id="image-hash-0673a87e21ff58b97de23dae56951f357442a74b784e90eef073d4afa412972d">{width=&quot;4.687045056867891in&quot; height=&quot;3.4in&quot;}</p>
+  <p data-line="513" class="code-line">Figure 8. Mosaic plot of the relationship between gender and admission.</p>
+  <p data-line="515" class="code-line">To generate a mosaic plot, we need to firstly install the R package vcd.
+  The mosaic plot function is</p>
+  <p data-line="518" class="code-line">mosaic(x, condvar = )</p>
+  <ul>
+  <li data-line="520" class="code-line">
+  <p data-line="520" class="code-line">x: the table or formula</p>
+  </li>
+  <li data-line="522" class="code-line">
+  <p data-line="522" class="code-line">condvar: vector of integers or character strings indicating
+  conditioning variables, if any. The table will be permuted to order
+  them first.</p>
+  </li>
+  </ul>
+  <p data-line="526" class="code-line"><em><strong>Key Points to Remember</strong></em></p>
+  <p data-line="528" class="code-line">A <strong>mosaic plot</strong> shows the relationship between two categorical
+  variables using colored boxes. The height and width of the boxes
+  proportionally represent each variable value for each category.</p>
+  <p data-line="532" class="code-line">The R function is <strong>mosaic()</strong> with the installation of the package vcd
+  first.</p>
+  <p data-line="535" class="code-line"><em><strong>Practice and Reflection</strong></em></p>
+  <p data-line="537" class="code-line"><em><strong>Practice</strong></em></p>
+  <p data-line="539" class="code-line">In example 5, we will plot the relationship between eye color and hair
+  color from the R dataset HairEyeColor. The R code is</p>
+  <p data-line="542" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image14.png" alt="" class="loading" id="image-hash-587fd7dc2e7b7a12b308f3ec27fb4fee84cd61679a6b212475bf39f3b73dfc1d">{width=&quot;3.7291666666666665in&quot; height=&quot;0.5in&quot;}</p>
+  <p data-line="544" class="code-line">The mosaic plot is shown in figure 9</p>
+  <p data-line="546" class="code-line"><img src="vscode-resource:/c:/Users/dylan/Documents/repos/stemfuse_mnscu/Visualization%20in%20R%20for%20Qualitative%20Variables/media/image15.jpeg" alt="" class="loading" id="image-hash-e9cba9f230c101aee20ca05811a4bcbe664d83d0b2b06bc9fc198717b241981f">{width=&quot;5.114751749781277in&quot; height=&quot;3.0in&quot;}</p>
+  <p data-line="548" class="code-line">Figure 9. The mosaic plot of the relationship between eye color and hair
+  color for males and females.</p>
+  <p data-line="551" class="code-line">From figure 9, we observe that most of the males are in brown hair and
+  brown eyes in the sample (the largest rectangle for male), and most of
+  the females have brown hair and brown eyes (the largest rectangle for
+  female).</p>
+  <p data-line="556" class="code-line"><em><strong>Reflection</strong></em></p>
+  <p data-line="558" class="code-line">Activity 5: the data below shows a random sample of 400 University of
+  Iowa undergraduate students. The students were classified according to
+  gender and the college in which they are enrolled (Hogg &amp; Tanis, 2006).</p>
+  <pre data-line="562" class="code-line"><code>       Business   Engineering   Liberal Arts   Nursing   Pharmacy
+  </code></pre>
+  <hr>
+  <p data-line="564" class="code-line">Male     21         16            145            2         6
+  Female   14         4             175            13        4</p>
+  <p data-line="567" class="code-line"><em><strong>Assessment</strong></em></p>
+  <p data-line="569" class="code-line">In 1912 the luxury liner Titanic, on its first voyage across the
+  Atlantic, struck an iceberg and sank. Some passengers got off the ship
+  in lifeboats, but many died. The two-way table gives information about
+  adult passengers who lived and who died, by class of travel.</p>
+  <pre data-line="574" class="code-line"><code>                Survival Status   
+  </code></pre>
+  <hr>
+  <p data-line="576" class="code-line">Class of Travel   Survived          Died
+  First class       197               122
+  Second class      94                167
+  Third class       151               476</p>
+  <p data-line="581" class="code-line">Generate a mosaic plot to show the relationship between survival status
+  and the class of travel.</p>
+  
+  </body>
+<!--- end body content -->
+
+  <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+<div id="footer">Where life and learning meet.</div>
+</div>
+</div>
+</body>
+</html>
