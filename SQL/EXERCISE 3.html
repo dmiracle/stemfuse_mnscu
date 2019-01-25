@@ -1,0 +1,66 @@
+<p><strong>EXERCISE 3</strong></p>
+<p><strong>Objective:</strong> The objectives include:</p>
+<ul>
+<li><blockquote>
+<p>inserting, displaying, updating, deleting data from MySQL db.</p>
+</blockquote></li>
+<li><blockquote>
+<p>learning the SQL JOIN functions, Views, and indexing</p>
+</blockquote></li>
+</ul>
+<p><strong>You may use SQLite or MySQL DBMS</strong>.</p>
+<ol type="1">
+<li><blockquote>
+<p>Create two relations/tables. Each table must have a minimum of three attributes.</p>
+</blockquote></li>
+</ol>
+<p>Example:</p>
+<p><img src="./EXERCISE 3/media/image1.png" style="width:5.41667in;height:3.375in" /></p>
+<ol start="2" type="1">
+<li><blockquote>
+<p>Populate the tables with sample data.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Execute each of the following SQL commands. What different think you see from each output. Get the screenshot for each.</p>
+</blockquote></li>
+</ol>
+<ul>
+<li><blockquote>
+<p>SELECT * FROM table1, table2;</p>
+</blockquote></li>
+<li><blockquote>
+<p>SELECT * FROM table1 INNER JOIN table2 ON table1.id1 = table2.id1;</p>
+</blockquote></li>
+<li><blockquote>
+<p>SELECT * FROM table1 LEFT JOIN table2 ON table1.id1 = table2.id1;</p>
+</blockquote></li>
+<li><blockquote>
+<p>SELECT * FROM table1 RIGHT JOIN table2 ON table1.id1= table2.id1;</p>
+</blockquote></li>
+<li><blockquote>
+<p>SELECT * FROM table1 LEFT JOIN table2 USING (id1);</p>
+</blockquote></li>
+</ul>
+<ol start="4" type="1">
+<li><blockquote>
+<p>Create a parent and children table and populate with different parents and children data. Write a query to display all the children from table1 that have common parent, where the parent id is = ‘p1’</p>
+</blockquote></li>
+<li><blockquote>
+<p>Write a query to create parent_child view that selects fatherName, motherName from the parent table and childName from child table.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Drop parent_child view, then Write the same query to create parent_child view that selects fatherName, motherName from the parent table and childName from child table but shows the child name as a preferred name.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Write a query to update the parent 2 (parentID = ‘P2’) information from parent table.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Write a query to update the parent 3 (parentID = ‘P3’) information from parent table changing fatherName to ’John’ and mother Name to ‘Megan’.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Write a query to create an index that uses parentID as index key</p>
+</blockquote></li>
+<li><blockquote>
+<p>Write a query that displays a row of p2 using the index created on step 9</p>
+</blockquote></li>
+</ol>
