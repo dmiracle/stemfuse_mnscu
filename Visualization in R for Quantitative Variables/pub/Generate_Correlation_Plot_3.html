@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-three-construct-correlation-plots">Learning Objective Three: Construct Correlation plots</h1>
+<h2>Introduction</h2>
+<p>A correlation plot is a two-dimensional plot showing the relationship between multiple pairs of numeric variables. The strength of the relationship is shown by the shape of the ellipse.</p>
+<h2>Knowledge</h2>
+<p>The R syntax of correlation plot is</p>
+<p>corrplot (corr, method= , type = , col = , bg =)</p>
+<ul>
+<li><p>corr: the correlation matrix of variables to visualize</p></li>
+<li><p>method: the default method is “circle”. The areas of circles show the absolute value of corresponding correlation coefficients. If use “ellipse”, then the direction of the ellipse shows the negative or positive correlation, and the area of the ellipse shows the corresponding correlation coefficients.</p></li>
+<li><p>type: character in “full”, “upper” or “lower”, displaying full matrix, lower triangular or upper triangular matrix. The default setting is “full”.</p></li>
+<li><p>col: Color of glyphs.</p></li>
+<li><p>bg: Background color</p></li>
+</ul>
+<p>A Youtube video on how to make a complex correlation plot is here</p>
+<p><a href="https://www.youtube.com/watch?v=jxUiIFj2l-s">https://www.youtube.com/watch?v=jxUiIFj2l-s</a></p>
+<p>In a correlation plot, the ellipse going from the top left corner to the bottom right corner represents a negative correlation between the two variables. The ellipse from the bottom left to the top right represents a positive correlation. The strength of the correlation is shown by the thickness of the ellipse. A very narrow ellipse shows a very strong correlation, and a very wide ellipse shows a weak correlation. If the correlation is represented by a circle, that means no correlation between the two variables.</p>
+<h2>Key Points to Remember</h2>
+<p>A <strong>correlation plot</strong> shows the strength of correlation between two quantitative variables. The R function is <strong>corrplot()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 4: Plot a correlation matrix between the variables in the dataset mtcars. The R code is</p>
+<p><img src="./media/media/image11.png" style="width:3.10417in;height:0.29167in" /></p>
+<p>The graph is shown in figure 6</p>
+<p><img src="./media/media/image12.jpeg" style="width:5.61999in;height:3.1in" /></p>
+<p>Figure 6. A correlation plot between every two numeric variables in the data set mtcars.</p>
+<p>In figure 6, the red ellipse representing the relationship between miles per gallon (mpg) and weight (wt) shows us a negative correlation. A positive correlation is shown by an ellipse in figure 6 between number of cylinder (cyl) and display (disp).</p>
+<h3>Reflection</h3>
+<p>Activity 3: Use the R dataset iris and make a correlation matrix of variables containing only numeric variables in iris data. Generate a correlation plot using ellipse method.</p>
+<h2>Assessment</h2>
+<p>Use the R data airquality to generate a correlation plot to show the relationship between variables. Identify the positive and negative correlation.</p>
+
+
+</div>
+</div>
+</body>
+</html>

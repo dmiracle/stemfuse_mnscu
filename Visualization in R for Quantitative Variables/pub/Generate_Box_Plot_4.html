@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-four-construct-box-plots">Learning Objective Four: Construct Box plots</h1>
+<h2>Introduction</h2>
+<p>A box plot shows the five number summery of a quantitative variable. The five number summary includes minimum, first quartile (<span class="math inline"><em>Q</em><sub>1</sub></span>), median, third quartile (<span class="math inline"><em>Q</em><sub>3</sub></span>), and maximum. Outliers are either <span class="math inline">3 × <em>I</em><em>Q</em><em>R</em></span> or more above the third quartile or <span class="math inline">3 × <em>I</em><em>Q</em><em>R</em></span> or more below the first quartile.</p>
+<h2>Knowledge</strong></em>:</p>
+<p>An example of a box plot is shown in figure 7. Outliers may be plotted as individual points.<img src="./media/media/image13.png" style="width:4.85114in;height:2.94886in" /></p>
+<p>Figure 7. An example of a box plot.</p>
+<p>A single box plot can be drawn for one batch of data with no distinct groups. Alternatively, multiple box plots can be drawn together to compare multiple data sets. The R function for boxplot is</p>
+<p>boxplot(x, boxwex=, varwidth=, border=, col=, horizontal=)</p>
+<p>or</p>
+<p>boxplot(y~group, data=, width=, varwidth=, border=, col=, horizontal=)</p>
+<ul>
+<li><p>x: vector of data</p></li>
+<li><p>y~group: y is a numeric vector of data values to be split into groups according to the grouping variable, which is a factor.</p></li>
+<li><p>boxwex: a number to indicate the width of the box</p></li>
+<li><p>varwidth: logic value. If varwidth is TRUE, the boxes are drawn with widths proportional to the square-roots of the number of observations in the groups</p></li>
+<li><p>border: an optional vector of colors for the outlines of the boxplots.</p></li>
+<li><p>col: if col is non-null, it is assumed to contain colors to be used to color the bodies of the box plots. By default they are in the background color.</p></li>
+<li><p>horizontal: a logical value indicating if the boxplots should be horizontal; default FALSE means vertical boxes</p></li>
+</ul>
+<h2>Key Points to Remember</h2>
+<p>A <strong>box plot</strong> shows the five number summary of a variable. The R function is <strong>boxplot()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 5: Make a box plot for the ten students grades shown in the following table</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>96</td>
+<td>67</td>
+<td>82</td>
+<td>51</td>
+<td>97</td>
+<td>76</td>
+<td>85</td>
+<td>88</td>
+<td>93</td>
+<td>75</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./media/media/image15.png" style="width:5.83333in;height:0.65625in" /></p>
+<p>The box plot is shown in figure 8 below</p>
+<p><img src="./media/media/image16.jpeg" style="width:5.59028in;height:3in" /></p>
+<p>Figure 8. Box plot of students’ grades.</p>
+<p>Example 6: Use R data mtcars to generate a box plot to show the five number summary of miles per gallon for the three types of cylinders. The R code is</p>
+<p><img src="./media/media/image17.png" style="width:6.38542in;height:0.45833in" /></p>
+<p>The boxplot is shown in figure 9 below:</p>
+<p><img src="./media/media/image18.jpeg" style="width:5.59028in;height:3in" /></p>
+<p>Figure 9. Box plot of miles per gallon for 4-cylinder, 6-cylinder, and 8-cylinder cars.</p>
+<h3>Reflection</h3>
+<p>Activity 6 Use R data ToothGrowth to generate a box plot to show the five number summary of tooth length for each dosage.</p>
+<h2>Assessment</h2>
+<ol type="1">
+<li><p>If there are 12 students in a statistics class and the 12 students’ grades are</p>
+<p>72 83 95 75 78 86 88 93 75 89 85 97</p>
+<p>Generate a box plot to show the five number summary. Make the width of the box as 0.4.</p></li>
+<li><p>Use the R dataset ToothGrowth to generate multiple box plots in one graph to show the five number summary of tooth length(len) for the two supplement type (supp). Add x- and y-axis labels. Add title and legend to the graph.</p></li>
+</ol>
+
+
+</div>
+</div>
+</body>
+</html>

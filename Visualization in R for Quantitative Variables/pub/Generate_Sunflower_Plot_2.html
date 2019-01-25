@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-two-construct-sunflower-graph">Learning Objective Two: Construct Sunflower graph</h1>
+<h2>Introduction</h2>
+<p>A sunflower plot is similar to a scatter plot, but with showing the repeated points as sun flowers. In a sunflower plot, multiple overlapping points are plotted as sunflowers with multiples leaves (petals) with each leave (petal) representing one individual.</p>
+<h2>Knowledge</h2>
+<p>The R function for creating a sunflower plot is</p>
+<p>sunflowerplot(x, y, cex= , size= , seg.col = , seg.lwd = )</p>
+<ul>
+<li><p>x and y: numeric vectors of the data</p></li>
+<li><p>cex: character size expansion of center points</p></li>
+<li><p>size: size of sunflower petals in inches</p></li>
+<li><p>seg.col: color to be used for the segments which make the sunflower petals</p></li>
+<li><p>seg.lwd: the line width for the sunflower petal segments</p></li>
+</ul>
+<p>An example of a sunflower plot is shown in figure 4. The graph is based on a data for 100 low birth weight infants, and it shows the relationship between the gestational age and birth weight. The horizontal axis shows the gestational age (in weeks), and vertical axis shows the birth weight (in grams) of the 100 infants. Each sun flower shown in red represents that there are multiple infants with the same gestational age and same birth weight. For example, the sun flower point at the gestational age of 27 weeks and weight of 1170 g indicates that there are four infants with the same gestational age of 27 weeks and same weight of 1170 grams.</p>
+<p><img src="./media/media/image8.jpeg" style="width:5.11475in;height:3in" /></p>
+<p>Figure 4. A sunflower plot of relationship between gestational age and birth weight for 100 infants.</p>
+<h2>Key Points to Remember</h2>
+<p>Both a scatter plot and <strong>a sunflower plot</strong> are good to show the relationship between two quantitative variables. A regular scatter plot does not show the repeated individuals as those individuals overlap, but a sunflower plot shows the repeated individuals as different petals. The R function is <strong>sunflowerplot()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 3: The following data shows two aspirin concentrations in urine samples of 10 patients at 1 hour. The 10 patients took Aspirin A first and had their urine samples taken, and then took Aspirin B and had their urine samples taken. The concentration of aspirin in urine samples is measured as mg%. Generate a sunflower plot to see the relationship between the urine samples from Aspirin A and Aspirin B.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Aspirin A</th>
+<th>15</th>
+<th>26</th>
+<th>15</th>
+<th>28</th>
+<th>17</th>
+<th>26</th>
+<th>15</th>
+<th>20</th>
+<th>18</th>
+<th>15</th>
+<th>26</th>
+<th>15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Aspirin B</td>
+<td>13</td>
+<td>20</td>
+<td>13</td>
+<td>21</td>
+<td>12</td>
+<td>20</td>
+<td>13</td>
+<td>22</td>
+<td>11</td>
+<td>13</td>
+<td>20</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/media/image9.png" style="width:4.14583in;height:0.45833in" /></p>
+<p>The sunflower plot is shown in figure 5.</p>
+<p><img src="./media/media/image10.jpeg" style="width:5.11458in;height:2.86458in" /></p>
+<p>Figure 5. Sunflower plot of relationship between the Aspirin A concentration and Aspirin B concentration.</p>
+<p>We can see that there are five patients having the same Aspirin A concentrations at 15 mg% and the same Aspirin B concentrations at 13 mg%. There are three patients having the same Aspirin A concentration at 26 mg%, and the same Aspirin B concentration at 20mg%.</p>
+<h3>Reflection</h3>
+<p>Activity 2: Use the R data Orange to generate a sunflower plot to show the relationship between age and circumference of the orange trees. Make the data points blue, and the sunflower green. How many sunflowers do you observe? What data points are the sunflowers represent?</p>
+<h2>Assessment</h2>
+<p>Use the R dataset Orange. Generate a sunflower plot to show the relationship between age and circumference. How many repeated individuals did you see?</p>
+
+
+</div>
+</div>
+</body>
+</html>

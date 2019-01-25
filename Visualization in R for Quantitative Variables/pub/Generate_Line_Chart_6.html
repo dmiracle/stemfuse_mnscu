@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-six-construct-line-charts">Learning Objective Six: Construct Line charts</h1>
+<h2>Introduction</h2>
+<p>A Line chart is usually used to investigate the changes over time for one or more groups. A line chart displays information as a series of data points connected by straight line segments. The horizontal axis represents time, and the vertical axis represents the measurements over time.</p>
+<h2>Knowledge</h2>
+<p>A line chart is similar to a scatter plot except that the measurements are ordered over time and joined with line segments. A line chart is generated based on a scatter plot in R. After plotting the scatter plot, use the R function</p>
+<p>lines (x, type= )</p>
+<p>to add line segments. The argument type is a character giving the type of lines desired, in which “p” is for points, “l” for lines, “b” for both lines and points, “c” for empty points joined by lines, “o” for overplotted points and lines, “s” for stair steps, and “h” for histogram like lines.</p>
+<h2>Key Points to Remember</h2>
+<p>A <strong>line chart</strong> shows the measurements through time. The R function is lines(). You may or may not plot the data points using plot() first.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 8: The following data shows the precipitation amount (in inches) from February to August in Minnesota in 2018 (based on National Weather Service). Generate a line graph to show the rain fall amount over time.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Month</th>
+<th>February</th>
+<th>March</th>
+<th>April</th>
+<th>May</th>
+<th>June</th>
+<th>July</th>
+<th>August</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Precipitation</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>7</td>
+<td>9</td>
+<td>15</td>
+<td>18</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/media/image25.png" style="width:5.65625in;height:0.94792in" /></p>
+<p>The argument “axes=FALSE” in plot is to remove the x- and y-axis labels. The code</p>
+<p>“axis(1, at=1:7, labels=months)” is to label the x-axis with the eight months, and the code</p>
+<p>“axis (2, at = 0:30*5)” is to label the y-axis with an interval of 5. The line graph is shown in figure 13.</p>
+<p><img src="./media/media/image26.jpeg" style="width:5.11475in;height:3in" /></p>
+<p>Figure 13. Line graph of precipitation from February to August in Minnesota in 2018.</p>
+<p>Or we can use the argument <em>type=”b”</em> in the R function plot().</p>
+<p>From the line chart, we observe that the precipitation is increasing through time.</p>
+<h3>Reflection</h3> 
+<p>Activity 8: The table below shows the number of fatalities of law enforcement officers in the United States (Triola, 2018). Show the trend using a line chart. Where is the maximum point? What happened in that year?</p>
+<table>
+<thead>
+<tr class="header">
+<th>Year</th>
+<th>1995</th>
+<th>1996</th>
+<th>1997</th>
+<th>1998</th>
+<th>1999</th>
+<th>2000</th>
+<th>2001</th>
+<th>2002</th>
+<th>2003</th>
+<th>2004</th>
+<th>2005</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Number of Fatalities</td>
+<td>140</td>
+<td>170</td>
+<td>169</td>
+<td>145</td>
+<td>158</td>
+<td>162</td>
+<td>240</td>
+<td>161</td>
+<td>150</td>
+<td>170</td>
+<td>165</td>
+</tr>
+</tbody>
+</table>
+<h2>Assessment</h2>
+<p>The mortality rates (per 1000 births) of new born infants in a country from 2000 to 2010 are shown in the table below. Generate a line chart to show the trend of mortality rate through years.</p>
+<table>
+<thead>
+<tr class="header">
+<th>2000</th>
+<th>2001</th>
+<th>2002</th>
+<th>2003</th>
+<th>2004</th>
+<th>2005</th>
+<th>2006</th>
+<th>2007</th>
+<th>2008</th>
+<th>2009</th>
+<th>2010</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9.5</td>
+<td>8</td>
+<td>8.1</td>
+<td>7.6</td>
+<td>6.9</td>
+<td>5.1</td>
+<td>3.2</td>
+<td>2.1</td>
+<td>2.5</td>
+<td>1.1</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</body>
+</html>

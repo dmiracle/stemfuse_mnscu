@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-five-construct-histograms">Learning Objective Five: Construct Histograms</h1>
+<h2>Introduction</h2>
+<p>A histogram is a display of statistical information that uses bars to show the frequency of data in successive numerical intervals of equal size. It is plotted by dividing the range of observations into equal sized bins, and then counting the number of values appearing in each bin. The bars represent the bins, and the height of each bin represents the number of observations in each bin.</p>
+<h2>Knowledge</h2>
+<p>The R function of making a histogram is hist(x, breaks= , col= ,border= ,main= , xlab= , ylab= , xlim= , ylim= )</p>
+<ul>
+<li><p>x: a vector of values for which the histogram is desired</p></li>
+</ul>
+<ul>
+<li><p>breaks: one of the following</p>
+<ul>
+<li><p>a vector giving the breakpoints between histogram bins</p></li>
+<li><p>a function to compute the vector of breakpoints</p></li>
+<li><p>a number giving the number of bins for the histogram</p></li>
+<li><p>a function to compute the number of bins</p></li>
+</ul></li>
+<li><p>col: a color to be used to fill the bars; the default yields unfilled bars</p></li>
+<li><p>border: a color of the border of bards. The default is black</p></li>
+<li><p>main: title of the graph</p></li>
+<li><p>xlab: label of the x-axis</p></li>
+<li><p>ylab: label of the y-axis</p></li>
+<li><p>xlim: range of x values on the x-axis</p></li>
+<li><p>ylim: range of the y values on the y-axis</p></li>
+</ul>
+<h2>Key Points to Remember</h2>
+<p>A <strong>histogram</strong> shows frequency of data in successive numerical intervals of equal size. A bell-shape and symmetric histogram represents a normal distribution. The R function to generate a histogram is <strong>hist()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 7: Use the R data AirPassengers to generate a histogram to show the distribution of the number of passengers</p>
+<p><img src="./media/media/image19.png" style="width:3.01042in;height:0.19792in" /></p>
+<p>The histogram is shown in figure 10</p>
+<p><img src="./media/media/image20.jpeg" style="width:5.12922in;height:3.1in" /></p>
+<p>Figure 10. A histogram of air passengers</p>
+<p>Figure 10 shows that there are about 24 flights with 100 to 150 passengers, 24 with 150 to 200 passengers, about 21 flights with 200 to 250 passengers, etc.</p>
+<p>If we would like to make only 5 bars (bins) for the histogram, then the R code is</p>
+<p><img src="./media/media/image21.png" style="width:3.83333in;height:0.17708in" /></p>
+<p>The histogram is shown in figure 11</p>
+<p><img src="./media/media/image22.jpeg" style="width:5.12922in;height:3.1in" /></p>
+<p>Figure 11. Histogram of airline passengers with fixed number of bins (n=5)</p>
+<p>If we would like to add color to the histogram and make the bars grey and the borders red, and break the bins at 100, 300, 500, and 700, then the R code is</p>
+<p><img src="./media/media/image23.png" style="width:6.17708in;height:0.34375in" /></p>
+<p>The histogram is shown in figure 12</p>
+<p><img src="./media/media/image24.jpeg" style="width:4.60734in;height:2.6in" /></p>
+<p>Figure 12. Histogram of airline passengers with the bins of between 100 to 300, 300 to 500, and 500 to 700. The bar color is grey, and border color is red.</p>
+<h3>Reflection</h3>
+<p>Activity 7: a) Use the R data iris to generate a histogram for sepal length of that dataset; b) Use “breaks=c(seq(4,8,0.4) to try the new break points for the bins and state the size of the bins and the number of the bins observed; c) make the color of the bars red and border purple.</p>
+<h2>Assessment</h2>
+<p>If there are 12 students in a statistics class and the 12 students’ grades are</p>
+<p>72 83 95 75 78 86 88 93 75 89 85 97</p>
+<p>Generate a histogram to show the frequency of grades with the bins break at 70, 80, 90 and 100; Make the bars grey and the borders black. Label the x-axis as “grades” and y-axis as “Frequency”. Title the graph as “Student Grades”.</p>
+
+
+</div>
+</div>
+</body>
+</html>

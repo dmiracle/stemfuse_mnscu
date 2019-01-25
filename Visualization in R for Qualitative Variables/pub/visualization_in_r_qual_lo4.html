@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Simple Linear Regression</title>
+  <title>Visualization in R for Qualitative Variables</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <meta name="person" content="" />
@@ -14,47 +14,22 @@
 
   
   <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js" type="text/javascript"></script>
-  <script src="inc/metroScript.js" type="text/javascript"></script>
 
-  <!--LaTex Includes-->
+
+  <!--LaTex Includes
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
   <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
   <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
-
+-->
 
   <style>
   
   .warning {
     visibility: hidden;
   }
-  #leftSideBar {
-      background-color: #003C66;
-      background-repeat: no-repeat;
-      background-position: top center;
-      background-size: 100%;
-      min-height: 100%;
-      width: 200px;
-      float: left;
-      padding-top: 10px;
-      padding-right: 1%;
-      padding-left: 1%;
-      font-size: 1em;
-      line-height: 100%;
-      color: white;
-  }
-  
-  #leftSideBar a {
-      color: white;
-      text-decoration: none;
-  }
-  
-  #leftSideBar li {
-      margin:0 0 1em 0;
-  }
-  
+
   </style>
 </head>
 
@@ -62,34 +37,15 @@
 <p style="text-align: center;"><a name="top"></a></p>
 <div id="pageContainer">
 <div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
-<div id="leftSideBar">
-<img src="images/ITCoE_white200px.png">
-<!---
-  <h2 style="color:white;">Sections</h2>
--->
-<hr style="color: white;">
-<ul>
-  <li><h2 style="color: white;">Sections</h2></li>
-</ul>
-<hr style="color: white;">
-<ul>
-<!--- Place sidebar links here like this:
-    <li><a href="#learning-objectives">Learning Objectives</a></li>
--->
 
-</ul>
-<div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png" width="32" type="image" height="32" /></div>
-<hr style="color: white;">
-<img src="images/mnstate_white200px.png">
-</div>
 <div id="mainContent">
 <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
 
 <!--- Place body content here -->
-<h4 id="learning-objective-four-construct-pie-charts">Learning Objective Four: Construct Pie Charts</h4>
-<p><em><strong>Introduction</strong></em></p>
+<h1 id="learning-objective-four-construct-pie-charts">Construct Pie Charts</h1>
+<h2>Introduction</h2>
 <p>Pie chart is used to show the proportions (or counts) of categories. A pie chart is a very common graph that depicts quantitative data as slices of a circle, in which the size of each slice is proportional to the frequency count for the category. Although pie charts are common, they are not very effective.</p>
-<p><em><strong>Knowledge</strong></em></p>
+<h2>Knowledge</h2>
 <p>The R function is</p>
 <p>pie(x, labels=names(x), clockwise=FALSE, density=NULL, angle=45, main=NULL, col=variable)</p>
 <p>The arguments are:</p>
@@ -102,10 +58,10 @@
 <li><p>main: title of the graph</p></li>
 <li><p>col: color; if col=names(x), then the color of the pie matches the legend</p></li>
 </ul>
-<p><em><strong>Key Points to Remember</strong></em></p>
+<h2>Key Points to Remember</h2>
 <p>A <strong>pie chart</strong> displays the frequency or relative frequency of each category of a qualitative variable. The R function is <strong>pie()</strong>. A pie chart is not very visually effective in showing the difference between categories, and is not recommended.</p>
-<p><em><strong>Practice and Reflection</strong></em></p>
-<p><em><strong>Practice</strong></em></p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
 <p>Example 4: A bag of M&amp;M candies has six color: red, blue, green, yellow, black, and orange. In a sample of 200 candies in a bag, there are 60 red, 30 blue, 20 green, 25 yellow, 40 black and 25 orange. Make a pie chart to show the number of each color. Make another pie chart to show the percentage of each color. The R code is</p>
 <p><img src="./media/image8.png" style="width:6.5in;height:2.63542in" /></p>
 <p>The pie chart is shown in figure 6 below</p>
@@ -148,9 +104,9 @@
 <p><img src="./media/image11.jpeg" style="width:3.12017in;height:2.6in" /><img src="./media/image12.jpeg" style="width:3.2528in;height:2.7in" /></p>
 <p>Figure 7.a. Bar chart of boat stolen data Figure 7.b. Pie chart of boat stolen data</p>
 <p>From figure 7, a bar chart does a better job of showing the relative sizes of different types of boat stolen and the trend. A bar chart effectively shows the difference among categories with only one color, while the differences among the utility boat, in board, and sail boat are not very easy to tell from a pie chart.</p>
-<p><em><strong>Reflection</strong></em></p>
+<h3>Reflection</h3>
 <p>Activity 4: A survey was conducted to study the political affiliation distribution. Among the 300 people surveyed, 101 of them are Republicans, 129 are Democrats, and 70 are others. Generate a pie chart to show the political affiliation distribution.</p>
-<p><em><strong>Assessment</strong></em></p>
+<h2>Assessment</h2>
 <p>Using the following data set of paint color shown in a painting competition to generate a pie chart showing the frequencies of each color. Title the graph. Match the legend with the color.</p>
 <table>
 <tbody>

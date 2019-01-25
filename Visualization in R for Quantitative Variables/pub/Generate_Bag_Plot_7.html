@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-seven-construct-bagplots">Learning Objective Seven: Construct Bagplots</h1>
+<h2>Introduction</h2>
+<p>A bagplot (or starburst plot) is a two-dimensional extension of a boxplot that shows the joint distribution of two numeric variables.</p>
+<h2>Knowledge</h2>
+<p>The R function bagplot is in the package aplpack. You will need to install that package before run the code. The syntax of bagplot is as following:</p>
+<p>bagplot( x, y, factor =3, approx..limit =300, show.outlier = TRUE, show.whiskers = TRUE, show. looppoints =TRUE, show.bagpoints =TRUE, show.loophull =TRUE, show.baghull =TRUE, pch =16, cex =0.4, col.loophull=”#aaccff”, col.looppoints=”#3355ff”, col.baghull=”#7799ff”, col.bagpoints=”#000088”)</p>
+<ul>
+<li><p>x and y: x and y values of a data set</p></li>
+<li><p>factor: factor defining the loop (outer light blue region); the default is 3 times the interior dark blue region</p></li>
+<li><p>approx.limit: if the number of data points exceeds approx.limt a sample is used to compute some of the quantities; default is 300</p></li>
+<li><p>show.outlier: if TRUE outlier are shown</p></li>
+<li><p>show.whiskers: if TRUE whiskers (red lines connecting loop points and the inner yellow region) are shown</p></li>
+<li><p>show.looppoints: if TRUE loop points (points between the interior dark blue region and the outer light blue region) are shown</p></li>
+<li><p>show.bagpoints: if TRUE bag points (points inside of the dark blue interior region) are shown</p></li>
+<li><p>show.loophull: if TRUE loop (outer light blue region) is shown</p></li>
+<li><p>show.baghull: if TRUE bag (interior dark blue region) is shown</p></li>
+<li><p>pch: point type, default is a solid point</p></li>
+<li><p>cex: size of characters</p></li>
+<li><p>col.loophull, col.looppoints, col.baghull, and col.bagpoints: color of the loop hull (outer light blue region), loop points, bag hull (inner dark blue region), and bag points. The default loop hull color is light blue, default bag hull color is dark blue. The default loop points and bag points color are black.</p></li>
+</ul>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 9: the data below shows the relationship between the heights of winning presidential candidates and heights of their main opponents in cm (Triola, 2018).</p>
+<table>
+<thead>
+<tr class="header">
+<th>President</th>
+<th>178</th>
+<th>182</th>
+<th>188</th>
+<th>175</th>
+<th>179</th>
+<th>183</th>
+<th>192</th>
+<th>182</th>
+<th>177</th>
+<th>185</th>
+<th>188</th>
+<th>188</th>
+<th>183</th>
+<th>188</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Opponent</td>
+<td>180</td>
+<td>180</td>
+<td>182</td>
+<td>173</td>
+<td>178</td>
+<td>182</td>
+<td>180</td>
+<td>180</td>
+<td>183</td>
+<td>177</td>
+<td>173</td>
+<td>188</td>
+<td>185</td>
+<td>175</td>
+</tr>
+</tbody>
+</table>
+<p>The bagplot is shown in figure 14.</p>
+<p><img src="./media/media/image27.jpeg" style="width:5.31617in;height:3in" /></p>
+<p>Figure 14. Bagplot of the presidents’ heights vs. opponents’ heights</p>
+<p>The red asterisk near the center of the graph represents the median heights of the presidents and opponents. The dark blue interior region is called the bag, representing the box of the traditional boxplot, which contains 50% of the data. The light blue outer region is called the fence, and it is formed by inflating the bag by a certain factor, usually 3. Points outside the fence are the outliers. The light blue region is also called loop hull. The points outside of the dark blue region and inside of the light blue region are called loop points. The red lines connecting the central yellow region and the loop points are called whiskers.</p>
+<p>The R code to obtain the above bagplot is</p>
+<p><img src="./media/media/image28.png" style="width:5.86458in;height:0.9375in" /></p>
+<h3>Reflection</h3>: 
+    <p>Activity 9: Use the R dataset mtcars to generate a bagplot for weight and miles per gallon (mpg). Label the x- and y-axis and give the graph a title.</p>
+<h2>Assessment</h2>
+<p>Use the R dataset Orange to generate a bag plot to show the relationship between age and circumference.</p>
+
+
+</div>
+</div>
+</body>
+</html>

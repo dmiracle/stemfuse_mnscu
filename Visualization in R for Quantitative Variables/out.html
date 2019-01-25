@@ -1,0 +1,615 @@
+<h1 id="module-visualization-in-r-for-quantitative-variables">Module Visualization in R for Quantitative Variables</h1>
+<h1 id="introduction-and-learning-objective">Introduction and Learning Objective</h1>
+<p>Introduction</p>
+<p>Quantitative variables are variables taking numbers as values, such as weight, height, age, and etc. Quantitative variables are also called numeric variables. Most commonly used graph for showing the relationship between two quantitative variables is scatter plot. Other commonly used graphs for showing characteristics of a quantitative variable are sunflower plot, correlation plot, box plot, line chart, histogram and bag plot. In this module, we will introduce different R functions for plotting quantitative variables.</p>
+<p>To summarize, we need to choose appropriate graphs for a given data. A summary of graph selection is included in the PDF file of <em>Graph Selection Matrix</em> on D2l.</p>
+<p>Learning Objectives</p>
+<p>After this module, students will be able to</p>
+<ul>
+<li><p>Generate scatter plot</p></li>
+<li><p>Generate sunflower plot</p></li>
+<li><p>Generate correlation plot</p></li>
+<li><p>Generate box plot</p></li>
+<li><p>Generate histogram</p></li>
+<li><p>Generate line chart</p></li>
+<li><p>Generate bag plot</p></li>
+</ul>
+<h1 id="learning-objective-one-construct-scatter-plots">Learning Objective One: Construct Scatter plots</h1>
+<h2>Introduction</h2>
+<p>A scatter plot is a plot of paired (x,y) data with a horizontal x-axis and a vertical y-axis. The horizontal axis is used for the independent variable (x), and the vertical axis is used for the dependent variable (y). A scatter plot shows the relationship between two quantitative variables (x and y). Each data point represents one individual.</p>
+<h2>Knowledge</h2>
+<p>If a scatter plot shows a pattern of approximately a straight line, then we say there is a linear correlation between the two quantitative variables. If the straight line goes from the origin to high x- and y-values (bottom left to top right), then the two variables are said to have a positive correlation. If the straight line goes from high values on the y-axis down to low y-values but high x-values (top left to bottom right), then the variables have a negative correlation. If the data points are very close to a straight line, then we say the two variables have a strong correlation. If the data points are scattered further around a line, then we say there is a weak (or no) correlation between the two variables. Figure 1 a, b, and c show the positive, negative and no correlation.</p>
+<p><img src="./media/media/image1.jpeg" alt="ANd9GcTN8To_WVUywnyMl-Jm69XsGtOjyAQFzSeUF1iY1DkHYuWXjSKb" style="width:1.74488in;height:1.7in" /><img src="./media/media/image2.jpeg" alt="ANd9GcScSDXaVXhKXhXUuzYiJhhY-ifcjn-JcldB8KXo3Mx_qoUswgWR" style="width:1.75373in;height:1.7in" /> <img src="./media/media/image3.png" alt="A scatter plot. The x-axis is for weight in kilograms, and the y-axis is for pulse rate in beats per minute. Across all x-values, the plotted points have y-values that tend to range from 50 to 90, so that the points appear loosely clustered about y = 70. All values estimated." style="width:1.92196in;height:1.8in" /></p>
+<p>Figure 1.a) Figure 1.b) Figure 1.c)</p>
+<p>Figure 1.a) A positive correlation between husband’s age and wife’s age; b) A negative correlation between cars’ weight and miles per gallon; and c) no correlation between cars’ weight and the pulse rate of the drivers</p>
+<p>The R function to make a scatter plot is</p>
+<p>plot(x,y, main= , xlab= , ylab= )</p>
+<p>or</p>
+<p>plot(y~x, data=)</p>
+<ul>
+<li><p>x: vector of data showing the x (independent variable) values of the individuals</p></li>
+<li><p>y: vector of data showing the y (dependent variable) values of the individuals</p></li>
+<li><p>main: title of the graph</p></li>
+<li><p>xlab: label of the x-axis</p></li>
+<li><p>ylab: label of the y-axis</p></li>
+</ul>
+<p>A Youtube video on how to generate a scatter plot in R is here</p>
+<p><a href="https://www.youtube.com/watch?v=yyXtiGCDOBo">https://www.youtube.com/watch?v=yyXtiGCDOBo</a></p>
+<h2>Key Points to Remember</h2>
+<p>A <strong>scatter plot</strong> shows the relationship between two quantitative variables. The relationship can be positive, negative or no correlation. The R function is <strong>plot()</strong>.</p>
+<p>The presence of a correlation between two variables is not evidence that one of the variables causes the other. <strong>Correlation does not imply causation</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 1: The temperature may associated with altitude. The research recorded the temperature at 7 altitudes, starting at 6327 feet. Use the scatter plot to show the relationship between altitude and temperature</p>
+<table>
+<thead>
+<tr class="header">
+<th>Altitude</th>
+<th>3</th>
+<th>10</th>
+<th>14</th>
+<th>22</th>
+<th>28</th>
+<th>31</th>
+<th>33</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Temperature</td>
+<td>57</td>
+<td>37</td>
+<td>24</td>
+<td>-5</td>
+<td>-30</td>
+<td>-41</td>
+<td>-54</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/media/image4.png" style="width:6.5in;height:0.48472in" /></p>
+<p>The scatter plot is shown in figure 2 below</p>
+<p><img src="./media/media/image5.jpeg" style="width:5.08604in;height:3in" /></p>
+<p>Figure 2. Scatter plot of the relationship between temperature and altitude.</p>
+<p>Example 2: In the ChickeWeight data in R datasets, there are four Diet groups. Use the scatter plot to show the relationship between the weight and time for the four different diet groups. Show different color for the diet groups.</p>
+<p>The R code is:</p>
+<p><img src="./media/media/image6.png" style="width:6.5in;height:0.47014in" /></p>
+<p>The graph is shown in figure 3.</p>
+<p><img src="./media/media/image7.jpeg" style="width:5.12922in;height:3.1in" /></p>
+<p>Figure 3. Scatter plot of the relationship between weight and time for the four types of diets.</p>
+<h3>Reflection</h3>
+<p>Activity 1: The table below lists weight and price of randomly selected six diamonds. All of the diamonds are round with rating of “very good” cut, and they all have color rating of F and clarity rating of VSI. Generate a scatter plot to show the relationship between price and weight</p>
+<table>
+<thead>
+<tr class="header">
+<th>Weight</th>
+<th>0.3</th>
+<th>0.4</th>
+<th>0.5</th>
+<th>0.5</th>
+<th>1.0</th>
+<th>0.7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Price</td>
+<td>510</td>
+<td>1151</td>
+<td>1343</td>
+<td>1410</td>
+<td>5669</td>
+<td>2277</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section"></h3>
+<h3 id="section-1"></h3>
+<h2>Assessment</h2>
+<ol type="1">
+<li><p>The data below shows the systolic blood pressure (SBP) and age for males and females. Generate a scatter plot to show the relationship between SBP and age for males and females separately using different color</p></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>SBP</th>
+<th>132</th>
+<th>143</th>
+<th>153</th>
+<th>137</th>
+<th>162</th>
+<th>154</th>
+<th>168</th>
+<th>149</th>
+<th>159</th>
+<th>128</th>
+<th>166</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Age</td>
+<td>52</td>
+<td>59</td>
+<td>67</td>
+<td>54</td>
+<td>73</td>
+<td>64</td>
+<td>74</td>
+<td>61</td>
+<td>65</td>
+<td>46</td>
+<td>72</td>
+</tr>
+<tr class="even">
+<td>Gender</td>
+<td>male</td>
+<td>female</td>
+<td>female</td>
+<td>male</td>
+<td>male</td>
+<td>male</td>
+<td>male</td>
+<td>male</td>
+<td>female</td>
+<td>female</td>
+<td>female</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><p>We are interested in investigating the relationship between the percentage of children who have been immunized and the corresponding mortality rate for children under five in a country. We believe that the mortality rate for children under five in a country decreases as more children received vaccines. The table listed the data of the percentage of immunized children and the mortality rate for a randomly chosen 9 countries.</p></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Percentage immunized</th>
+<th>Mortality rate per 1000 births</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bolivia</td>
+<td>77</td>
+<td>118</td>
+</tr>
+<tr class="even">
+<td>Cambodia</td>
+<td>32</td>
+<td>184</td>
+</tr>
+<tr class="odd">
+<td>China</td>
+<td>94</td>
+<td>43</td>
+</tr>
+<tr class="even">
+<td>Czech Republic</td>
+<td>99</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>Egypt</td>
+<td>89</td>
+<td>55</td>
+</tr>
+<tr class="even">
+<td>Ethiopia</td>
+<td>13</td>
+<td>208</td>
+</tr>
+<tr class="odd">
+<td>Mexico</td>
+<td>91</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td>Senegal</td>
+<td>47</td>
+<td>145</td>
+</tr>
+<tr class="odd">
+<td>Turkey</td>
+<td>76</td>
+<td>87</td>
+</tr>
+</tbody>
+</table>
+<p>Make a scatter plot to show the relationship between the percentage immunized and the mortality rate. Add title to the graph. Make the points solid and blue.</p>
+<h1 id="learning-objective-two-construct-sunflower-graph">Learning Objective Two: Construct Sunflower graph</h1>
+<h2>Introduction</h2>
+<p>A sunflower plot is similar to a scatter plot, but with showing the repeated points as sun flowers. In a sunflower plot, multiple overlapping points are plotted as sunflowers with multiples leaves (petals) with each leave (petal) representing one individual.</p>
+<h2>Knowledge</h2>
+<p>The R function for creating a sunflower plot is</p>
+<p>sunflowerplot(x, y, cex= , size= , seg.col = , seg.lwd = )</p>
+<ul>
+<li><p>x and y: numeric vectors of the data</p></li>
+<li><p>cex: character size expansion of center points</p></li>
+<li><p>size: size of sunflower petals in inches</p></li>
+<li><p>seg.col: color to be used for the segments which make the sunflower petals</p></li>
+<li><p>seg.lwd: the line width for the sunflower petal segments</p></li>
+</ul>
+<p>An example of a sunflower plot is shown in figure 4. The graph is based on a data for 100 low birth weight infants, and it shows the relationship between the gestational age and birth weight. The horizontal axis shows the gestational age (in weeks), and vertical axis shows the birth weight (in grams) of the 100 infants. Each sun flower shown in red represents that there are multiple infants with the same gestational age and same birth weight. For example, the sun flower point at the gestational age of 27 weeks and weight of 1170 g indicates that there are four infants with the same gestational age of 27 weeks and same weight of 1170 grams.</p>
+<p><img src="./media/media/image8.jpeg" style="width:5.11475in;height:3in" /></p>
+<p>Figure 4. A sunflower plot of relationship between gestational age and birth weight for 100 infants.</p>
+<h2>Key Points to Remember</h2>
+<p>Both a scatter plot and <strong>a sunflower plot</strong> are good to show the relationship between two quantitative variables. A regular scatter plot does not show the repeated individuals as those individuals overlap, but a sunflower plot shows the repeated individuals as different petals. The R function is <strong>sunflowerplot()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 3: The following data shows two aspirin concentrations in urine samples of 10 patients at 1 hour. The 10 patients took Aspirin A first and had their urine samples taken, and then took Aspirin B and had their urine samples taken. The concentration of aspirin in urine samples is measured as mg%. Generate a sunflower plot to see the relationship between the urine samples from Aspirin A and Aspirin B.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Aspirin A</th>
+<th>15</th>
+<th>26</th>
+<th>15</th>
+<th>28</th>
+<th>17</th>
+<th>26</th>
+<th>15</th>
+<th>20</th>
+<th>18</th>
+<th>15</th>
+<th>26</th>
+<th>15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Aspirin B</td>
+<td>13</td>
+<td>20</td>
+<td>13</td>
+<td>21</td>
+<td>12</td>
+<td>20</td>
+<td>13</td>
+<td>22</td>
+<td>11</td>
+<td>13</td>
+<td>20</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/media/image9.png" style="width:4.14583in;height:0.45833in" /></p>
+<p>The sunflower plot is shown in figure 5.</p>
+<p><img src="./media/media/image10.jpeg" style="width:5.11458in;height:2.86458in" /></p>
+<p>Figure 5. Sunflower plot of relationship between the Aspirin A concentration and Aspirin B concentration.</p>
+<p>We can see that there are five patients having the same Aspirin A concentrations at 15 mg% and the same Aspirin B concentrations at 13 mg%. There are three patients having the same Aspirin A concentration at 26 mg%, and the same Aspirin B concentration at 20mg%.</p>
+<h3>Reflection</h3>
+<p>Activity 2: Use the R data Orange to generate a sunflower plot to show the relationship between age and circumference of the orange trees. Make the data points blue, and the sunflower green. How many sunflowers do you observe? What data points are the sunflowers represent?</p>
+<h2>Assessment</h2>
+<p>Use the R dataset Orange. Generate a sunflower plot to show the relationship between age and circumference. How many repeated individuals did you see?</p>
+<h1 id="learning-objective-three-construct-correlation-plots">Learning Objective Three: Construct Correlation plots</h1>
+<h2>Introduction</h2>
+<p>A correlation plot is a two-dimensional plot showing the relationship between multiple pairs of numeric variables. The strength of the relationship is shown by the shape of the ellipse.</p>
+<h2>Knowledge</h2>
+<p>The R syntax of correlation plot is</p>
+<p>corrplot (corr, method= , type = , col = , bg =)</p>
+<ul>
+<li><p>corr: the correlation matrix of variables to visualize</p></li>
+<li><p>method: the default method is “circle”. The areas of circles show the absolute value of corresponding correlation coefficients. If use “ellipse”, then the direction of the ellipse shows the negative or positive correlation, and the area of the ellipse shows the corresponding correlation coefficients.</p></li>
+<li><p>type: character in “full”, “upper” or “lower”, displaying full matrix, lower triangular or upper triangular matrix. The default setting is “full”.</p></li>
+<li><p>col: Color of glyphs.</p></li>
+<li><p>bg: Background color</p></li>
+</ul>
+<p>A Youtube video on how to make a complex correlation plot is here</p>
+<p><a href="https://www.youtube.com/watch?v=jxUiIFj2l-s">https://www.youtube.com/watch?v=jxUiIFj2l-s</a></p>
+<p>In a correlation plot, the ellipse going from the top left corner to the bottom right corner represents a negative correlation between the two variables. The ellipse from the bottom left to the top right represents a positive correlation. The strength of the correlation is shown by the thickness of the ellipse. A very narrow ellipse shows a very strong correlation, and a very wide ellipse shows a weak correlation. If the correlation is represented by a circle, that means no correlation between the two variables.</p>
+<h2>Key Points to Remember</h2>
+<p>A <strong>correlation plot</strong> shows the strength of correlation between two quantitative variables. The R function is <strong>corrplot()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 4: Plot a correlation matrix between the variables in the dataset mtcars. The R code is</p>
+<p><img src="./media/media/image11.png" style="width:3.10417in;height:0.29167in" /></p>
+<p>The graph is shown in figure 6</p>
+<p><img src="./media/media/image12.jpeg" style="width:5.61999in;height:3.1in" /></p>
+<p>Figure 6. A correlation plot between every two numeric variables in the data set mtcars.</p>
+<p>In figure 6, the red ellipse representing the relationship between miles per gallon (mpg) and weight (wt) shows us a negative correlation. A positive correlation is shown by an ellipse in figure 6 between number of cylinder (cyl) and display (disp).</p>
+<h3>Reflection</h3>
+<p>Activity 3: Use the R dataset iris and make a correlation matrix of variables containing only numeric variables in iris data. Generate a correlation plot using ellipse method.</p>
+<h2>Assessment</h2>
+<p>Use the R data airquality to generate a correlation plot to show the relationship between variables. Identify the positive and negative correlation.</p>
+<h1 id="learning-objective-four-construct-box-plots">Learning Objective Four: Construct Box plots</h1>
+<h2>Introduction</h2>
+<p>A box plot shows the five number summery of a quantitative variable. The five number summary includes minimum, first quartile (<span class="math inline"><em>Q</em><sub>1</sub></span>), median, third quartile (<span class="math inline"><em>Q</em><sub>3</sub></span>), and maximum. Outliers are either <span class="math inline">3 × <em>I</em><em>Q</em><em>R</em></span> or more above the third quartile or <span class="math inline">3 × <em>I</em><em>Q</em><em>R</em></span> or more below the first quartile.</p>
+<h2>Knowledge</strong></em>:</p>
+<p>An example of a box plot is shown in figure 7. Outliers may be plotted as individual points.<img src="./media/media/image13.png" style="width:4.85114in;height:2.94886in" /></p>
+<p>Figure 7. An example of a box plot.</p>
+<p>A single box plot can be drawn for one batch of data with no distinct groups. Alternatively, multiple box plots can be drawn together to compare multiple data sets. The R function for boxplot is</p>
+<p>boxplot(x, boxwex=, varwidth=, border=, col=, horizontal=)</p>
+<p>or</p>
+<p>boxplot(y~group, data=, width=, varwidth=, border=, col=, horizontal=)</p>
+<ul>
+<li><p>x: vector of data</p></li>
+<li><p>y~group: y is a numeric vector of data values to be split into groups according to the grouping variable, which is a factor.</p></li>
+<li><p>boxwex: a number to indicate the width of the box</p></li>
+<li><p>varwidth: logic value. If varwidth is TRUE, the boxes are drawn with widths proportional to the square-roots of the number of observations in the groups</p></li>
+<li><p>border: an optional vector of colors for the outlines of the boxplots.</p></li>
+<li><p>col: if col is non-null, it is assumed to contain colors to be used to color the bodies of the box plots. By default they are in the background color.</p></li>
+<li><p>horizontal: a logical value indicating if the boxplots should be horizontal; default FALSE means vertical boxes</p></li>
+</ul>
+<h2>Key Points to Remember</h2>
+<p>A <strong>box plot</strong> shows the five number summary of a variable. The R function is <strong>boxplot()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 5: Make a box plot for the ten students grades shown in the following table</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>96</td>
+<td>67</td>
+<td>82</td>
+<td>51</td>
+<td>97</td>
+<td>76</td>
+<td>85</td>
+<td>88</td>
+<td>93</td>
+<td>75</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./media/media/image15.png" style="width:5.83333in;height:0.65625in" /></p>
+<p>The box plot is shown in figure 8 below</p>
+<p><img src="./media/media/image16.jpeg" style="width:5.59028in;height:3in" /></p>
+<p>Figure 8. Box plot of students’ grades.</p>
+<p>Example 6: Use R data mtcars to generate a box plot to show the five number summary of miles per gallon for the three types of cylinders. The R code is</p>
+<p><img src="./media/media/image17.png" style="width:6.38542in;height:0.45833in" /></p>
+<p>The boxplot is shown in figure 9 below:</p>
+<p><img src="./media/media/image18.jpeg" style="width:5.59028in;height:3in" /></p>
+<p>Figure 9. Box plot of miles per gallon for 4-cylinder, 6-cylinder, and 8-cylinder cars.</p>
+<h3>Reflection</h3>
+<p>Activity 6 Use R data ToothGrowth to generate a box plot to show the five number summary of tooth length for each dosage.</p>
+<h2>Assessment</h2>
+<ol type="1">
+<li><p>If there are 12 students in a statistics class and the 12 students’ grades are</p>
+<p>72 83 95 75 78 86 88 93 75 89 85 97</p>
+<p>Generate a box plot to show the five number summary. Make the width of the box as 0.4.</p></li>
+<li><p>Use the R dataset ToothGrowth to generate multiple box plots in one graph to show the five number summary of tooth length(len) for the two supplement type (supp). Add x- and y-axis labels. Add title and legend to the graph.</p></li>
+</ol>
+<h1 id="learning-objective-five-construct-histograms">Learning Objective Five: Construct Histograms</h1>
+<h2>Introduction</h2>
+<p>A histogram is a display of statistical information that uses bars to show the frequency of data in successive numerical intervals of equal size. It is plotted by dividing the range of observations into equal sized bins, and then counting the number of values appearing in each bin. The bars represent the bins, and the height of each bin represents the number of observations in each bin.</p>
+<h2>Knowledge</h2>
+<p>The R function of making a histogram is hist(x, breaks= , col= ,border= ,main= , xlab= , ylab= , xlim= , ylim= )</p>
+<ul>
+<li><p>x: a vector of values for which the histogram is desired</p></li>
+</ul>
+<ul>
+<li><p>breaks: one of the following</p>
+<ul>
+<li><p>a vector giving the breakpoints between histogram bins</p></li>
+<li><p>a function to compute the vector of breakpoints</p></li>
+<li><p>a number giving the number of bins for the histogram</p></li>
+<li><p>a function to compute the number of bins</p></li>
+</ul></li>
+<li><p>col: a color to be used to fill the bars; the default yields unfilled bars</p></li>
+<li><p>border: a color of the border of bards. The default is black</p></li>
+<li><p>main: title of the graph</p></li>
+<li><p>xlab: label of the x-axis</p></li>
+<li><p>ylab: label of the y-axis</p></li>
+<li><p>xlim: range of x values on the x-axis</p></li>
+<li><p>ylim: range of the y values on the y-axis</p></li>
+</ul>
+<h2>Key Points to Remember</h2>
+<p>A <strong>histogram</strong> shows frequency of data in successive numerical intervals of equal size. A bell-shape and symmetric histogram represents a normal distribution. The R function to generate a histogram is <strong>hist()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 7: Use the R data AirPassengers to generate a histogram to show the distribution of the number of passengers</p>
+<p><img src="./media/media/image19.png" style="width:3.01042in;height:0.19792in" /></p>
+<p>The histogram is shown in figure 10</p>
+<p><img src="./media/media/image20.jpeg" style="width:5.12922in;height:3.1in" /></p>
+<p>Figure 10. A histogram of air passengers</p>
+<p>Figure 10 shows that there are about 24 flights with 100 to 150 passengers, 24 with 150 to 200 passengers, about 21 flights with 200 to 250 passengers, etc.</p>
+<p>If we would like to make only 5 bars (bins) for the histogram, then the R code is</p>
+<p><img src="./media/media/image21.png" style="width:3.83333in;height:0.17708in" /></p>
+<p>The histogram is shown in figure 11</p>
+<p><img src="./media/media/image22.jpeg" style="width:5.12922in;height:3.1in" /></p>
+<p>Figure 11. Histogram of airline passengers with fixed number of bins (n=5)</p>
+<p>If we would like to add color to the histogram and make the bars grey and the borders red, and break the bins at 100, 300, 500, and 700, then the R code is</p>
+<p><img src="./media/media/image23.png" style="width:6.17708in;height:0.34375in" /></p>
+<p>The histogram is shown in figure 12</p>
+<p><img src="./media/media/image24.jpeg" style="width:4.60734in;height:2.6in" /></p>
+<p>Figure 12. Histogram of airline passengers with the bins of between 100 to 300, 300 to 500, and 500 to 700. The bar color is grey, and border color is red.</p>
+<h3>Reflection</h3>
+<p>Activity 7: a) Use the R data iris to generate a histogram for sepal length of that dataset; b) Use “breaks=c(seq(4,8,0.4) to try the new break points for the bins and state the size of the bins and the number of the bins observed; c) make the color of the bars red and border purple.</p>
+<h2>Assessment</h2>
+<p>If there are 12 students in a statistics class and the 12 students’ grades are</p>
+<p>72 83 95 75 78 86 88 93 75 89 85 97</p>
+<p>Generate a histogram to show the frequency of grades with the bins break at 70, 80, 90 and 100; Make the bars grey and the borders black. Label the x-axis as “grades” and y-axis as “Frequency”. Title the graph as “Student Grades”.</p>
+<h1 id="learning-objective-six-construct-line-charts">Learning Objective Six: Construct Line charts</h1>
+<h2>Introduction</h2>
+<p>A Line chart is usually used to investigate the changes over time for one or more groups. A line chart displays information as a series of data points connected by straight line segments. The horizontal axis represents time, and the vertical axis represents the measurements over time.</p>
+<h2>Knowledge</h2>
+<p>A line chart is similar to a scatter plot except that the measurements are ordered over time and joined with line segments. A line chart is generated based on a scatter plot in R. After plotting the scatter plot, use the R function</p>
+<p>lines (x, type= )</p>
+<p>to add line segments. The argument type is a character giving the type of lines desired, in which “p” is for points, “l” for lines, “b” for both lines and points, “c” for empty points joined by lines, “o” for overplotted points and lines, “s” for stair steps, and “h” for histogram like lines.</p>
+<h2>Key Points to Remember</h2>
+<p>A <strong>line chart</strong> shows the measurements through time. The R function is lines(). You may or may not plot the data points using plot() first.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 8: The following data shows the precipitation amount (in inches) from February to August in Minnesota in 2018 (based on National Weather Service). Generate a line graph to show the rain fall amount over time.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Month</th>
+<th>February</th>
+<th>March</th>
+<th>April</th>
+<th>May</th>
+<th>June</th>
+<th>July</th>
+<th>August</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Precipitation</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>7</td>
+<td>9</td>
+<td>15</td>
+<td>18</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/media/image25.png" style="width:5.65625in;height:0.94792in" /></p>
+<p>The argument “axes=FALSE” in plot is to remove the x- and y-axis labels. The code</p>
+<p>“axis(1, at=1:7, labels=months)” is to label the x-axis with the eight months, and the code</p>
+<p>“axis (2, at = 0:30*5)” is to label the y-axis with an interval of 5. The line graph is shown in figure 13.</p>
+<p><img src="./media/media/image26.jpeg" style="width:5.11475in;height:3in" /></p>
+<p>Figure 13. Line graph of precipitation from February to August in Minnesota in 2018.</p>
+<p>Or we can use the argument <em>type=”b”</em> in the R function plot().</p>
+<p>From the line chart, we observe that the precipitation is increasing through time.</p>
+<h3>Reflection</h3> 
+<p>Activity 8: The table below shows the number of fatalities of law enforcement officers in the United States (Triola, 2018). Show the trend using a line chart. Where is the maximum point? What happened in that year?</p>
+<table>
+<thead>
+<tr class="header">
+<th>Year</th>
+<th>1995</th>
+<th>1996</th>
+<th>1997</th>
+<th>1998</th>
+<th>1999</th>
+<th>2000</th>
+<th>2001</th>
+<th>2002</th>
+<th>2003</th>
+<th>2004</th>
+<th>2005</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Number of Fatalities</td>
+<td>140</td>
+<td>170</td>
+<td>169</td>
+<td>145</td>
+<td>158</td>
+<td>162</td>
+<td>240</td>
+<td>161</td>
+<td>150</td>
+<td>170</td>
+<td>165</td>
+</tr>
+</tbody>
+</table>
+<h2>Assessment</h2>
+<p>The mortality rates (per 1000 births) of new born infants in a country from 2000 to 2010 are shown in the table below. Generate a line chart to show the trend of mortality rate through years.</p>
+<table>
+<thead>
+<tr class="header">
+<th>2000</th>
+<th>2001</th>
+<th>2002</th>
+<th>2003</th>
+<th>2004</th>
+<th>2005</th>
+<th>2006</th>
+<th>2007</th>
+<th>2008</th>
+<th>2009</th>
+<th>2010</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9.5</td>
+<td>8</td>
+<td>8.1</td>
+<td>7.6</td>
+<td>6.9</td>
+<td>5.1</td>
+<td>3.2</td>
+<td>2.1</td>
+<td>2.5</td>
+<td>1.1</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+<h1 id="learning-objective-seven-construct-bagplots">Learning Objective Seven: Construct Bagplots</h1>
+<h2>Introduction</h2>
+<p>A bagplot (or starburst plot) is a two-dimensional extension of a boxplot that shows the joint distribution of two numeric variables.</p>
+<h2>Knowledge</h2>
+<p>The R function bagplot is in the package aplpack. You will need to install that package before run the code. The syntax of bagplot is as following:</p>
+<p>bagplot( x, y, factor =3, approx..limit =300, show.outlier = TRUE, show.whiskers = TRUE, show. looppoints =TRUE, show.bagpoints =TRUE, show.loophull =TRUE, show.baghull =TRUE, pch =16, cex =0.4, col.loophull=”#aaccff”, col.looppoints=”#3355ff”, col.baghull=”#7799ff”, col.bagpoints=”#000088”)</p>
+<ul>
+<li><p>x and y: x and y values of a data set</p></li>
+<li><p>factor: factor defining the loop (outer light blue region); the default is 3 times the interior dark blue region</p></li>
+<li><p>approx.limit: if the number of data points exceeds approx.limt a sample is used to compute some of the quantities; default is 300</p></li>
+<li><p>show.outlier: if TRUE outlier are shown</p></li>
+<li><p>show.whiskers: if TRUE whiskers (red lines connecting loop points and the inner yellow region) are shown</p></li>
+<li><p>show.looppoints: if TRUE loop points (points between the interior dark blue region and the outer light blue region) are shown</p></li>
+<li><p>show.bagpoints: if TRUE bag points (points inside of the dark blue interior region) are shown</p></li>
+<li><p>show.loophull: if TRUE loop (outer light blue region) is shown</p></li>
+<li><p>show.baghull: if TRUE bag (interior dark blue region) is shown</p></li>
+<li><p>pch: point type, default is a solid point</p></li>
+<li><p>cex: size of characters</p></li>
+<li><p>col.loophull, col.looppoints, col.baghull, and col.bagpoints: color of the loop hull (outer light blue region), loop points, bag hull (inner dark blue region), and bag points. The default loop hull color is light blue, default bag hull color is dark blue. The default loop points and bag points color are black.</p></li>
+</ul>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 9: the data below shows the relationship between the heights of winning presidential candidates and heights of their main opponents in cm (Triola, 2018).</p>
+<table>
+<thead>
+<tr class="header">
+<th>President</th>
+<th>178</th>
+<th>182</th>
+<th>188</th>
+<th>175</th>
+<th>179</th>
+<th>183</th>
+<th>192</th>
+<th>182</th>
+<th>177</th>
+<th>185</th>
+<th>188</th>
+<th>188</th>
+<th>183</th>
+<th>188</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Opponent</td>
+<td>180</td>
+<td>180</td>
+<td>182</td>
+<td>173</td>
+<td>178</td>
+<td>182</td>
+<td>180</td>
+<td>180</td>
+<td>183</td>
+<td>177</td>
+<td>173</td>
+<td>188</td>
+<td>185</td>
+<td>175</td>
+</tr>
+</tbody>
+</table>
+<p>The bagplot is shown in figure 14.</p>
+<p><img src="./media/media/image27.jpeg" style="width:5.31617in;height:3in" /></p>
+<p>Figure 14. Bagplot of the presidents’ heights vs. opponents’ heights</p>
+<p>The red asterisk near the center of the graph represents the median heights of the presidents and opponents. The dark blue interior region is called the bag, representing the box of the traditional boxplot, which contains 50% of the data. The light blue outer region is called the fence, and it is formed by inflating the bag by a certain factor, usually 3. Points outside the fence are the outliers. The light blue region is also called loop hull. The points outside of the dark blue region and inside of the light blue region are called loop points. The red lines connecting the central yellow region and the loop points are called whiskers.</p>
+<p>The R code to obtain the above bagplot is</p>
+<p><img src="./media/media/image28.png" style="width:5.86458in;height:0.9375in" /></p>
+<h3>Reflection</h3>: 
+    <p>Activity 9: Use the R dataset mtcars to generate a bagplot for weight and miles per gallon (mpg). Label the x- and y-axis and give the graph a title.</p>
+<h2>Assessment</h2>
+<p>Use the R dataset Orange to generate a bag plot to show the relationship between age and circumference.</p>

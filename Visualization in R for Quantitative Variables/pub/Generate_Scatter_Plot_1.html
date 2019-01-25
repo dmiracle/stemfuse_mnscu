@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-one-construct-scatter-plots">Learning Objective One: Construct Scatter plots</h1>
+<h2>Introduction</h2>
+<p>A scatter plot is a plot of paired (x,y) data with a horizontal x-axis and a vertical y-axis. The horizontal axis is used for the independent variable (x), and the vertical axis is used for the dependent variable (y). A scatter plot shows the relationship between two quantitative variables (x and y). Each data point represents one individual.</p>
+<h2>Knowledge</h2>
+<p>If a scatter plot shows a pattern of approximately a straight line, then we say there is a linear correlation between the two quantitative variables. If the straight line goes from the origin to high x- and y-values (bottom left to top right), then the two variables are said to have a positive correlation. If the straight line goes from high values on the y-axis down to low y-values but high x-values (top left to bottom right), then the variables have a negative correlation. If the data points are very close to a straight line, then we say the two variables have a strong correlation. If the data points are scattered further around a line, then we say there is a weak (or no) correlation between the two variables. Figure 1 a, b, and c show the positive, negative and no correlation.</p>
+<p><img src="./media/media/image1.jpeg" alt="ANd9GcTN8To_WVUywnyMl-Jm69XsGtOjyAQFzSeUF1iY1DkHYuWXjSKb" style="width:1.74488in;height:1.7in" /><img src="./media/media/image2.jpeg" alt="ANd9GcScSDXaVXhKXhXUuzYiJhhY-ifcjn-JcldB8KXo3Mx_qoUswgWR" style="width:1.75373in;height:1.7in" /> <img src="./media/media/image3.png" alt="A scatter plot. The x-axis is for weight in kilograms, and the y-axis is for pulse rate in beats per minute. Across all x-values, the plotted points have y-values that tend to range from 50 to 90, so that the points appear loosely clustered about y = 70. All values estimated." style="width:1.92196in;height:1.8in" /></p>
+<p>Figure 1.a) Figure 1.b) Figure 1.c)</p>
+<p>Figure 1.a) A positive correlation between husband’s age and wife’s age; b) A negative correlation between cars’ weight and miles per gallon; and c) no correlation between cars’ weight and the pulse rate of the drivers</p>
+<p>The R function to make a scatter plot is</p>
+<p>plot(x,y, main= , xlab= , ylab= )</p>
+<p>or</p>
+<p>plot(y~x, data=)</p>
+<ul>
+<li><p>x: vector of data showing the x (independent variable) values of the individuals</p></li>
+<li><p>y: vector of data showing the y (dependent variable) values of the individuals</p></li>
+<li><p>main: title of the graph</p></li>
+<li><p>xlab: label of the x-axis</p></li>
+<li><p>ylab: label of the y-axis</p></li>
+</ul>
+<p>A Youtube video on how to generate a scatter plot in R is here</p>
+<p><a href="https://www.youtube.com/watch?v=yyXtiGCDOBo">https://www.youtube.com/watch?v=yyXtiGCDOBo</a></p>
+<h2>Key Points to Remember</h2>
+<p>A <strong>scatter plot</strong> shows the relationship between two quantitative variables. The relationship can be positive, negative or no correlation. The R function is <strong>plot()</strong>.</p>
+<p>The presence of a correlation between two variables is not evidence that one of the variables causes the other. <strong>Correlation does not imply causation</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 1: The temperature may associated with altitude. The research recorded the temperature at 7 altitudes, starting at 6327 feet. Use the scatter plot to show the relationship between altitude and temperature</p>
+<table>
+<thead>
+<tr class="header">
+<th>Altitude</th>
+<th>3</th>
+<th>10</th>
+<th>14</th>
+<th>22</th>
+<th>28</th>
+<th>31</th>
+<th>33</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Temperature</td>
+<td>57</td>
+<td>37</td>
+<td>24</td>
+<td>-5</td>
+<td>-30</td>
+<td>-41</td>
+<td>-54</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/media/image4.png" style="width:6.5in;height:0.48472in" /></p>
+<p>The scatter plot is shown in figure 2 below</p>
+<p><img src="./media/media/image5.jpeg" style="width:5.08604in;height:3in" /></p>
+<p>Figure 2. Scatter plot of the relationship between temperature and altitude.</p>
+<p>Example 2: In the ChickeWeight data in R datasets, there are four Diet groups. Use the scatter plot to show the relationship between the weight and time for the four different diet groups. Show different color for the diet groups.</p>
+<p>The R code is:</p>
+<p><img src="./media/media/image6.png" style="width:6.5in;height:0.47014in" /></p>
+<p>The graph is shown in figure 3.</p>
+<p><img src="./media/media/image7.jpeg" style="width:5.12922in;height:3.1in" /></p>
+<p>Figure 3. Scatter plot of the relationship between weight and time for the four types of diets.</p>
+<h3>Reflection</h3>
+<p>Activity 1: The table below lists weight and price of randomly selected six diamonds. All of the diamonds are round with rating of “very good” cut, and they all have color rating of F and clarity rating of VSI. Generate a scatter plot to show the relationship between price and weight</p>
+<table>
+<thead>
+<tr class="header">
+<th>Weight</th>
+<th>0.3</th>
+<th>0.4</th>
+<th>0.5</th>
+<th>0.5</th>
+<th>1.0</th>
+<th>0.7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Price</td>
+<td>510</td>
+<td>1151</td>
+<td>1343</td>
+<td>1410</td>
+<td>5669</td>
+<td>2277</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section"></h3>
+<h3 id="section-1"></h3>
+<h2>Assessment</h2>
+<ol type="1">
+<li><p>The data below shows the systolic blood pressure (SBP) and age for males and females. Generate a scatter plot to show the relationship between SBP and age for males and females separately using different color</p></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>SBP</th>
+<th>132</th>
+<th>143</th>
+<th>153</th>
+<th>137</th>
+<th>162</th>
+<th>154</th>
+<th>168</th>
+<th>149</th>
+<th>159</th>
+<th>128</th>
+<th>166</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Age</td>
+<td>52</td>
+<td>59</td>
+<td>67</td>
+<td>54</td>
+<td>73</td>
+<td>64</td>
+<td>74</td>
+<td>61</td>
+<td>65</td>
+<td>46</td>
+<td>72</td>
+</tr>
+<tr class="even">
+<td>Gender</td>
+<td>male</td>
+<td>female</td>
+<td>female</td>
+<td>male</td>
+<td>male</td>
+<td>male</td>
+<td>male</td>
+<td>male</td>
+<td>female</td>
+<td>female</td>
+<td>female</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><p>We are interested in investigating the relationship between the percentage of children who have been immunized and the corresponding mortality rate for children under five in a country. We believe that the mortality rate for children under five in a country decreases as more children received vaccines. The table listed the data of the percentage of immunized children and the mortality rate for a randomly chosen 9 countries.</p></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Percentage immunized</th>
+<th>Mortality rate per 1000 births</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bolivia</td>
+<td>77</td>
+<td>118</td>
+</tr>
+<tr class="even">
+<td>Cambodia</td>
+<td>32</td>
+<td>184</td>
+</tr>
+<tr class="odd">
+<td>China</td>
+<td>94</td>
+<td>43</td>
+</tr>
+<tr class="even">
+<td>Czech Republic</td>
+<td>99</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>Egypt</td>
+<td>89</td>
+<td>55</td>
+</tr>
+<tr class="even">
+<td>Ethiopia</td>
+<td>13</td>
+<td>208</td>
+</tr>
+<tr class="odd">
+<td>Mexico</td>
+<td>91</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td>Senegal</td>
+<td>47</td>
+<td>145</td>
+</tr>
+<tr class="odd">
+<td>Turkey</td>
+<td>76</td>
+<td>87</td>
+</tr>
+</tbody>
+</table>
+<p>Make a scatter plot to show the relationship between the percentage immunized and the mortality rate. Add title to the graph. Make the points solid and blue.</p>
+
+
+</div>
+</div>
+</body>
+</html>
