@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-five-format-axes">Format Axes</h1>
+<h2>Introduction</h2>
+<p>When using the plot() function, R will label the x- tick marks as 1, 2, 3, etc. in an ascending order, and label y-axis tick markers based on the values provided. We can manipulate the axis attributes using the R function axis().</p>
+<h2>Knowledge</h2>
+<p>If we need to change the labels on the x-tick marks and y-tick marks, we need to firstly claim axes=FALSE in the plot() function to remove all the labels of the x- and y-axis. Then use the function axis() to add all the labels and tick marks. The R syntax of the axis () function is</p>
+<p>axis(side, at = , labels = , tick = , las=, lwd = , col = , col.ticks = )</p>
+<ul>
+<li><p>side: 1 for horizontal x-axis; and 2 for vertical y-axis</p></li>
+<li><p>at: numeric vector where the tick marks are to be drawn</p></li>
+<li><p>labels: character or numeric vector of the labels placing by the tick marks</p></li>
+<li><p>tick: a logical value specifying whether tick marks and an axis line should be drawn. The default is TRUE</p></li>
+<li><p>las: 0 for parallel labels to the axis, 2 for perpendicular labels to the axis</p></li>
+<li><p>lwd: line widths for the axis and the tick marks</p></li>
+<li><p>col: color for the axis line and tick marks.</p></li>
+<li><p>col.ticks: color for the tick marks if different from the axis color.</p></li>
+</ul>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 5: Use the data from Activity 4. If we write the R code as following</p>
+<p><img src="./media/media/image15.png" style="width:6.15625in;height:0.82292in" /></p>
+<p>Then the graph will not show appropriate x-axis labels as the eight months in words. Instead, the labels of the x-axis will be the default numbers (figure 7 a). If we include the argument axes=FALSE in the plot function</p>
+<p><img src="./media/media/image16.png" style="width:6.5in;height:0.19028in" />and add the following lines to the code</p>
+<p><img src="./media/media/image17.png" style="width:2.63542in;height:0.35417in" /></p>
+<p>The output graph will show the correct x-axis label as the eight months (figure 7 b).</p>
+<p><img src="./media/media/image18.jpeg" style="width:4.06181in;height:2.69792in" /></p>
+<p>Figure 7 a. Plot of rain fall amount over months without the correct x-labels</p>
+<p><img src="./media/media/image19.jpeg" style="width:4.06235in;height:2.8in" /></p>
+<p>Figure 7 b. Plot of rain fall amount over months with the correct x-labels.</p>
+<h3>Reflection</h3>
+Activity 5: The data below shows the average price of each type of the car in Minnesota. Genearte a bar graph to show the average price of each type of the car. Label the x-axis tick marks as the five types of cars. Label the y-axis from 0 to 55 with an increment of 5. Include x-label as “Cars” and y-label as “Average Price”. Put the y-axis labels perpendicular to the axis.</p>
+<table>
+
+<tbody>
+<tr class="header">
+<td>Car</td>
+<td>BMW</td>
+<td>Toyota</td>
+<td>Honda</td>
+<td>Ford</td>
+<td>Volvo</td>
+</tr>
+
+<tr class="odd">
+<td>Average Price (k)</td>
+<td>52</td>
+<td>26</td>
+<td>24</td>
+<td>22</td>
+<td>54</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-1"></h3>
+<h2>Assessment</h2>
+<p>Use the R dataset ToothGrowth to generate multiple box plots in one graph to show the five number summary of tooth length(len) for the two supplement type (supp). Add x- and y-axis labels. Add title and legend to the graph. Place the text “Highest Median” right below the highest median line on the graph.</p>
+
+
+</div>
+</div>
+</body>
+</html>

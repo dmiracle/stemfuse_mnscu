@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-two-identify-global-setting-and-local-setting-for-a-plot">Identify global setting and local setting for a plot</h1>
+<h2>Introduction</h2>
+<p>The par() function allows us to set up many useful functions globally to be applied to all subsequent plots until we change it. The function par with argument mfrow allows us to set up multiple graphs in one plot.</p>
+<h2>Knowledge</h2>
+<p>The syntax of the function par() is</p>
+<p>par(mfrow=c(x, y))</p>
+<p>plot(…)</p>
+<p>Viewing multiple plots in one graph help to see the differences between datasets, similarities between datasets, different views of the same dataset, and relationship between different variables of a dataset.</p>
+<p>Other functions that can be set up globally using par() are all characteristics for a plot, such as cex for point size, pch for point type, and lty for line type, etc. (see more details of the characteristics in the locally setting section below).</p>
+<p>The function dev.off() is to turn off the global setting. If you have applied any global settings from previous commands, state “dev.off()” at the beginning of the new script removes all previous global settings.</p>
+<h2>Key Points to Remember</h2>
+<p>To plot several graphs in one chart, use the R function <strong>par(mfrow=c(x, y))</strong>. To turn off the global setting of doing multiple plots in one chart, use the R function <strong>dev.off()</strong>.</p>
+<h2>Practice and Reflection</h2>
+<h2>Practice</h2>
+<p>Example 2: Use the R dataset mtcars to show four scatter plots in one graph as a 2 by 2 matrix: 1) a scatter plot between weight (wt) and miles per gallon (mpg); 2) a scatter plot between cylinder (cyl) and mpg; 3) a scatter plot between gross horsepower (hp) and mpg; 4) a scatter plot between displacement (disp) and mpg. Make the size of all titles as 0.8 and red.</p>
+<p>The R code is</p>
+<p><img src="./media/media/image6.png" style="width:4.41667in;height:1.78662in" /></p>
+<p>The output graph is shown in figure 3</p>
+<p><img src="./media/media/image7.jpeg" style="width:5.01944in;height:2.54167in" /></p>
+<p>Figure 3. Showing multiple plots in one graph with global setting of title size and color.</p>
+<h2>Reflection</h2> Activity 2: Use the R data set iris to generate two scatter plots in one graph and show the two plots side by side: 1) a scatter plot between sepal length and sepal width; and 2) a scatter plot between petal length and petal width. Make the two plots blue.</p>
+<h2>Assessment</h2>
+<p>Use the mtcars data in R to generate a box plot and a bar plot in one graph using mfrow(). The boxplot shows the five number summary of mpg for each number of cylinders and the bar plot shows the mean values of mpg for each number of cylinders. Label the x-axis Number of cylinders. Title each plot.</p>
+
+
+</div>
+</div>
+</body>
+</html>

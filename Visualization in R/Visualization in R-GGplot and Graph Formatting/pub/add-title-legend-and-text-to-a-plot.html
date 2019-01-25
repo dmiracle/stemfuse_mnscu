@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-four-add-title-legend-and-text-to-a-plot">Add title, legend, and text to a plot</h1>
+<h2>Introduction</h2>
+<p>We can add titles, axes, labels of axes, text of points, and legend to a plot.</p>
+<h2>Knowledge</h2>
+<p>To add title, we can either use the argument <em>main=</em> in the plot () function as shown in the previous example, or use the function title(). For example, using the altitude and temperature data from previous example, if we do not have the argument <em>main=</em> in the plot function, we can add title() after the plot () function</p>
+<p><img src="./media/media/image11.png" style="width:4.71875in;height:0.30208in" /></p>
+<p>To add a legend to a plot, use the R function legend(x=, legend=, pch=, col=, border =, horiz=) after plot(). In the arguments:</p>
+<ul>
+<li><p>x: character or number to show the position where the legend should appear</p></li>
+<li><p>legend: a character expression vector to appear as the legend</p></li>
+<li><p>pch: point types appearing in the legend</p></li>
+<li><p>col: the color of points or lines appearing in the legend</p></li>
+<li><p>border: the border color for the box of the legend</p></li>
+<li><p>horiz: logical; if TRUE (default), set the legend horizontally; otherwise, vertically.</p></li>
+</ul>
+<p>An example R code is</p>
+<p><img src="./media/media/image12.png" style="width:6.5in;height:0.19792in" /></p>
+<p>This is to add the legend at the top right corner with the three colors representing three age groups.</p>
+<p>To add text to a particular point or place in the plot, use the R function</p>
+<p>text(x, y, labels=“ “, adj= ,srt = , font= , cex = , col = ) after the plot () function.</p>
+<p>In the arguments,</p>
+<ul>
+<li><p>x and y: the coordinates where the text labels should be written.</p></li>
+<li><p>labels: the character vector that specifies the text to appear</p></li>
+<li><p>adj: values of 0.5, 0 or 1, where 0.5 (default) is centered, 0 is left-justified, and 1 is right-justified</p></li>
+<li><p>srt: the angle that the text appears</p></li>
+<li><p>font: font of the text</p></li>
+<li><p>cex: size of the text</p></li>
+<li><p>col: color of the text</p></li>
+</ul>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 4: Use the R data iris to generate a scatter plot showing the relationship between sepal length and sepal width in red color, and the relationship between petal length and petal width in green color. Plot the sepal using red circles (pch=1) and plot the petal using green triangles (pch=6). Add a legend to show the difference between the petal and sepal. Add text “separation of two petal groups?” at the position (2,2) with -45<span class="math inline"><em></em><sup>∘</sup></span>, in brown color with size of 0.8.</p>
+<p>The R code is:</p>
+<p><img src="./media/media/image13.png" style="width:6.5in;height:0.90694in" /></p>
+<p>The output graph is shown in figure 6</p>
+<p><img src="./media/media/image14.jpeg" style="width:5.91887in;height:3.4375in" /></p>
+<p>Figure 6. Add legend, and text to a scatter plot.</p>
+<h3>Reflection</h3>
+<p>Activity 4: The data below shows the rain fall amount in a city at two different years. Generate two line plots in one graph to show the trend of rain fall through time in the two years. Label the x-axis as month, and y-axis as rain fall amount. Make the line for year 2000 red and green for year 2010. Use the type of line across points for both years (type=”o”). Make the y-axis start from 0 and end at 40 with an increment of 5. Add legend to the top right corner of the graph showing the two different years with different color (red for 2000 and green for 2010), with size “cex=0.8”. Add text “maximum point” at the maximum point with black color and size “cex=1”.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>March</th>
+<th>April</th>
+<th>May</th>
+<th>June</th>
+<th>July</th>
+<th>August</th>
+<th>Sep</th>
+<th>October</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Year2000</td>
+<td>7</td>
+<td>12</td>
+<td>28</td>
+<td>30</td>
+<td>41</td>
+<td>39</td>
+<td>22</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>Year2010</td>
+<td>10</td>
+<td>9</td>
+<td>19</td>
+<td>28</td>
+<td>32</td>
+<td>27</td>
+<td>18</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h1 id="section"></h1>
+<h2>Assessment</h2>
+<p>Use the R dataset Orange to generate five boxplots in one graph. Each boxplot shows the five number summary of the circumference of each tree. The factor Tree is ordered as 3&lt;1&lt;5&lt;2&lt;4, which is not the original order. Rename the factor Tree in ascending order. Add a legend showing “Tree1”, “Tree2”, “Tree3”, “Tree4”, and “Tree5” on the top left corner of the graph, with red being tree1, green being tree2, blue being tree3, yellow being tree4, and gold being tree5. Make the size of the legends 0.8, and use solid dots. Give the graph a title “Orange Tree Circumferences”.</p>
+
+
+</div>
+</div>
+</body>
+</html>

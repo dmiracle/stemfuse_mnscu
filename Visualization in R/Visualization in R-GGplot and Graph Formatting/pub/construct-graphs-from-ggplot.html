@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+
+<h1 id="learning-objective-one-construct-graphs-from-ggplot">Construct graphs from GGPLOT</h1>
+<h2>Introduction</h2>
+<p>Chapter 3 (“Data visualization”) of the open source text, <em>R for Data Science</em> by Garrett Grolemund and Hadley Wickham, is another excellent resource for learning more about <strong>ggplot2</strong>. The link is posted on D2L. Also the link for all exercises is posted. This resource goes into much greater details on geometric objects, aesthetic mappings, position adjustments, and coordinate systems. It also covers the use of <strong>ggplot2</strong> in graphing statistical transformations and concludes with a discussion of the layered grammar of graphics.</p>
+<h2>Knowledge</h2>
+<p>The R function to generate a ggplot is</p>
+<p>ggplot(data= , aes(x= , y= ))+geom_point ()+las (title= , y= , x= )</p>
+<p>The arguments:</p>
+<ul>
+<li><p>data: dataset name</p></li>
+<li><p>aes(x= ,y= ): x variable name and y variable name</p></li>
+<li><p>geom_point: plot points; can be a different geom function to generate a line chart, for example, geom_line</p></li>
+<li><p>las (title= , y= , x= ): label the title and x- and y-axis</p></li>
+</ul>
+<p>Let’s generate a scatter plot using the <strong>mtcars</strong> data frame in the base installation of R; it contains automotive details on 32 automobiles. The code below produces the plot in figure 1 which is a scatterplot of automobile weight by mileage.</p>
+<p><embed src="./media/media/image1.tmp" style="width:5.55286in;height:0.6876in" /></p>
+<p><img src="./media/media/image2.png" style="width:4.91136in;height:3in" /></p>
+<p>Figure 1. Scatterplot of automobile weight by mileage.</p>
+<p>Let’s break down how the plot was produced. The <strong>ggplot( )</strong> function initializes the plot and specifies the data source (<strong>mtcars</strong>) and variables (<strong>wt, mpg</strong>) to be used. The options in the <strong>aes( )</strong> function specify what role each variable will play. (<strong>aes</strong> stands for <em>aesthetics</em>, or how information is represented visually.) Here, the <strong>wt</strong> values are mapped to distances along the x-axis, and <strong>mpg</strong> values are mapped to distances along the y-axis. The <strong>ggplot( )</strong> function sets up the graph but produces no visual output on its own. Geometric objects (called <em>geoms</em> for short), which include points, lines, bars, box plots, and shaded regions, are added to the graph using one or more <em>geom functions</em>.</p>
+<p>Options to <strong>geom_point( )</strong> set the point shape to triangles (<strong>pch=17</strong>), double the points’ size (<strong>size=2</strong>), and render them in blue (<strong>color=”blue”</strong>). The <strong>geom_smooth( )</strong> function adds a “smoothed” line. Here a linear fit is requested (<strong>method=”lm”</strong>) and a red (<strong>color=”red”</strong>) dashed (<strong>linetype=2</strong>) line of size 1 (<strong>size=1</strong>) is produced. By default, the line includes 95% confidence intervals (the darker band).</p>
+<p>The <strong>ggplot2</strong> package provides methods for grouping and faceting. <em>Grouping</em> displays two or more groups of observations in a single plot. Groups are usually differentiated by color, shape, or shading. <em>Faceting</em> displays groups of observations in separate, side-by-side plots. The <strong>ggplot2</strong> package uses factors when defining groups or facets.</p>
+<h2>Key Points to Remember</h2>
+<p>The R function <strong>ggplot()</strong> provides methods for complex graphing. The <strong>geom_</strong> option provides the choice of graph.</p>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+<p>Example 1: Create a scatter plot to show the relationship between automobile weight and gas mileage, with a superimposed line of best fit and 95% confidence region.</p>
+<p>Solution:</p>
+<p><embed src="./media/media/image3.tmp" style="width:5.60495in;height:0.69801in" /></p>
+<p><img src="./media/media/image4.png" style="width:6.15548in;height:3.75995in" /></p>
+<p>Figure 2. Scatterplot of automobile weight by gas mileage, with a superimposed line of best fit and 95% confidence region.</p>
+<p>Example 2: Applying grouping and faceting to the <strong>mtcars</strong> data frame. First, the code below transform the <strong>am</strong>, <strong>vs</strong>, and <strong>cyl</strong> variables into factors.</p>
+<p><embed src="./media/media/image5.tmp" style="width:5.28199in;height:0.84387in" /></p>
+<h3>Reflection </h3>
+<p>Activity 1: Generate a scatterplot showing the relationship between horsepower and gas mileage separately for transmission and engine type.</p>
+<h2>Assessment</h2>
+<p>Generate a scatter plot for the R data Orange to show the relationship between the variables age and circumference for each type of tree.</p>
+
+
+</div>
+</div>
+</body>
+</html>
