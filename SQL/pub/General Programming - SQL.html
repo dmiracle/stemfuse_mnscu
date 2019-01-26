@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>General Programming - SQL</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+  <!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js" type="text/javascript"></script>
+  <script src="inc/metroScript.js" type="text/javascript"></script>
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+  -->
+
+  <style>
+
+    .warning {
+    visibility: hidden;
+  }
+  #leftSideBar {
+      background-color: #003C66;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: 100%;
+      min-height: 100%;
+      width: 200px;
+      float: left;
+      padding-top: 10px;
+      padding-right: 1%;
+      padding-left: 1%;
+      font-size: 1em;
+      line-height: 100%;
+      color: white;
+  }
+  
+  #leftSideBar a {
+      color: white;
+      text-decoration: none;
+  }
+  
+  #leftSideBar li {
+      margin:0 0 1em 0;
+  }
+  
+  </style>
+</head>
+
+<body>
+  <p style="text-align: center;"><a name="top"></a></p>
+  <div id="pageContainer">
+    <div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+    <div id="leftSideBar">
+      <img src="images/ITCoE_white200px.png">
+      <!---
+  <h2 style="color:white;">Sections</h2>
+-->
+      <hr style="color: white;">
+      <ul>
+        <li>
+          <h2 style="color: white;">Sections</h2>
+        </li>
+      </ul>
+      <hr style="color: white;">
+      <ul>
+        <!--- Place sidebar links here like this:
+    <li><a href="#learning-objectives">Learning Objectives</a></li>
+-->
+        <li><a href="#sql-module">General Programming - SQL</a></li>
+        <li><a href="#chapter-1.-introduction-to-the-sql-system-1">Chapter 1. Introduction to the SQL System</a></li>
+        <li><a href="#chapter-2.-sql-statements-to-create-and-manage-database-and-database-tables-1">Chapter 2. SQL
+            Statements</a></li>
+        <li><a href="#chapter-3.-essential-skills-of-sql-statement-1">Chapter 3. Essential Skills of SQL Statement</a></li>
+        <li><a href="#chapter-4.-intermediate-skills-of-sql-statement-1">Chapter 4. Intermediate Skills of SQL
+            Statement</a></li>
+        <li><a href="#appendix.">Appendix</a></li>
+        <!--- end sidebar -->
+      </ul>
+      <div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png"
+          width="32" type="image" height="32" /></div>
+      <hr style="color: white;">
+      <img src="images/mnstate_white200px.png">
+    </div>
+    <div id="mainContent">
+      <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning
+            block, Control + Z to Undo... Do not delete</strong></span></div>
+
+      <!--- Place body content here -->
+      <div class="chapter">
+        <h1 id="sql-module">General Programming - SQL</h1>
+        <h2 id="preface">PREFACE</h2>
+        <p>This module is prepared to be used as a one credit course. We assume the students have some background in
+          relational database modeling. The main objective of this module is to teach fundamental knowledge of SQL
+          (pronounced &quot;es-sequel or sequel&quot;) stands for Structured Query Language.</p>
+        <h2 id="learning-objectives">LEARNING OBJECTIVES</h2>
+        <ol type="1">
+          <li>
+            <p>Introducing the SQL system.</p>
+          </li>
+          <li>
+            <p>Learning how to create and maintain databases and tables with SQL statements.</p>
+          </li>
+          <li>
+            <p>Learning essential skills of SQL statements</p>
+          </li>
+          <li>
+            <p>Learning Intermediate skills of SQL.</p>
+          </li>
+        </ol>
+        <h2 id="software-requirements">SOFTWARE REQUIREMENTS </h2>
+        <p>Every relational database follows mostly standard SQL, but also has supplemental syntax, features,
+          functions, and idiosyncrasies. There are several Relational Database Management System(RDBMS) implementations
+          including:</p>
+        <ol type="1">
+          <li>
+            <p>MySQL</p>
+          </li>
+          <li>
+            <p>SQLite</p>
+          </li>
+        </ol>
+        <p>For complete utilization of practical exercises and examples in the module you must use one of the above
+          Database Management Systems. To introduce the concept of SQL, in chapter 1 we used MySQL RDBMS. In the
+          following chapters we will be using SQLite RDBMS. To go along with the examples and exercises in the module,
+          we strongly recommend the installation of SQLite manager.</p>
+        <p>Unlike MySQL or SQL Server, the SQLite engine has no standalone processes with which the application program
+          communicates. Instead, the SQLite library is linked in and thus becomes an integral part of the application
+          program. The library can also be called dynamically. The application program uses SQLite's functionality
+          through simple function calls, which reduce latency in database access: function calls within a single
+          process are more efficient than inter-process communication. SQLite stores the entire database (definitions,
+          tables, indices, and the data itself) as a single cross-platform file on a host machine.</p>
+        <p>Due to the server-less design, SQLite applications require less configuration than client-server databases.
+          SQLite is called <em>zero-conf</em> because it does not require service management (such as startup scripts)
+          or access control based on GRANT and passwords. Access control is handled by means of file system permissions
+          given to the database file itself. SQLite is not the preferred choice for write-intensive deployments.
+          However, for simple queries with little concurrency, SQLite performance profits from avoiding the overhead of
+          passing its data to another process.</p>
+        <p>The installation and configuration guidelines of all the three RDBMS are outlined in appendix A.</p>
+        <h2 id="table-of-contents">TABLE OF CONTENTS </h2>
+        <h3 id="chapter-1.-introduction-to-the-sql-system"><strong>Chapter 1. Introduction to the SQL system</strong></h3>
+        <blockquote>
+          <p>1.1 Overview of SQL Query Language</p>
+          <p>1.2 The Data Definition Language (DDL)</p>
+          <p>1.3 The Data Manipulation Language (DML)</p>
+          <p>1.4 The Data Control Language (DCL)</p>
+          <p>1.5 Data types in SQL</p>
+          <p>1.6 Constraints</p>
+        </blockquote>
+        <h3 id="chapter-2.-sql-statements-to-create-and-manage-database-and-database-tables"><strong>Chapter 2. SQL
+            statements to create and manage database and database tables</strong></h3>
+        <blockquote>
+          <p>2.1 How to start a database</p>
+          <p>2.2 Create Database statements and show database</p>
+          <p>2.3 Create Table statements and Show tables</p>
+          <p>2.4 Drop table statement</p>
+          <p>2.5 Drop database statement</p>
+        </blockquote>
+        <h3 id="chapter-3.-essential-skills-of-sql-statement"><strong>Chapter 3. Essential skills of SQL statement</strong></h3>
+        <blockquote>
+          <p>3.1 Describe statement</p>
+          <p>3.2 Select statement</p>
+          <p>3.3 Where clause</p>
+          <p>3.4 Insert, update, delete</p>
+          <p>3.5 Order by clause</p>
+          <p>3.6 Aggregate</p>
+          <p>3.7 Group by</p>
+        </blockquote>
+        <h3 id="chapter-4.-intermediate-skills-of-sql-statement"><strong>Chapter 4. Intermediate skills of SQL
+            statement</strong></h3>
+        <blockquote>
+          <p>4.1. Join Statements</p>
+          <p>4.2. Views</p>
+          <p>4.3. SQL Integrity constraints</p>
+          <p>4.3.1. Column constraints</p>
+          <p>4.3.2. Table constraints</p>
+          <p>4.4. Transaction control</p>
+          <p>4.5. Normalization</p>
+        </blockquote>
+      </div>
+      <div class="chapter">
+        <h1 id="chapter-1.-introduction-to-the-sql-system-1">Chapter 1. Introduction to the SQL system</h1>
+        <p>This chapter provides a short description of SQL, its origins, basic concepts and components, and some
+          examples.</p>
+        <div class="section">
+          <h2 id="overview-of-sql-query-language">1.1 Overview of SQL Query Language</h2>
+          <h3 id="what-is-sql">What is SQL? </h3>
+          <p>SQL stands for Structured Query Language. It is the standard means of manipulating and querying data in
+            relational databases. Basically, every relational DBMS (RDBMS) implements SQL, although with slight
+            variations.</p>
+          <p>SQL can be divided into three subsets:</p>
+          <ul>
+            <li>
+              <p><strong>The Data Definition Language (DDL),</strong> which includes commands for creating schema
+                objects (tables, views etc) and manipulating them. It deals only with the metadata.</p>
+            </li>
+            <li>
+              <p><strong>The Data Manipulation Language (DML),</strong> which includes the commands for changing or
+                retrieving the actual data.</p>
+            </li>
+            <li>
+              <p><strong>The Data Control Language (DCL),</strong> which includes the commands for database
+                administration; that is, creating users, assigning permissions.</p>
+            </li>
+          </ul>
+          <p>SQL commands are English based. SQL is NOT case sensitive, except for data inside quotes; however, there
+            is a strong stylistic convention that requires writing keywords in all uppercase. Character constants are
+            enclosed in SINGLE QUOTES, while double quotes are reserved for spelling names which contain special
+            characters.</p>
+          <p>Although SQL statements do NOT need to end in a semicolon, most SQL interpreters use this character</p>
+          <p>(;) to represent the end of a statement. That way you can use line breaks to make your statement more</p>
+          <p>readable. SQL ignores extra white spaces and line breaks.</p>
+          <h3 id="sql-origin"><strong>SQL Origin</strong></h3>
+          <p>Edgar F. Codd. Edgar Frank &quot;Ted&quot; Codd (19 August 1923 – 18 April 2003) was a computer scientist
+            who used to work for IBM. He invented the relational model for database management, the theoretical basis
+            for relational databases and relational database management systems. IBM commissioned a group to build a
+            prototype based on Codd’s ideas. This group created a simplified version of DSL/Alpha that they called
+            SQUARE. Refinements, to SQUARE led to a language called SEQUEL, which was, finally, renamed</p>
+          <p>SQL.</p>
+        </div>
+        <div class="section">
+          <h2 id="the-data-definition-language-ddl">1.2 The Data Definition Language (DDL)</h2>
+          <p><strong>Description: </strong></p>
+          <p>A data definition language or data description language (DDL) is a syntax similar to a computer
+            programming language for defining data structures, especially database schemas.</p>
+          <p>Many data description languages use a declarative syntax to define columns and data types. Structured
+            query language (e.g., SQL), however, uses a collection of imperative verbs whose effect is to modify the
+            schema of the database by adding, changing, or deleting definitions of tables or other elements. These
+            statements can be freely mixed with other SQL statements, making the DDL not a separate language.</p>
+          <p><strong>Example:</strong></p>
+          <p><img src="./SQL Module/media/image1.png" /></p>
+          <p><strong>Explanation:</strong></p>
+          <p>The above code creates a table called courses. Five columns titled courseID, courseName, courseFee,
+            maximumLimit, and enrollment are defined with data types indicated. CourseID is used as a primary key while
+            courseName is used as an index of the courses table. The third column represents constraints for each
+            column. AUTO_INCREMENT allows for an auto-number to be generated for each record in the table. See Section
+            1.6-Constraints for more detail.</p>
+        </div>
+        <div class="section">
+          <h2 id="the-data-manipulation-language-dml">1.3 The Data Manipulation Language (DML)</h2>
+          <p><strong>Description: </strong></p>
+          <p>SQL's DML includes statements to alter the rows in a table, and to get data from one or more tables.</p>
+          <p>Notice that these statements do NOT alter the schema at all, only the data in the table. DMLs may serve
+            for:</p>
+          <ul>
+            <li>
+              <p>Inserting records into a table</p>
+            </li>
+            <li>
+              <p>Deleting records from table</p>
+            </li>
+            <li>
+              <p>Updating data</p>
+            </li>
+            <li>
+              <p>Selecting some parts of the record</p>
+            </li>
+          </ul>
+          <p><strong>Example:</strong></p>
+          <p><img src="./SQL Module/media/image2.png"  /></p>
+          <p><strong>Explanation:</strong></p>
+          <p>The above code inserts data into the first row of the courses table. Inserting thisdata never changes the
+            schema of the table. New entries will be automatically recorded into the next row.</p>
+        </div>
+        <div class="section">
+          <h2 id="the-data-control-language-dcl">1.4 The Data Control Language (DCL)</h2>
+          <p><strong>Description: </strong></p>
+          <p>A data control language (DCL) is a syntax similar to a computer programming language used to control
+            access to data stored in a database (Authorization). It is a component of SQL. Examples of DCL commands
+            include: GRANT to allow specific users to perform specifictasks.</p>
+          <p><strong>Example:</strong></p>
+          <p><img src="./SQL Module/media/image3.png" /></p>
+          <p><strong>Explanation:</strong></p>
+          <p>The above code provides the privilege to insert records into all the database tables for the admin. N.B.
+            the admin will be authenticated for password and the password entry must match “pass1234” to get access.</p>
+        </div>
+        <div class="section">
+          <h2 id="data-types-in-sql">1.5 Data types in SQL</h2>
+          <p><strong>Common Data Types</strong></p>
+          <p>Although the full set of data types available varies with each DBMS, the following data types are among
+            the most useful and commonly available:</p>
+          <ul>
+            <li>
+              <p>CHARACTER [(length)] or CHAR [(length)]</p>
+            </li>
+            <li>
+              <p>VARCHAR (length)</p>
+            </li>
+            <li>
+              <p>BOOLEAN</p>
+            </li>
+            <li>
+              <p>SMALLINT</p>
+            </li>
+            <li>
+              <p>INTEGER or INT</p>
+            </li>
+            <li>
+              <p>DECIMAL [(p[,s])] or DEC [(p[,s])]</p>
+            </li>
+            <li>
+              <p>NUMERIC [(p[,s])]</p>
+            </li>
+            <li>
+              <p>REAL</p>
+            </li>
+            <li>
+              <p>FLOAT(p)</p>
+            </li>
+            <li>
+              <p>DOUBLE PRECISION</p>
+            </li>
+            <li>
+              <p>DATE</p>
+            </li>
+            <li>
+              <p>TIME</p>
+            </li>
+            <li>
+              <p>TIMESTAMP</p>
+            </li>
+            <li>
+              <p>CLOB [(length)] or CHARACTER LARGE OBJECT [(length)] or CHAR LARGE OBJECT [(length)]</p>
+            </li>
+            <li>
+              <p>BLOB [(length)] or BINARY LARGE OBJECT [(length)]</p>
+            </li>
+          </ul>
+          <p>A more detailed list of datatypes can also be found at: <span class="underline">https://www.w3schools.com/sql/sql_datatypes.asp</span></p>
+        </div>
+        <div class="section">
+          <h2 id="constraints">1.6 Constraints</h2>
+          <p>In SQL we can attach constraints to each column or field, and we can also attach constraints to the whole
+            table. The table constraints are added after all fields in the CREATE TABLE statement. For example, we can
+            write the book table from Example 1, as follows:</p>
+          <p><strong>Example:</strong> CREATE TABLE statement with constraints</p>
+          <p><img src="./SQL Module/media/image4.png" /></p>
+          <p><strong>Notice that</strong> this notation allows us to give a name to each constraint (courseId and
+            courseName in our</p>
+          <p>case), and also that NOT NULL has to be expressed as a column constraint.</p>
+          <p>SQL constraints include the following:</p>
+          <ul>
+            <li>
+              <p>NOT NULL</p>
+            </li>
+            <li>
+              <p>PRIMARY KEY</p>
+            </li>
+            <li>
+              <p>UNIQUE</p>
+            </li>
+            <li>
+              <p>FOREIGN KEY ... REFERENCES this constraint allows us to express a foreign key.</p>
+            </li>
+            <li>
+              <p>CHECK This constraint allows us to add an arbitrary predicate to be tested</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="chapter">
+        <h1 id="chapter-2.-sql-statements-to-create-and-manage-database-and-database-tables-1"><strong>Chapter 2. SQL
+            Statements to Create and Manage Database and Database Tables</strong></h1>
+        <p>N.B. First thing is first, before you proceed with this lesson make sure that you have installed SQLite
+          manager. If you haven’t done so, you may refer to Appendix 1. A.</p>
+        <p>To check the correct installation of SQLite, from the command line, change your directory to the directory
+          of SQLite installation. The SQLite project provides a simple command-line program named <strong>sqlite3</strong>
+          (or <strong>sqlite3.exe</strong> on Windows) that allows the user to manually enter and execute SQL
+          statements against an SQLite database. This document provides a brief introduction on how to use the <strong>sqlite3</strong>
+          program.</p>
+        <div class="section">
+          <h2 id="how-to-start-a-database-in-sqlite">2.1 How to start a database in SQLite: </h2>
+          <p>To start the <strong>sqlite3</strong> go to the directory where you extracted the SQLite files.</p>
+          <p><img src="./SQL Module/media/image5.png" /></p>
+          <p>Make sure that <em><strong>sqlite3.exe</strong></em> exists</p>
+        </div>
+        <div class="section">
+          <h2 id="sql-code-to-create-a-database">2.2 SQL code to create a database </h2>
+
+          <h3>Using SQLite Syntax</h3>
+
+
+          <p>To create a new SQLite database named &quot;my database”, type the following code on command line</p>
+          <blockquote>
+            <p>C:\sqlite&gt; sqlite3 my_database.db</p>
+          </blockquote>
+          <p><strong>Example:</strong></p>
+          <p><img src="./SQL Module/media/image6.png" /></p>
+          <p><strong>Note.</strong> The above statement will create a database with the name <strong>“my_database”.</strong>
+            If the database name does not exist, a new database file with the given name will be created automatically.
+            The command line changes to sqlite &gt; prompt. SQLite doesn't use the CREATE DATABASE statement like other
+            databases.</p>
+          <p>To show the created database type the following code at the command line</p>
+          <blockquote>
+            <p>sqlite&gt; .show</p>
+          </blockquote>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image7.png" style="width:5.10763in;height:1.86766in" /></p>
+
+          <h3>Using MySQL Syntax </h3>
+
+
+          <p>MySQL database uses the CREATE DATABASE statement like other databases.</p>
+          <p>To create a new MySQL database named &quot;my database”, type the following code on command line</p>
+          <blockquote>
+            <p>mysql&gt; CREATE DATABASE courses_db;</p>
+          </blockquote>
+          <p><strong>Example:</strong></p>
+          <p><img src="./SQL Module/media/image8.png" /></p>
+
+          <h3>SQLite Meta Commands</h3>
+
+          <p>Meta Commands are used for definition and administration operations. In SQLite, they always start with a
+            dot. Here are some of the common ones:</p>
+
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td><strong>Command</strong></td>
+                <td><strong>Description</strong></td>
+              </tr>
+              <tr class="even">
+                <td>.show</td>
+                <td>Displays current settings for various parameters</td>
+              </tr>
+              <tr class="odd">
+                <td>.databases</td>
+                <td>Provides database names and files</td>
+              </tr>
+              <tr class="even">
+                <td>.quit</td>
+                <td>Quit sqlite3 program</td>
+              </tr>
+              <tr class="odd">
+                <td>.tables</td>
+                <td>Show current tables</td>
+              </tr>
+              <tr class="even">
+                <td>.schema</td>
+                <td>Display schema of table</td>
+              </tr>
+              <tr class="odd">
+                <td>.header</td>
+                <td>Display or hide the output table header</td>
+              </tr>
+              <tr class="even">
+                <td>.mode</td>
+                <td>Select mode for the output table</td>
+              </tr>
+              <tr class="odd">
+                <td>. dump</td>
+                <td>Dump database in SQL text format</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section">
+          <h2 id="how-to-create-table">2.3 How to create table</h2>
+          <p>To create a table in a database named courses, type the following code on command line:</p>
+          <h3>SQLite syntax</h3>
+          <blockquote><p>sqlite> CREATE TABLE “table_name” (table columns);</p></blockquote>
+          <p>Example:</p>
+          <div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">CREATE</span> <span class="kw">TABLE</span> courses(</a>
+            <a class="sourceLine" id="cb1-2" title="2">    courseId <span class="dt">INT</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</a>
+            <a class="sourceLine" id="cb1-3" title="3">    courseName <span class="dt">CHAR</span>(<span class="dv">9</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</a>
+            <a class="sourceLine" id="cb1-4" title="4">    courseFee <span class="dt">REAL</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</a>
+            <a class="sourceLine" id="cb1-5" title="5">    maximumLimit <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</a>
+            <a class="sourceLine" id="cb1-6" title="6">    enrollment <span class="dt">BOOLEAN</span></a>
+            <a class="sourceLine" id="cb1-7" title="7">);</a></code></pre></div>
+          <h3>MySQL syntax</h3>
+          <div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">CREATE</span> <span class="kw">TABLE</span> courses (</a>
+            <a class="sourceLine" id="cb2-2" title="2">    courseId <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> AUTO_INCREMENT,</a>
+            <a class="sourceLine" id="cb2-3" title="3">    courseName <span class="dt">CHAR</span>(<span class="dv">9</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</a>
+            <a class="sourceLine" id="cb2-4" title="4">    courseFee <span class="dt">FLOAT</span>(<span class="dv">20</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</a>
+            <a class="sourceLine" id="cb2-5" title="5">    maximumLimit <span class="dt">INTEGER</span>(<span class="dv">20</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</a>
+            <a class="sourceLine" id="cb2-6" title="6">    enrollment <span class="dt">BOOLEAN</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</a>
+            <a class="sourceLine" id="cb2-7" title="7">    <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (courseId),</a>
+            <a class="sourceLine" id="cb2-8" title="8">    <span class="kw">UNIQUE</span> <span class="kw">INDEX</span> courseName (courseName)</a>
+            <a class="sourceLine" id="cb2-9" title="9">);</a></code></pre></div>
+
+          <p><strong>Note.</strong> The above SQL code will create a “courses” table that has five columns named
+            “courseId, courseName, courseFee, maximumLimit, and enrollment. “</p>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image9.png" /></p>
+          <p><strong>Note.</strong> To show the current table use the. tables SQL command.</p>
+        </div>
+        <div class="section">
+          <h2 id="drop-table-statement">2.4 Drop table statement</h2>
+          <p><strong>Note:</strong> To remove a table from the database you use SQL DROP statement.</p>
+          <ul>
+            <li>
+              <blockquote>
+                <p><strong>SQLite/MySQL DROP TABLE statement.</strong></p>
+              </blockquote>
+            </li>
+          </ul>
+          <blockquote>
+            <p>DROP TABLE table_name</p>
+          </blockquote>
+          <p><strong>Example:</strong></p>
+          <p><img src="./SQL Module/media/image10.png" /></p>
+          <p><strong>Note.</strong> After we run the DROP TABLE SQL statement, running the. tables commands view no
+            table. This confirms the removal of courses table from the database.</p>
+          <blockquote>
+            <p>TRUNCATE TABLE table_name;</p>
+          </blockquote>
+          <p><strong>Note:</strong> The TRUNCATE TABLE statement is used to delete the data inside a table, but not the
+            table itself.</p>
+        </div>
+        <div class="section">
+          <h2 id="drop-database-statement">2.5Drop database statement </h2>
+          <p><strong>Note.</strong> SQLite does not use the DROP DATABASE statement like many other database management
+            systems do. To drop the database in SQLite. You just have to delete the file manually.</p>
+          <ul>
+            <li>
+              <blockquote>
+                <p><strong>MySQL DROP database command</strong></p>
+              </blockquote>
+            </li>
+          </ul>
+          <blockquote>
+            <p>DROP DATABASE database_name;</p>
+          </blockquote>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image11.png" /></p>
+        </div>
+      </div>
+      <div class="chapter">
+        <h1 id="chapter-3.-essential-skills-of-sql-statement-1"><strong>Chapter 3. Essential skills of SQL statement</strong></h1>
+        <div class="section">
+          <h2 id="describe-statement">3.1 Describe statement</h2>
+          <p>The DESCRIBE statement displays metadata about a table, such as the column names and their data types.</p>
+          <ul>
+            <li>
+              <blockquote>
+                <p><strong>SQLite syntax</strong></p>
+              </blockquote>
+            </li>
+          </ul>
+          <p>SQLite does not use the DESCRIBE table statement like other database management systems do. But, we can
+            use “.schema” SQLite command to display the metadata about a table.</p>
+          <blockquote>
+            <p>.schema ‘tablename’</p>
+            <p><strong>Example:</strong></p>
+            <p><img src="./SQL Module/media/image12.png" /></p>
+          </blockquote>
+          <ul>
+            <li>
+              <p><strong>MySQL syntax</strong></p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>DESCRIBE table_name;</p>
+          </blockquote>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image13.png" /></p>
+          <p><strong>Note.</strong> The courses table displays Field(columns) of the table, Type, Key, and other
+            parameters based on the setting of the table.</p>
+        </div>
+        <div class="section">
+          <h2 id="select-statement">3.2 Select statement</h2>
+          <blockquote>
+            <p>The SELECT statement is used to select data from a database. If you want to select all the fields
+              available in the table, instead of column name use an asterisk (*)</p>
+          </blockquote>
+          <ul>
+            <li>
+              <blockquote>
+                <p><strong>SQLite/MySQL SELECT statement.</strong></p>
+              </blockquote>
+            </li>
+          </ul>
+          <blockquote>
+            <p>SELECT column1, column2, ...</p>
+            <p>FROM table_name;</p>
+          </blockquote>
+          <p><strong>Example: SQLite:</strong></p>
+          <p><img src="./SQL Module/media/image14.png" /></p>
+          <p><strong>Example: MySQL database:</strong></p>
+          <p><img src="./SQL Module/media/image14.png" /></p>
+        </div>
+        <div class="section">
+          <h2 id="where-clause">3.3 WHERE clause</h2>
+          <p>The SQL WHERE clause is used to filter the results and apply conditions in a SELECT, INSERT, UPDATE, or
+            DELETE statement.</p>
+          <ul>
+            <li>
+              <p><strong>The syntax for the WHERE clause in SQL is:</strong></p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>SELECT column1, column2, ...</p>
+            <p>FROM table_name</p>
+            <p>WHERE condition;</p>
+          </blockquote>
+          <p><strong>conditions</strong></p>
+          <p>The conditions that must be met for records to be selected.</p>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image15.png" /></p>
+          <p><strong>Note: The course name (ICS-24) with the courseId of 2 is selected.</strong></p>
+        </div>
+        <div class="section">
+          <h2 id="sql-insert-update-delete-commands">3.4 SQL Insert, update, delete commands</h2>
+          <p>The INSERT INTO statement of SQL is used to insert a new row in a table.</p>
+          <ul>
+            <li>
+              <p><strong>The general syntax of INSERT statement is:</strong></p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>INSERT INTO table_name (column1, column2, column3,..)</p>
+            <p>VALUES (value1, value2, value3,..);</p>
+            <p>WHERE condition;</p>
+          </blockquote>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image16.png" /></p>
+          <p>The UPDATE statement is used to modify the existing records in a table.</p>
+          <ul>
+            <li>
+              <p><strong>The general SQL syntax for the UPDATE statement is: </strong></p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>UPDATE table_name</p>
+            <p>SET column1 = value1, column2 = value2, ...</p>
+            <p>WHERE condition;</p>
+          </blockquote>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image17.png" /></p>
+          <p><strong>Note:</strong> The table is updated with a new courseName and a new enrollment records.</p>
+          <p>The DELETE FROM statement in SQL is used to remove records from a table. Make sure that a condition is
+            specified, otherwise all records will be removed.</p>
+          <ul>
+            <li>
+              <p><strong>The general syntax of DELETE statement is:</strong></p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>DELETE FROM table_name</p>
+            <p>WHERE condition;</p>
+          </blockquote>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image18.png" /></p>
+          <p><strong>Note:</strong> Be careful when deleting records in a table! You will delete any information in the
+            table as well. You won't normally be asked to confirm.</p>
+        </div>
+        <div class="section">
+          <h2 id="order-by-clause">3.5 Order by clause</h2>
+          <blockquote>
+            <p>The <strong>ORDER BY</strong> keyword is used to sort the result-set in ascending or descending order.</p>
+            <p>The <strong>ORDER BY</strong> keyword sorts the records in ascending order by default. To sort the
+              records in descending order, use the DESC keyword.</p>
+          </blockquote>
+          <ul>
+            <li>
+              <p><strong>The general ORDER BY Syntax:</strong></p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>SELECT column1, column2, ...</p>
+            <p>FROM table_name</p>
+            <p>ORDER BY column1, column2, ... ASC|DESC;</p>
+            <p><strong>Example:</strong></p>
+            <p><img src="./SQL Module/media/image19.png" /></p>
+          </blockquote>
+        </div>
+        <div class="section">
+          <h2 id="aggregate-functions">3.6 Aggregate Functions</h2>
+          <p>SQL aggregate functions return a single value, calculated from values in a column</p>
+          <ul>
+            <li>
+              <p><strong>SQL aggregate to find average value:</strong></p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>SELECT  AVG(<em>column_name</em>)<br />
+              FROM  <em>table_name</em><br />
+              WHERE  <em>condition</em>;</p>
+          </blockquote>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image20.png" /></p>
+        </div>
+        <div class="section">
+          <h2 id="group-by">3.7 Group by </h2>
+          <p>The GROUP BY statement is often used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) to group the
+            result-set by one or more columns<strong>.</strong></p>
+          <ul>
+            <li>
+              <p><strong>SQL Group by statement</strong> <strong>-</strong></p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>SELECT column_name(s)</p>
+            <p>FROM table_name</p>
+            <p>WHERE condition</p>
+            <p>GROUP BY column_name(s) -- Must be used when displaying non-aggregate fields in SELECT</p>
+            <p>ORDER BY column_name(s);</p>
+          </blockquote>
+          <p><strong>Example: </strong></p>
+          <p><img src="./SQL Module/media/image21.png" /></p>
+        </div>
+      </div>
+      <div class="chapter">
+        <h1 id="chapter-4.-intermediate-skills-of-sql-statement-1"><strong>Chapter 4. Intermediate skills of SQL
+            statement</strong></h1>
+        <div class="section">
+          <h2 id="join-statements">4.1 Join Statements</h2>
+          <blockquote>
+            <p>The SQL Joins statement is used to combine records from two or more tables in a database. A JOIN is a
+              means for combining fields from two tables by using common fields between each table.</p>
+            <p>Consider the following two tables</p>
+            <p><strong>Course Table</strong></p>
+          </blockquote>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td><strong>ID</strong></td>
+                <td><strong>Course ID</strong></td>
+                <td><strong>Course Name</strong></td>
+                <td><strong>Course Fee</strong></td>
+                <td><strong>Maximum Limit</strong></td>
+                <td><strong>Enrollment</strong></td>
+              </tr>
+              <tr class="even">
+                <td>1</td>
+                <td>Chem-100</td>
+                <td>Intro to Chemistry</td>
+                <td>555.99</td>
+                <td>5</td>
+                <td>False</td>
+              </tr>
+              <tr class="odd">
+                <td>2</td>
+                <td>ICS-140</td>
+                <td>Programming 1</td>
+                <td>888.99</td>
+                <td>30</td>
+                <td>True</td>
+              </tr>
+              <tr class="even">
+                <td>3</td>
+                <td>ICS-141</td>
+                <td>Programming 2</td>
+                <td>999.99</td>
+                <td>30</td>
+                <td>True</td>
+              </tr>
+              <tr class="odd">
+                <td>4</td>
+                <td>ICS-240</td>
+                <td>Programming 3</td>
+                <td>1200.00</td>
+                <td>30</td>
+                <td>True</td>
+              </tr>
+            </tbody>
+          </table>
+          <blockquote>
+            <p><strong>Student table</strong></p>
+          </blockquote>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td><strong>ID</strong></td>
+                <td><strong>Student ID</strong></td>
+                <td><strong>First Name</strong></td>
+                <td><strong>Last Name</strong></td>
+              </tr>
+              <tr class="even">
+                <td>1</td>
+                <td>1001</td>
+                <td>Sara</td>
+                <td>Johnson</td>
+              </tr>
+              <tr class="odd">
+                <td>2</td>
+                <td>1002</td>
+                <td>John</td>
+                <td>Mike</td>
+              </tr>
+              <tr class="even">
+                <td>3</td>
+                <td>1003</td>
+                <td>Alex</td>
+                <td>Adam</td>
+              </tr>
+              <tr class="odd">
+                <td>4</td>
+                <td>1004</td>
+                <td>Moha</td>
+                <td>Abdi</td>
+              </tr>
+            </tbody>
+          </table>
+          <blockquote>
+            <p>We can join the two tables different ways. For example, in our example database, there are two tables:
+              Courses and Student table. The contact table contains the column CourseId, which correlates with the
+              Primary-Key column id of the Course table. By evaluating the column values, we can join courses and
+              Students table together.</p>
+            <p>Run the following SQL statement and as result you will get the joined table.</p>
+            <p>SELECT *</p>
+            <p>FROM courses c</p>
+            <p>JOIN students s ON c.courseId = s.courseId;</p>
+            <p><strong>Joined (virtual) table, created out of Courses &amp; Student </strong></p>
+          </blockquote>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>ID</td>
+                <td><strong>Course ID</strong></td>
+                <td><strong>Course Name</strong></td>
+                <td><strong>Course Fee</strong></td>
+                <td><strong>Maximum Limit</strong></td>
+                <td><strong>Enrollment</strong></td>
+                <td><strong>Student ID</strong></td>
+                <td><strong>First Name</strong></td>
+                <td><strong>Lat Name</strong></td>
+                <td><strong>Course ID</strong></td>
+              </tr>
+              <tr class="even">
+                <td>1</td>
+                <td>Chem-100</td>
+                <td>Intro to Chemistry</td>
+                <td>555.99</td>
+                <td>5</td>
+                <td>False</td>
+                <td>1001</td>
+                <td>Sara</td>
+                <td>Johnson</td>
+                <td>Chem-100</td>
+              </tr>
+              <tr class="odd">
+                <td>2</td>
+                <td>ICS-140</td>
+                <td>Programming 1</td>
+                <td>888.99</td>
+                <td>30</td>
+                <td>True</td>
+                <td>1002</td>
+                <td>John</td>
+                <td>Mike</td>
+                <td>ICS-140</td>
+              </tr>
+              <tr class="even">
+                <td>3</td>
+                <td>ICS-141</td>
+                <td>Programming 2</td>
+                <td>999.99</td>
+                <td>30</td>
+                <td>True</td>
+                <td>1003</td>
+                <td>Alex</td>
+                <td>Adam</td>
+                <td>ICS-141</td>
+              </tr>
+              <tr class="odd">
+                <td>4</td>
+                <td>ICS-240</td>
+                <td>Programming 3</td>
+                <td>1200.00</td>
+                <td>30</td>
+                <td>True</td>
+                <td>1004</td>
+                <td>Moha</td>
+                <td>Abdi</td>
+                <td>ICS-240</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><strong><span class="underline">Different types of SQL joins</span></strong></p>
+          <p>SQLite doesn’t support different types of SQL joins, so in this section we are using MySQL DBMS to
+            demonstrate the properties of different types of SQL joins.</p>
+          <p>Types of SQL joins include:</p>
+          <ul>
+            <li>
+              <p>INNER JOIN</p>
+            </li>
+            <li>
+              <p>LEFT JOIN</p>
+            </li>
+            <li>
+              <p>RIGHT JOIN</p>
+            </li>
+            <li>
+              <p>FULL OUTER JOIN(UNION)</p>
+            </li>
+          </ul>
+          <p>Use the source code included in this module to create the following <strong>courses</strong> and <strong>students</strong>
+            tables in MySQL database.</p>
+          <p><strong>Courses table</strong></p>
+          <p><img src="./SQL Module/media/image22.png" /></p>
+          <p><strong>Students table</strong></p>
+          <p><img src="./SQL Module/media/image23.png"  /></p>
+          <p><strong>INNER JOIN:</strong></p>
+          <p>General SQL Syntax for INNER JOIN.</p>
+          <blockquote>
+            <p>SELECT <em>column_name(s)</em><br />
+              FROM <em>table1</em><br />
+              INNER JOIN <em>table2</em> ON <em>table1.column_name</em> = <em>table2.column_name</em>;</p>
+          </blockquote>
+          <p><strong>Example</strong></p>
+          <blockquote>
+            <p>--inner join--</p>
+            <p>SELECT *</p>
+            <p>FROM courses</p>
+            <p>INNER JOIN students ON courses.starId = students.starId;</p>
+          </blockquote>
+
+          <p><strong>Query Output from inner join</strong></p>
+          <blockquote>
+            <p><img src="./SQL Module/media/image24.png"  /></p>
+          </blockquote>
+          <p><strong><span class="underline">Discussion </span></strong></p>
+          <p>The INNER JOIN statement selects records that have matching values in both tables.</p>
+          <p><img src="./SQL Module/media/image25.png" /></p>
+          <p><strong>LEFT JOIN:</strong></p>
+          <p>General SQL Syntax for LEFT JOIN.</p>
+          <blockquote>
+            <p>SELECT <em>column_name(s)</em><br />
+              FROM <em>table1</em><br />
+              LEFT JOIN <em>table2</em> ON <em>table1.column_name</em> = <em>table2.column_name</em>;</p>
+          </blockquote>
+          <p><strong>Example</strong>—LEFT JOIN--</p>
+          <blockquote>
+            <p>--LEFT JOIN--</p>
+            <p>SELECT *</p>
+            <p>FROM courses</p>
+            <p>LEFT JOIN students ON courses.starId = students.starId;</p>
+          </blockquote>
+          <p><strong>Query Output from LEFT JOIN</strong></p>
+          <p><img src="./SQL Module/media/image26.png" /></p>
+          <p><strong><span class="underline">Discussion</span></strong></p>
+          <p>The LEFT JOIN query returns all records from the left table and the matched records from the right table.
+            The result is NULL from the right side if there is no match.</p>
+          <p><img src="./SQL Module/media/image27.png" /></p>
+          <p><strong>RIGHT JOIN:</strong></p>
+          <p>General SQL Syntax for RIGHT JOIN.</p>
+          <blockquote>
+            <p>SELECT <em>column_name(s)</em><br />
+              FROM <em>table1</em><br />
+              RIGHT JOIN <em>table2</em> ON <em>table1.column_name</em> = <em>table2.column_name</em>;</p>
+          </blockquote>
+          <p><strong>Example</strong>—LEFT JOIN--</p>
+          <blockquote>
+            <p>--LEFT JOIN--</p>
+            <p>SELECT *</p>
+            <p>FROM courses</p>
+            <p>RIGHT JOIN students ON courses.starId = students.starId;</p>
+          </blockquote>
+          <p><strong>Query Output from RIGHT JOIN</strong></p>
+          <p><img src="./SQL Module/media/image28.png"  /></p>
+          <p><strong><span class="underline">Discussion</span></strong></p>
+          <p>The RIGHT JOIN keyword returns all records from the right table, and the matched records from the left
+            table the result is NULL from the left side, when there is no match.</p>
+          <p><img src="./SQL Module/media/image29.png" /></p>
+          <p><strong>FULL OUTER JOIN(UNION) :</strong></p>
+          <p>General SQL Syntax for RIGHT JOIN.</p>
+          <blockquote>
+            <p>SELECT column_name(s) from table2</p>
+            <p>LEFT JOIN table1 ON table2.column_name = table1.column_name</p>
+            <p>UNION</p>
+            <p>SELECT column_name(s) table1</p>
+            <p>LEFT JOIN table2 ON table1.column_name = table2.column_name;</p>
+          </blockquote>
+          <p><strong>Example</strong>—LEFT JOIN--</p>
+          <blockquote>
+            <p>--FULL OUTER JOIN (UNION)--</p>
+            <p>SELECT * FROM students</p>
+            <p>LEFT JOIN courses ON students.starId = courses.starId</p>
+            <p>UNION</p>
+            <p>SELECT * FROM courses</p>
+            <p>RIGHT JOIN students ON courses.starId = students.starId;</p>
+          </blockquote>
+          <p><strong>Query Output from FULL OUTER JOIN(UNION)</strong></p>
+          <p><img src="./SQL Module/media/image30.png" /></p>
+          <p><strong><span class="underline">Discussion</span></strong></p>
+          <p>The FULL OUTER JOIN keyword return all records when there is a match in either left or right table
+            records.</p>
+          <p><img src="./SQL Module/media/image31.png" /></p>
+        </div>
+        <div class="section">
+          <h2 id="views">4.2 Views </h2>
+          <p>Views in SQL are virtual tables created from database tables. In a database, a view is the result set of a
+            stored query on the data, which the database users can query just as they would in a persistent database
+            collection object.</p>
+          <p>A view also has rows and columns as they are in a real table in the database. We can create a view by
+            selecting fields from one or more tables present in the database.</p>
+          <p><strong>Views can provide advantages over tables:</strong></p>
+          <ul>
+            <li>
+              <p>Views can represent a subset of the data contained in a table. Consequently, a view can limit the
+                degree of exposure of the underlying tables to the outer world: a given user may have permission to
+                query the view, while denied access to the rest of the base table.</p>
+            </li>
+            <li>
+              <p>Views can join and simplify multiple tables into a single virtual table.</p>
+            </li>
+            <li>
+              <p>Views can act as aggregated tables, where the database engine aggregates data (sum, average, etc.) and
+                presents the calculated results as part of the data.</p>
+            </li>
+            <li>
+              <p>Views can hide the complexity of data.</p>
+            </li>
+            <li>
+              <p>Views take very little space to store; the database contains only the definition of a view, not a copy
+                of all the data that it presents.</p>
+            </li>
+            <li>
+              <p>Depending on the SQL engine used, views can provide extra security.</p>
+            </li>
+          </ul>
+          <p>General SQL Syntax for RIGHT JOIN.</p>
+          <blockquote>
+            <p>CREATE VIEW view_name AS</p>
+            <p>SELECT column1, column2, ...</p>
+            <p>FROM table_name</p>
+            <p>WHERE condition;</p>
+          </blockquote>
+          <p>Example</p>
+          <blockquote>
+            <p>CREATE VIEW ics240_view AS</p>
+            <p>SELECT *</p>
+            <p>FROM courses</p>
+            <p>WHERE courses. courseID = 'ICS-240';</p>
+            <p>SELECT * FROM ics240_view;</p>
+          </blockquote>
+          <p><strong>Output from the view query</strong></p>
+          <p><img src="./SQL Module/media/image32.png" /></p>
+          <p><strong>Discussion</strong></p>
+          <p>As you see from the output queries, the view for ‘isc240_view’ is created. Like a regular table, we used
+            the SELECT * query to show the record in the view.</p>
+        </div>
+        <div class="section">
+          <h2 id="sql-integrity-constraints">4.3 SQL Integrity constraints</h2>
+          <blockquote>
+            <p>In SQL, Integrity Constraints are used to specify business rules for the database tables.</p>
+            <p>Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and
+              reliability of the data in the table. If there is any violation between the constraint and the data
+              action, the action is aborted. Constraints can be column level or table level. Column level constraints
+              apply to a column, and table level constraints apply to the whole table.</p>
+          </blockquote>
+          <p><strong>Column Constraint</strong></p>
+          <p>The column constraint clause specifies conditions which all values must meet. There are different column
+            constraint types Including:</p>
+          <ul>
+            <li>
+              <p>NOT NULL</p>
+            </li>
+            <li>
+              <p>Primary Key</p>
+            </li>
+            <li>
+              <p>Unique</p>
+            </li>
+            <li>
+              <p>Foreign Key</p>
+            </li>
+            <li>
+              <p>Check values</p>
+            </li>
+          </ul>
+          <p>The <strong><span class="underline">NOT NULL</span></strong> phrase defines, that it is not allowed to
+            store the <strong>NULL</strong> value in the column.</p>
+          <p> In the above examples, starId INT PRIMARY KEY NOT NULL AUTO_INCREMENT ,</p>
+          <ul>
+            <li>
+              <p>The starId is per definition not allowed to hold the Null value.</p>
+            </li>
+          </ul>
+          <blockquote>
+            <p><em>-- This INSERT command will fail</em></p>
+            <p><strong>INSERT</strong> <strong>INTO</strong> t1(col_1) <strong>values</strong>(<strong>NULL</strong>);</p>
+            <p><em>-- The same applies to the following UPDATE command</em></p>
+            <p><strong>INSERT</strong> <strong>INTO</strong> t1(col_1) <strong>values</strong>(5);</p>
+            <p><strong>UPDATE</strong> t1 <strong>SET</strong> col_1 = <strong>NULL</strong>;</p>
+          </blockquote>
+          <p>The <strong><span class="underline">PRIMARY KEY</span></strong> phrase defines that the column acts as the
+            Primary Key of the table. This implies that the column is not allowed to store a <strong>NULL value</strong>
+            and that the values of all rows are distinct from each other.</p>
+          <blockquote>
+            <p><strong>CREATE TABLE courses(</strong></p>
+            <p>starId INT PRIMARY KEY NOT NULL AUTO_INCREMENT ,</p>
+            <p><em>-- This INSERT will fail because a primary key column is not allowed to store the NULL value.</em></p>
+            <p><strong>INSERT</strong> <strong>INTO</strong> t2(col_1) <strong>VALUES</strong>(<strong>NULL</strong>);</p>
+            <p><em>-- This INSERT works</em></p>
+            <p><strong>INSERT</strong> <strong>INTO</strong> courses(starId) <strong>VALUES</strong>(5);</p>
+            <p><em>-- But the next INSERT will fail, because only one row with the value '5' is allowed.</em></p>
+            <p><strong>INSERT INTO courses(starId) VALUES(5);</strong></p>
+          </blockquote>
+          <p>The <strong><span class="underline">UNIQUE</span></strong> constraint has a similar meaning as the PRIMARY
+            KEY phrase. But there are two slight differences.</p>
+          <ul>
+            <li>
+              <p>First, the values of different rows of a UNIQUE column are not allowed to be equal, which is the same
+                as with PK. But they are allowed to hold the NULL value, which is different from PK. The existence of
+                NULL values has an implication. As the term <em>null = null</em> never evaluates to <em>true</em> (it
+                evaluates to <em>unknown</em>) there may exist multiple rows with the NULL value in a column which is
+                defined to be UNIQUE.</p>
+            </li>
+            <li>
+              <p>Second, only one PK definition per table is allowed. In contrast, there may be many UNIQUE constraints
+                (on different columns).</p>
+            </li>
+          </ul>
+          <blockquote>
+            <p><strong>CREATE</strong> <strong>TABLE</strong> students (studentId VARCHAR <strong>UNIQUE</strong>);</p>
+            <p><em>-- works well</em></p>
+            <p><strong>INSERT</strong> <strong>INTO</strong> students(studentId) <strong>VALUES</strong>(‘10as12’);</p>
+            <p><em>-- repeating the same insert instruction is not allowed with the same student of</em> <strong>‘10as12’</strong></p>
+            <p><strong>INSERT INTO students(studentId) VALUES(‘10as12’);</strong></p>
+            <p><em>-- works well</em></p>
+            <p><strong>INSERT</strong> <strong>INTO</strong> students(studentId) <strong>VALUES</strong> (<strong>null</strong>);</p>
+            <p><em>-- works also</em></p>
+            <p><strong>INSERT</strong> <strong>INTO</strong> students(studentId) <strong>VALUES</strong>(<strong>null</strong>);</p>
+          </blockquote>
+          <p>The <strong><span class="underline">FOREIGN KEY</span></strong> condition defines that the column can hold
+            only those values, which are also stored in a different column of (the same or) another table. This
+            different column has to be UNIQUE or a Primary Key, whereas the values of the foreign key column itself may
+            hold identical values for multiple rows. The consequence is that one cannot create a row with a certain
+            value in this column before there is a row with exactly this certain value in the referred table.</p>
+          <p>In our example database we have a <em>courses</em> table whose column <em>starID</em> as the primary key
+            of the table. The starId is used as a foreign key in the student table.</p>
+          <p>CREATE TABLE students (</p>
+          <p>FOREIGN KEY (starId) REFERENCES courses(starId)</p>
+          <p><strong><span class="underline">Column checks</span></strong> inspect the values of the column to see
+            whether they meet the defined criterion. Within such column checks only the actual column is visible. If a
+            condition covers two or more columns (e.g.: col_1 &gt; col_2) a table check must be used.</p>
+          <p><strong><span class="underline">Table Constraint</span></strong></p>
+          <p>Table constraints defines rules which are mandatory for the table as a whole. Their sematic and syntax
+            overlaps partially with the previous shown column constraints.</p>
+          <p>Table constraints are defined after the definition of all columns. The syntax starts with the key word
+            CONSTRAINT and includes the possibility to denominate them with a meaningful name, <em>t6_pk</em>, <em>t6_uk</em> and <em>t6_fk</em> in
+            the next example.</p>
+          <p>In the case of any exception most DBMS shows this name as part of the error message - and if you haven’t
+            defined one it uses its internal naming conventions which may be very cryptic.</p>
+          <p><strong>Primary Key, UNIQUE and Foreign Key</strong></p>
+          <p>In the same manner as shown in the column constraints part Primary Key, UNIQUE and Foreign Key conditions
+            can be expressed as table constraints. The syntax differs slightly from the column constraint syntax, the
+            semantic is identical.</p>
+          <p>As you have seen some constraints may be defined as part of the column definition, which is called a <em>column
+              constraint</em>, or as a separate <em>table constraint</em>. Table constraints have two advantages.</p>
+          <p>First, they are a little bit more powerful.</p>
+          <p>Second, they do have their own name! This helps to understand system messages. Furthermore, it opens the
+            possibility to manage constraints after the table exists and contains data. The ALTER TABLE statement can
+            deactivate, activate or delete constraints. To do so, you have to know their name.</p>
+        </div>
+        <div class="section">
+          <h2 id="transaction-control">4.4 Transaction control</h2>
+          <blockquote>
+            <p>A transaction is an embracing of <strong>one or more</strong> SQL statements - especially of such
+              statements, which write to the database such as INSERT, UPDATE or DELETE, but also the SELECT command can
+              be part of a transaction. All writing statements <span class="underline">must</span> be part of a
+              transaction. The purpose of transactions is the guarantee that the database changes only from one
+              consistent state to another consistent state fading out all intermediate situations. This holds true also
+              in critical situations such as parallel processing, disc crash, power failure, ... . Transactions ensure
+              the <strong>database integrity</strong>.</p>
+            <p>To do so they support four basic properties, which all in all are called the <span class="underline">ACID
+                paradigm<em>.</em></span></p>
+          </blockquote>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>
+                  <blockquote>
+                    <p><strong>A</strong>tomic</p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>All SQL statements of the transaction take place or none.</p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr class="even">
+                <td>
+                  <blockquote>
+                    <p><strong>C</strong>onsistent</p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>The sum of all data changes of a transaction transforms the database from one consistent state
+                      to another consistent state.</p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr class="odd">
+                <td>
+                  <blockquote>
+                    <p><strong>I</strong>solated</p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>The isolation level defines, which parts of uncommitted transactions are visible to other
+                      sessions.</p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr class="even">
+                <td>
+                  <blockquote>
+                    <p><strong>D</strong>urable</p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>The database retains committed changes even if the system crashes afterwards.</p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section">
+          <h2 id="normalization">4.5 Normalization</h2>
+          <blockquote>
+            <p>Normalization provides a set of rules and patterns that can be applied to any database to avoid common
+              logical inconsistencies. Normalizing a database design will typically improve</p>
+          </blockquote>
+          <ul>
+            <li>
+              <p>Consistency, since errors that could be made with the database would be structurally impossible</p>
+            </li>
+            <li>
+              <p>Extensibility, since changes to the database structure will only affect parts of the database they are
+                logically dependent on</p>
+            </li>
+            <li>
+              <p>Efficiency, since redundant information will not need to be stored</p>
+            </li>
+          </ul>
+          <blockquote>
+            <p>The database community has identified several distinct levels of normalization, each more stringent than
+              the last. These are referred to as normal forms and are numbered from one (the lowest form of
+              normalization, referred to as first normal form or 1NF) through five (fifth normal form or 5NF). It's
+              quite common in practice to speak of one database design as being more or less normalized than another,
+              as defined by these levels.</p>
+            <p>In practical applications, you'll often see 1NF, 2NF, and 3NF along with the occasional 4NF. Fifth
+              normal form is very rarely seen.</p>
+          </blockquote>
+        </div>
+      </div>
+      <div class="chapter">
+        <h1 id="appendix."><strong>Appendix </strong></h1>
+        <div class="section">
+          <h2 id="how-to-install-sqlite">How to install SQLite</h2>
+          <p>How to Install SQLite On Windows<strong>: <a href="https://youtu.be/wXEZZ2JT3-k"><span class="underline">https://youtu.be/wXEZZ2JT3-k</span></a></strong></p>
+          <p>How to Install SQLite On Mac<strong>: <a href="https://youtu.be/iyXYwNQC6ag"><span class="underline">https://youtu.be/iyXYwNQC6ag</span></a></strong></p>
+          <p>How to Install SQLite On Linux<strong>: <a href="https://youtu.be/z94raoO7AII"><span class="underline">https://youtu.be/z94raoO7AII</span></a></strong></p>
+        </div>
+        <div class="section">
+          <h2 id="how-to-install-mysql">How to install MySQL</h2>
+          <p>How to Install MySQL On Windows<strong>: <a href="https://youtu.be/i-GlTXE2JU4"><span class="underline">https://youtu.be/i-GlTXE2JU4</span></a></strong></p>
+          <p>How to Install MySQL On Mac<strong>: <a href="https://youtu.be/iOlJxOkp6sI"><span class="underline">https://youtu.be/iOlJxOkp6sI</span></a></strong></p>
+          <p>How to Install MySQL On Linux<strong>: <a href="https://youtu.be/0o0tSaVQfV4"><span class="underline">https://youtu.be/0o0tSaVQfV4</span></a></strong></p>
+        </div>
+      </div>
+
+      <!--- end body content -->
+
+      <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning
+            block, Control + Z to Undo... Do not delete</strong></span></div>
+      <div id="footer">Where life and learning meet.</div>
+    </div>
+  </div>
+</body>
+
+</html>
