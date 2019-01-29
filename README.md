@@ -48,6 +48,7 @@ MNSCU Blue: #003C66
 ```bash
 pandoc -f docx -t markdown logistic-regression.docx -o tmp.md
 pandoc -f docx -t gfm --extract-media=./media 
+pandoc -f docx -t html --extract-media=./media 
 ```
 
 
