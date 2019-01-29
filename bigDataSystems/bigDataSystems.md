@@ -771,6 +771,7 @@ On SparkMaster, the whole cluster can be expediently launched as:
 ```
 $SPARK_HOME/sbin/start-all.sh
 ```
+
 The above command should be reaching out to the worker node to run the
 following commands:
 ```
@@ -783,60 +784,46 @@ Check the SparkWorker web UI at http://SparkWorker:8081
 
 ### Submitting jobs to the Spark cluster
 
-We are running jobs on the cluster without so called High Availability
-(HA). That means that SparkMaster is a single point of failure (SPOF)
-for the cluster; if SparkMaster fails then no other node can take over
-and the job fails. HA can be integrated into Spark by setting up a
-standby master. The master and standby master are toggled according to
-rules set by distributed coordination software (like a load balancer),
-such as Apache Zookeeper.
+We are running jobs on the cluster without so called High Availability (HA). That means that SparkMaster is a single point of failure (SPOF) for the cluster; if SparkMaster fails then no other node can take over and the job fails. HA can be integrated into Spark by setting up a standby master. The master and standby master are toggled according to rules set by distributed coordination software (like a load balancer), such as Apache Zookeeper.
 
-Programs that run on the cluster will utilize the Spark API (covered in
-Big Data Analytics module).
+Programs that run on the cluster will utilize the Spark API (covered in Big Data Analytics module).
 
 Example programs that you can try are located in
-$SPARK\_HOME/lib/spark-examples.
+`$SPARK_HOME/lib/spark-examples`.
 
 Test using example program (in terminal of any node):
-
+```
 RESULT=\`$SPARK\_HOME/bin/run-example SparkPi 10\`
-
-echo $RESULT → Pi is roughly 3.142803142803143
-
-While the program is being run you will see dozens of output lines
-regarding systems status. However, the result is of interest. Hence the
-assignment to the result variable above.
+echo $RESULT  
+  Pi is roughly 3.142803142803143
+```
+While the program is being run you will see dozens of output lines regarding systems status. However, the result is of interest. Hence the assignment to the result variable above.
 
 More tests:
+```
+RESULT=`$SPARK_HOME/bin/spark-submit \
+  $SPARK_HOME/examples/src/main/python/pi.py 10\`
+echo $RESULT 
+  Pi is roughly 3.140904
 
-RESULT=\`$SPARK\_HOME/bin/spark-submit \\
+RESULT=`$SPARK_HOME/bin/spark-submit \
+  $SPARK_HOME/examples/src/main/scala/org/apache/spark/examples \
+  SparkPi.scala 10\`
+echo $RESULT 
+  Pi is roughly 3.140904
 
-$SPARK\_HOME/examples/src/main/python/pi.py 10\`
-
-echo $RESULT → Pi is roughly 3.140904
-
-RESULT=\`$SPARK\_HOME/bin/spark-submit \\
-
-$SPARK\_HOME/examples/src/main/scala/org/apache/spark/examples \\
-
-SparkPi.scala 10\`
-
-echo $RESULT → Pi is roughly 3.140904
-
-$ spark-submit --class org.apache.spark.examples.SparkPi \\
-
-\--master spark://SparkMaster:7077 --driver-memory 512m \\
-
-\--executor-memory 512m --executor-cores 1 \\
-
-$SPARK\_HOME/lib/spark-examples\*.jar 10
+$ spark-submit --class org.apache.spark.examples.SparkPi \
+  --master spark://SparkMaster:7077 --driver-memory 512m \
+  --executor-memory 512m --executor-cores 1 \
+  $SPARK\_HOME/lib/spark-examples\*.jar 10
+```
 
 Stop everything:
-
-$ $SPARK\_HOME/sbin/stop-all.sh
-
+```
+$ $SPARK_HOME/sbin/stop-all.sh
+```
 Check the status of a job (Here is status of Pope's three nodes) at
-[<span class="underline">http://SparkMaster:8080</span>](http://SparkMaster:8080/)
+[http://SparkMaster:8080](http://SparkMaster:8080/)
 
 ![](./media/media/image2.png)
 
@@ -844,40 +831,24 @@ Check the status of a job (Here is status of Pope's three nodes) at
 
 ### Overview 
 
-The Hadoop platform consists of different services available for
-analyzing big data. It has 3 main components:
+The Hadoop platform consists of different services available for analyzing big data. It has 3 main components:
 
   - HDFS: Hadoop Distributed File System
-
   - YARN: Schedule Resource Manager
-
   - MapReduce: Programming model for processing big data
 
-In addition to MapReduce, there are many programs available for use in
-Hadoop. Some programming models are independent of Hadoop. Most use HDFS
-and are managed using YARN. These programs are as follows and can be
-seen in the architectural diagram too \[3\]:
+In addition to MapReduce, there are many programs available for use in Hadoop. Some programming models are independent of Hadoop. Most use HDFS and are managed using YARN. These programs are as follows and can be seen in the architectural diagram too \[3\]:
 
   - Spark (In-memory Data Processing)
-
   - PIG, HIVE (Data Processing Services using SQL like Query)
-
   - HBase, Cassandra (NoSQL Database)
-
   - Mahout, Spark MLlib (Machine Learning)
-
   - Apache Drill (SQL on Hadoop)
-
   - Zookeeper (Managing Cluster)
-
   - Oozie (Job Scheduling)
-
   - Flume, Sqoop (Data Ingesting Services)
-
   - Solr & Lucene (Searching & Indexing)
-
   - Ambari (Provision, Monitor and Maintain cluster)
-
   - Giraffe (Working with
 Graphs)
 
@@ -885,24 +856,11 @@ Graphs)
 
 #### HDFS
 
-HDFS is a java based distributed file system that provides scalable and
-reliable data storage across multiple nodes in Hadoop clusters. It is
-scalable, fault-tolerant, distributed storage system that works closely
-with a wide variety of concurrent data access applications, coordinated
-by YARN. Having distributed storage and computation across many servers,
-the combined storage resource can grow linearly with demand while
-remaining economical at every amount of storage.
+HDFS is a java based distributed file system that provides scalable and reliable data storage across multiple nodes in Hadoop clusters. It is scalable, fault-tolerant, distributed storage system that works closely with a wide variety of concurrent data access applications, coordinated by YARN. Having distributed storage and computation across many servers, the combined storage resource can grow linearly with demand while remaining economical at every amount of storage.
 
-HDFS has a master/slave architecture. An HDFS cluster comprises of a
-single Name Node (master) and multiple Data Nodes (slave nodes).
-Usually, Name Node executes file system namespace operations like
-opening, closing and renaming files and directories; it contains
-attributes like permissions, modification and access and disk space
-quotas, whereas Data Nodes contains the split data and are responsible
-for serving read and write requests from the clients. The Data Nodes can
-also perform block creation, deletion and replication upon instruction
-from the Name Node.
+HDFS has a master/slave architecture. An HDFS cluster comprises of a single Name Node (master) and multiple Data Nodes (slave nodes). Usually, Name Node executes file system namespace operations like opening, closing and renaming files and directories; it contains attributes like permissions, modification and access and disk space quotas, whereas Data Nodes contains the split data and are responsible for serving read and write requests from the clients. The Data Nodes can also perform block creation, deletion and replication upon instruction from the Name Node.
 
+![]()
 #### YARN
 
 YARN allows multiple data processing engines such as interactive SQL,
