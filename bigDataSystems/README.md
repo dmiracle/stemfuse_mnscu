@@ -34,3 +34,10 @@ but that is not true
 Sample text file used for example
 Available in the drop box with the file named WordCount_Example.txt
 
+## General Notes 
+
+Content doesn't break up easily -- references are monolithic and not in order in the document. Posted as a single reference document.
+
+Exercise answer keys not provided.
+
+Assessments not provided.
