@@ -1,0 +1,47 @@
+<h1 id="applications">Applications</h1>
+<p>There are plenty of examples and data that you can test at <a href="https://github.com/apache/spark">https://github.com/apache/spark</a> . We will comment here on Spark Streaming, Machine Learning and Graph processing in the context of PySpark.</p>
+<h3 id="spark-streaming">Spark Streaming</h3>
+<p>Spark Streaming enables high-throughput stream processing of live data streams. Data can be ingested from TCP sockets. Continuous streams are discretized into DStreams, which is internally represented as a sequence of RDDs. Text files can also be read as streams, which can allow programs to automatically adapt to local data sources.</p>
+<h3 id="windowing">Windowing</h3>
+<p>Discretization can be expanded over a sliding window of time periods, so that RDDs that fall within the window are combined into a windowed DStream.</p>
+<p><img src="./ch7_Applications/a4b0690c53f49d36b1c1bf1e76985e618dd6f16b.png" /></p>
+<p>Streams can also be joined. This may be useful for providing a seamless data feed when multiple sources are available (think IOT). Example:</p>
+<p>joinedStream = windowedStream.transform(lambda rdd: rdd.join(dataset))</p>
+<p>More details: <a href="https://spark.apache.org/docs/latest/streaming-programming-guide.html">https://spark.apache.org/docs/latest/streaming-programming-guide.html</a></p>
+<h3 id="spark-machine-learning-(mlib)">Spark Machine Learning (MLib)</h3>
+<p>MLlib's APIs cover algorithms for classification, regression, clustering, dimensionality reduction, linear algebra and basic statistics. More details: <a href="https://spark.apache.org/docs/latest/ml-guide.html">https://spark.apache.org/docs/latest/ml-guide.html</a></p>
+<p>Lets consider an application of binary classification. The code we will use is here:</p>
+<p><a href="https://github.com/apache/spark/blob/master/examples/src/main/python/mllib/svm_with_sgd_example.py">https://github.com/apache/spark/blob/master/examples/src/main/python/mllib/svm_with_sgd_example.py</a> , modified for style and data paths:</p>
+<pre><code>if __name__ == &quot;__main__&quot;:
+
+sc = SparkContext(appName=&quot;PythonSVMWithSGDExample&quot;)
+
+# Load and parse the data
+
+def parsePoint(line):
+    values = [float(x) for x in line.split(&#39; &#39;)]
+    return LabeledPoint(values[0], values[1:])
+
+data = sc.textFile(&quot;data/sample_svm_data.txt&quot;)
+parsedData = data.map(parsePoint)
+
+# Build the model
+model = SVMWithSGD.train(parsedData, iterations=100)
+
+# Evaluating the model on training data
+labelsAndPreds = parsedData.map(lambda p: (p.label, model.predict(p.features)))
+trainErr = labelsAndPreds.filter(lambda lp: lp[0] != lp[1]).count() float(parsedData.count())
+
+print(&quot;Training Error = &quot; + str(trainErr))
+
+# Save and load model
+model.save(sc, &quot;tmp/pythonSVMWithSGDModel&quot;)
+sameModel = SVMModel.load(sc, &quot;tmp/pythonSVMWithSGDModel&quot;)
+</code></pre>
+<p>Some data we will test is here:</p>
+<p><a href="https://github.com/apache/spark/blob/master/data/mllib/sample_svm_data.txt">https://github.com/apache/spark/blob/master/data/mllib/sample_svm_data.txt</a></p>
+<p>Binary classification divides data into two categories: positive and negative. This could reflect any number of states such as up/down, on/off, true/false, yes/no, etc (MLib denotes positive as 1 and negative as 0).</p>
+<p>Classification can be done by Support Vector Machine (SVM) or logistic Regression. The example uses the former. An SVM separates data points into classes by a hyperplane. During training, the best hyperplane is sought with a certain maximum margin of distance from the hyperplane in separating the classes.</p>
+<p>When run, a model is generated that has a certain training error. (For the given data, the training error is Training Error = 0.38198757764 )</p>
+<h3 id="graphs-processing-in-spark">Graphs processing in Spark</h3>
+<p>The premiere graphing program in Apache Spark is GraphX. However, GraphX is not compatible with PySpark at this time. An alternative project called GraphFrames provides a wrapper to GraphX objects by using Spark's DataFrames API. However, Spark 2x is not quickly compatible with GraphFrames either. A work around is to use the Networkx library for graph processing, converting graph data to RDDs. Another possibility for parallelization of graphs in Python/Networkx is a platform called Parallel Python: <a href="https://www.parallelpython.com/">https://www.parallelpython.com</a></p>

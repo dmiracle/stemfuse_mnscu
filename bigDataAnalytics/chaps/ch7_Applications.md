@@ -1,11 +1,11 @@
-## Applications
+# Applications
 
 There are plenty of examples and data that you can test at
 <https://github.com/apache/spark> . We will comment here on Spark
 Streaming, Machine Learning and Graph processing in the context of
 PySpark.
 
-Spark Streaming:
+### Spark Streaming
 
 Spark Streaming enables high-throughput stream processing of live data
 streams. Data can be ingested from TCP sockets. Continuous streams are
@@ -13,7 +13,8 @@ discretized into DStreams, which is internally represented as a sequence
 of RDDs. Text files can also be read as streams, which can allow
 programs to automatically adapt to local data sources.
 
-Windowing: Discretization can be expanded over a sliding window of time
+### Windowing
+Discretization can be expanded over a sliding window of time
 periods, so that RDDs that fall within the window are combined into a
 windowed DStream.
 
@@ -27,7 +28,8 @@ joinedStream = windowedStream.transform(lambda rdd: rdd.join(dataset))
 More details:
 <https://spark.apache.org/docs/latest/streaming-programming-guide.html>
 
-Spark Machine Learning (MLib):
+### Spark Machine Learning (MLib)
+
 
 MLlib's APIs cover algorithms for classification, regression,
 clustering, dimensionality reduction, linear algebra and basic
@@ -40,49 +42,36 @@ here:
 
 <https://github.com/apache/spark/blob/master/examples/src/main/python/mllib/svm_with_sgd_example.py>
 , modified for style and data paths:
-
-if \_\_name\_\_ == "\_\_main\_\_":
+```
+if __name__ == "__main__":
 
 sc = SparkContext(appName="PythonSVMWithSGDExample")
 
-\# Load and parse the data
+# Load and parse the data
 
 def parsePoint(line):
+    values = [float(x) for x in line.split(' ')]
+    return LabeledPoint(values[0], values[1:])
 
-values = \[float(x) for x in line.split(' ')\]
-
-return LabeledPoint(values\[0\], values\[1:\])
-
-data = sc.textFile("data/sample\_svm\_data.txt")
-
+data = sc.textFile("data/sample_svm_data.txt")
 parsedData = data.map(parsePoint)
 
-\# Build the model
-
+# Build the model
 model = SVMWithSGD.train(parsedData, iterations=100)
 
-\# Evaluating the model on training data
-
-labelsAndPreds = parsedData.map(lambda p: (p.label,
-model.predict(p.features)))
-
-trainErr = labelsAndPreds.filter(lambda lp: lp\[0\] \!= lp\[1\]).count()
-/ 
-
-float(parsedData.count())
+# Evaluating the model on training data
+labelsAndPreds = parsedData.map(lambda p: (p.label, model.predict(p.features)))
+trainErr = labelsAndPreds.filter(lambda lp: lp[0] != lp[1]).count() float(parsedData.count())
 
 print("Training Error = " + str(trainErr))
 
-\# Save and load model
-
+# Save and load model
 model.save(sc, "tmp/pythonSVMWithSGDModel")
-
 sameModel = SVMModel.load(sc, "tmp/pythonSVMWithSGDModel")
+```
+Some data we will test is here:
 
-Some data we will test is
-here:
-
-[https://github.com/apache/spark/blob/master/data/mllib/sample\_](https://github.com/apache/spark/blob/master/data/mllib/sample_linear_regression_data.txt)[svm](https://github.com/apache/spark/blob/master/data/mllib/sample_linear_regression_data.txt)[\_data.txt](https://github.com/apache/spark/blob/master/data/mllib/sample_linear_regression_data.txt)
+https://github.com/apache/spark/blob/master/data/mllib/sample_svm_data.txt
 
 Binary classification divides data into two categories: positive and
 negative. This could reflect any number of states such as up/down,
@@ -98,7 +87,7 @@ separating the classes.
 When run, a model is generated that has a certain training error. (For
 the given data, the training error is Training Error = 0.38198757764 )
 
-Graphs processing in Spark:
+### Graphs processing in Spark
 
 The premiere graphing program in Apache Spark is GraphX. However, GraphX
 is not compatible with PySpark at this time. An alternative project

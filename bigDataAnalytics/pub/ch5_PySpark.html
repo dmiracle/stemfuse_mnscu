@@ -1,0 +1,103 @@
+<h1 id="pyspark">PySpark</h1>
+<p>PySpark is the API for Python programming in the Spark environment.</p>
+<p>The interactive PySpark shell session can be launched from the command-line:</p>
+<pre><code>pyspark 
+</code></pre>
+<p>Alternatively, PySpark applications are typically run using $SPARK_HOME/bin/spark-submit. For example:</p>
+<pre><code>$SPARK_HOME/bin/spark-submit /path/to/my/program.py
+</code></pre>
+<p>Use of PySpark automatically imports required libraries (no explicit import statement required). For example, SparkContext uses the Py4J library to launch the JVM, creating a JavaSparkContext.</p>
+<p>With respect to PySpark, a SparkContext instance named “sc” is automatically created. Therefore, it is useless to try to create a new SparkContext unless you want to change its constructor parameters.</p>
+<p>Your Spark context defines how your application's processes run independently across a cluster. This is illustrated as follows (source: at <a href="https://spark.apache.org/docs/latest/cluster-overview.html">https://spark.apache.org/docs/latest/cluster-overview.html</a> ):</p>
+<p><img src="./ch5_PySpark/d4e7a7289adb74a07cafd9cbf49ea6e74184b0fe.png" /></p>
+<p>With the initialization of a SparkContext, each worker node starts an executor program which eventually sends information back to to the driver on the master. The driver can be considered a local parent process of the remote executors. When the driver stops so do the executors.</p>
+<p>The driver will serialize function objects for tasks on an executor. The executor then deserializes the the function and executes it on a partition of an RDD.</p>
+<p>To check the Spark Context of a session, start a PySpark session and enter:</p>
+<pre><code>spark.sparkContext.getConf().getAll()
+</code></pre>
+<p>This will return a dictionary of settings. These setting can be changed by providing arguments to the SparkContext constructor. The argument choices are here: <a href="https://spark.apache.org/docs/2.3.1/api/java/org/apache/spark/SparkContext.html">https://spark.apache.org/docs/2.3.1/api/java/org/apache/spark/SparkContext.html</a></p>
+<p>The first argument in the SparkContex is the cluster type. This can include:</p>
+<ul>
+<li>local – single machine (desktop, notebook, ...)</li>
+<li>stand-along – a group pre-defined machines</li>
+<li>yarn – a scheduler</li>
+<li>cloud – such as EC2</li>
+</ul>
+<p>We could define a single task for a single “local” machine as follows:</p>
+<pre><code>sc = SparkContext(&#39;local&#39;, &#39;testing...&#39;) 
+</code></pre>
+<p>Suppose we want to use all cores on a local machine, then we can specify:</p>
+<pre><code>sc = SparkContext(&#39;local[*]&#39;, &#39;testing...&#39;) 
+</code></pre>
+<p>RDDs in the context of PySpark:</p>
+<p>To distribute data around the disparate machines comprising a cluster, Spark uses a data structure called a Resilient Distributed Dataset or RDD.</p>
+<p>RDDs include methods that works with the PySpark API's lambda syntax. A function can be passed to an RDD method, as we saw with the above example with <code>sc.parallelize(grades).map(lambda a: [a, a + 10]).collect().</code></p>
+<p>Unlike with Scala, Python RDDs can hold objects of multiple types. RRD methods can also take functions and return Python collection types.</p>
+<p>The Spark API includes Spark Core for basic functionality such as RDDs and related map, reduce and filter operations.</p>
+<p>Lets convert our earlier Python example to PySpark we use RDDs instead of Python lists. We now have:</p>
+<pre><code>grades = [30, 35, 55, 70, 45, 60]
+rdd_grades = sc.parallelize(grades)
+rdd_grades_adj = rdd_grades.map(lambda a: a + 10).collect() 
+print(rdd_grades_adj)        →       [40, 45, 65, 80, 55, 70]
+</code></pre>
+<p>When dealing with large data sets, the accumulation of output can push local resources. This is a reason to limit some of the collection by using the <code>take()</code> method instead of collect.</p>
+<pre><code>rdd_grades_adj = rdd_grades.map(lambda a: a + 10).take(2)
+print(rdd_grades_adj)        →        [40, 45]
+</code></pre>
+<p>For an example of reduce, lets find the average grade.</p>
+<pre><code>rdd_grades_avg = rdd_grades.reduce(lambda a, b: a + b)
+rdd_grades_avg = rdd_grades.reduce(lambda a, b: a + b)/rdd_grades.count()
+print(rdd\_grades\_avg)        →        49
+</code></pre>
+<h2 id="exercise">Exercise</h2>
+<p>Repeat the Python exercises in the Functional Programming section using PySpark.</p>
+<p>Submit your code and output from executing your program.</p>
+<h2 id="rdd-persistence">RDD persistence</h2>
+<p>Redundancies such as RDD duplication in memory and storage to disk (serialization).</p>
+<p>Serialization is useful for data transmission as well as storage and can speed up operations.</p>
+<p>Serialization can be accommodated by file format such as XML, JSON or binary (really Java byte code for Spark).</p>
+<p>PySpark has a variety of serializers, including:</p>
+<ul>
+<li>AutoSerializer – Automatically select Marshal or Pickle serializer protocol.</li>
+<li>CompressedSerializer – Serialize and unserialize objects with GZIP compression.</li>
+<li>MarshalSerializer – faster than PickleSerializer, but has fewer data types.</li>
+<li>PickleSerializer – accommodates most Python objects.</li>
+</ul>
+<p>More here: <a href="https://spark.apache.org/docs/2.3.1/api/python/_modules/pyspark/serializers.html">https://spark.apache.org/docs/2.3.1/api/python/_modules/pyspark/serializers.html</a></p>
+<p>Seven RDD storage levels are outline here:</p>
+<p><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence">https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence</a></p>
+<p>For example, lets serialize an RDD for storage to both memory and disk:</p>
+<pre><code>a.persist(pyspark.StorageLevel.MEMORY_AND_DISK_SER)
+</code></pre>
+<p>Verify that storage:</p>
+<pre><code>print(a.getStorageLevel())     →     Disk Memory Serialized 1x Replicated
+</code></pre>
+<p>Another example (If within the pyspark interactive shell, first stop the prior Spark Context):</p>
+<pre><code>sc.stop()
+from pyspark.serializers import PickleSerializer
+sc = SparkContext(&quot;local&quot;, &quot;serialization app&quot;, serializer = PickleSerializer())
+print(sc.parallelize(list(range(1000))).map(lambda a: a * 2).take(10))
+sc.stop()
+</code></pre>
+<h2 id="shared-variables">Shared variables</h2>
+<p>Types of variables that are shared across nodes:</p>
+<ul>
+<li><p>Accumulator – stores of updated aggregated value.</p></li>
+<li><p>Broadcast – sent to all nodes where they are cached.</p></li>
+</ul>
+<p>In the following example, the variable 'a' is an accumulator, as it is modified such that a = a + b.</p>
+<pre><code>ints = [2, 4, 6, 8]
+sum = lambda a, b: a + b
+avg = reduce(sum, ints)/len(ints)
+print(avg)       →        20
+</code></pre>
+<p>Example broadcast:</p>
+<pre><code>more_animals = sc.broadcast([(&quot;rooster&quot;, 1), (&quot;ox&quot;, 2), (&quot;horse&quot;, 5)])
+</code></pre>
+<p>Now verify oxen in new set:</p>
+<pre><code>animal = more_animals.value[1] 
+print (&quot;Oxen? ... %s&quot;, animal)    →    (&#39;Oxen? ... %s&#39;, (&#39;ox&#39;, 2))
+</code></pre>
+<h2 id="exercise-1">Exercise</h2>
+<p>Devise an algorithm that Create an RDD_alpa1 consisting of the letters of the alphabet. Serialize the RDD to disk using CompressedSerializer. Devise a second algorithm that create RDD_alpha2 from the serialized RDD_alpa1 that is on disk. Write test code that validates the two RDDs are the same.</p>
+<p>Upload your code and test output.</p>

@@ -84,7 +84,7 @@ fn = lambda L, R: ("Go Left", L, R) if L > 5 and R < 10 else ("Go Right", L, R)
 print(fn(5,15))        →        ('Go Right', 5, 15)
 ```
 
-### Higher order functions
+## Higher order functions
 
 Higher order functions (aka “functors”) accept other functions as
 arguments and are able to return a function. Examples of higher order
@@ -100,69 +100,58 @@ map takes two arguments:
 map(function, list)
 ```
 For example, suppose we have a list of exam grades:
-
-grades = \[30, 35, 55, 70, 45, 60\]
-
+```
+grades = [30, 35, 55, 70, 45, 60]
+```
 To scale all exam grades up by 10 points, map a lambda as follows:
-
-grades\_adj = list(map(lambda a: a + 10, grades))
-
-list(grades\_adj)→\[40, 45, 65, 80, 55, 70\]
-
-reduce: Like map, reduce applies a function to a list of values. Unlike
+```
+grades_adj = list(map(lambda a: a + 10, grades))
+list(grades_adj)        →        [40, 45, 65, 80, 55, 70]
+```
+#### `reduce` 
+Like map, reduce applies a function to a list of values. Unlike
 map, the output of reduce is an aggregate of the list. The operation of
 reduce is pairwise such that for elements a, b, the pairing “a + b, b”
 creates a sum aggregate. For example:
-
-ints = \[2, 4, 6, 8\]
-
+```
+ints = [2, 4, 6, 8]
 sum = lambda a, b: a + b
-
 avg = reduce(sum, ints)/len(ints)
+print(avg)        →        20
+```
+#### `filter`
+Used to filter data, conditionally allowing some data to pass without modifying it. Hence, the resulting list may be shorter than the input list.
+```
+ok = lambda a: a > 0
+ints = [2, -4, 6, -8]
+pos_ints = filter(ok, ints)
+print(pos_ints)        →        [2, 6]
+```
 
-print(avg)→20
-
-filter: used to filter data, conditionally allowing some data to pass
-without modifying it. Hence, the resulting list may be shorter than the
-input list.
-
-ok = lambda a: a \> 0
-
-ints = \[2, -4, 6, -8\]
-
-pos\_ints = filter(ok, ints)
-
-print(pos\_ints)→\[2, 6\]
-
-flatMap: the map function may yield multiple sub lists. If a single
-“flattened” list is preferred, then use flatMap.
+#### `flatMap`
+The map function may yield multiple sub lists. If a single “flattened” list is preferred, then use `flatMap`.
 
 For example, in PySpark suppose the following 
-
-sc.parallelize(grades).map(lambda a: \[a, a + 10\]).collect() 
-
-→ \[\[30, 40\], \[35, 45\], \[55, 65\], \[70, 80\], \[45, 55\], \[60,
-70\]\]
-
+```
+sc.parallelize(grades).map(lambda a: [a, a + 10]).collect() 
+→ [[30, 40], [35, 45], [55, 65], [70, 80], [45, 55], [60, 70]]
+```
 Using flatMap we get:
-
-sc.parallelize(grades).flatMap(lambda a: \[a, a + 10\]).collect() 
-
-→ \[30, 40, 35, 45, 55, 65, 70, 80, 45, 55, 60, 70\]
-
-… with results “flattened” into one single list. So, given a couple sets
-of grade provided as:
+```
+sc.parallelize(grades).flatMap(lambda a: [a, a + 10]).collect() 
+→ [30, 40, 35, 45, 55, 65, 70, 80, 45, 55, 60, 70]
+```
+with results “flattened” into one single list. So, given a couple sets of grade provided as:
 
 Similarly, given nested lists such as:
-
-grades = \[\[20, 40, 60, 80\], \[10, 30, 50, 70\]\]
-
+```
+grades = [[20, 40, 60, 80], [10, 30, 50, 70]]
+```
 We can flatten the list into a single list as follows:
-
+```
 sc.parallelize(grades).flatMap(lambda a: a).collect() 
-
-→ \[20, 40, 60, 80, 10, 30, 50, 70\]
-
+→ [20, 40, 60, 80, 10, 30, 50, 70]
+```
 That is enough of a functional programming overview for this module. For
 more functional programming material and Python basics, please visit the
 other Python and Functional Programming modules. 
@@ -182,34 +171,17 @@ Related Internet resources:
 
 <https://en.wikipedia.org/wiki/Higher-order_function>
 
-### Exercises
+## Exercises
 
-1\. Using Python, given a list of pets:
-
-pets = \['dogs', 'cats', 'birds', 'fish'\]
-
+1. Using Python, given a list of pets:
+`pets = ['dogs', 'cats', 'birds', 'fish']` 
 Use the map function to print the character count comprising each pet
 type.  
-
-2\. Given the list:
-
-nums = \[1, 2, 3, 4, 5, 6, 7, 8, 9\]
-
-Devise a lambda function to yield a list of only the odd integers. 
-
-3\. Using Python, given a list of pairs, pets with their associated
-count, as (pet, count):
-
-pets = \[('dogs', 5), ('cats', 3), ('birds', 7), ('fish', 4)\]
-
-Devise lambda functions to do the following:
-
-A. Sort the pets alphabetically by type.
-
-B. Sort the pets numerically by count.
-
-C. Retrieve the total count of all pets.
-
-Hint: Lists contain a sort function.
+2. Given the list: `nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]` Devise a lambda function to yield a list of only the odd integers. 
+3. Using Python, given a list of pairs, pets with their associated count, as (pet, count): `pets = [('dogs', 5), ('cats', 3), ('birds', 7), ('fish', 4)]` Devise lambda functions to do the following:
+    - Sort the pets alphabetically by type.
+    - Sort the pets numerically by count.
+    - Retrieve the total count of all pets.
+    - (Hint: Lists contain a sort function.)
 
 Submit your code and output from executing your programs.

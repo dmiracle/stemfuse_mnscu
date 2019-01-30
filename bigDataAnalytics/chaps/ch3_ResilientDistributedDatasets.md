@@ -1,4 +1,4 @@
-## Resilient Distributed Dataset (RDD)
+# Resilient Distributed Dataset (RDD)
 
 Spark's architecture is designed around a data structure called the
 Resilient Distributed Dataset (RDD).
@@ -72,7 +72,7 @@ More:
 
 <https://spark.apache.org/docs/latest/api/java/org/apache/spark/rdd/RDD.html>
 
-### RDD partitioning
+## RDD partitioning
 
 Partitioning of RDDs can be done using HashPartitioner or
 CustomPartitioner.
@@ -94,7 +94,7 @@ CustomPartitioner:
 
 - Just extend Spark's Partitioner class.
 
-### Python dictionaries versus RDDs
+## Python dictionaries versus RDDs
 
 An efficient way to compute modes is using associative-arrays, also
 known as dictionaries. Dictionaries are associated (key : value) pairs.
