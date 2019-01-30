@@ -70,7 +70,7 @@ When faced with huge data sets we are motivated to avoid serial in design and ex
 
 Processing of partitioned data on cluster nodes takes place independently and concurrently. Results can be consolidated on a master node according to the keys of key-value pairings in the data.
 
-While the map reduce concept goes back a to the time when Lisp was at is zenith, Google managed to win a patent for its version, spelled MapReduce (USPTO patent \#7,650,331).
+While the map reduce concept goes back a to the time when Lisp was at is zenith, Google managed to win a patent for its version, spelled MapReduce (USPTO patent #7,650,331).
 
 The map-reduce paradigm supports parallel computing. The map function as applied to each value of a data set is readily performed in parallel, as the value and the function are independent. However, in the context of distributed processing, a reduce operation will depend on a completed map operation.
 
@@ -250,7 +250,7 @@ architectures enable data parallelism.
 ### Characteristics of Big Data
 
 The characterization of big data using the 3 V’s was introduced by Doug
-Laney of Gartner. According to Laney \[6\]:
+Laney of Gartner. According to Laney [6]:
 
   - Volume: This refers to the vast amounts of data that is generated
     continuously through machines, people or organization.
@@ -394,8 +394,8 @@ terminals. This helps with scalability.
 ### Exercise
 
 Using the link:
-[https://flightaware.com/about/faq\#intl](https://flightaware.com/about/faq#intl)
-and [https://www.faa.gov/air\_traffic/by\_the\_numbers/](https://www.faa.gov/air_traffic/by_the_numbers/)
+[https://flightaware.com/about/faq#intl](https://flightaware.com/about/faq#intl)
+and [https://www.faa.gov/air_traffic/by_the_numbers/](https://www.faa.gov/air_traffic/by_the_numbers/)
 , have student gather information on how flight status app works, and
 complete the following task:
 
@@ -446,22 +446,17 @@ cluster.
 Dependencies:
 
   - Software: Python, Java, Scala, Spark, SSH (passwordless)
-
   - Network: Routable nodes; same subnet; resolvable hostnames
 
 Spark configuration:
 
   - spark-defaults.conf
-
   - spark-env.sh
-
-  - High availability (HA – multi-nodes): Can optionally use Apache
-    Zookeper
+  - High availability (HA – multi-nodes): Can optionally use Apache Zookeper
 
 Running:
 
   - start-master.sh
-
   - start-slave.sh
 
 Monitoring: Web UI
@@ -481,15 +476,10 @@ On VirtualBox, the first host to create we'll call SparkMaster. From VirtualBox,
 SparkMaster components to install:
 
   - Java (Open JDK 8; later versions currently conflict with sbt below, and earlier versions do not support Java lambdas for functional programming.)
-
   - Git
-
   - Scala (includes scalac compiler - Need version 2.12 to avoid compile errors.. see install below)
-
   - sbt – Scala Build Tool
-
   - Python 2
-
   - SSH server
 
 Latest stable version of Spark from
@@ -549,8 +539,7 @@ sudo ./sbin/start-master.sh -h localhost -p 7077 --webui-port 8080
 
 If when attempting the above command, there is this error message:
 ```
-Failed to find Spark jars directory (/Users/bh/downloads/spark/assembly/target/scala-2.10/jars). You need to build Spark with the target “package” before
-running this program.
+Failed to find Spark jars directory (/Users/bh/downloads/spark/assembly/target/scala-2.10/jars). You need to build Spark with the target “package” before running this program.
 ```
 then, within /opt/spark:
 ```
@@ -563,7 +552,7 @@ file in /opt/spark to your spark user. The latter is probably best,
 since a user with higher privilege can still use the files.
 
 ```
-sudo chown -R SparkUser:SparkUser $SPARK\_HOME
+sudo chown -R SparkUser:SparkUser $SPARK_HOME
 ```
 
 The web interface should now be visible at:
@@ -585,18 +574,18 @@ http://IPaddress_SparkMaster:8080/.
 At this point we can run programs on the single master node with Scala
 and Python. Let us run a test now.
 ```
-$SPARK\_HOME/bin/run-example SparkPi 10
-$SPARK\_HOME/bin/spark-submit examples/src/main/python/pi.py 10
+$SPARK_HOME/bin/run-example SparkPi 10
+$SPARK_HOME/bin/spark-submit examples/src/main/python/pi.py 10
 ```
 
 More tests at
-[<span class="underline">https://spark.apache.org/docs/latest/</span>](https://spark.apache.org/docs/latest/)
+[https://spark.apache.org/docs/latest/](https://spark.apache.org/docs/latest/)
 
 #### Create cluster (workers):
 
 Clone SparkMaster as SparkWorker
 
-- change hostname from SparkMaster to SparkWorker1, 2, …
+- change hostname from SparkMaster to SparkWorker1, SparkWorker2,  . . .
 
 - change static ip address
 
@@ -751,16 +740,16 @@ $SPARK_HOME/sbin/start-slave.sh spark://IPaddress_SparkMaster:7077
 ### Running a Spark cluster
 
 The above run commands contrast with the automatic launch of workers
-from the master, provided they are listed in `$SPARK_HOME/conf/slaves` and the master's public ssh key resides on each worker.
+from the master, provided they are listed in $SPARK_HOME/conf/slaves and the master's public ssh key resides on each worker.
 
-Make the following edits in `$SPARK_HOME/conf`
+Make the following edits in $SPARK_HOME/conf
 ```
 cp spark-defaults.conf.template spark-defaults.conf
 echo -e "spark.master \t spark://SparkMaster:7077" >> spark-defaults.conf
 cp spark-env.sh.template spark-env.sh
 echo SPARK_MASTER_IP=SparkMaster >> spark-env.sh
 ```
-Edit `$SPARK_HOME/conf/slaves`
+Edit $SPARK_HOME/conf/slaves
 ```
 cp slaves.template slaves
 echo SparkWorker1 >> slaves
@@ -789,7 +778,7 @@ We are running jobs on the cluster without so called High Availability (HA). Tha
 Programs that run on the cluster will utilize the Spark API (covered in Big Data Analytics module).
 
 Example programs that you can try are located in
-`$SPARK_HOME/lib/spark-examples`.
+$SPARK_HOME/lib/spark-examples.
 
 Test using example program (in terminal of any node):
 ```
@@ -815,7 +804,7 @@ echo $RESULT
 $ spark-submit --class org.apache.spark.examples.SparkPi \
   --master spark://SparkMaster:7077 --driver-memory 512m \
   --executor-memory 512m --executor-cores 1 \
-  $SPARK\_HOME/lib/spark-examples\*.jar 10
+  $SPARK_HOME/lib/spark-examples\*.jar 10
 ```
 
 Stop everything:
@@ -827,7 +816,7 @@ Check the status of a job (Here is status of Pope's three nodes) at
 
 ![](./media/media/image2.png)
 
-## Apache Hadoop 
+## 4. Apache Hadoop 
 
 ### Overview 
 
@@ -860,119 +849,85 @@ HDFS is a java based distributed file system that provides scalable and reliable
 
 HDFS has a master/slave architecture. An HDFS cluster comprises of a single Name Node (master) and multiple Data Nodes (slave nodes). Usually, Name Node executes file system namespace operations like opening, closing and renaming files and directories; it contains attributes like permissions, modification and access and disk space quotas, whereas Data Nodes contains the split data and are responsible for serving read and write requests from the clients. The Data Nodes can also perform block creation, deletion and replication upon instruction from the Name Node.
 
-![]()
+![](./media/media/image4.jpg)
 #### YARN
 
-YARN allows multiple data processing engines such as interactive SQL,
-real time streaming, data science and batch processing to process and
-handle data stored in HDFS. To be precise, YARN acts as a resource
-manager for different applications to access the distributed data
-storage. YARN also performs job scheduling.
+YARN allows multiple data processing engines such as interactive SQL, real time streaming, data science and batch processing to process and handle data stored in HDFS. To be precise, YARN acts as a resource manager for different applications to access the distributed data storage. YARN also performs job scheduling.
 
-YARN consists of following components:
+![](./media/media/image5.jpg)
 
-> <span class="underline"></span>
-> 
-> <span class="underline">Resource Manager:</span>
-> 
-> Resource Manager receives the processing requests, and then passes the
-> parts of request to corresponding Node Manager, which are installed on
-> every data node.
-> 
-> It has a scheduler, which is responsible for allocating resources to
-> the various applications running in the cluster, according to the
-> constraints such a queue capacities and user limits. The scheduler
-> schedules based on the resource requirements of each application.
-> 
-> <span class="underline"></span>
-> 
-> <span class="underline">Node Manager:</span>
+#### YARN consists of following components:
 
-Node Managers are responsible for execution of task on every single data
-node.
+**Resource Manager**
 
-> <span class="underline"></span>
-> 
-> <span class="underline">Application Master</span>
-> 
-> Application Master is responsible for negotiating appropriate resource
-> containers from the scheduler, tracking their status, and monitoring
-> their progress.
-> 
-> <span class="underline"></span>
-> 
-> <span class="underline">Container</span>
+Resource Manager receives the processing requests, and then passes the parts of request to corresponding Node Manager, which are installed on every data node.
+ 
+It has a scheduler, which is responsible for allocating resources to the various applications running in the cluster, according to the constraints such a queue capacities and user limits. The scheduler schedules based on the resource requirements of each application.
+ 
+**Node Manager**
 
-It consists of resources like memory, processing unit and network on a
-single node.
+Node Managers are responsible for execution of task on every single datanode.
+
+**Application Master**
+
+Application Master is responsible for negotiating appropriate resource containers from the scheduler, tracking their status, and monitoring their progress.
+
+**Container**
+
+It consists of resources like memory, processing unit and network on a single node.
 
 #### How does YARN work \[5\]?
+![](./media/media/image6.jpg)
 
 ### Application of MapReduce in Hadoop with example
 
-The execution of Map and Reduce task in controlled by Job- and
-Task-trackers. Each cluster-node consists of a single Job Tracker and
-one Task Tracker. The Job tracker acts as a master and is responsible
-for scheduling the jobs' component tasks on the slaves (Task Tracker),
-monitoring them and re-executing the failed tasks. The slaves execute
-the tasks as directed by the master. Job Tracker resides on Name node
-and Task Tracker on Data node.
+The execution of Map and Reduce task in controlled by Job and Task trackers. Each cluster-node consists of a single Job Tracker and one Task Tracker. The Job tracker acts as a master and is responsible for scheduling the jobs' component tasks on the slaves (Task Tracker), monitoring them and re-executing the failed tasks. The slaves execute the tasks as directed by the master. Job Tracker resides on Name node and Task Tracker on Data node.
 
-<span class="underline">Example text (WordCount\_Example.txt): </span>
+#### Example text (WordCount_Example.txt):
 
 *Play Golf? Don’t play if the outlook is rain and it’s windy. Don’t play
 if humidity is high, outlook sunny, and it’s not windy. Otherwise, go
 play*
 
-<span class="underline">Phase 1: </span>
+#### Phase 1:
 
-Input Splits:
+**Input Splits:**
 
-During this process the input file is divided into chunks of data to be
-processed by individual mapper. In our example, the text is divided in a
-chunk of 4 words each.
+During this process the input file is divided into chunks of data to be processed by individual mapper. In our example, the text is divided in a chunk of 4 words each.
 
-Mapping:
+**Mapping:**
 
-During mapping process, the output from the input splits is passed to a
-mapping function to produce output values; job of mapping is to count
-number of occurrences of each word from input splits and prepare a list
-in the form of key-value (word, frequency). Please refer to the diagram
-below and see how each word is seen with frequency of 1.
+During mapping process, the output from the input splits is passed to a mapping function to produce output values; job of mapping is to count number of occurrences of each word from input splits and prepare a list in the form of key-value (word, frequency). Please refer to the diagram below and see how each word is seen with frequency of 1.
 
-<span class="underline">Phase 2: </span>
+#### Phase 2: 
 
-Shuffling:
+**Shuffling:**
 
 This process takes the output of mapping phase. Its task is to
 consolidate the relevant records from mapping process. In our example,
 the word “and” is in the file twice, so it is grouped and is seen twice
 with a frequency of 1 each.
 
-Reducing:
+**Reducing:**
 
 This process combines values from shuffling process and returns a single
 output value. Considering our example, now the word “and” is seen in the
 output only once with the frequency of 2.
 
-**Installation and configuration of Hadoop on the Cloudera Virtual
-Machine**
+### Installation and configuration of Hadoop on the Cloudera Virtual Machine
 
-*The installation video is attached in the google drive*
-
-<span class="underline">Download and Install Virtual Box</span>
+#### Download and Install Virtual Box
 
 Download link
 
 https://www.virtualbox.org/wiki/Downloads
 
-<span class="underline">Download and Install Cloudera Virtual Machine
-(VM) Image:</span>
+#### Download and Install Cloudera Virtual Machine
+(VM) Image:
 
-Download
-link
+Download link
 
-https://downloads.cloudera.com/demo\_vm/virtualbox/cloudera-quickstart-vm-5.4.2-0-virtualbox.zip
+https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.4.2-0-virtualbox.zip
 
 <span class="underline">Sample text file used for example</span>
 
@@ -980,62 +935,58 @@ Available in the drop box with the file named *WordCount\_Example.txt*
 
 ### Testing the installation – running a program in Hadoop
 
-Let us consider the example of wordcount we used earlier for the
-demonstration on the use of Hadoop. We can run the application using
-terminal shell
+Let us consider the example of wordcount we used earlier for the demonstration on the use of Hadoop. We can run the application using terminal shell
 
 ![](./media/media/image7.png)
 
-<span class="underline">Step 1: </span>
+#### Step 1:
 
-Download or generate a file that needs to be used for the application.
-In our example, a text document titled WordCount\_Example.txt is created
-in the Downloads folder of virtual box. The file can then be transferred
-to HDFS using the following command:
+Download or generate a file that needs to be used for the application. In our example, a text document titled WordCount_Example.txt is created in the Downloads folder of virtual box. The file can then be transferred to HDFS using the following command:
 
 Code:
 
-*hadoop fs –copyFromLocal WordCount\_Example.txt*
+```
+hadoop fs –copyFromLocal WordCount_Example.txt
+```
 
 Screen shot:
 
 ![](./media/media/image8.png)
 
-<span class="underline">Step 2: </span>
+### Step 2:
 
 Check if the file is available in the HDFS
 
 Code:
 
-*hadoop fs –ls *
+```
+hadoop fs –ls 
+```
 
 Screen shot:
 
 ![](./media/media/image9.png)
 
-<span class="underline">Step 3: </span>
+### Step 3:
 
-We can use jar command to run a program in hadoop from a jar file. The
-jar file is in usr/jars/hadoop-examples.jar, and we are going to use
-wordcount program on the text file we have in the file system.
+We can use jar command to run a program in hadoop from a jar file. The jar file is in usr/jars/hadoop-examples.jar, and we are going to use wordcount program on the text file we have in the file system.
 
 Syntax:
-
-hadoop jar /usr/jars/hadoop-examples.jar wordcount \<input\> \<output\>
-
+```
+hadoop jar /usr/jars/hadoop-examples.jar wordcount <input> <output>
+```
 Code:
 
-*hadoop jar /usr/jars/hadoop-examples.jar wordcount
-WordCount\_Example.txt Eout*
+```
+hadoop jar /usr/jars/hadoop-examples.jar wordcount
+WordCount_Example.txt Eout
+```
 
 Screen shot:
 
 ![](./media/media/image10.png)
 
-The MapReduce application will now perform the map and reduce task. The
-process can be monitored on the screen. In the screen below, we can see
-that the input has been split and is awaiting the map and reduce phase
-(both at 0%)
+The MapReduce application will now perform the map and reduce task. The process can be monitored on the screen. In the screen below, we can see that the input has been split and is awaiting the map and reduce phase (both at 0%)
 
 ![](./media/media/image11.png)
 
@@ -1043,60 +994,59 @@ Once Map phase completes, Reduce phase starts
 
 ![](./media/media/image12.png)
 
-After the completion of Reduce phase, we get the summary of task
-completed by the application
+After the completion of Reduce phase, we get the summary of task completed by the application
 
 ![](./media/media/image13.png)
 
-<span class="underline">Step 4: </span>
+#### Step 4:
 
 Check if the output directory is created
 
 Code:
 
-*hadoop fs –ls*
+```
+hadoop fs –ls
+```
 
 Screen shot:
 
 ![](./media/media/image14.png)
 
-<span class="underline"></span>
+#### Step 5:
 
-<span class="underline">Step 5: </span>
+Open the directory to check the files in the directory. There are two files in the directory:
 
-Open the directory to check the files in the directory. There are two
-files in the directory:
-
-Eout/\_SUCCESS and
-
+Eout/_SUCCESS and \
 Eout/part-r-00000.
 
-The Eout/\_SUCCESS means that the wordcount job ran successfully. The
+The Eout/_SUCCESS means that the wordcount job ran successfully. The
 other file is the output generated by the process.
 
 ![](./media/media/image15.png)
 
-<span class="underline">Step 6: </span>
+#### Step 6:
 
-The output file can now to copied to local file system from HDFS and
-view it.
+The output file can now to copied to local file system from HDFS and view it.
 
 Code:
 
-*hadoop fs –copyToLocal Eout/part-r-0000 Output.txt*
+```
+hadoop fs –copyToLocal Eout/part-r-0000 Output.txt
+```
 
 Screen shot:
 
 ![](./media/media/image16.png)
 
-<span class="underline">Step 7: </span>
+#### Step 7:
 
-We can now read the output file. The file contains the word and the
-frequency of the word in the file we sent in as an input.
+We can now read the output file. The file contains the word and the frequency of the word in the file we sent in as an input.
 
 Code:
 
-*more Output.txt*
+```
+more Output.txt
+```
 
 Screen shot:
 
@@ -1104,49 +1054,21 @@ Screen shot:
 
 ### Exercise
 
-1.  Download the text file from the following link (instructor could
-    provide their own text file, the specified file in the link is used
-    just as an example):
-
-> https://www.w3.org/TR/PNG/iso\_8859-1.txt
-
+1.  Download the text file from the following link (instructor could provide their own text file, the specified file in the link is used just as an example): [https://www.w3.org/TR/PNG/iso_8859-1.txt](https://www.w3.org/TR/PNG/iso_8859-1.txt)
 2.  Copy the file in HDFS
-
 3.  Run wordcount program using MapReduce
-
 4.  Explain each phase of MapReduce and submit the file output to the instructor
 
 ## Websites of relevance
 
-1.  What is Big Data and why it matters. (n.d.). Retrieved July 1, 2018,
-    from
-    https://www.sas.com/en\_us/insights/big-data/what-is-big-data.html
-
-2.  MapReduce Tutorial. (n.d.). Retrieved July 1, 2018, from
-    https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
-
-3.  Sinha, S. (2018, July 17). Hadoop Ecosystem | Hadoop Tools for
-    Crunching Big Data | Edureka. Retrieved July 1, 2018, from
-    https://www.edureka.co/blog/hadoop-ecosystem
-
-4.  HDFS Architecture Guide. (n.d.). Retrieved July 1, 2018, from
-    https://hadoop.apache.org/docs/r1.2.1/hdfs\_design.html
-
-5.  Subramaniam, A. (2018, July 17). Apache Hadoop YARN | Introduction
-    to YARN Architecture | Edureka. Retrieved July 1, 2018, from
-    https://www.edureka.co/blog/hadoop-yarn-tutorial/
-
-6.  Big Data. (n.d.). Retrieved July 1, 2018, from
-    https://words.sdsc.edu/words-data-science/big-data
-
-7.  Apache Hadoop HDFS. (n.d.). Retrieved July 1, 2018, from
-    https://hortonworks.com/apache/hdfs/
-
-8.  Apache Hadoop YARN. (n.d.). Retrieved July 1, 2018, from
-    https://hortonworks.com/apache/YARN/
-
-9.  [<span class="underline">https://computing.llnl.gov/tutorials/parallel\_comp/</span>](https://computing.llnl.gov/tutorials/parallel_comp/)
-
-10. [<span class="underline">https://en.wikipedia.org/wiki/Beowulf\_cluster</span>](https://en.wikipedia.org/wiki/Beowulf_cluster)
-
-11. [<span class="underline">https://www.top500.org/</span>](https://www.top500.org/)
+1. What is Big Data and why it matters. (n.d.). Retrieved July 1, 2018, from https://www.sas.com/en_us/insights/big-data/what-is-big-data.html
+2. MapReduce Tutorial. (n.d.). Retrieved July 1, 2018, from https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
+3. Sinha, S. (2018, July 17). Hadoop Ecosystem | Hadoop Tools for Crunching Big Data | Edureka. Retrieved July 1, 2018, from https://www.edureka.co/blog/hadoop-ecosystem
+4. HDFS Architecture Guide. (n.d.). Retrieved July 1, 2018, from https://hadoop.apache.org/docs/r1.2.1/hdfs\_design.html
+5.  Subramaniam, A. (2018, July 17). Apache Hadoop YARN | Introduction to YARN Architecture | Edureka. Retrieved July 1, 2018, from https://www.edureka.co/blog/hadoop-yarn-tutorial/
+6.  Big Data. (n.d.). Retrieved July 1, 2018, from https://words.sdsc.edu/words-data-science/big-data
+7.  Apache Hadoop HDFS. (n.d.). Retrieved July 1, 2018, from https://hortonworks.com/apache/hdfs/
+8.  Apache Hadoop YARN. (n.d.). Retrieved July 1, 2018, from https://hortonworks.com/apache/YARN/
+9.  https://computing.llnl.gov/tutorials/parallel_comp/
+10. https://en.wikipedia.org/wiki/Beowulf_cluster
+11. https://www.top500.org/

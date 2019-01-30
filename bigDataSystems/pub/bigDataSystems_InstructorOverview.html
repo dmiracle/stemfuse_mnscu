@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Big Data - Big Data Systems</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+  <!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js" type="text/javascript"></script>
+  <script src="inc/metroScript.js" type="text/javascript"></script>
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+  -->
+
+  <style>
+
+    .warning {
+    visibility: hidden;
+  }
+  #leftSideBar {
+      background-color: #003C66;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: 100%;
+      min-height: 100%;
+      width: 200px;
+      float: left;
+      padding-top: 10px;
+      padding-right: 1%;
+      padding-left: 1%;
+      font-size: 1em;
+      line-height: 100%;
+      color: white;
+  }
+  
+  #leftSideBar a {
+      color: white;
+      text-decoration: none;
+  }
+  
+  #leftSideBar li {
+      margin:0 0 1em 0;
+  }
+  
+  </style>
+</head>
+
+<body>
+  <p style="text-align: center;"><a name="top"></a></p>
+  <div id="pageContainer">
+    <div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+    <div id="leftSideBar">
+      <img src="images/ITCoE_white200px.png">
+      <!---
+  <h2 style="color:white;">Sections</h2>
+-->
+      <hr style="color: white;">
+      <ul>
+        <li>
+          <h2 style="color: white;">Sections</h2>
+        </li>
+      </ul>
+      <hr style="color: white;">
+      <ul>
+        <!--- Place sidebar links here like this:
+    <li><a href="#learning-objectives">Learning Objectives</a></li>
+-->
+        <li><a href="#instructor-overview-&amp;-objective">Instructor overview &amp; objective</a></li>
+        <li><a href="#table-of-contents">Table of Contents</a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <!--- end sidebar -->
+      </ul>
+      <div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png"
+          width="32" type="image" height="32" /></div>
+      <hr style="color: white;">
+      <img src="images/mnstate_white200px.png">
+    </div>
+    <div id="mainContent">
+      <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning
+            block, Control + Z to Undo... Do not delete</strong></span></div>
+
+      <!--- Place body content here -->
+      <h1 id="module:-big-data-systems">Module: Big Data Systems</h1>
+      <p><strong>Competency: Big Data</strong></p>
+      <p>Authors: Jack Pope, Prabesh Shrestha</p>
+      <h2 id="instructor-overview-&amp;-objective">Instructor overview &amp; objective</h2>
+      <p>This course module is about distributed computing environments for “big data.” It looks at systems that can perform parallel computation or cluster computing. Topics include shared memory, map-reduce, clustering, concurrency, task parallel versus data parallel, database integration, multi-threading and networked file systems.</p>
+      <p>Given that this module is to be worth 1 credit, or 15 hours of coursework, the instructor should prepare three to five subtopic discussions. These should account for at least 5 hours of instructional material and might be in the form of lecture notes or lecture videos. The additional hours should be comprised of student labs or assignments.</p>
+      <p>Our examples use Apache Spark and Apache Hadoop. Spark makes for distributed in-memory computing and can write to local as well as networked file systems. A distributed file system called the Hadoop Distributed File System (HDFS) is typically installed with Apache Spark in the enterprise.</p>
+      <p>Spark essentially allows us to process large data sets faster by employing more than one machine. Spark also easily integrates with popular programming languages, databases and other tools for ensuring high availability.</p>
+      <p>The lessons in this module use the Python and SQL programming languages on distributed instances of Apache Spark and Apache Hadoop. Installation and configuration of virtual machines takes place on Oracle Virtual Box and Cloudera.</p>
+      <p>While our example system topology has 8GB of RAM and 32GB disk space per compute node, students can specify fewer resources for testing small data sets. Depending on the operating system for installing Spark, you may be fine with a single 4GB master node for testing and training. Even fewer local resources are required if the set up is in the cloud. Cloud providers who accommodate Spark and Hadoop include Cloudera, Databricks, AWS, Microsoft Azure, Google Cloud, Oracle Cloud and IBM Bluemix.</p>
+      <h2 id="table-of-contents">Table of Contents</h2>
+      <h3 id="1.-introduction">1. Introduction</h3>
+      <ul>
+      <li>Overview</li>
+      <li>Paradigms for Big Data Processing</li>
+      <li>The Map-Reduce Paradigm</li>
+      </ul>
+      <h3 id="2.-considerations-for-concurrency-and-parallelism">2. Considerations For Concurrency and Parallelism</h3>
+      <ul>
+      <li>Computational Scales</li>
+      <li>Characteristics of Big Data</li>
+      <li>The Origin of “Big Data”</li>
+      <li>Types of Data</li>
+      <li>Distributed File Systems (DFS)</li>
+      <li>Exercise</li>
+      </ul>
+      <h3 id="3.-apache-spark">3. Apache Spark</h3>
+      <ul>
+      <li>Overview</li>
+      <li>Installation and Configuration of Apache Spark</li>
+      <li>Testing the Installation of Apache Spark</li>
+      <li>Running a Spark Cluster</li>
+      <li>Submitting Jobs to the Spark Cluster</li>
+      <li>Exercise</li>
+      </ul>
+      <h3 id="4.-apache-hadoop">4. Apache Hadoop</h3>
+      <ul>
+      <li>Overview</li>
+      <li>Application of MapReduce in Hadoop</li>
+      <li>Installation and Configuration of Hadoop on the Cloudera Virtual Machine</li>
+      <li>Testing the Installation of Apache Hadoop</li>
+      <li>Exercise</li>
+      </ul>
+
+      <!--- end body content -->
+
+      <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning
+            block, Control + Z to Undo... Do not delete</strong></span></div>
+      <div id="footer">Where life and learning meet.</div>
+    </div>
+  </div>
+</body>
+
+</html>
