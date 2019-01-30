@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Big Data - Big Data Systems</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+  <!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js" type="text/javascript"></script>
+  <script src="inc/metroScript.js" type="text/javascript"></script>
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+  -->
+
+  <style>
+
+    .warning {
+    visibility: hidden;
+  }
+  #leftSideBar {
+      background-color: #003C66;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: 100%;
+      min-height: 100%;
+      width: 200px;
+      float: left;
+      padding-top: 10px;
+      padding-right: 1%;
+      padding-left: 1%;
+      font-size: 1em;
+      line-height: 100%;
+      color: white;
+  }
+  
+  #leftSideBar a {
+      color: white;
+      text-decoration: none;
+  }
+  
+  #leftSideBar li {
+      margin:0 0 1em 0;
+  }
+  
+  </style>
+</head>
+
+<body>
+  <p style="text-align: center;"><a name="top"></a></p>
+  <div id="pageContainer">
+    <div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+    <div id="leftSideBar">
+      <img src="images/ITCoE_white200px.png">
+      <!---
+  <h2 style="color:white;">Sections</h2>
+-->
+      <hr style="color: white;">
+      <ul>
+        <li>
+          <h2 style="color: white;">Sections</h2>
+        </li>
+      </ul>
+      <hr style="color: white;">
+      <ul>
+        <!--- Place sidebar links here like this:
+    <li><a href="#learning-objectives">Learning Objectives</a></li>
+-->
+        <li><a href="#instructor-overview-and-objective">Instructor Overview and Objective</a></li>
+        <li><a href="#table-of-contents">Table of Contents</a></li>
+        <li><a href="#1.-introduction-1">1. Introduction</a></li>
+        <li><a href="#2.-considerations-for-concurrency-and-parallelism-1">2. Considerations for Concurrency and Parallelism</a></li>
+        <li><a href="#3.-apache-spark-1">3. Apache Spark</a></li>
+        <li><a href="#4.-apache-hadoop-1">4. Apache Hadoop</a></li>
+        <li><a href="#websites-of-relevance">References</a></li>
+        <!--- end sidebar -->
+      </ul>
+      <div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png"
+          width="32" type="image" height="32" /></div>
+      <hr style="color: white;">
+      <img src="images/mnstate_white200px.png">
+    </div>
+    <div id="mainContent">
+      <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning
+            block, Control + Z to Undo... Do not delete</strong></span></div>
+
+      <!--- Place body content here -->
+      <div id="moduleContent">
+      <h1 id="module:-big-data-systems">Module: Big Data Systems</h1>
+      <p><strong>Competency: Big Data</strong></p>
+      <p>Authors: Jack Pope, Prabesh Shrestha</p>
+      <div class="chapter">
+        <h2 id="instructor-overview-and-objective">Instructor Overview and Objective</h2>
+        <p>This course module is about distributed computing environments for “big data.” It looks at systems that can perform parallel computation or cluster computing. Topics include shared memory, map-reduce, clustering, concurrency, task parallel versus data parallel, database integration, multi-threading and networked file systems.</p>
+        <p>Given that this module is to be worth 1 credit, or 15 hours of coursework, the instructor should prepare three to five subtopic discussions. These should account for at least 5 hours of instructional material and might be in the form of lecture notes or lecture videos. The additional hours should be comprised of student labs or assignments.</p>
+        <p>Our examples use Apache Spark and Apache Hadoop. Spark makes for distributed in-memory computing and can write to local as well as networked file systems. A distributed file system called the Hadoop Distributed File System (HDFS) is typically installed with Apache Spark in the enterprise.</p>
+        <p>Spark essentially allows us to process large data sets faster by employing more than one machine. Spark also easily integrates with popular programming languages, databases and other tools for ensuring high availability.</p>
+        <p>The lessons in this module use the Python and SQL programming languages on distributed instances of Apache Spark and Apache Hadoop. Installation and configuration of virtual machines takes place on Oracle Virtual Box and Cloudera.</p>
+        <p>While our example system topology has 8GB of RAM and 32GB disk space per compute node, students can specify fewer resources for testing small data sets. Depending on the operating system for installing Spark, you may be fine with a single 4GB master node for testing and training. Even fewer local resources are required if the set up is in the cloud. Cloud providers who accommodate Spark and Hadoop include Cloudera, Databricks, AWS, Microsoft Azure, Google Cloud, Oracle Cloud and IBM Bluemix.</p>
+      </div>
+      <div class="chapter">
+        <h2 id="table-of-contents">Table of Contents</h2>
+      <h3 id="1.-introduction">1. Introduction</h3>
+      <ul>
+      <li>Overview</li>
+      <li>Paradigms for Big Data Processing</li>
+      <li>The Map-Reduce Paradigm</li>
+      </ul>
+      <h3 id="2.-considerations-for-concurrency-and-parallelism">2. Considerations For Concurrency and Parallelism</h3>
+      <ul>
+      <li>Computational Scales</li>
+      <li>Characteristics of Big Data</li>
+      <li>The Origin of “Big Data”</li>
+      <li>Types of Data</li>
+      <li>Distributed File Systems (DFS)</li>
+      <li>Exercise</li>
+      </ul>
+      <h3 id="3.-apache-spark">3. Apache Spark</h3>
+      <ul>
+      <li>Overview</li>
+      <li>Installation and Configuration of Apache Spark</li>
+      <li>Testing the Installation of Apache Spark</li>
+      <li>Running a Spark Cluster</li>
+      <li>Submitting Jobs to the Spark Cluster</li>
+      <li>Exercise</li>
+      </ul>
+      <h3 id="4.-apache-hadoop">4. Apache Hadoop</h3>
+      <ul>
+      <li>Overview</li>
+      <li>Application of MapReduce in Hadoop</li>
+      <li>Installation and Configuration of Hadoop on the Cloudera Virtual Machine</li>
+      <li>Testing the Installation of Apache Hadoop</li>
+      <li>Exercise</li>
+      </ul>
+      </div>
+      <div class="chapter">
+        <h2 id="1.-introduction-1">1. Introduction</h2>
+      <h3 id="overview">Overview</h3>
+      <p>The problem, or What is Big Data?</p>
+      <p>One definition of Big Data, according to Jack Pope: <em>when the value of your data needs exceeds the value of your local processing resources.</em></p>
+      <p>By this definition, Big Data processing cannot take place on a single machine. Instead, many machines, a “cluster,” must be used in tandem. These machines can be local or virtual machines in the cloud.</p>
+      <p>For our big data analytics in this course module we will emphasize Apache Spark. Spark makes for distributed in-memory computing and can write to local as well as networked file systems. A distributed file system called the Hadoop Distributed File System (HDFS) is typically installed with Apache Spark in the enterprise.</p>
+      <p>Spark essentially allows us to process large data sets faster by employing more than one machine. There are other systems that do as much. However, Spark is also somewhat easily integrates with popular programming languages, databases and other tools for ensuring high availability.</p>
+      <p>A few points of information need to be made to distinguish Big Data Systems from Big Data Analytics. Big Data Systems are platforms. Before installing and configuring a Big Data System, the analytical problem should be understood. This is because a lot of effort and time can go into building a particular Big Data System that is not suitable for the problem, and sometimes we just don't need a sledgehammer to drive a tack.</p>
+      <h3 id="the-map-reduce-paradigm">The Map-Reduce Paradigm</h3>
+      <p>When faced with huge data sets we are motivated to avoid serial in design and execution, as it can tax patience. Instead, we try to break a workload into parts that can be processed independently using multiple machines. Such parallelization may or may not be feasible given the problem at hand, and we have to think about what problems can be solved in asynchronous task parallel and data parallel fashion.</p>
+      <p>Processing of partitioned data on cluster nodes takes place independently and concurrently. Results can be consolidated on a master node according to the keys of key-value pairings in the data.</p>
+      <p>While the map reduce concept goes back a to the time when Lisp was at is zenith, Google managed to win a patent for its version, spelled MapReduce (USPTO patent #7,650,331).</p>
+      <p>The map-reduce paradigm supports parallel computing. The map function as applied to each value of a data set is readily performed in parallel, as the value and the function are independent. However, in the context of distributed processing, a reduce operation will depend on a completed map operation.</p>
+      <h4 id="map-and-reduce-definitions:">Map and Reduce Definitions:</h4>
+      <p>Fundamentally, the map and reduce functions each take as parameters a data set and a function, which is then applied to each element of data. The map function then returns a transformed data set. The reduce function returns an aggregate of the the data set.</p>
+      <ul>
+      <li><p>map definition 2: index and partition input data into a subset for each compute node. In tree structured clusters, worker nodes are masters of subordinate nodes.</p></li>
+      <li><p>reduce definition 2: the master node consolidates compute node output into one data set. Reduction may entail sorting, averaging, filtering, etc.</p></li>
+      </ul>
+      <p>In Apache Spark, map and reduce work on local data, and the map-reduce paradigm is injected with “shuffle” and “sort” operations. We have the following definitions:</p>
+      <ul>
+      <li><p>map definition 3: Worker nodes apply the map function to their respective local data, maintaining results in temporary storage or memory. Map operations occur on each partition element and include transforming or filtering.</p></li>
+      <li><p>shuffle: The transfer of values from the mapper to the reducer. Worker nodes are assigned a partition of data associated with a sorted range of keys. The keys are generated by a dedicated key-value map function.</p></li>
+      <li><p>sort: a dependency for shuffle, with ordering by keys, then value.</p></li>
+      <li><p>reduce definition 3: Worker nodes aggregate (sum, count) all partition values by key.</p></li>
+      </ul>
+      <p>The pseudo code for a map:</p>
+      <p>map(key, value) → list(key, value')</p>
+      <p>The pseudo code for a map:</p>
+      <p>reduce(key, list(value')) → (key, value'')</p>
+      <p>Apache Hadoop's implementation of Google's MapReduce entails additional operations such as split and combine. The following illustration provides some clarity (Source: <a href="https://www.mssqltips.com/sqlservertip/3222/big-data-basics--part-5--introduction-to-mapreduce/">https://www.mssqltips.com/sqlservertip/3222/big-data-basics--part-5--introduction-to-mapreduce/</a> )</p>
+      <p><img src="./media/media/image1.png" /></p>
+      <p>In the past decade, the general map-reduce concept has been convoluted by various implementations, including complex ones like that of MapReduce for Hadoop. Apache Spark does not require Hadoop Google's MapReduce. Spark employs the map-reduce paradigm in partitioning RDDs and applying transformation to data in dedicated areas of distributed memory.</p>
+      </div>
+      <div class="chapter">
+        <h2 id="2.-considerations-for-concurrency-and-parallelism-1">2. Considerations for Concurrency and Parallelism</h2>
+      <p>Parallel operations can run at different levels of granularity:</p>
+      <ul>
+      <li><p>bit-level – processing multiple bits of data in parallel</p></li>
+      <li><p>instruction-level – executing different instructions from the same instruction stream in parallel</p></li>
+      <li><p>task-level – executing separate instruction streams in parallel</p></li>
+      </ul>
+      <p>Different forms of parallel hardware:</p>
+      <ul>
+      <li><p>multi-core processors</p></li>
+      <li><p>symmetric multiprocessors (multiple CPUs on board)</p></li>
+      <li><p>general purpose graphics processing unit</p></li>
+      <li><p>field-programmable gate arrays</p></li>
+      <li><p>computer clusters</p></li>
+      </ul>
+      <p>Embarrassingly parallel: very little or no effort is required to separate problem into parallel tasks.</p>
+      <p>Task parallel versus data parallel . . . simultaneous execution on multiple cores of:</p>
+      <ul>
+      <li><p>Task parallel: different functions, same data.</p></li>
+      <li><p>Data parallel: same function, different data (a partitioned data set; the parallel for-loop is data parallel).</p></li>
+      </ul>
+      <p>Some tasks cannot be parallelized, as when the work on each core depends on the results of another core.</p>
+      <p>Data parallel scheduler: efficiently balance the workload across cores. Only those workloads that are likely to be time consuming should be parallelized. Certain thresholds should be considered.</p>
+      <p>Distributed systems:</p>
+      <ul>
+      <li><p>Mutli-core CPUs</p></li>
+      <li><p>Message passing Interface (MPI)</p></li>
+      <li><p>Parallel Virtual Machine (PMI)</p></li>
+      <li><p>HTCondor</p></li>
+      <li><p>Mosix and OpenMosix</p></li>
+      <li><p>Boinc</p></li>
+      </ul>
+      <p>A Big Data System wish list:</p>
+      <p>Our platform should run as a service for big compute jobs, either locally, in the cloud or as a hybrid. Ideally, the system should facilitate selecting on-line data targets, uploading files, selecting various statistical options, and then running a program.</p>
+      <p>The system should scale from local servers to remote private and public cloud nodes. By allowing private clouds to join in parallel computing efforts, the system facilitates peer-to-peer like clouds.</p>
+      <p>There should be a status monitor program that communicates node status in terms of availability, job progress, and errors.</p>
+      <p>The system should alert the user to problems such as corrupt files and failed data error checks. Otherwise a node might finish a job with erroneous output, or it may never finish if bad data or mistaken code does not ever satisfy some while loop, etc. Without timely notification of such a problem, the cost of leased resources could escalate without any benefit in return.</p>
+      <p>Regardless of the promoted fault tolerances of system, such as Apache Spark, we cannot take this for granted.</p>
+      <p>Our examples use Apache Spark and Apache Hadoop. Spark makes for distributed in-memory computing and can write to local as well as networked file systems. A distributed file system called the Hadoop Distributed File System (HDFS) is typically installed with Apache Spark in the enterprise.</p>
+      <p>Spark essentially allows us to process large data sets faster by employing more than one machine. Spark also easily integrates with popular programming languages, databases and other tools for ensuring high availability.</p>
+      <h3 id="computational-scales">Computational Scales</h3>
+      <h4 id="single-computing-node:">Single Computing Node:</h4>
+      <p>In this type of computing, a single processor is used to compute the data stored in internal or external hard drives. The storage and processing capability of the single node may not be sufficient for big data analysis.</p>
+      <h4 id="parallel-computing:">Parallel Computing:</h4>
+      <p>Parallel computing refers to a very large number of single computing nodes; these nodes usually have specialized capabilities and are connected with each other via a network. Specialized computers are comparatively expensive.</p>
+      <h4 id="commodity-clustering:">Commodity Clustering:</h4>
+      <p>Commodity clusters are affordable parallel computers with comparatively lower number of computer nodes. These computers have generic computing capabilities and are not as powerful as traditional parallel computers hence they are comparatively cheaper and is commonly used for distributed computing.</p>
+      <p>In commodity clustering, computers/nodes are arranged in a rack, and connected to each other via a fast network. Computing in one or more of such clusters over a network is called Distributed Computing. Such architectures enable data parallelism.</p>
+      <h3 id="characteristics-of-big-data">Characteristics of Big Data</h3>
+      <p>The characterization of big data using the 3 V’s was introduced by Doug Laney of Gartner. According to Laney [6]:</p>
+      <ul>
+      <li><p>Volume: This refers to the vast amounts of data that is generated continuously through machines, people or organization.</p></li>
+      <li><p>Velocity: This refers to the speed at which data is being generated and the pace at which data moves from one point to the next.</p></li>
+      <li><p>Variety: Data generated by different source could be structured, numeric data in traditional databases to unstructured text documents, email, video, audio, stock ticker data, geospatial and financial transactions.</p></li>
+      </ul>
+      <p>In addition to these 3, new V’s has been added to the definition:</p>
+      <ul>
+      <li><p>Veracity: Refers to bias, noise, and uncertainty in the data.</p></li>
+      <li><p>Variability: In addition to the increasing velocities and varieties of data, data flows can be highly inconsistent with periodic peaks. Daily, seasonal and event-triggered peak data loads can be challenging to manage, specially the unstructured data [1].</p></li>
+      </ul>
+      <p>The above V’s are the dimensions that characterize big data, and embody its challenges: huge amounts of data, in different formats and varying quality that must be processed quickly.</p>
+      <p>Businesses processes big data to understand hidden patterns, trends or anomalies for any problem. This will help in understanding the problems within the organization and help the business make more informed and data driven decisions. This leads us to next V – value.</p>
+      <p>Value: Processing big data must bring about value from the insights gained [6].</p>
+      <h3 id="the-origin-of-big-data">The Origin of “Big Data”</h3>
+      <h4 id="infrastructure/smart-devices/machines:">Infrastructure/Smart devices/Machines:</h4>
+      <p>The flight status app gets its data from the airline sensors, ADS-B and other sensors in and around airport. These help track flights.</p>
+      <p>Health sensor data like Fitbit are another example of big data. They can track various activities of any user and provide data continuously forming large chunk of data for any data analysis.</p>
+      <p>In addition to that, different smart devices and sensors can interact with each other, for example, the traffic light changes based on its interaction with the sensors that detects the traffic on the road. This function generates data and the process is termed as Internet of Things (IoT).</p>
+      <p>These data form the largest source of big data.</p>
+      <h4 id="people:">People:</h4>
+      <p>Another source of big data is people. The data are generated using social media. The other source of data generated by people are online photo sharing, video sharing, blogs, and comments on different websites or documents.</p>
+      <p>Most of the data from people are text heavy and unstructured hence cannot be conformed in a well-defined data model.</p>
+      <h4 id="organization:">Organization:</h4>
+      <p>Every business have a specific process that they follow to complete their job functions. These processes generates data and these data could be retail transactions, credit card transactions, medical records, ecommerce or stocks. Traditionally, these data are structured and can be stored in a table in relational database management system.</p>
+      <h3 id="types-of-data">Types of Data</h3>
+      <h4 id="structured:">Structured:</h4>
+      <p>This refers to traditional data that are well organized and stored in a relational model or table. Since this type of data is organized, searching and accessing information is very easy.</p>
+      <h4 id="semi-structured:">Semi structured:</h4>
+      <p>This refers to data that do not conform to the structure as defined by structured data but contains markers to separate semantic elements and enforce hierarchies of records and fields within the data. Web data such JSON (JavaScript Object Notation) files, csv files, tab-delimited text files, XML are examples of Semi-structured data</p>
+      <h4 id="unstructured:">Unstructured:</h4>
+      <p>This refers to data that cannot conform to well-defined data model. These include text, images, audio or video. They cannot be stored in relational model but are the major types of data collected and stored for data analysis</p>
+      <h3 id="distributed-file-systems-(dfs)">Distributed file systems (DFS)</h3>
+      <p>Data are generated by different sources and if a business wants to store the data, they need to store it as a file. When a file is created, it is stored in a memory in specific order or sequence determined by the operating system of the computer and is called file system.</p>
+      <p>If the amount of data is small, the data can be stored in personal computer and managed individually, however, if the volume of data is high, multiple computers might be required to store the data. If we have large volume of data that do not fit in specific hard drive and are distributed across multiple computer and managed for easy data access, it is called Distributed File System (DFS). DFS contains group of computer nodes within a local area network or wide area network.</p>
+      <p>When a large volume of data needs to be stored using DFS, parts of data is replicated across the nodes of the DFS, between the nodes and computers. When data is required for analysis, computation is moved to the data and not the other way round.</p>
+      <p>Since the data is replicated within each cluster, failure or one node or rack doesn’t fail the data accessibility hence having data using DFS increases fault tolerance. Also, if the data is popular, having replicated data accessible in parallel, for multiple users, increases concurrency.</p>
+      <p>DFS also helps with scalability as nodes could be added without affecting other terminals or processes.</p>
+      <h4 id="example-to-understand-dfs:">Example to understand DFS:</h4>
+      <p>Let us consider that we have 10 machines with 1 TB as their memory/storage/hard drives. If we install Hadoop on these machines, we can treat the cluster as one computer with 10 TB data of hard drive capacity in one machine.</p>
+      <p>Since the data is distributed in multiple machines, we can perform distributed and parallel computation. If it takes 30 minutes to process a 1 TB data, simple mathematics state that it will take 30 X 10 or 300 minutes to process a 10 TB of data. However, with 10 different computers working parallel, we can complete the task in 30 minutes instead of 300 minutes.</p>
+      <p>In addition to that, if 10 TB is not enough for storage, we can increase or add another computer with higher hard disk without affecting other terminals. This helps with scalability.</p>
+      <h3 id="exercise">Exercise</h3>
+      <p>Using the link: <a href="https://flightaware.com/about/faq#intl">https://flightaware.com/about/faq#intl</a> and <a href="https://www.faa.gov/air_traffic/by_the_numbers/">https://www.faa.gov/air_traffic/by_the_numbers/</a> , have student gather information on how flight status app works, and complete the following task:</p>
+      <ul>
+      <li><p>Find the different sources and types of data used by the app</p></li>
+      <li><p>Is the data obtained by flight app – a big data? If yes, explain using the Vs</p></li>
+      <li><p>How does parallelism and concurrency help the users’ access flight status?</p></li>
+      </ul>
+      </div>
+      <div class="chapter">
+        <h2 id="3.-apache-spark-1">3. Apache Spark</h2>
+      <h3 id="overview-1">Overview</h3>
+      <p>To analyze “Big Data” one system we use is Apache Spark.</p>
+      <p>Spark essentially allows us to process large data sets faster by employing more than one machine. Spark also easily integrates with popular programming languages, databases and other tools for ensuring high availability.</p>
+      <p>On Spark, we are using PySpark (Python) for programming applications for a Spark cluster. PySpark is included in the installation of Apache Spark 2.3.1 and it works with GraphX, MlLib and Spark SQL libraries that come with Apache Spark. You must separately install Python (version 2). PySpark is part of the Spark Core library in Apache Spark.</p>
+      <p>Spark libraries include:</p>
+      <ul>
+      <li><p>Spark Core – provides task distributions, scheduling, basic I/O, and an API for Java, Python, Scala and R.</p></li>
+      <li><p>Spark SQL – relies on JDBC and treats tables as RDDs so that queries are Spark operations.</p></li>
+      <li><p>MLlib (deprecated to ML) – machine learning algorithms.</p></li>
+      <li><p>GraphX – graph algorithms.</p></li>
+      <li><p>Spark Streaming – real-time stream data processing.</p></li>
+      </ul>
+      <h4 id="installation-and-configuration-of-a-3-node-cluster-(using-virtualbox)">Installation and configuration of a 3 node cluster (using VirtualBox)</h4>
+      <p>If you have VirtualBox, you can set up a cluster using a preferred OS. The nodes for our example will use Ubuntu Linux. These can be cloned for larger clusters locally or migrated to the cloud for hybrid local-cloud cluster.</p>
+      <p>Dependencies:</p>
+      <ul>
+      <li>Software: Python, Java, Scala, Spark, SSH (passwordless)</li>
+      <li>Network: Routable nodes; same subnet; resolvable hostnames</li>
+      </ul>
+      <p>Spark configuration:</p>
+      <ul>
+      <li>spark-defaults.conf</li>
+      <li>spark-env.sh</li>
+      <li>High availability (HA – multi-nodes): Can optionally use Apache Zookeper</li>
+      </ul>
+      <p>Running:</p>
+      <ul>
+      <li>start-master.sh</li>
+      <li>start-slave.sh</li>
+      </ul>
+      <p>Monitoring: Web UI</p>
+      <p>Example system topology:</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>host name</th>
+      <th>memory (gb)</th>
+      <th>disk space (gb)</th>
+      <th>ipAddress</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>SparkMaster</td>
+      <td>8</td>
+      <td>32</td>
+      <td>192.168.1.101</td>
+      </tr>
+      <tr class="even">
+      <td>SparkWorker1</td>
+      <td></td>
+      <td></td>
+      <td>192.168.1.102</td>
+      </tr>
+      <tr class="odd">
+      <td>SparkWorker2</td>
+      <td></td>
+      <td></td>
+      <td>192.168.1.103</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>For disks, use the full disk space and LVM (we can resize later as needed)</p>
+      <p>On VirtualBox, the first host to create we'll call SparkMaster. From VirtualBox, we are using a Ubuntu 18 ISO to fulfill the system; with “bridged” networking mode.</p>
+      <p>SparkMaster components to install:</p>
+      <ul>
+      <li>Java (Open JDK 8; later versions currently conflict with sbt below, and earlier versions do not support Java lambdas for functional programming.)</li>
+      <li>Git</li>
+      <li>Scala (includes scalac compiler - Need version 2.12 to avoid compile errors.. see install below)</li>
+      <li>sbt – Scala Build Tool</li>
+      <li>Python 2</li>
+      <li>SSH server</li>
+      </ul>
+      <p>Latest stable version of Spark from <a href="http://spark.apache.org/downloads.html">http://spark.apache.org/downloads.html</a></p>
+      <p>(Build here from source, without Hadoop)</p>
+      <p>Install procedure (all on SparkMaster):</p>
+      <pre><code>sudo echo &quot;deb https://dl.bintray.com/sbt/debian /&quot; | sudo tee -a /etc/apt/sources.list.d/sbt.list
+      sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 –recv \
+      
+            2EE0EA64E40A89B84B2DF73499E82A75642AC823
+      sudo apt-get update
+      sudo apt-get install openjdk-8-jdk python openssh-server
+      </code></pre>
+      <p>Scala and sbt installs:</p>
+      <pre><code>sudo apt remove scala-library scala # in case old version is installed
+      wget www.scala-lang.org/files/archive/scala-2.12.6.deb
+      sudo dpkg -i scala-2.12.6.deb
+      sudo apt-get update
+      sudo apt-get install scala
+      sudo apt-get install sbt
+      </code></pre>
+      <p>Spark installs:</p>
+      <pre><code>wget https://archive.apache.org/dist/spark/spark-2.3.1/spark-2.3.1.tgz
+      tar xvf spark-2.3.1.tgz
+      
+      sudo mv spark-version-bin-hadoop2.6 /opt/spark
+      cd /opt/spark
+      git init
+      sudo sbt assembly
+      ./build/sbt assembly
+      </code></pre>
+      <p>This build seems to take some patience. Go have some coffee.</p>
+      <p>Now make an environment variable for a Spark user:</p>
+      <pre><code>echo -e &quot;\nexport SPARK_HOME=/opt/spark&quot; &gt;&gt; ~/.bashrc
+      echo -e &quot;\nexport PATH=${SPARK_HOME}/bin:${PATH}&quot; &gt;&gt; ~/.bashrc
+      source ~/.bashrc
+      source ~/.profile
+      </code></pre>
+      <h3 id="testing-the-installation--running-spark">Testing the installation – running Spark</h3>
+      <pre><code>sudo ./sbin/start-master.sh -h localhost -p 7077 --webui-port 8080
+      </code></pre>
+      <p>If when attempting the above command, there is this error message:</p>
+      <pre><code>Failed to find Spark jars directory (/Users/bh/downloads/spark/assembly/target/scala-2.10/jars). You need to build Spark with the target “package” before running this program.
+      </code></pre>
+      <p>then, within /opt/spark:</p>
+      <pre><code>./build/sbt assembly
+      build/sbt package
+      </code></pre>
+      <p>If you get “permission denied” errors, then you either have to run the the commands as root user, or using sudo, change the ownership of all file in /opt/spark to your spark user. The latter is probably best, since a user with higher privilege can still use the files.</p>
+      <pre><code>sudo chown -R SparkUser:SparkUser $SPARK_HOME
+      </code></pre>
+      <p>The web interface should now be visible at: http://IPaddress_SparkMaster:8080.</p>
+      <p>Test the Spark and PySpark terminals:</p>
+      <pre><code>pyspark
+          &gt;&gt;&gt; quit()
+      
+      spark-shell
+          scala&gt; :quit
+      </code></pre>
+      <p>The web interface is visible at the default port 8080: http://IPaddress_SparkMaster:8080/.</p>
+      <p>At this point we can run programs on the single master node with Scala and Python. Let us run a test now.</p>
+      <pre><code>$SPARK_HOME/bin/run-example SparkPi 10
+      $SPARK_HOME/bin/spark-submit examples/src/main/python/pi.py 10
+      </code></pre>
+      <p>More tests at <a href="https://spark.apache.org/docs/latest/">https://spark.apache.org/docs/latest/</a></p>
+      <h4 id="create-cluster-(workers):">Create cluster (workers):</h4>
+      <p>Clone SparkMaster as SparkWorker</p>
+      <ul>
+      <li><p>change hostname from SparkMaster to SparkWorker1, SparkWorker2, . . .</p></li>
+      <li><p>change static ip address</p></li>
+      <li><p>public SSH key (of master put on workers)</p></li>
+      <li><p>Edit /etc/hosts on each system</p></li>
+      </ul>
+      <p>Creating a static IP on Ubuntu 18 requires we edit the file /etc/netplan/01-netcfg.yaml to include the following information (including relative indentation):</p>
+      <pre><code>network:
+        version: 2
+        renderer: networkd
+        ethernets:
+          enp0s3:
+            dhcp4: no
+            addresses: [192.168.1.101/24]
+            gateway4: 192.168.1.1
+            nameservers:
+              addresses: [192.168.1.1]
+      </code></pre>
+      <p>For each node to communicate by host name, rather than by ip address, add to your /etc/hosts file information for resolving the respective IP addresses (your subnet may of course differ):</p>
+      <pre><code>127.0.0.1 localhost
+      192.168.1.101 SparkMaster
+      192.168.1.102 SparkWorker1
+      192.168.1.103 SparkWorker2
+      </code></pre>
+      <h4 id="generate-the-ssh-key:">Generate the SSH key:</h4>
+      <pre><code>cd ~/.ssh
+      ssh-keygen  # for each question, just enter, enter, enter
+      cp id_rsa.pub authorized_keys
+      </code></pre>
+      <p>This last step at least allows the workers to have this key once they are cloned from SparkMaster.</p>
+      <p>As root user, edit /etc/ssh/ssh_config to uncomment the following:</p>
+      <pre><code>StrictHostKeyChecking no
+      </code></pre>
+      <p>This prevents yes/no question when connecting.</p>
+      <h4 id="preparation-for-file-io:">Preparation for File IO:</h4>
+      <p>When it comes to using files on multiple nodes you have to ensure the data is distributed. Your options include implementing a distributed file systems on-the-fly by scripting SSHFS, using a networked file system or Hadoop (HDFS). Given a small static cluster, it may be sensible to script a quick file transfer/cleanup that you call from your PySpark program.</p>
+      <h3 id="integrating-an-sql-oriented-database">Integrating an SQL oriented database</h3>
+      <p>Spark SQL can connect to a database via the OBDC library. Keep in mind that if all compute nodes connect to a single database server, that server may become a bottleneck. Alternatively, you can use serverless SQLite (all nodes will need their own installation of SQLite).</p>
+      <p>More: <a href="http://spark.apache.org/docs/latest/sql-programming-guide.html#jdbc-to-other-databases">http://spark.apache.org/docs/latest/sql-programming-guide.html#jdbc-to-other-databases</a></p>
+      <p>For an SQLite install, for get SQLite:</p>
+      <pre><code>wget https://bitbucket.org/xerial/sqlite-jdbc/downloads/sqlite-jdbc-3.8.11.2.jar
+      </code></pre>
+      <p>Move the jar to the appropriate directory:</p>
+      <pre><code>/usr/share/java/sqlite-jdbc-3.23.1.jar
+      </code></pre>
+      <p>Get some test data:</p>
+      <pre><code>wget
+      https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sqlite
+      </code></pre>
+      <p>Start PySpark as:</p>
+      <pre><code>pyspark --driver-class-path .:/usr/share/java/sqlite-jdbc-3.23.1.jar
+      </code></pre>
+      <p>In PySpark session, enter:</p>
+      <pre><code>df = sqlContext.read.format(&#39;jdbc&#39;). \
+          options (url=&#39;jdbc:sqlite:/home/.../data/Chinook_Sqlite.sq
+          dbtable=&#39;employee&#39;,driver=&#39;org.sqlite.JDBC&#39;).load()
+      </code></pre>
+      <p>Test:</p>
+      <pre><code>df.printSchema()
+      </code></pre>
+      <p>Class paths can also be added to $SPARK_HOME/conf/spark-defaults.conf as:</p>
+      <pre><code>spark.driver.extraClassPath /path/to/my.jar
+      </code></pre>
+      <h3 id="cloning-sparkworker-from-sparkmaster">Cloning SparkWorker from SparkMaster</h3>
+      <p>Shutdown SparkMaster to clone it.</p>
+      <pre><code>$SPARK_HOME/sbin/stop-master.sh
+      sudo shutdown now
+      </code></pre>
+      <p>In VirtualBox, right-click on SparkMaster and select “Linked Clone.” Then specify worker node names SparkWorker1, SparkWorker2, . . ., SparkWorkerN. If you soon plan to migrate the VMs to remote hardware, you can alternatively select “Clone” instead of Linked Clone. Otherwise, go with linked clones now and convert them to full clones later.</p>
+      <h4 id="virtual-clone-definition-(according-to-vmware):">Virtual clone definition (according to VMWare):</h4>
+      <p><strong>Full-clone</strong>: A full clone is an independent copy of a virtual machine that shares nothing with the parent virtual machine after the cloning operation. Ongoing operation of a full clone is entirely separate from the parent virtual machine</p>
+      <p><strong>Linked-clone</strong>: A linked clone is a copy of a virtual machine that shares virtual disks with the parent virtual machine in an ongoing manner. This conserves disk space, and allows multiple virtual machines to use the same software installation</p>
+      <p>For each clone, reconfigure as follows:</p>
+      <ul>
+      <li><p>edit /etc/hostname and replace SparkMaster with SparkWorker1</p></li>
+      <li><p>edit /etc/netplan/01-netcfg.yaml so that the static ip address of SparkWorker is used. So, for SparkWorker1 it is 192.168.1.102</p></li>
+      </ul>
+      <h4 id="define-a-cluster-group-in-virtualbox-(optional):">Define a cluster group in VirtualBox (optional):</h4>
+      <p>VirtualBox allows us to define groups, as in cluster group. To do so, right-click on a machine, click add-group, then rename the group. Then using the mouse, drag the other virtual machines into the group. VMs can also be part of more than one group. (All this can all be done on the command-line as well.)</p>
+      <p>Defining a cluster group in VirtualBox allows for powering the entire cluster from one click. You can start/stop grouped VMs in tandem, from any state (including headless mode: hold the shift-key, click the group, and click start).</p>
+      <h3 id="testing-the-local-installation-of-spark">Testing the local installation of Spark</h3>
+      <p><a href="https://spark.apache.org/docs/latest/spark-standalone.html">https://spark.apache.org/docs/latest/spark-standalone.html</a></p>
+      <p>Start up the VirtualBox SparkCluster group in headless mode, then log into the master and enter the command:</p>
+      <pre><code>$SPARK_HOME/sbin/start-master.sh -h 127.0.0.1 -p 7077 --webui-port 8080
+      </code></pre>
+      <p>This will start a master node with local ip 127.0.0.1 and port 7077. The web interface is visible from other machines via <a href="http://IPaddress_SparkMaster:8080/">http://IPaddress_SparkMaster:8080</a></p>
+      <p>On each worker enter:</p>
+      <pre><code>$SPARK_HOME/sbin/start-slave.sh spark://IPaddress_SparkMaster:7077
+      </code></pre>
+      <h3 id="running-a-spark-cluster">Running a Spark cluster</h3>
+      <p>The above run commands contrast with the automatic launch of workers from the master, provided they are listed in $SPARK_HOME/conf/slaves and the master's public ssh key resides on each worker.</p>
+      <p>Make the following edits in $SPARK_HOME/conf</p>
+      <pre><code>cp spark-defaults.conf.template spark-defaults.conf
+      echo -e &quot;spark.master \t spark://SparkMaster:7077&quot; &gt;&gt; spark-defaults.conf
+      cp spark-env.sh.template spark-env.sh
+      echo SPARK_MASTER_IP=SparkMaster &gt;&gt; spark-env.sh
+      </code></pre>
+      <p>Edit $SPARK_HOME/conf/slaves</p>
+      <pre><code>cp slaves.template slaves
+      echo SparkWorker1 &gt;&gt; slaves
+      echo SparkWorker2 &gt;&gt; slaves
+      </code></pre>
+      <p>On SparkMaster, the whole cluster can be expediently launched as:</p>
+      <pre><code>$SPARK_HOME/sbin/start-all.sh
+      </code></pre>
+      <p>The above command should be reaching out to the worker node to run the following commands:</p>
+      <pre><code>$SPARK_HOME/sbin/start-master.sh
+      $SPARK_HOME/sbin/start-slave.sh spark://SparkMaster:7077
+      </code></pre>
+      <p>Check the SparkMaster web UI at <a href="http://SparkMaster:8080">http://SparkMaster:8080</a></p>
+      <p>Check the SparkWorker web UI at <a href="http://SparkWorker:8081">http://SparkWorker:8081</a></p>
+      <h3 id="submitting-jobs-to-the-spark-cluster">Submitting jobs to the Spark cluster</h3>
+      <p>We are running jobs on the cluster without so called High Availability (HA). That means that SparkMaster is a single point of failure (SPOF) for the cluster; if SparkMaster fails then no other node can take over and the job fails. HA can be integrated into Spark by setting up a standby master. The master and standby master are toggled according to rules set by distributed coordination software (like a load balancer), such as Apache Zookeeper.</p>
+      <p>Programs that run on the cluster will utilize the Spark API (covered in Big Data Analytics module).</p>
+      <p>Example programs that you can try are located in $SPARK_HOME/lib/spark-examples.</p>
+      <p>Test using example program (in terminal of any node):</p>
+      <pre><code>RESULT=\`$SPARK\_HOME/bin/run-example SparkPi 10\`
+      echo $RESULT  
+        Pi is roughly 3.142803142803143
+      </code></pre>
+      <p>While the program is being run you will see dozens of output lines regarding systems status. However, the result is of interest. Hence the assignment to the result variable above.</p>
+      <p>More tests:</p>
+      <pre><code>RESULT=`$SPARK_HOME/bin/spark-submit \
+        $SPARK_HOME/examples/src/main/python/pi.py 10\`
+      echo $RESULT 
+        Pi is roughly 3.140904
+      
+      RESULT=`$SPARK_HOME/bin/spark-submit \
+        $SPARK_HOME/examples/src/main/scala/org/apache/spark/examples \
+        SparkPi.scala 10\`
+      echo $RESULT 
+        Pi is roughly 3.140904
+      
+      $ spark-submit --class org.apache.spark.examples.SparkPi \
+        --master spark://SparkMaster:7077 --driver-memory 512m \
+        --executor-memory 512m --executor-cores 1 \
+        $SPARK_HOME/lib/spark-examples\*.jar 10
+      </code></pre>
+      <p>Stop everything:</p>
+      <pre><code>$ $SPARK_HOME/sbin/stop-all.sh
+      </code></pre>
+      <p>Check the status of a job (Here is status of Pope's three nodes) at <a href="http://SparkMaster:8080/">http://SparkMaster:8080</a></p>
+      <p><img src="./media/media/image2.png" /></p>
+      </div>
+      <div class="chapter">
+        <h2 id="4.-apache-hadoop-1">4. Apache Hadoop</h2>
+      <h3 id="overview-2">Overview</h3>
+      <p>The Hadoop platform consists of different services available for analyzing big data. It has 3 main components:</p>
+      <ul>
+      <li>HDFS: Hadoop Distributed File System</li>
+      <li>YARN: Schedule Resource Manager</li>
+      <li>MapReduce: Programming model for processing big data</li>
+      </ul>
+      <p>In addition to MapReduce, there are many programs available for use in Hadoop. Some programming models are independent of Hadoop. Most use HDFS and are managed using YARN. These programs are as follows and can be seen in the architectural diagram too [3]:</p>
+      <ul>
+      <li>Spark (In-memory Data Processing)</li>
+      <li>PIG, HIVE (Data Processing Services using SQL like Query)</li>
+      <li>HBase, Cassandra (NoSQL Database)</li>
+      <li>Mahout, Spark MLlib (Machine Learning)</li>
+      <li>Apache Drill (SQL on Hadoop)</li>
+      <li>Zookeeper (Managing Cluster)</li>
+      <li>Oozie (Job Scheduling)</li>
+      <li>Flume, Sqoop (Data Ingesting Services)</li>
+      <li>Solr &amp; Lucene (Searching &amp; Indexing)</li>
+      <li>Ambari (Provision, Monitor and Maintain cluster)</li>
+      <li>Giraffe (Working with Graphs)</li>
+      </ul>
+      <p><img src="./media/media/image3.png" alt="C:\Users\ys8782np\Desktop\HADOOP-ECOSYSTEM-Edureka.png" /></p>
+      <h4 id="hdfs">HDFS</h4>
+      <p>HDFS is a java based distributed file system that provides scalable and reliable data storage across multiple nodes in Hadoop clusters. It is scalable, fault-tolerant, distributed storage system that works closely with a wide variety of concurrent data access applications, coordinated by YARN. Having distributed storage and computation across many servers, the combined storage resource can grow linearly with demand while remaining economical at every amount of storage.</p>
+      <p>HDFS has a master/slave architecture. An HDFS cluster comprises of a single Name Node (master) and multiple Data Nodes (slave nodes). Usually, Name Node executes file system namespace operations like opening, closing and renaming files and directories; it contains attributes like permissions, modification and access and disk space quotas, whereas Data Nodes contains the split data and are responsible for serving read and write requests from the clients. The Data Nodes can also perform block creation, deletion and replication upon instruction from the Name Node.</p>
+      <p><img src="./media/media/image4.jpg" /></p>
+      <h4 id="yarn">YARN</h4>
+      <p>YARN allows multiple data processing engines such as interactive SQL, real time streaming, data science and batch processing to process and handle data stored in HDFS. To be precise, YARN acts as a resource manager for different applications to access the distributed data storage. YARN also performs job scheduling.</p>
+      <p><img src="./media/media/image5.jpg" /></p>
+      <h4 id="yarn-consists-of-following-components:">YARN consists of following components:</h4>
+      <p><strong>Resource Manager</strong></p>
+      <p>Resource Manager receives the processing requests, and then passes the parts of request to corresponding Node Manager, which are installed on every data node.</p>
+      <p>It has a scheduler, which is responsible for allocating resources to the various applications running in the cluster, according to the constraints such a queue capacities and user limits. The scheduler schedules based on the resource requirements of each application.</p>
+      <p><strong>Node Manager</strong></p>
+      <p>Node Managers are responsible for execution of task on every single datanode.</p>
+      <p><strong>Application Master</strong></p>
+      <p>Application Master is responsible for negotiating appropriate resource containers from the scheduler, tracking their status, and monitoring their progress.</p>
+      <p><strong>Container</strong></p>
+      <p>It consists of resources like memory, processing unit and network on a single node.</p>
+      <h4 id="how-does-yarn-work-[5]?">How does YARN work [5]?</h4>
+      <p><img src="./media/media/image6.jpg" /></p>
+      <h3 id="application-of-mapreduce-in-hadoop-with-example">Application of MapReduce in Hadoop with example</h3>
+      <p>The execution of Map and Reduce task in controlled by Job and Task trackers. Each cluster-node consists of a single Job Tracker and one Task Tracker. The Job tracker acts as a master and is responsible for scheduling the jobs' component tasks on the slaves (Task Tracker), monitoring them and re-executing the failed tasks. The slaves execute the tasks as directed by the master. Job Tracker resides on Name node and Task Tracker on Data node.</p>
+      <h4 id="example-text-(wordcount_example.txt):">Example text (WordCount_Example.txt):</h4>
+      <p><em>Play Golf? Don’t play if the outlook is rain and it’s windy. Don’t play if humidity is high, outlook sunny, and it’s not windy. Otherwise, go play</em></p>
+      <h4 id="phase-1:">Phase 1:</h4>
+      <p><strong>Input Splits:</strong></p>
+      <p>During this process the input file is divided into chunks of data to be processed by individual mapper. In our example, the text is divided in a chunk of 4 words each.</p>
+      <p><strong>Mapping:</strong></p>
+      <p>During mapping process, the output from the input splits is passed to a mapping function to produce output values; job of mapping is to count number of occurrences of each word from input splits and prepare a list in the form of key-value (word, frequency). Please refer to the diagram below and see how each word is seen with frequency of 1.</p>
+      <h4 id="phase-2:">Phase 2:</h4>
+      <p><strong>Shuffling:</strong></p>
+      <p>This process takes the output of mapping phase. Its task is to consolidate the relevant records from mapping process. In our example, the word “and” is in the file twice, so it is grouped and is seen twice with a frequency of 1 each.</p>
+      <p><strong>Reducing:</strong></p>
+      <p>This process combines values from shuffling process and returns a single output value. Considering our example, now the word “and” is seen in the output only once with the frequency of 2.</p>
+      <h3 id="installation-and-configuration-of-hadoop-on-the-cloudera-virtual-machine">Installation and configuration of Hadoop on the Cloudera Virtual Machine</h3>
+      <h4 id="download-and-install-virtual-box">Download and Install Virtual Box</h4>
+      <p>Download link</p>
+      <p><a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></p>
+      <h4 id="download-and-install-cloudera-virtual-machine">Download and Install Cloudera Virtual Machine</h4>
+      <p>(VM) Image:</p>
+      <p>Download link</p>
+      <p><a href="https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.4.2-0-virtualbox.zip">https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.4.2-0-virtualbox.zip</a></p>
+      <p><span class="underline">Sample text file used for example</span></p>
+      <p>Available in the drop box with the file named <em>WordCount_Example.txt</em></p>
+      <h3 id="testing-the-installation--running-a-program-in-hadoop">Testing the installation – running a program in Hadoop</h3>
+      <p>Let us consider the example of wordcount we used earlier for the demonstration on the use of Hadoop. We can run the application using terminal shell</p>
+      <p><img src="./media/media/image7.png" /></p>
+      <h4 id="step-1:">Step 1:</h4>
+      <p>Download or generate a file that needs to be used for the application. In our example, a text document titled WordCount_Example.txt is created in the Downloads folder of virtual box. The file can then be transferred to HDFS using the following command:</p>
+      <p>Code:</p>
+      <pre><code>hadoop fs –copyFromLocal WordCount_Example.txt
+      </code></pre>
+      <p>Screen shot:</p>
+      <p><img src="./media/media/image8.png" /></p>
+      <h3 id="step-2:">Step 2:</h3>
+      <p>Check if the file is available in the HDFS</p>
+      <p>Code:</p>
+      <pre><code>hadoop fs –ls 
+      </code></pre>
+      <p>Screen shot:</p>
+      <p><img src="./media/media/image9.png" /></p>
+      <h3 id="step-3:">Step 3:</h3>
+      <p>We can use jar command to run a program in hadoop from a jar file. The jar file is in usr/jars/hadoop-examples.jar, and we are going to use wordcount program on the text file we have in the file system.</p>
+      <p>Syntax:</p>
+      <pre><code>hadoop jar /usr/jars/hadoop-examples.jar wordcount &lt;input&gt; &lt;output&gt;
+      </code></pre>
+      <p>Code:</p>
+      <pre><code>hadoop jar /usr/jars/hadoop-examples.jar wordcount
+      WordCount_Example.txt Eout
+      </code></pre>
+      <p>Screen shot:</p>
+      <p><img src="./media/media/image10.png" /></p>
+      <p>The MapReduce application will now perform the map and reduce task. The process can be monitored on the screen. In the screen below, we can see that the input has been split and is awaiting the map and reduce phase (both at 0%)</p>
+      <p><img src="./media/media/image11.png" /></p>
+      <p>Once Map phase completes, Reduce phase starts</p>
+      <p><img src="./media/media/image12.png" /></p>
+      <p>After the completion of Reduce phase, we get the summary of task completed by the application</p>
+      <p><img src="./media/media/image13.png" /></p>
+      <h4 id="step-4:">Step 4:</h4>
+      <p>Check if the output directory is created</p>
+      <p>Code:</p>
+      <pre><code>hadoop fs –ls
+      </code></pre>
+      <p>Screen shot:</p>
+      <p><img src="./media/media/image14.png" /></p>
+      <h4 id="step-5:">Step 5:</h4>
+      <p>Open the directory to check the files in the directory. There are two files in the directory:</p>
+      <p>Eout/_SUCCESS and <br />
+      Eout/part-r-00000.</p>
+      <p>The Eout/_SUCCESS means that the wordcount job ran successfully. The other file is the output generated by the process.</p>
+      <p><img src="./media/media/image15.png" /></p>
+      <h4 id="step-6:">Step 6:</h4>
+      <p>The output file can now to copied to local file system from HDFS and view it.</p>
+      <p>Code:</p>
+      <pre><code>hadoop fs –copyToLocal Eout/part-r-0000 Output.txt
+      </code></pre>
+      <p>Screen shot:</p>
+      <p><img src="./media/media/image16.png" /></p>
+      <h4 id="step-7:">Step 7:</h4>
+      <p>We can now read the output file. The file contains the word and the frequency of the word in the file we sent in as an input.</p>
+      <p>Code:</p>
+      <pre><code>more Output.txt
+      </code></pre>
+      <p>Screen shot:</p>
+      <p><img src="./media/media/image17.png" /></p>
+      <h3 id="exercise-1">Exercise</h3>
+      <ol>
+      <li>Download the text file from the following link (instructor could provide their own text file, the specified file in the link is used just as an example): <a href="https://www.w3.org/TR/PNG/iso_8859-1.txt">https://www.w3.org/TR/PNG/iso_8859-1.txt</a></li>
+      <li>Copy the file in HDFS</li>
+      <li>Run wordcount program using MapReduce</li>
+      <li>Explain each phase of MapReduce and submit the file output to the instructor</li>
+      </ol>
+      </div>
+      <div class="chapter">
+        <h2 id="websites-of-relevance">References</h2>
+      <ol>
+      <li>What is Big Data and why it matters. (n.d.). Retrieved July 1, 2018, from <a href="https://www.sas.com/en_us/insights/big-data/what-is-big-data.html">https://www.sas.com/en_us/insights/big-data/what-is-big-data.html</a></li>
+      <li>MapReduce Tutorial. (n.d.). Retrieved July 1, 2018, from <a href="https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html">https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html</a></li>
+      <li>Sinha, S. (2018, July 17). Hadoop Ecosystem | Hadoop Tools for Crunching Big Data | Edureka. Retrieved July 1, 2018, from <a href="https://www.edureka.co/blog/hadoop-ecosystem">https://www.edureka.co/blog/hadoop-ecosystem</a></li>
+      <li>HDFS Architecture Guide. (n.d.). Retrieved July 1, 2018, from <a href="https://hadoop.apache.org/docs/r1.2.1/hdfs\_design.html">https://hadoop.apache.org/docs/r1.2.1/hdfs\_design.html</a></li>
+      <li>Subramaniam, A. (2018, July 17). Apache Hadoop YARN | Introduction to YARN Architecture | Edureka. Retrieved July 1, 2018, from <a href="https://www.edureka.co/blog/hadoop-yarn-tutorial/">https://www.edureka.co/blog/hadoop-yarn-tutorial/</a></li>
+      <li>Big Data. (n.d.). Retrieved July 1, 2018, from <a href="https://words.sdsc.edu/words-data-science/big-data">https://words.sdsc.edu/words-data-science/big-data</a></li>
+      <li>Apache Hadoop HDFS. (n.d.). Retrieved July 1, 2018, from <a href="https://hortonworks.com/apache/hdfs/">https://hortonworks.com/apache/hdfs/</a></li>
+      <li>Apache Hadoop YARN. (n.d.). Retrieved July 1, 2018, from <a href="https://hortonworks.com/apache/YARN/">https://hortonworks.com/apache/YARN/</a></li>
+      <li><a href="https://computing.llnl.gov/tutorials/parallel_comp/">https://computing.llnl.gov/tutorials/parallel_comp/</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Beowulf_cluster">https://en.wikipedia.org/wiki/Beowulf_cluster</a></li>
+      <li><a href="https://www.top500.org/">https://www.top500.org/</a></li>
+      </ol>
+      
+
+      <!--- end body content -->
+
+      <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning
+            block, Control + Z to Undo... Do not delete</strong></span></div>
+      <div id="footer">Where life and learning meet.</div>
+    </div>
+      </div>
+  </div>
+</body>
+
+</html>
