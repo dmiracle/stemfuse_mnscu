@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h1 id="learning-objective-three-formatting-a-plot">Formatting a Plot</h1>
+<h2>Introduction</h2>
+<p>To specify any graph settings locally for one plot, you need to simply declare that setting parameter in the plot () function. For example, if you would like the type of the plot to be both points and lines, then use plot(x, y, type=”b”) to declare that setting.</p>
+<h2>Knowledge</h2>
+<p>Commonly used settings for a plot is shown below as the arguments of the plot () function:</p>
+<p>plot(x,y, type= , pty= , lty= , pch= , col.axis= , col.lab= , col.main= , font= , main= , xlab= , ylab= , xlim= c(), ylim=c())</p>
+<ul>
+<li><p>type: what type of plot should be drawn. Possible types are</p></li>
+</ul>
+<ul>
+<li><p>“p” for points</p></li>
+<li><p>“l” for lines</p></li>
+<li><p>“b” for both points and lines</p></li>
+<li><p>“c” for the lines part alone of “b”</p></li>
+<li><p>“o” for both points and lines overlapping</p></li>
+<li><p>“h” for histogram like vertical lines</p></li>
+<li><p>“s” for stair steps</p></li>
+<li><p>“n” for no plotting</p></li>
+</ul>
+<ul>
+<li><p>pty: a character specifying the type of plot region to be used; “s” generates a square plotting region and “m” generates the maximal plotting region</p></li>
+<li><p>lty: the line type. Possible line types are</p></li>
+</ul>
+<ul>
+<li><p>0 for blank</p></li>
+<li><p>1 for solid (default)</p></li>
+<li><p>2 for dashed</p></li>
+<li><p>3 for dotted</p></li>
+<li><p>4 for dot-dash</p></li>
+<li><p>5 for long-dash</p></li>
+<li><p>6 for two-dash</p></li>
+</ul>
+<p>Line types can be either specified as an integer listed above or as a character string</p>
+<p>pch: point choice to be used in the graph. Possible point choices are shown in figure 4</p>
+<p><img src="./media/media/image8.png" alt="http://www.endmemo.com/program/R/pic/pchsymbols.png" style="width:2.3in;height:3.3in" /></p>
+<p>Figure 4. Possible point types in the plot() function.</p>
+<p>The other arguments are:</p>
+<ul>
+<li><p>col.axis: color of the x- and y-axis</p></li>
+<li><p>col.lab: color of the labels for the axes</p></li>
+<li><p>col.main: color of the title of the graph</p></li>
+<li><p>font: font size</p></li>
+<li><p>main: title of the graph</p></li>
+<li><p>xlab and ylab: label of the x-axis and y-axis</p></li>
+<li><p>xlim: a vector with two numbers c(a, b), with the lower limit a and upper limit b for the x-axis</p></li>
+<li><p>ylim: a vector with two numbers c(a, b) representing the lower and upper limit of y-axis</p></li>
+<h2>Practice and Reflection</h2>
+<h3>Practice</h3>
+</ul>
+<p>Example 3: The research recorded the temperature at 7 altitudes, starting at 6327 feet. Use the scatter plot to show the relationship between altitude and temperature. Plot the graph with red hollow triangle points in a squared plotting region. Make the title green, and the label of the axes blue. Set the x-axis from 0 to 35, and the y-axis from -60 to 60.</p>
+<table>
+
+<tbody>
+<tr class="header">
+<td>Altitude (x)</td>
+<td>3</td>
+<td>10</td>
+<td>14</td>
+<td>22</td>
+<td>28</td>
+<td>31</td>
+<td>33</td>
+</tr>
+
+<tr class="odd">
+<td>Temperature</td>
+<td>57</td>
+<td>37</td>
+<td>24</td>
+<td>-5</td>
+<td>-30</td>
+<td>-41</td>
+<td>-54</td>
+</tr>
+</tbody>
+</table>
+<p>The R code is</p>
+<p><img src="./media/media/image9.png" style="width:5.82292in;height:0.96875in" /></p>
+<p>The output graph is shown in figure 5.</p>
+<p><img src="./media/media/image10.jpeg" style="width:5.46729in;height:3in" /></p>
+<p>Figure 5. A scatter plot with specific local setting for the point type and color, axes’ color and limits, plot type and title color.</p>
+<h3>Reflection</h3>
+<p>Activity 3 Use the iris data in R to generate a scatter plot showing the relationship between petal length and petal width. Make the points as blue solid squares. Color the title and axes’ labels as red. Make the x-axis go from 1 to 7, and y-axis from 0 to 3.</p>
+<h2>Assessment</h2>
+<p>Use the mtcars data in R to generate a box plot and a bar plot in one graph using mfrow(). The boxplot shows the five number summary of mpg for each number of cylinders and the bar plot shows the mean values of mpg for each number of cylinders. Add legend and color to show the difference of the three types of cylinders. Use the title() function to add the titles.</p>
+
+
+</div>
+</div>
+</body>
+</html>
