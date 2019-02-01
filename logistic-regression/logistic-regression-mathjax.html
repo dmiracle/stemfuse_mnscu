@@ -10,6 +10,9 @@
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
+      blockquote{
+        background-color: #D3E1E4;
+      }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
   <!--[if lt IE 9]>
@@ -873,7 +876,9 @@
 <p>Notice that <span class="math inline">\(x\)</span> falls out. Thus, it does not matter what the value of <span class="math inline">\(x\)</span> is, the odds ratio remains the same for a <span class="math inline">\(c\)</span>-unit increase. This is one of the main reasons why logistic regression is the most used way to model binary response data.</p>
 <p>OR = <span class="math inline">\(e^{c\beta_{r}}\)</span> for the model given at the beginning of this section.</p>
 <p>There are a number of ways to interpret the odds ratio in the context of logistic regression. We recommend using the following:</p>
+<blockquote>
 <p>The odds of a success change by <span class="math inline">\(e^{c\beta_{1}}\)</span> times for every <span class="math inline">\(c\)</span>-unit increase in <span class="math inline">\(x\)</span>.</p>
+</blockquote>
 <p>It is also common to say “increase” instead of “change” when <span class="math inline">\(e^{c\beta_{1}}\)</span> &gt; 1, and “decrease” when <span class="math inline">\(e^{c\beta_{1}}\)</span> &lt; 1.</p>
 <p>Suppose <span class="math inline">\(x\)</span> only has two levels coded as 0 or 1 as is commonly done for indicator variables in normal linear regression. This leads to</p>
 <p><span class="math inline">\(\text{Odds}_{x = 0} = \ e^{\beta_{0} + \ \beta_{1}0} = \ e^{\beta_{0}}\)</span> and <span class="math inline">\(\text{Odds}_{x = 1} = \ e^{\beta_{0} + \ \beta_{1}}\)</span></p>
