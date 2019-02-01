@@ -1,6 +1,7 @@
 # MNSCU Web Templates
 
-## pandoc
+## pandoc with mathjax
+
 ```bash
 pandoc -f docx -t html -s --mathjax logistic-regression.docx  --extract-media=./images -o logistic-recression-mathjax.html
 ```
