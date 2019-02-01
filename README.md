@@ -1,5 +1,9 @@
 # MNSCU Web Templates
 
+## pandoc
+```bash
+pandoc -f docx -t html -s --mathjax logistic-regression.docx  --extract-media=./images -o logistic-recression-mathjax.html
+```
 ## Color
 
 MNSCU Blue: #003C66
