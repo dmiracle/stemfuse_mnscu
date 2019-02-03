@@ -14,6 +14,31 @@
       .warning {
         visibility: hidden;
       }
+      #leftSideBar {
+          background-color: #003C66;
+          background-repeat: no-repeat;
+          background-position: top center;
+          background-size: 100%;
+          min-height: 100%;
+          width: 200px;
+          float: left;
+          padding-top: 10px;
+          padding-right: 1%;
+          padding-left: 1%;
+          font-size: 1em;
+          line-height: 100%;
+          color: white;
+      }
+      
+      #leftSideBar a {
+          color: white;
+          text-decoration: none;
+      }
+      
+      #leftSideBar li {
+          margin:0 0 1em 0;
+      }
+  
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
   <!--[if lt IE 9]>
@@ -25,6 +50,40 @@
     <div id="pageContainer">
     <div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
     
+
+    <div id="leftSideBar">
+      <img src="images/ITCoE_white200px.png">
+      <!---
+        <h2 style="color:white;">Sections</h2>
+      -->
+      <hr style="color: white;">
+      <ul>
+        <li><h2 style="color: white;">Sections</h2></li>
+      </ul>
+      <hr style="color: white;">
+      <ul>
+      <!--- Place sidebar links here like this:
+          <li><a href="#learning-objectives">Learning Objectives</a></li>
+      -->
+      <li><a href="#requirements">Requirements</a></li>
+      <li><a href="#supplementary-materials">Supplementary Materials</a></li>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#modeling-qualitative-data">Modeling Qualitative Data</a></li>
+      <li><a href="#the-logit-model">The Logit Model</a></li>
+      <li><a href="#logistic-regression-and-the-glm">Logistic Regression and the GLM</a></li>
+      <li><a href="#variance-covariance-matrix">Variance-Covariance Matrix</a></li>
+      <li><a href="#hypothesis-tests-for-regression-parameters">Hypothesis Tests for Regression Parameters</a></li>
+      <li><a href="#odds-ratios">Odds Ratios</a></li>
+      <li><a href="#probability-of-success">Probability of Success</a></li>
+      <li><a href="#final-assessment">Final Assessment</a></li>
+      
+      <!--- end sidebar -->
+      </ul>
+      <div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png" width="32" type="image" height="32" /></div>
+      <hr style="color: white;">
+      <img src="images/mnstate_white200px.png">
+      </div>
+
     <div id="mainContent">
     <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
     
@@ -106,21 +165,22 @@
 <h3 id="the-logit-model">The Logit Model</h3>
 <p>The relationship between the probability <span class="math inline">\(\pi\)</span> and <span class="math inline">\(x\)</span> can often be represented by a <em>logistic response function.</em> It resembles an <em>S</em>-shaped curve. The probability <span class="math inline">\(\pi\)</span>initially increases slowly with increase in <span class="math inline">\(x\)</span>, then the increase accelerates, finally stabilizes, but does not increase beyond 1. Intuitively this makes sense. Consider the probability of a questionnaire being returned as a function of cash reward, or the probability of passing a test as a function of the time put in studying for it.</p>
 <p>The shape of the <em>S</em>-curve can be reproduced if we model the probabilities as follows:</p>
-<p><span class="math inline">\(\pi = \Pr\left( y = 1 \right) = \ \frac{e^{\beta_{0} + \beta_{1}x}}{1 + \ e^{\beta_{0} + \beta_{1}x}}\)</span>,</p>
+<p><span class="math display">\[\pi = \Pr\left( y = 1 \right) = \ \frac{e^{\beta_{0} + \beta_{1}x}}{1 + \ e^{\beta_{0} + \beta_{1}x}},\]</span></p>
 <p>where <span class="math inline">\(e\)</span> is the base of the natural logarithm. The probabilities here are modeled by the distribution function (cumulative probability function) of the logistic distribution. There are other ways of modeling the probabilities that would also produce the <em>S</em>-curve. The cumulative distribution of the normal curve has also been used. This gives rise to the <em>probit</em> model. We will not discuss the probit model in this module, as we consider the logistic model simpler and superior to the probit model.</p>
 <p>The logistic model can be generalized directly to the situation where we have several predictor variables. The probability <span class="math inline">\(\pi\)</span> is modeled as</p>
-<p><span class="math inline">\(\pi = \Pr\left( y = 1 \right) = \ \frac{e^{\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \cdots + \beta_{p}x_{p}}}{1 + \ e^{\beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p}}}\)</span>.</p>
+<p><span class="math display">\[\pi = \Pr\left( y = 1 \right) = \ \frac{e^{\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \cdots + \beta_{p}x_{p}}}{1 + \ e^{\beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p}}}.\]</span></p>
 <p>The above equation is called the <em>logistic regression function</em>. It is nonlinear in the parameters <span class="math inline">\(\beta_{0,}\)</span> <span class="math inline">\(\beta_{1,\ \ \ \cdots,\ \ \ }\beta_{p}\)</span>. However, it can be linearized by the <em>logit transformation.</em> Instead of working directly with <span class="math inline">\(\pi\)</span> we work with a transformed value of <span class="math inline">\(\pi\)</span>. If <span class="math inline">\(\pi\)</span> is the probability of an event happening, the ratio <span class="math inline">\(\pi\)</span> / <span class="math inline">\(\left( 1 - \ \pi \right)\)</span> is called the <em>odds ratio</em> for the event. Since</p>
-<p><span class="math inline">\(1 - \ \pi = \Pr\left( y = 0 \right) = \ \frac{1}{1 + \ e^{\beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p}}}\)</span>,</p>
+<p><span class="math display">\[1 - \ \pi = \Pr\left( y = 0 \right) = \ \frac{1}{1 + \ e^{\beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p}}},\]</span></p>
 <p>then</p>
-<p><span class="math inline">\(\frac{\pi}{1 - \ \pi} = \ e^{\beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p}}\)</span>.</p>
+<p><span class="math display">\[\frac{\pi}{1 - \ \pi} = \ e^{\beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p}}.\]</span></p>
 <p>Taking the natural logarithm of both sides of the above equation, we obtain</p>
 <p><span class="math display">\[\ln\left( \frac{\pi}{1 - \pi} \right) = \ \beta_{0} + \ \beta_{1}x_{1} + \ \cdots + \ \beta_{p}x_{p}.\]</span></p>
 <p>The logarithm of the odds ratio is called the <em>logit</em>. It can be seen from the above that the logit transformation produces a linear function of the parameters <span class="math inline">\(\beta_{0},\ \beta_{1},\ \cdots,\ \beta_{p}\)</span>. Note also that while the range of values of <span class="math inline">\(\pi\)</span> is between 0 and 1, the range of values of [<span class="math inline">\(\ln\pi/\left( 1 - \ \pi \right)\)</span>] is between <span class="math inline">\(- \infty\)</span> and <span class="math inline">\(+ \infty\)</span>, which makes the logits (the logarithm of the odds ratio) more appropriate for linear regression fitting.</p>
 <p>Modeling the response probabilities by the logistic distribution and estimating the parameters of the model constitutes fitting a logistic regression. In logistic regression the fitting is carried out by working with the logits. The logit transformation produces a model that is linear in the parameters. The method of estimation used is the <em>maximum likelihood</em> method. The maximum likelihood estimates are obtained numerically, using an iterative procedure. Unlike least squares fitting, no closed-form expression exists for the estimates of the parameters.</p>
 <p>To fit a logistic regression in practice a computer program is essential. In this module, we will fit the logistic regression equation with R. After the fitting one looks at the same set of questions that are usually considered in linear regression. Questions about the suitability of the model, the variables to be retained, and goodness of fit are all considered. Tools used are not the usual <span class="math inline">\(R^{2},\ t\)</span>-, and <span class="math inline">\(F\)</span>-Tests, the ones employed in least squares regression, but others which provide answers to these same questions. Hypothesis testing is done by different methods, since the method of estimation is maximum likelihood as opposed to least squares. Information criteria such as AIC and BIC can be used for model selection. Instead of SSE, the logarithm of the likelihood for the fitted model is used.</p>
 <h4 id="plot-of-the-logistic-regression-model">Plot of the Logistic Regression Model</h4>
-<p>The purpose of this example is to examine the shape of the logistic regression model when there is a single explanatory variable <span class="math inline">\(x_{1}\)</span>. Consider the model <span class="math inline">\(\pi = \ \frac{e^{\beta_{0} + \ \beta_{1}x_{1}}}{1 + \ e^{\beta_{0} + \ \beta_{1}x_{1}}}\)</span>, which is equivalently expressed as <span class="math inline">\(\ln\left( \frac{\pi}{1 - \ \pi} \right)\)</span> = <span class="math inline">\(\beta_{0} + \ \beta_{1}x_{1}\)</span>. Suppose that <span class="math inline">\(\beta_{0} = 1\)</span> and <span class="math inline">\(\beta_{1} = 0.5.\)</span> Figure 1 shows this model plotted on the left. The plot on the right is the same, but with <span class="math inline">\(\beta_{1} = \  - 0.5\)</span>. <img src="./images/media/image1.png" style="width:6.15548in;height:3.75995in" /></p>
+<p>The purpose of this example is to examine the shape of the logistic regression model when there is a single explanatory variable <span class="math inline">\(x_{1}\)</span>. Consider the model <span class="math inline">\(\pi = \ \frac{e^{\beta_{0} + \ \beta_{1}x_{1}}}{1 + \ e^{\beta_{0} + \ \beta_{1}x_{1}}}\)</span>, which is equivalently expressed as <span class="math inline">\(\ln\left( \frac{\pi}{1 - \ \pi} \right)\)</span> = <span class="math inline">\(\beta_{0} + \ \beta_{1}x_{1}\)</span>. Suppose that <span class="math inline">\(\beta_{0} = 1\)</span> and <span class="math inline">\(\beta_{1} = 0.5.\)</span> Figure 1 shows this model plotted on the left. The plot on the right is the same, but with <span class="math inline">\(\beta_{1} = \  - 0.5\)</span>.</p>
+<p> <embed src="./images/media/image1.png" style="width:6.15548in;height:3.75995in" /></p>
 <p>Figure 1. Logistic regression model for <span class="math inline">\(\beta_{0} = 1\)</span> and <span class="math inline">\(\beta_{1} = 0.5\)</span> and <span class="math inline">\(- 0.5\)</span>.</p>
 <p>We can make the following generalizations from examining the model and these plots:</p>
 <ul>
@@ -131,11 +191,11 @@
 <li><p>Above <span class="math inline">\(\pi = 0.5\)</span> is a mirror image of below <span class="math inline">\(\pi = 0.5\)</span>.</p></li>
 </ul>
 <p>In figure 2 is the R code used to create the plots in figure 1.</p>
-<p><embed src="./images/media/image2.tmp" style="width:5.92791in;height:1.88568in" /></p>
+<p><embed src="./images/media/image2.png" style="width:5.92791in;height:1.88568in" /></p>
 <p>Figure 2. R code used for creating the plots in figure 1.</p>
 <p>The <strong>par( )</strong> function sets graphics parameters that control various plotting options. In our code, we use it to partition the graphics window into 1 row and 2 columns using the <strong>mfrow</strong> argument, which stands for “make frame by row.” (<a href="https://www.statmethods.net/advgraphs/layout.html%20">https://www.statmethods.net/advgraphs/layout.html</a>)</p>
 <p>The <strong>curve( )</strong> function is used to plot the model. This is a very useful function for plotting mathematical functions that vary over one variable. In our example, the <strong>expr</strong> argument contains the logistic regression model where the letter <strong>x</strong> must be used as the variable name for the variable plotted on the x-axis. By default, the mathematical function is evaluated at 101 equally spaced x-axis values within the range specified by <strong>xlim</strong>. These resulting 101 points are then joined by straight lines. Also within <strong>curve( )</strong>, we use the <strong>expression( )</strong> function with the title and axis labels in order to Greek letters and fractions. (<a href="https://thomasleeper.com/Rcourse/Tutorials/curve.html">https://thomasleeper.com/Rcourse/Tutorials/curve.html</a>)</p>
-<p><em>Activity 1:</em> Generate two plots of the logistic regression model with <span class="math inline">\(\beta_{0} = 1\)</span>. First, assume <span class="math inline">\(\beta_{1} = 0.8\)</span>. For the second plot, use <span class="math inline">\(\beta_{1}\)</span> = <span class="math inline">\(- 0.8\)</span>.</p>
+<h5>Activity 1:</h5><p> Generate two plots of the logistic regression model with <span class="math inline">\(\beta_{0} = 1\)</span>. First, assume <span class="math inline">\(\beta_{1} = 0.8\)</span>. For the second plot, use <span class="math inline">\(\beta_{1}\)</span> = <span class="math inline">\(- 0.8\)</span>.</p>
 <h3 id="logistic-regression-and-the-glm">Logistic Regression and the GLM</h3>
 <p>The response in the logistic regression formula is the log odds of a binary outcome of 0 or 1. We only observe the binary outcome, not the log odds, so special statistical methods are needed to fit the equation. Logistic regression is a special instance of a <em>generalized linear model</em> (GLM) developed to extend linear regression to other settings.</p>
 <h4 id="single-predictor-model">Single Predictor Model</h4>
@@ -269,10 +329,10 @@
 <p><em>Note:</em> Ft = flight no., TD = thermal distress (1 = yes, 0 = no)</p>
 <p><em>Source:</em> Data based on Table 1 in S.R. Dalal, E.B. Fowlkes and B. Hoadley, <em>J. Am. Statist. Assoc.,</em> <strong>84</strong>: 945-957, 1989.</p>
 <p>The code in figure 3 shows how we get the data into a data frame.</p>
-<p><embed src="./images/media/image3.tmp" style="width:6.45923in;height:4.67774in" /></p>
+<p><embed src="./images/media/image3.png" style="width:6.45923in;height:4.67774in" /></p>
 <p>Figure 3. Creation of data frame consisting of temperature and thermal distress status for space shuttle flights prior to Challenger disaster.</p>
 <p>The code in figure 4 fits a logistic regression to model the effect of temperature on the probability of thermal distress.</p>
-<p><embed src="./images/media/image4.tmp" style="width:6.5in;height:1.89306in" /></p>
+<p><embed src="./images/media/image4.png" style="width:6.5in;height:1.89306in" /></p>
 <p>Figure 4. Code for fitting a logistic regression to the space shuttle data.</p>
 <p>The results from <strong>glm( )</strong> are saved into an object that we call <strong>mod.fit</strong>. The arguments within <strong>glm( )</strong> are:</p>
 <ul>
@@ -284,13 +344,13 @@
 <p><span class="math inline">\(\text{logit}(\widehat{\pi}\)</span>) = <span class="math inline">\(15.0429 - 0.2322\)</span><strong>temp.</strong></p>
 <p>Because there is a negative parameter estimate corresponding to temp, the estimated probability of thermal distress decreases as the temperature increases.</p>
 <p>There is actually much more information stored within the <strong>mod.fit</strong> object. Through the use of the <strong>names( )</strong> function, we obtain the list of items shown in figure 5.</p>
-<p><embed src="./images/media/image5.tmp" style="width:6.5in;height:1.32778in" /></p>
+<p><embed src="./images/media/image5.png" style="width:6.5in;height:1.32778in" /></p>
 <p>Figure 5. List of items in the <strong>mod.fit</strong> object.</p>
 <p>Figure 6 shows <strong>mod.fit$coefficients</strong> contains <span class="math inline">\({\widehat{\beta}}_{0}\)</span> and <span class="math inline">\({\widehat{\beta}}_{1}\)</span>.</p>
-<p><embed src="./images/media/image6.tmp" style="width:2.13572in;height:0.46882in" /></p>
+<p><embed src="./images/media/image6.png" style="width:2.13572in;height:0.46882in" /></p>
 <p>Figure 6. Extraction of coefficients from the <strong>mod.fit</strong> object.</p>
 <p>To see a summary of all the information in <strong>mod.fit</strong>, we can use the <strong>summary( )</strong> function (figure 7).</p>
-<p><embed src="./images/media/image7.tmp" style="width:6.5in;height:3.44861in" /></p>
+<p><embed src="./images/media/image7.png" style="width:6.5in;height:3.44861in" /></p>
 <p>Figure 7. Summary of <strong>mod.fit</strong> object.</p>
 <p>The output in figure 7 displays a lot of information about the model that we will describe throughout this module. For now, note that the values of <span class="math inline">\({\widehat{\beta}}_{0}\)</span> and <span class="math inline">\({\widehat{\beta}}_{1}\)</span> are displayed in the “Coefficients” table under the “Estimate” header. Also, it took 5 iterations to obtain these estimates as given by the last line in the output.</p>
 <p>There are only a few simple cases where the parameter estimates in logistic regression models have closed-form solutions (i.e. we cannot generally write out the parameter estimates in terms of the observed data). Instead, we use iterative numerical procedures to successively find estimates of the regression parameters. When the estimates change negligibly for successive iterations, we say that they have converged. If the estimates continue to change noticeably up to a selected maximum number of iterations, the iterative numerical procedure has not converged, and those final parameter estimates should not be used.</p>
@@ -298,19 +358,19 @@
 <p>We can find the estimated probability of thermal distress for a particular temperature using:</p>
 <p><span class="math display">\[\widehat{\pi} = \ \frac{e^{15.0429 - 0.2322temp}}{1 + \ e^{15.0429 - 0.2322temp}}\]</span></p>
 <p>For example, the probability of thermal distress at a temperature of 56<span class="math inline">\(℉\)</span> is 0.885 (figure 8).</p>
-<p><embed src="./images/media/image8.tmp" style="width:6.03209in;height:1.42728in" /></p>
+<p><embed src="./images/media/image8.png" style="width:6.03209in;height:1.42728in" /></p>
 <p>Figure 8. Probability of thermal distress at a temperature of 56<span class="math inline">\(℉\)</span>.</p>
 <p>We can estimate the probability of thermal distress at 31<span class="math inline">\(℉\)</span>, the temperature at the time of the Challenger flight, using the code in figure 9.</p>
-<p><embed src="./images/media/image9.tmp" style="width:5.80289in;height:0.47923in" /></p>
+<p><embed src="./images/media/image9.png" style="width:5.80289in;height:0.47923in" /></p>
 <p>Figure 9. Probability of thermal distress at a temperature of 31<span class="math inline">\(℉\)</span>.</p>
 <p>However, note that the minimum temperature in the data used to develop the model is 53<span class="math inline">\(℉\)</span>. Hence an extrapolation to 31<span class="math inline">\(℉\ \)</span>may be a possible problem with using the model at this temperature.</p>
 <p>We can plot the model with the <strong>curve( )</strong> function in R using the code in figure 10.</p>
-<p><embed src="./images/media/image10.tmp" style="width:4.90693in;height:1.0939in" /></p>
+<p><embed src="./images/media/image10.png" style="width:4.90693in;height:1.0939in" /></p>
 <p>Figure 10. Code for plotting the model in the <strong>mod.fit</strong> object.</p>
 <p>The plot is shown in figure 11.</p>
 <p><img src="./images/media/image11.png" style="width:6.5in;height:3.97292in" /></p>
 <p>Figure 11. Plot of the model relating probability of thermal distress to temperature.</p>
-<p><em>Activity 2:</em> Hastie and Tibshirani (1990, p. 282) described a study to determine risk factors for kyphosis, which is severe forward flexion of the spine following corrective spinal surgery. The age in months at the time of the operation for the 18 subjects for whom kyphosis was present were 12, 15, 42, 52, 59, 73, 82, 91, 96, 105, 114, 120, 121, 128, 130, 139, 139, 157 and for the 22 subjects for whom kyphosis was absent were 1, 1, 2, 8, 11, 18, 22, 31, 37, 61, 72, 81, 97, 112, 118, 127, 131, 140, 151, 159, 177, 206.</p>
+<h5>Activity 2:</h5><p> Hastie and Tibshirani (1990, p. 282) described a study to determine risk factors for kyphosis, which is severe forward flexion of the spine following corrective spinal surgery. The age in months at the time of the operation for the 18 subjects for whom kyphosis was present were 12, 15, 42, 52, 59, 73, 82, 91, 96, 105, 114, 120, 121, 128, 130, 139, 139, 157 and for the 22 subjects for whom kyphosis was absent were 1, 1, 2, 8, 11, 18, 22, 31, 37, 61, 72, 81, 97, 112, 118, 127, 131, 140, 151, 159, 177, 206.</p>
 <ul>
 <li><p>Fit a logistic regression model using age as a predictor of whether kyphosis is present (i.e., 1 = kyphosis present, 0 = kyphosis absent).</p></li>
 <li><p>Estimate the probability of kyphosis being present at an age of 150 months.</p></li>
@@ -543,16 +603,16 @@
 <p><em>Source:</em> Data from D. Collett, in <em>Encyclopedia of Biostatistics</em>, Wiley, New York, 1998, pp. 350-358.</p>
 <p>Predictors are D = duration of surgery and T = type of device.</p>
 <p>Figure 12 shows how we get the data into a data frame.</p>
-<p><embed src="./images/media/image12.tmp" style="width:4.91735in;height:1.5523in" /></p>
+<p><embed src="./images/media/image12.png" style="width:4.91735in;height:1.5523in" /></p>
 <p>Figure 12. Code for creation of data frame relating Y to D and T.</p>
 <p>Figure 13 shows the data frame.</p>
-<p><embed src="./images/media/image13.tmp" style="width:1.95861in;height:5.77164in" /></p>
+<p><embed src="./images/media/image13.png" style="width:1.95861in;height:5.77164in" /></p>
 <p>Figure 13. Data frame consisting of the variables D, T, and Y.</p>
 <p>We find the estimated logistic regression model using the code in figure 14.</p>
-<p><embed src="./images/media/image14.tmp" style="width:6.5in;height:3.93333in" /></p>
+<p><embed src="./images/media/image14.png" style="width:6.5in;height:3.93333in" /></p>
 <p>Figure 14. Code for fitting a logistic regression model relating Y to D and T.</p>
 <p>The estimated logistic regression model is <span class="math inline">\(	ext{logit}\left( \widehat{\pi} \right)\)</span> = <span class="math inline">\(- 1.41734 + 0.06868D - 1.65895T.\)</span></p>
-<p><em>Activity 3:</em> Suppose you are investigating allegations of gender discrimination in the hiring practices of a particular firm. An equal-rights group claims that females are less likely to be hired than males with the same background, experience, and other qualifications. The data on the table below was collected on 28 former applicants.</p>
+<h5>Activity 3:</h5><p> Suppose you are investigating allegations of gender discrimination in the hiring practices of a particular firm. An equal-rights group claims that females are less likely to be hired than males with the same background, experience, and other qualifications. The data on the table below was collected on 28 former applicants.</p>
 <p><span class="math inline">\(y\)</span> = 1 if hired; <span class="math inline">\(y\)</span> = 0 if not</p>
 <p><span class="math inline">\(x_{1}\)</span> = Years of higher education (4, 6, or 8)</p>
 <p><span class="math inline">\(x_{2}\)</span> = Years of experience</p>
@@ -762,24 +822,24 @@
 \end{bmatrix}\]</span></p>
 <p>Thus, the (1, 1) element is the estimated variance of <span class="math inline">\({\widehat{\beta}}_{0}\)</span>, the (1, 2) element is the estimated covariance of <span class="math inline">\({\widehat{\beta}}_{0}\)</span> and <span class="math inline">\({\widehat{\beta}}_{1}\)</span>, <span class="math inline">\(\cdots\)</span> . We will more simply call this matrix a “covariance matrix” for the remainder of the module.</p>
 <p>From the <strong>summary(mod.fit)</strong> output earlier (figure 7), we have</p>
-<p><embed src="./images/media/image15.tmp" style="width:6.5in;height:3.45625in" /></p>
+<p><embed src="./images/media/image15.png" style="width:6.5in;height:3.45625in" /></p>
 <p>We can limit the displayed output by using the fact that <strong>summary( )</strong> creates a list with <strong>coefficients</strong> as one component (figure 15).</p>
-<p><embed src="./images/media/image16.tmp" style="width:4.24017in;height:0.61467in" /></p>
+<p><embed src="./images/media/image16.png" style="width:4.24017in;height:0.61467in" /></p>
 <p>Figure 15. Limited output of the <strong>summary( )</strong> function.</p>
 <p>The <strong>Std. Error</strong> column gives the standard errors for the regression parameter estimators - <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{0} \right)^{1/2} = 7.3786\)</span> in the <strong>“(Intercept)”</strong> row and <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{1} \right)^{1/2} = 0.1082\)</span> in the <strong>“temp”</strong> row.</p>
 <p>The <strong>vcov( )</strong> function produces the estimated covariance matrix (figure 16). (<a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/vcov.html">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/vcov.html</a>)</p>
-<p><embed src="./images/media/image17.tmp" style="width:3.15669in;height:0.64592in" /></p>
+<p><embed src="./images/media/image17.png" style="width:3.15669in;height:0.64592in" /></p>
 <p>Figure 16. Covariance matrix of the <strong>mod.fit</strong> object.</p>
 <p>We can extract the estimated variance for <span class="math inline">\({\widehat{\beta}}_{1}\)</span> by specifying the (2, 2) element of the matrix (figure 17).</p>
-<p><embed src="./images/media/image18.tmp" style="width:3.8547in;height:0.33338in" /></p>
+<p><embed src="./images/media/image18.png" style="width:3.8547in;height:0.33338in" /></p>
 <p>Figure 17. Extraction of the estimated variance for <span class="math inline">\({\widehat{\beta}}_{1}\)</span>.</p>
 <p>Thus, <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{1} \right)\)</span> = 0.01171512, which is the square of 0.1082 given within the coefficients table.</p>
-<p><em>Activity 4:</em> Refer to Activity 2.</p>
+<h5>Activity 4:</h5><p> Refer to Activity 2.</p>
 <ul>
 <li><p>Use <strong>vcov( )</strong> in R to find <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{0} \right)\ \)</span>and <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{1} \right).\)</span></p></li>
 <li><p>Use <strong>summary( )$coefficients</strong> in R to find the estimated standard errors for the regression parameters.</p></li>
 </ul>
-<p><em>Activity 5:</em> Refer to Activity 3.</p>
+<h5>Activity 5:</h5><p> Refer to Activity 3.</p>
 <ul>
 <li><p>Use <strong>vcov( )</strong> in R to find <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{0} \right),\ \widehat{\text{Var}}\left( {\widehat{\beta}}_{1} \right)\)</span>, <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{2} \right)\)</span>, and <span class="math inline">\(\widehat{\text{Var}}{\widehat{\beta}}_{3}\)</span>.</p></li>
 <li><p>Use <strong>summary( )$coefficients</strong> in R to find the estimated standard errors for the regression parameters.</p></li>
@@ -799,11 +859,12 @@
 <p><span class="math display">\[Z_{0} = \ \frac{{\widehat{\beta}}_{r}}{\sqrt{\text{Var}\left( {\widehat{\beta}}_{r} \right)}}\]</span></p>
 <p>to test <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\beta_{r} = \ 0\ \)</span>vs. <span class="math inline">\(H_{a}\)</span>: <span class="math inline">\(\beta_{r}\  \neq 0\)</span>. For a large sample, the test statistic has an approximate standard normal distribution if the null hypothesis of <span class="math inline">\(\beta_{r} = 0\)</span> is true. Thus, reject the null hypothesis if we observe a test statistic value that is “unusual” for a standard normal distribution. The <span class="math inline">\(p\)</span>-value is 
 <span class="math inline">\(2P(Z > |Z_{0}|)\)</span> where <span class="math inline">\(Z \sim N(0,1)\)</span>. 
-Wald test statistics and <span class="math inline">\(p\)</span>-values are automatically provided for individual <span class="math inline">\(\beta\)</span> parameters using code like <strong>summary(mod.fit).</strong> Recall figure 7 in the temperature and thermal distress example: <embed src="./images/media/image15.tmp" style="width:6.5in;height:3.45625in" /></p>
+Wald test statistics and <span class="math inline">\(p\)</span>-values are automatically provided for individual <span class="math inline">\(\beta\)</span> parameters using code like <strong>summary(mod.fit).</strong> Recall figure 7 in the temperature and thermal distress example:</p> 
+<p><embed src="./images/media/image15.png" style="width:6.5in;height:3.45625in" /></p>
 <p>Let’s use the Wald test to test the hypothesis that temperature has no effect: <span class="math inline">\(Z_{0} = \  - 2.145\)</span> and <span class="math inline">\(p\)</span>-value <span class="math inline">\(= 0.0320\)</span>. Since <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt; \ \alpha = 0.05\)</span> (typical significance level), we reject <span class="math inline">\(H_{0}:\ \ \beta_{1} = 0.\)</span> There is sufficient evidence to indicate temperature has an effect on the probability of thermal distress. If <span class="math inline">\(\alpha = 0.01\)</span>, there would not be a rejection of the null hypothesis. It is preferable to word a conclusion like: There is <span class="underline">marginal</span> evidence to indicate that temperature has an effect on the probability of thermal distress.</p>
-<p><em>Activity 6:</em> Refer to Activities 2 and 4. Test whether age has a significant effect using the Wald test.</p>
+<h5>Activity 6:</h5><p> Refer to Activities 2 and 4. Test whether age has a significant effect using the Wald test.</p>
 <p>The Wald test can also be performed for more than one parameter at the same time. Recall the summary of the <strong>mod.fit2</strong> object of figure 14 for the experiencing sore throat after surgery example:</p>
-<p><embed src="./images/media/image14.tmp" style="width:6.5in;height:3.93333in" /></p>
+<p><embed src="./images/media/image14.png" style="width:6.5in;height:3.93333in" /></p>
 <p>We will perform Wald tests on both duration of the surgery (D) and type of device used to secure the airway (T) in the model <span class="math inline">\(\text{logit}\left( \pi \right) = \ \beta_{0} + \ \beta_{1}D + \ \beta_{2}\text{T.}\)</span> Here is a summary of the tests using <span class="math inline">\(\alpha = 0.05:\)</span></p>
 <table>
 <thead>
@@ -837,7 +898,7 @@ Wald test statistics and <span class="math inline">\(p\)</span>-values are autom
 </tr>
 </tbody>
 </table>
-<p><em>Activity 7:</em> Refer to Activities 3 and 5. Perform Wald tests on each of the independent variables.</p>
+<h5>Activity 7:</h5><p> Refer to Activities 3 and 5. Perform Wald tests on each of the independent variables.</p>
 <h4 id="likelihood-ratio-test-lrt">Likelihood Ratio Test (LRT)</h4>
 <p>Generally, a better test than the Wald is an LRT. The LRT statistic is:</p>
 <p><span class="math display">\[\Lambda = \frac{\text{Maximum of likelihood function under }H_{0}}{\text{Maximum of likelihood function under }H_{0}\text{ or }H_{a}}\]</span></p>
@@ -847,17 +908,17 @@ Wald test statistics and <span class="math inline">\(p\)</span>-values are autom
 <p><span class="math display">\[\text{logit}\left( \pi \right) = \ \beta_{0} + \ \beta_{1}x_{1} + \ \cdots + \ \beta_{r}x_{r} + \ \cdots + \ \beta_{p}x_{p}.\]</span></p>
 <p>We can then find <span class="math inline">\(- 2\)</span><span class="math inline">\(\ln\left( \Lambda \right)\)</span>. If the null hypothesis is true, <span class="math inline">\(- 2\)</span><span class="math inline">\(\ln\left( \Lambda \right)\)</span> has an approximate <span class="math inline">\(\chi_{1}^{2}\)</span> distribution for a large sample.</p>
 <p>There are a number of ways to perform LRTs in R. The easiest way to perform the tests of interest is to use the <strong>Anova( )</strong> function from the <strong>car</strong> package. (<a href="http://cran.r-project.org/web/packages/car/car.pdf">http://cran.r-project.org/web/packages/car/car.pdf</a>) This package is not automatically installed in R so we will need to install it prior to use. The package corresponds to the book “An R Companion to Applied Regression” by Fox and Weisberg. The code and output is given in figure 18.</p>
-<p><embed src="./images/media/image19.tmp" style="width:5.55286in;height:2.03153in" /></p>
+<p><embed src="./images/media/image19.png" style="width:5.55286in;height:2.03153in" /></p>
 <p>Figure 18. LRT test with the <strong>Anova( )</strong> function for a single independent variable.</p>
 <p><span class="math inline">\(- 2\)</span><span class="math inline">\(\ln\left( \Lambda \right) = 7.952\)</span> and <span class="math inline">\(p\)</span>-value <span class="math inline">\(= 0.004804\)</span>. Since <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt; \ \alpha = 0.05\)</span>, we reject <span class="math inline">\(H_{0}\)</span>: <span class="math inline">\(\beta_{1} = 0.\)</span> There is significant evidence to indicate temperature has an effect on the probability of thermal distress. LRT is generally a better test than the Wald test.</p>
-<p><em>Activity 8:</em> Refer to Activities 2 and 4. Test whether age has a significant effect using the likelihood-ratio test (LRT).</p>
+<h5>Activity 8:</h5><p> Refer to Activities 2 and 4. Test whether age has a significant effect using the likelihood-ratio test (LRT).</p>
 <p>Let’s reconsider the model with both duration of the surgery (D) and type of device used to secure the airway (T) in it: <span class="math inline">\(\text{logit}\left( \pi \right) = \ \beta_{0} + \ \beta_{1}D + \ \beta_{2}T\)</span>. In figure 19, we perform LRTs for these two variables using <strong>Anova( )</strong> in R.</p>
-<p><embed src="./images/media/image20.tmp" style="width:5.43826in;height:1.40645in" /></p>
+<p><embed src="./images/media/image20.png" style="width:5.43826in;height:1.40645in" /></p>
 <p>Figure 19. LRT test with the <strong>Anova( )</strong> function for two independent variables.</p>
 <p>For the test of duration with <span class="math inline">\(H_{0}:\ \ \beta_{1} = 0\)</span> vs. <span class="math inline">\(H_{a}:\ \ \beta_{1}\  \neq 0\)</span>, we obtain <span class="math inline">\(- 2\)</span><span class="math inline">\(\ln\left( \pi \right) = 12.4396\)</span> with a <span class="math inline">\(p\)</span>-value of 0.0004203, and we reach the same conclusion as with the previous Wald test. In fact, it is now highly significant. The <span class="math inline">\(p\)</span>-value for the type of device test is given as 0.0608744, which again suggests there is insufficient evidence that type of device is important (given that the model includes duration of surgery).</p>
-<p><em>Activity 9:</em> Refer to Activities 3 and 5. Perform LRTs for the three independent variables using <strong>Anova( )</strong> in R.</p>
+<h5>Activity 9:</h5><p> Refer to Activities 3 and 5. Perform LRTs for the three independent variables using <strong>Anova( )</strong> in R.</p>
 <p>Within the <strong>stats</strong> package, the <strong>anova( )</strong> function can perform LRTs. In figure 20, we see what occurs with a somewhat naïve use of it.</p>
-<p><embed src="./images/media/image21.tmp" style="width:5.5216in;height:2.48993in" /></p>
+<p><embed src="./images/media/image21.png" style="width:5.5216in;height:2.48993in" /></p>
 <p>Figure 20. Naïve use of <strong>anova( )</strong> function.</p>
 <p>The <span class="math inline">\(p\)</span>-value for type of device (0.0608744) is the same as from using <strong>Anova( )</strong>, but the <em>p</em>-value for duration of surgery (0.0004008) is not. The reason for the difference is due to the hypotheses being tested. The <strong>anova( )</strong> function tests the model’s explanatory variables in a sequential manner. Thus, the duration test <span class="math inline">\(p\)</span>-value is actually for the test of</p>
 <p><span class="math inline">\(H_{0}:\ \ \)</span><span class="math inline">\(\text{logit}\left( \pi \right) = \ \beta_{0}\)</span></p>
@@ -867,7 +928,7 @@ Wald test statistics and <span class="math inline">\(p\)</span>-values are autom
 <p><span class="math inline">\(H_{a}:\ \ \)</span><span class="math inline">\(\text{logit}\left( \pi \right) = \ \beta_{0} + \ \beta_{1}\)</span>D <span class="math inline">\(+ \ \beta_{2}\)</span>T</p>
 <p>where duration of surgery is assumed to be in both models.</p>
 <p>In order to produce the tests like <strong>Anova( )</strong>, we need to estimate the <span class="math inline">\(H_{0}\)</span> and <span class="math inline">\(H_{a}\)</span> models separately and then use their model fit objects in a different way with <strong>anova( )</strong> (figure 21). <a href="file:///C:\Users\jx0848tg\AppData\Local\Microsoft\Windows\Temporary%20Internet%20Files\Content.Outlook\0GLG0KQP\(https:\stats.stackexchange.com\questions\223626\r-anova-vs-anova-for-test-of-categorical-predictor-from-glmer-or-glm-nb-ob%3fnoredirect=1&amp;lq=1">(https://stats.stackexchange.com/questions/223626/r-anova-vs-anova-for-test-of-categorical-predictor-from-glmer-or-glm-nb-ob?noredirect=1&amp;lq=1</a>)</p>
-<p><embed src="./images/media/image22.tmp" style="width:5.5216in;height:1.86484in" /></p>
+<p><embed src="./images/media/image22.png" style="width:5.5216in;height:1.86484in" /></p>
 <p>Figure 21. Use of <strong>anova( )</strong> function to compare reduced and full models.</p>
 <p>We obtain the same results as before with <span class="math inline">\(- 2\)</span><span class="math inline">\(\ln\left( \Lambda \right)\)</span> = 30.138 and a <span class="math inline">\(p\)</span>-value = 0.0004203. The use of <strong>anova( )</strong> helps to emphasize a reduced and full model approach to obtaining the <span class="math inline">\(- 2\)</span><span class="math inline">\(\ln\left( \Lambda \right)\)</span> statistic.</p>
 
@@ -903,10 +964,10 @@ Wald test statistics and <span class="math inline">\(p\)</span>-values are autom
 <p>Consider the model with only temperature at lift off as the explanatory variable:</p>
 <p><span class="math display">\[\text{logit}\left( \widehat{\pi} \right) = 15.0429 - 0.2322\text{temp}\]</span></p>
 <p>To estimate the odds ratio, we can simply use the <strong>exp( )</strong> function (figure 22).</p>
-<p><embed src="./images/media/image23.tmp" style="width:3.07335in;height:0.92721in" /></p>
+<p><embed src="./images/media/image23.png" style="width:3.07335in;height:0.92721in" /></p>
 <p>Figure 22. Calculation of the estimated odds ratio for <strong>temp</strong>.</p>
 <p>We see that <span class="math inline">\(\exp( {\widehat{\beta}}_{1} )\)</span> = 0.7928 with <span class="math inline">\(c = 1\)</span>. The odds of thermal distress decrease by 0.7928 times for every 1-degree increase in temperature. Because a 1-degree increment is rather small (range in temperature in the previous 23 flights was from 53-81<span class="math inline">\(^\circ\text{F}\)</span>), we instead focus on the change in the odds of thermal distress for a 10-degree increment. Also, because the estimated odds of thermal distress are lower for an increase in temperature <span class="math inline">\((e^{c{\widehat{\beta}}_{1}} < 1\)</span> for <span class="math inline">\(c\  &gt; 0)\)</span>, we focus on <span class="math inline">\(c =  -10\)</span> for our primary interpretation. Thus, we find that the estimated odds of thermal distress increase by 10.19 times for every 10-degree decrease in the temperature.</p>
-<p><em>Activity 10:</em> Refer to Activities 2 and 4. Calculate the estimated odds ratio for age with <span class="math inline">\(c = 1\)</span> and <span class="math inline">\(c = 12.\)</span></p>
+<h5>Activity 10:</h5><p> Refer to Activities 2 and 4. Calculate the estimated odds ratio for age with <span class="math inline">\(c = 1\)</span> and <span class="math inline">\(c = 12.\)</span></p>
 <h4 id="confidence-intervals-for-or">Confidence Intervals for OR</h4>
 <p>Because the estimated odds ratio is a statistic, it will vary from sample to sample. Therefore, we need to find a confidence interval for <em>OR</em> in order to make inferences with a particular level of confidence.</p>
 <p>Wald confidence intervals are the easiest to calculate. First, an interval for <span class="math inline">\(c\beta_{1}\)</span> needs to be found:</p>
@@ -931,18 +992,18 @@ where the appropriate numerical values are inserted with &lt; &gt;.
 </ol>
 <h4 id="confidence-intervals-for-the-space-shuttle-example">Confidence Intervals for the Space Shuttle Example</h4>
 <p>To account for the variability in the odds ratio estimator, we would like to calculate a confidence interval for the actual odds ratio itself. The code for the profile likelihood ratio interval is given in figure 23.</p>
-<p><embed src="./images/media/image24.tmp" style="width:5.56328in;height:1.8961in" /></p>
+<p><embed src="./images/media/image24.png" style="width:5.56328in;height:1.8961in" /></p>
 <p>Figure 23. Code for the Profile Likelihood Ratio Confidence Interval.</p>
 <p>The <strong>confint( )</strong> function first finds an interval for <span class="math inline">\(\beta_{1}\)</span> itself. (<a href="https://stats.stackexchange.com/questions/177005/interpreting-glm-output-from-r%20">https://stats.stackexchange.com/questions/177005/interpreting-glm-output-from-r</a>) The 95% profile LR confidence interval for the <strong>temp</strong> parameter is <span class="math inline">\(- 0.5155  &lt;  \beta_{1} &lt; - 0.0608.\)</span> We then use the <strong>exp( )</strong> function to find the confidence interval for <span class="math inline">\(\text{OR}\)</span>. Using <span class="math inline">\(c =  - 10\)</span>, the 95% profile LR interval for the odds ratio is <span class="math inline">\(1.84  &lt; OR  &lt;  &lt; 173.25\)</span> where <span class="math inline">\(OR = e^{- 10\beta_{1}}\)</span>. With 95% confidence, the odds of thermal distress increase by an amount between 1.84 to 173.25 times for every 10-degree decrease in temperature. Because the interval is entirely above 1, there is sufficient evidence that a 10-degree decrease in temperature significantly increases the odds of thermal distress. Note that we use <strong>as.numeric( )</strong> in figure 23 to prevent unnecessary labels from being printed.</p>
 <p>In order to calculate a Wald interval, we need to use the specific method function <strong>confint.default( )</strong> (figure 24).</p>
-<p><embed src="./images/media/image25.tmp" style="width:5.2924in;height:1.0939in" /></p>
+<p><embed src="./images/media/image25.png" style="width:5.2924in;height:1.0939in" /></p>
 <p>Figure 24. Code for Wald confidence interval.</p>
 <p>We used the <strong>confint.default( )</strong> function for part of the calculations, because there is no “Wald” like option in <strong>confint( )</strong>. The 95% Wald confidence interval for the <strong>temp</strong> parameter is <span class="math inline">\(- 0.4443\  &lt; \ \beta_{1}\  &lt; \  - 0.0200.\)</span> Using <span class="math inline">\(c = \  - 10,\)</span> we obtain the 95% Wald interval <span class="math inline">\(1.22\  &lt; OR &lt; 85.03.\)</span></p>
 <p>To see how these calculations are performed without the <strong>confint.default( )</strong> function, figure 25 is an example of how to program into R the corresponding formula.</p>
-<p><embed src="./images/media/image26.tmp" style="width:5.77164in;height:0.93763in" /></p>
+<p><embed src="./images/media/image26.png" style="width:5.77164in;height:0.93763in" /></p>
 <p>Figure 25. Code for computing the Wald confidence interval directly.</p>
 <p>The <strong>vcov( )</strong> function calculates the estimated covariance matrix for the parameter estimates using the information within <strong>mod.fit</strong>. By specifying <strong>vcov(mod.fit)[2,2]</strong>, we extract <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{1} \right)\)</span> from the matrix. The <strong>mod.fit$coefficients[2]</strong> syntax extracts <span class="math inline">\({\widehat{\beta}}_{1}\)</span> from the vector of parameter estimates. Putting these elements together, we calculate the confidence interval for <span class="math inline">\(\beta_{1}\)</span> and then the desired confidence interval for the odds ratio.</p>
-<p><em>Activity 11:</em> Refer to Activities 2 and 4.</p>
+<h5>Activity 11:</h5><p> Refer to Activities 2 and 4.</p>
 <ul>
 <li><p>Find the 95% Wald confidence interval for <span class="math inline">\(\beta_{1}\)</span>.</p></li>
 <li><p>Find the 95% profile LR confidence interval for <span class="math inline">\(\beta_{1}\)</span>.</p></li>
@@ -953,14 +1014,14 @@ where the appropriate numerical values are inserted with &lt; &gt;.
 <p>As shown earlier, the estimate for <span class="math inline">\(\pi\)</span> is</p>
 <p><span class="math display">\[\widehat{\pi} = \ \frac{e^{{\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x_{1} + \ \cdots + \ {\widehat{\beta}}_{p}x_{p}}}{1 + \ e^{{\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x_{1} + \ \cdots + \ {\widehat{\beta}}_{p}x_{p}}}\]</span></p>
 <p>As an example, we again use the <strong>mod.fit</strong> object from the logistic regression model that uses only <strong>temp</strong> as an explanatory variable. Figures 26 and 27 show two ways that the estimated probability of thermal distress can be calculated for a temperature of 50 degrees.</p>
-<p><embed src="./images/media/image27.tmp" style="width:4.84443in;height:1.11474in" /></p>
+<p><embed src="./images/media/image27.png" style="width:4.84443in;height:1.11474in" /></p>
 <p>Figure 26. Direct calculation of the probability of thermal distress at a temperature of <span class="math inline">\(50℉\)</span>.</p>
 <p>The first way directly calculates the linear predictor as <span class="math inline">\({\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x = 15.0429 - 0.2322\  \times 50 = 3.4348\)</span> resulting in <span class="math inline">\(\widehat{\pi} = \ \frac{e^{3.4348}}{1 + \ e^{3.4348}} = 0.9688.\)</span></p>
-<p><embed src="./images/media/image28.tmp" style="width:5.93833in;height:1.06265in" /></p>
+<p><embed src="./images/media/image28.png" style="width:5.93833in;height:1.06265in" /></p>
 <p>Figure 27. Use of the <strong>predict( )</strong> function to calculate the probability of thermal distress at a temperature of <span class="math inline">\(50℉\)</span>.</p>
 <p>The second way to calculate <span class="math inline">\(\widehat{\pi}\)</span> is to use the <strong>predict( )</strong> function. To use <strong>predict( )</strong>, a data frame must contain the explanatory variable values at which the estimates of <span class="math inline">\(\pi\)</span> are desired. This data frame is included then in the <strong>newdata</strong> argument of <strong>predict( )</strong>. Additionally, the <strong>object</strong> argument specifies where the model fit information from <strong>glm( )</strong> is located, and the <strong>type = “response”</strong> argument value instructs R to estimate <span class="math inline">\(\pi\)</span>. Alternatively, the <strong>type = “link”</strong> argument value instructs R to estimate <span class="math inline">\(\beta_{0} + \ \beta_{1}x\)</span>. (<a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/predict.glm.html">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/predict.glm.html</a>)</p>
-<p><em>Activity 12:</em> Refer to Activities 2 and 4. Use the <strong>predict( )</strong> function in R to estimate the probability of kyphosis being present at an age of 180 months (15 years).</p>
-<p><em>Activity 13:</em> Refer to Activities 3 and 5. Using the direct approach, estimate the probability of being hired when <span class="math inline">\(x_{1} = 4,\ x_{2} = 3,\ \)</span>and <span class="math inline">\(x_{3} = 0.\)</span></p>
+<h5>Activity 12:</h5><p> Refer to Activities 2 and 4. Use the <strong>predict( )</strong> function in R to estimate the probability of kyphosis being present at an age of 180 months (15 years).</p>
+<h5>Activity 13:</h5><p> Refer to Activities 3 and 5. Using the direct approach, estimate the probability of being hired when <span class="math inline">\(x_{1} = 4,\ x_{2} = 3,\ \)</span>and <span class="math inline">\(x_{3} = 0.\)</span></p>
 <p>Because <span class="math inline">\(\widehat{\pi}\)</span> is a statistic, it will vary from sample to sample. Therefore, we need to find a confidence interval for <span class="math inline">\(\pi\)</span> in order to make inferences with a particular level of confidence. Both Wald and profile LR intervals will be discussed next.</p>
 <h4 id="wald-interval">Wald Interval</h4>
 <p>To find a confidence interval for <span class="math inline">\(\pi\)</span>, consider again the logistic regression model with only one explanatory variable <span class="math inline">\(x\)</span>:</p>
@@ -974,16 +1035,16 @@ where the appropriate numerical values are inserted with &lt; &gt;.
 <p>To find the <span class="math inline">\(\left( 1 - \ \alpha \right)100\%\ \)</span>Wald confidence interval for <span class="math inline">\(\pi\)</span>, we use the <span class="math inline">\(\exp(\cdot)/[1 + \exp(\cdot)]\)</span> transformation:</p>
 <p><span class="math display">\[\frac{e^{{\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x\  \pm \ Z_{1 - \alpha/2}\sqrt{\text{\ Var}\left( {\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x \right)}}}{1 + \ e^{{\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x\  \pm \ Z_{1 - \ \alpha/2}\sqrt{\text{Var}\left( {\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x \right)}}}\]</span></p>
 <p>To calculate a Wald confidence interval for <span class="math inline">\(\pi\)</span>, the easiest way is to use the <strong>predict( )</strong> function to calculate <span class="math inline">\({\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x\)</span> and <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x \right)\)</span> first. We then calculate the confidence interval for <span class="math inline">\(\pi\)</span> using the appropriate code for the above equations (figure 28).</p>
-<p><embed src="./images/media/image29.tmp" style="width:6.5in;height:3.05in" /></p>
+<p><embed src="./images/media/image29.png" style="width:6.5in;height:3.05in" /></p>
 <p>Figure 28. Calculation of Wald confidence interval for <span class="math inline">\(\pi\)</span>.</p>
 <p>We use the <strong>se = TRUE</strong> argument value within <strong>predict( )</strong> to find <span class="math inline">\(\widehat{\text{Var}}\left( {\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x \right)\)</span><sup>1/2</sup>, the “standard error” for <span class="math inline">\({\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x\)</span>. The 95% Wald confidence interval for <span class="math inline">\(\pi\)</span> is <span class="math inline">\(0.3704\  &lt; \ \pi\  &lt; 0.9994\)</span>.</p>
-<p><em>Activity 14:</em> Refer to Activities 2 and 4. Calculate a 95% Wald confidence interval for <span class="math inline">\(\pi\)</span> at an age of 180 months.</p>
+<h5>Activity 14:</h5><p> Refer to Activities 2 and 4. Calculate a 95% Wald confidence interval for <span class="math inline">\(\pi\)</span> at an age of 180 months.</p>
 <p>Using the original Wald confidence interval equation again, we can also calculate more than one interval at a time and include more than one explanatory variable. Figure 29 is an example using the estimated model</p>
 <p><span class="math inline">\(\text{logit}\left( \widehat{\pi} \right) = \  - 1.4173 + 0.0687D - 1.6590T\)</span></p>
 <p>that we found earlier and then saved the results from <strong>glm( )</strong> in an object called <strong>mod.fit2</strong>.</p>
-<p><embed src="./images/media/image30.tmp" style="width:6.48007in;height:2.51077in" /></p>
+<p><embed src="./images/media/image30.png" style="width:6.48007in;height:2.51077in" /></p>
 <p>Figure 29. Code for calculating two confidence intervals at a time and including two explanatory variables.</p>
-<p><em>Activity 15:</em> Refer to Activities 3 and 5. Calculate 95% Wald confidence intervals for <span class="math inline">\(\pi\)</span>, the probability of being hired, when <span class="math inline">\(x_{1} = 4,\ x_{2} = 3,\ x_{3} = 0\)</span> and when <span class="math inline">\(x_{1} = 4,\ x_{2} = 0,\ x_{3} = 1.\)</span> Use <strong>data.frame(x1 = c(4, 4), x2 = c(3, 0), x3 = c(0, 1))</strong>.</p>
+<h5>Activity 15:</h5><p> Refer to Activities 3 and 5. Calculate 95% Wald confidence intervals for <span class="math inline">\(\pi\)</span>, the probability of being hired, when <span class="math inline">\(x_{1} = 4,\ x_{2} = 3,\ x_{3} = 0\)</span> and when <span class="math inline">\(x_{1} = 4,\ x_{2} = 0,\ x_{3} = 1.\)</span> Use <strong>data.frame(x1 = c(4, 4), x2 = c(3, 0), x3 = c(0, 1))</strong>.</p>
 <h4 id="profile-likelihood-ratio-interval">Profile Likelihood Ratio Interval</h4>
 <p>Profile LR confidence intervals for <span class="math inline">\(\pi\)</span> can be found as well, but they can be much more difficult computationally to find than for <span class="math inline">\(\text{OR}\)</span>. This is because a larger number of parameters are involved. For example, the one explanatory variable model <span class="math inline">\(\text{logit}\left( \pi \right) = \ \beta_{0} + \ \beta_{1}x\)</span> is a linear combination of <span class="math inline">\(\beta_{0}\)</span> and <span class="math inline">\(\beta_{1}\)</span>. The numerator of <span class="math inline">\(- 2\)</span><span class="math inline">\(\ln\left( \Lambda \right)\)</span> involves maximizing the likelihood function with a constraint for this linear combination.</p>
 <p>The <strong>mcprofile</strong> package (not in the default installation of R) provides a general way to compute profile likelihood ratio intervals. Earlier versions of it produced questionable results at times. Current versions generally do not have problems. <a href="file:///C:\Users\jx0848tg\AppData\Local\Microsoft\Windows\Temporary%20Internet%20Files\Content.Outlook\0GLG0KQP\(https:\cran.r-project.org\web\packages\mcprofile\mcprofile.pdf">(https://cran.r-project.org/web/packages/mcprofile/mcprofile.pdf</a>) Still, we recommend using the following approach with this package:</p>
@@ -993,7 +1054,7 @@ where the appropriate numerical values are inserted with &lt; &gt;.
 <li><p>Use the profile LR interval as long as it is not outlandishly different than the Wald and there are no warning messages given by R when calculating the interval. Otherwise, use the Wald interval.</p></li>
 </ol>
 <p>To find a profile LR interval for <span class="math inline">\(\pi\)</span> at a lift off temperature of 50 degrees, we use the code in figure 30.</p>
-<p><embed src="./images/media/image31.tmp" style="width:6.5in;height:3.725in" /></p>
+<p><embed src="./images/media/image31.png" style="width:6.5in;height:3.725in" /></p>
 <p>Figure 30. Profile LR interval for <span class="math inline">\(\pi\)</span> at a temperature of 50 degrees.</p>
 
 <p>After the initial call to the <strong>library( )</strong> function for the <strong>mcprofile</strong> package, we create a matrix 
@@ -1004,8 +1065,8 @@ The <strong>mcprofile( )</strong> function calculates <span class="math inline">
 transformation then to find the interval for <span class="math inline">\(\pi\)</span> as <span class="math inline">\(0.5437\  &lt; \ \pi\  &lt; 0.9998\)</span>.</p>
 
 
-<p><em>Activity 16:</em> Refer to Activities 2 and 4. Calculate a 95% profile LR confidence interval for <span class="math inline">\(\pi\)</span> at an age of 180 months.</p>
-<p><strong>Final Assessment</strong></p>
+<h5>Activity 16:</h5><p> Refer to Activities 2 and 4. Calculate a 95% profile LR confidence interval for <span class="math inline">\(\pi\)</span> at an age of 180 months.</p>
+<h3 id="final-assessment">Final Assessment</h3>
 <ol type="1">
 <li><p>The following table refers to a sample of subjects randomly selected for an Italian study on the relation between income and whether one possesses a travel credit card (such as American Express). At each level of annual income in millions of lira, the table indicates the number of subjects sampled and the number of them possessing at least one travel credit card. (Note: one million lira at the time of the study is currently worth about 500 euros.) Logistic regression was used to relate the probability of having a travel credit card to income.</p></li>
 </ol>
@@ -1177,11 +1238,11 @@ transformation then to find the interval for <span class="math inline">\(\pi\)</
 </table>
 <p><em>Source:</em> Based on data in <em>Categorical Data Analysis</em>, Quaderni del Corso Estivo di Statistica e Calcolo delle Probabilita, no. 4, Instituto di Metodi Quantitativi, Universita Luigi Bocconi, by R. Piccarretta.</p>
 <p>Use the following code to create a data frame:</p>
-<p><embed src="./images/media/image32.tmp" style="width:6.5in;height:1.0625in" /></p>
+<p><embed src="./images/media/image32.png" style="width:6.5in;height:1.0625in" /></p>
 <p>Your data.frame should be the following:</p>
-<p><embed src="./images/media/image33.tmp" style="width:2.73997in;height:5.14655in" /></p>
+<p><embed src="./images/media/image33.png" style="width:2.73997in;height:5.14655in" /></p>
 <p>Use the following code to create the logistic regression model:</p>
-<p><embed src="./images/media/image34.tmp" style="width:6.26129in;height:0.30213in" /></p>
+<p><embed src="./images/media/image34.png" style="width:6.26129in;height:0.30213in" /></p>
 <ol type="a">
 <li><p>The estimated logistic regression equation is <span class="math inline">\(\text{logit}\left( \widehat{\pi} \right) =\)</span> __________ + _________*<strong>income.</strong></p></li>
 <li><p>Because there is a positive parameter estimate corresponding to income, the estimated probability of having a travel credit card _________ as income increases.</p></li>
@@ -1395,17 +1456,17 @@ transformation then to find the interval for <span class="math inline">\(\pi\)</
 </ul>
 <p>The authors used logistic regression to estimate the probability an O-ring will fail. In order to use this model, the authors needed to assume that each O-ring is independent for each launch. This assumption is necessary since logistic regression assumes that each response has a binomial distribution, and independence of trials is required for the binomial. Because three O-rings are on each rocket, there may be dependencies (e.g. installed by the same workers, failure in one perhaps could lead to failure in another, …) in their success or failure. Note that a subsequent analysis helped to alleviate the authors’ concerns about independence.</p>
 <p>Create a data frame using the following code:</p>
-<p><embed src="./images/media/image35.tmp" style="width:6.5in;height:4.82083in" /></p>
+<p><embed src="./images/media/image35.png" style="width:6.5in;height:4.82083in" /></p>
 <ol type="a">
 <li><p>Estimate the logistic regression model using the explanatory variables (<strong>temp</strong> and <strong>pressure</strong>) in a linear form. Use <strong>o.ring/number</strong> as the response variable in your model. Use the following code to create your model:</p></li>
 </ol>
-<p><embed src="./images/media/image36.tmp" style="width:5.90707in;height:0.31254in" /></p>
+<p><embed src="./images/media/image36.png" style="width:5.90707in;height:0.31254in" /></p>
 <p><span class="math inline">\(\text{logit}\left( \widehat{\pi} \right) = \ \)</span>__________ + __________<strong>temp</strong> + __________<strong>pressure</strong></p>
 <ol start="2" type="a">
 <li><p>Use the Wald test results to test the significance of the two explanatory variables. Use <span class="math inline">\(\alpha = 0.05\)</span>.</p></li>
 <li><p>A logistic regression model was fit using only <strong>temp</strong> as a predictor of O-ring failure. Use the following code:</p></li>
 </ol>
-<p><embed src="./images/media/image37.tmp" style="width:5.51119in;height:0.29171in" /></p>
+<p><embed src="./images/media/image37.png" style="width:5.51119in;height:0.29171in" /></p>
 <p>The estimated logistic regression model is <span class="math inline">\(\text{logit}\left( \widehat{\pi} \right) = \ \)</span>__________ + __________<strong>temp.</strong></p>
 <ol start="4" type="a">
 <li><p>Test whether <strong>temp</strong> has a significant effect using the Wald test.</p></li>
