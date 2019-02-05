@@ -624,7 +624,7 @@ Dijkstra:
   - Select unvisited vertex V1 having minimum distance from origin V0.
     (some use a queue)
   - Select unvisited vertex V2 having minimum distance from vertex V1.
-  - … Repeat until at destination vertex.
+  -  . . . Repeat until at destination vertex.
 
 The Dijkstra algorithm exhaustively finds the shortest path between the
 origin vertex and every other of the graph's vertices. 
@@ -726,40 +726,37 @@ Or:
 
 Based on the second version of this algorithm, find the MST of a graph
 of vertices A, B, C, D, E, and F. 
+| | | | | | | | | | |
+|--|--|--|--|--|--|--|--|--|--|
+|Edges: | B-D | A-E | D-F | B-F | C-E | A-C | A-F | B-E | B-C  |      
+|Weight: | 2   |   4   |  5  |  6  |  7    | 8  |   8   |   9  |   9    |      
+|Add?  | Yes | Yes |  Yes | No | Yes  | No | Yes |  No | No|
 
-Edges:  B-D A-E D-F B-F C-E A-C A-F B-E B-C        
+|  | |  |  |  |  | ||||||
+|--|--|--|--|--|--|--|-|-|-|-|-|-|
+|Edges of MST: | B-D | | A-E | | D-F |  | C-E | | A-F | | 
+| Sum of edges:  |  2 |+ | 4 |+ |5  |+ |7 |+ | 8 | == | 26 
 
-Weight:  2      4      5     6     7      8     8      9     9          
-
-Add?  Yes  Yes   Yes  No  Yes   No Yes  No  No
-
-Edges of MST:  B-D A-E D-F  C-E A-F   
-
-Sum of edges:    2 + 4 + 5  + 7 + 8  == 26 
-
-Exercises
+### Exercises
 
 For the following tasks, submit tested code and and related output.
 
 Tasks:
 
-1\. Devise a function to determine if a graph is strictly a tree.  
-
-2\. Given any two random vertices in a connected graph, write a Python
+1. Devise a function to determine if a graph is strictly a tree.  
+2. Given any two random vertices in a connected graph, write a Python
 program to compare Dijkstra and MST approaches for computing the
 shortest path. See that you get the same results. How doe there
 processing times compare? 
-
-3\. Write an algorithm to topologically sort a graph. Test your
+3. Write an algorithm to topologically sort a graph. Test your
 algorithm on graphs that contain a cycle and those that don't. Compare
 the run times and output of these two scenarios. What do you find most
 remarkable? 
-
-4\. Euler theorized that the "Eulerian graph" exists if and only if each
+4. Euler theorized that the "Eulerian graph" exists if and only if each
 vertex has an even numbered degree. Write a Python program to prove
 Euler correct, or not.
 
-Traveling salesman problem (summation of paths)
+## Traveling salesman problem (summation of paths)
 
 Consider a cyclic and connected graph that permits every node to be
 visited at least once. Such a graph is also called a "Hamiltonian
@@ -776,7 +773,9 @@ possible routes.
 Total possible routes (Hamiltonian circuits) in a complete graph having
 n vertices:
 
-H = (n – 1)\! / 2
+\[
+H = \frac{(n – 1)!}{2}
+\]
 
 Solutions put forth in the programming communuity have included the
 following techniques:
@@ -789,12 +788,11 @@ following techniques:
   - Implementation of constraints
   - Other exotic and sophisticated methods.
 
-A somewhat naïve approach using the nearest neighbor method:
+A somewhat naive approach using the nearest neighbor method:
 
   - For every targeted vertex, compute the distance to each of the other
     targeted vertices
   - For each target vertex, sort the other targeted vertices by distance
-    
   - Move to the nearest target vertice that has not been visited.
   - Repeat, until circuit is complete
 
