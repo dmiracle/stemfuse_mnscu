@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h2 id="graph-quantification-and-comparison">Graph quantification and comparison</h2>
+<h3 id="quantification-of-graphs">Quantification of graphs:</h3>
+<ul>
+<li>Total degrees in a graph: 2 * edgeCount</li>
+<li>Density of graph of n vertices: 2 * edgeCount / n * (n - 1)
+<ul>
+<li>Maximum density is 1, or 100%.</li>
+<li>Minimum density is 0 (isolated graph).</li>
+</ul></li>
+<li>Number of edges in a graph of n vertices:
+<ul>
+<li>Complete directed graph: n - 1</li>
+<li>Complete undirected graph: n * (n - 1) / 2</li>
+<li>Directed graph: n * (n – 1)</li>
+</ul></li>
+<li>Edge weight: may be assigned or computed, as below</li>
+<li>Distance (see shortest path discussion below)</li>
+</ul>
+<h3 id="edge-weight">Edge weight:</h3>
+<p>A weighted graph gives values to its edges, such as weight, cost, time, or distance. This is unlike an unweighted graph that represents relationships simply as true or false, or as 0 or 1.</p>
+<p>It may be the case that weights must be derived by your program. One method to compute distance is to assign Cartesian (x, y) coordinates to each vertex and then to compute the sum of distances between each vertex from the origin and the destination vertex. Between any two vertices in an XY plane, the distance, or Euclidean distance is:</p>
+<p>[ \left( (x_1 - x_2)^2 + (y_1 - y_2)^2\right)^{1/2} ]</p>
+<p>The advantage of having weights based on Euclidean distance is that it affords representing graphs beyond two or even three dimensions, such that the distance between any vertex pairs can be determined as:</p>
+<p>[ \left((x1 - x2)^2 + (y1 - y2)^2 + … + (z1 - z2)^2 )\right)^{1/2} ]</p>
+<p>Such coordinates can be useful for highly dimensional factor analytics.</p>
+<p>Graph density example:</p>
+<p>Using Python, density may be computed as follows. Suppose we have a graph represent be the following adjacency list G (more about adjacency lists below):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1">G <span class="op">=</span> { </a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="st">&quot;a&quot;</span> : [<span class="st">&quot;b&quot;</span>, <span class="st">&quot;d&quot;</span>],</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="st">&quot;b&quot;</span> : [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>],</a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="st">&quot;c&quot;</span> : [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>],</a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="st">&quot;d&quot;</span> : [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>]</a>
+<a class="sourceLine" id="cb1-6" title="6">}</a></code></pre></div>
+<p>Populate a data structure:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1">edges <span class="op">=</span> []</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="cf">for</span> vertex <span class="kw">in</span> G:</a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="cf">for</span> neighbor <span class="kw">in</span> G[vertex]:</a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="cf">if</span> {neighbor, vertex} <span class="kw">not</span> <span class="kw">in</span> edges:</a>
+<a class="sourceLine" id="cb2-5" title="5">      edges.append({vertex, neighbor})</a></code></pre></div>
+<p>A density algorithm:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">def</span> density(G):</a>
+<a class="sourceLine" id="cb3-2" title="2">  n <span class="op">=</span> <span class="bu">len</span>(G.keys())</a>
+<a class="sourceLine" id="cb3-3" title="3">  edgeCount <span class="op">=</span> <span class="bu">len</span>(G.edges())</a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="cf">return</span> <span class="fl">2.0</span> <span class="op">*</span> edgeCount <span class="op">/</span> (n <span class="op">*</span> (n <span class="op">-</span> <span class="dv">1</span>))</a></code></pre></div>
+<p>Comparing of graphs:</p>
+<ul>
+<li>Equality: same structure, data and order; equal objects are identical</li>
+<li>Identity: same data and order; maybe different structure (identical may be equal)</li>
+<li>Isomorphism: same number of vertices, edges and degrees at each level (data irrelevant)</li>
+</ul>
+<p>Two graphs are isomorphic if they can be mapped one-to-one to each other and preserve the relationships between vertices. These are essentially the same graphs though they may look different.</p>
+<p>Applications of graph comparison include analysis of fingerprints and social networks.</p>
+<p>Incidentally, a connected undirected graph can be equivalent to a directed graph if each of the vertex pairs of the former connect by two directed edges, one going in each direction between nodes.</p>
+<h3 id="exercise">Exercise</h3>
+<p>Write a Python program that generates two undirected graphs G1 and G2, each with vertices A to Z, and each with randomly connected vertices (no more than one connection to a pair of vertices). The connection weights should be random integers from 1 to 10. Determine if G1 and G2 are equal, identical and isomorphic.</p>
+<p>Submit your code and your tested output.</p>
+
+</div>
+</div>
+</body>
+</html>

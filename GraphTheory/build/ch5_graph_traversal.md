@@ -215,16 +215,16 @@ Or:
 
 Based on the second version of this algorithm, find the MST of a graph
 of vertices A, B, C, D, E, and F. 
-| | | | | | | | | | |
-|--|--|--|--|--|--|--|--|--|--|
-|Edges: | B-D | A-E | D-F | B-F | C-E | A-C | A-F | B-E | B-C  |      
+
+|Edges: | B-D | A-E | D-F | B-F | C-E | A-C | A-F | B-E | B-C  |    
+|--|--|--|--|--|--|--|--|--|--|  
 |Weight: | 2   |   4   |  5  |  6  |  7    | 8  |   8   |   9  |   9    |      
 |Add?  | Yes | Yes |  Yes | No | Yes  | No | Yes |  No | No|
 
-|  | |  |  |  |  | ||||||
-|--|--|--|--|--|--|--|-|-|-|-|-|-|
-|Edges of MST: | B-D | | A-E | | D-F |  | C-E | | A-F | | 
-| Sum of edges:  |  2 |+ | 4 |+ |5  |+ |7 |+ | 8 | == | 26 
+
+|Edges of MST: | B-D | | A-E | | D-F |  | C-E | | A-F |  |
+|--|--|--|--|--|--|--|--|--|--|--|
+| Sum of edges:  |  2 |+ | 4 |+ |5  |+ |7 |+ | 8 | == 26 |
 
 ### Exercises
 

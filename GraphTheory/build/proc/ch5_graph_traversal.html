@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h2 id="graph-traversal">Graph traversal</h2>
+<ul>
+<li>Traversal begins with any vertex – the "origin" vertex</li>
+<li>Visiting a vertex in a graph does not entail processing its data.</li>
+<li>Only vertices that are connected can be traversed.</li>
+<li>Methods include Depth First Search and Breadth First Search</li>
+</ul>
+<p>Depth first search and breadth first search methods:</p>
+<ul>
+<li>Find all neighbors of a vertex.</li>
+<li>Find all paths between an origin and destination vertex.</li>
+</ul>
+<p>Depth first search (DFS): Visit a neighbor of the origin, a neighbor of the neighbor, and so on, advancing as far as possible from the origin. Then go back to the first neighbor and repeat this procedure from there, traversing to unvisited neighbors. Sometimes a stack data structure is used to ensure that each path of neighbors is traversed in reverse to get back to the origin. DFS is also used for a topological sort (see below).</p>
+<p>In Python, we have the following depth first and breadth first search functions, as popularized by Guido van Rossum, the creator of Python (<a href="https://www.python.org/doc/essays/graphs.html">https://www.python.org/doc/essays/graphs.html</a> … link is now defunct).</p>
+<p>A recursive DFS algorithm:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">def</span> dfs(graph, start, path<span class="op">=</span>[]):</a>
+<a class="sourceLine" id="cb1-2" title="2">  path <span class="op">+=</span> [start]</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="cf">for</span> vertex <span class="kw">in</span> graph[start]:</a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="cf">if</span> <span class="kw">not</span> vertex <span class="kw">in</span> path:</a>
+<a class="sourceLine" id="cb1-5" title="5">      path <span class="op">=</span> dfs(graph, vertex, path)</a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="cf">return</span> path</a></code></pre></div>
+<p>An iterative DFS algorithm:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">def</span> dfs(graph, start, path<span class="op">=</span>[]):</a>
+<a class="sourceLine" id="cb2-2" title="2">  front <span class="op">=</span> [start]</a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="cf">while</span> front:</a>
+<a class="sourceLine" id="cb2-5" title="5">    vertex <span class="op">=</span> front.pop(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="cf">if</span> vertex <span class="kw">not</span> <span class="kw">in</span> path: <span class="co"># versus bfs... if not vertex in path</span></a>
+<a class="sourceLine" id="cb2-8" title="8">      path <span class="op">+=</span> [vertex]</a>
+<a class="sourceLine" id="cb2-9" title="9">      front <span class="op">+=</span> graph[vertex]</a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="cf">return</span> path</a></code></pre></div>
+<p>The aforementioned algorithms can be tested on a graph of the following adjacency list form:</p>
+<pre><code>graph = {
+  &#39;A&#39;: [&#39;B&#39;, &#39;C&#39;], 
+  &#39;B&#39;: [&#39;D&#39;, &#39;E&#39;],
+  &#39;C&#39;: [&#39;E&#39;], 
+  &#39;D&#39;: [&#39;F&#39;], 
+  &#39;E&#39;: [&#39;F&#39;],
+  &#39;F&#39;: [&#39;G&#39;, &#39;D&#39;],
+  &#39;G&#39;: []
+}
+</code></pre>
+<p>Breadth first search (BFS): Visit each neighbor, then each neighbor's neighbor, and so on. Sometimes a queue data structure is used to ensure that no neighbor is visited more than once. DFS can additionally yield the minimum edge accumulation in a path (shortest path).</p>
+<p>In Python:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">def</span> bfs(graph, start, path<span class="op">=</span>[]):</a>
+<a class="sourceLine" id="cb4-2" title="2">  front <span class="op">=</span> [start]</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="cf">while</span> front:</a>
+<a class="sourceLine" id="cb4-5" title="5">    vertex <span class="op">=</span> front.pop(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="cf">if</span> <span class="kw">not</span> vertex <span class="kw">in</span> path:<span class="co"># versus iterative dfs... if vertex not in path</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    path <span class="op">+=</span> [vertex]</a>
+<a class="sourceLine" id="cb4-9" title="9">    front <span class="op">+=</span> graph[vertex]</a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="cf">return</span> path</a></code></pre></div>
+<p>Note how the above algorithm is almost identical to the iterative DFS function above.</p>
+<h3 id="shortest-path-problems">Shortest path problems</h3>
+<p>Graph traversal methods for finding the shortest path entail adding up the connecting edges in the chain of neighbors between the origin vertex and destination vertex. The solution to an unweighted shortest path problem will be the path having minimum number of edges.</p>
+<p>Recall that edges can be weighted. That is, associated values vary over some range, such as distance, correlation, or time. A path can represent a sum of decisions and have an associated cost. A solution will have a "total distance" or "total cost."</p>
+<p>total vertices in shortest path &lt; n – 1</p>
+<p>Some shortest path methods:</p>
+<ul>
+<li>Dijkstra's algorithm</li>
+<li>All pairs (Floyd-Warshall) algorithm</li>
+<li>Topological ordering</li>
+<li>Minimum spanning tree</li>
+</ul>
+<p>Dijkstra:</p>
+<ul>
+<li>Set origin distance to 0.</li>
+<li>Set all vertex distances to max possible distance.</li>
+<li>Select unvisited vertex V1 having minimum distance from origin V0. (some use a queue)</li>
+<li>Select unvisited vertex V2 having minimum distance from vertex V1.</li>
+<li>. . . Repeat until at destination vertex.</li>
+</ul>
+<p>The Dijkstra algorithm exhaustively finds the shortest path between the origin vertex and every other of the graph's vertices.</p>
+<p>All pairs:</p>
+<ul>
+<li>Set origin distance to 0.</li>
+<li>Set all vertex distances to max possible distance.</li>
+<li>For every vertex, accumulate the minimum distance to every neighbor.</li>
+<li>Given distance[i][j] == 0 where i and j represent the origin, the destination distance depends on specified i,j</li>
+</ul>
+<p>The all-pairs (Floyd-Warshall) method computes the shortest path between all vertex pairs. The method is relatively straight forward:</p>
+<pre><code>for (int i = 0; i &lt; n; i++) {
+  for (int j = 0; j &lt; n; j++) {
+    for (int k = 0; k &lt; n; k++) {
+      distance[i][k] = min(distance[i][k], distance[i][j] + distance[j][k]);
+    }
+  }
+}
+</code></pre>
+<p>Given a weighted adjacency matrix, using a dictionary of form...</p>
+<pre><code>g[1,1] = 2
+g[1,3] = 4
+g[1,5] = 6
+</code></pre>
+<p>In Python we can have:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">def</span> all_pairs(g, n):</a>
+<a class="sourceLine" id="cb7-2" title="2">  dist <span class="op">=</span> {<span class="dv">0</span>: g}</a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb7-5" title="5">    dist[i] <span class="op">=</span> {}</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb7-9" title="9">      dist[i][j, k] <span class="op">=</span> <span class="bu">min</span>(dist[i <span class="op">-</span> <span class="dv">1</span>][j, k], dist[i <span class="op">-</span> <span class="dv">1</span>][i, j] <span class="op">+</span> dist[i <span class="op">-</span> <span class="dv">1</span>][i, k])</a>
+<a class="sourceLine" id="cb7-10" title="10"></a>
+<a class="sourceLine" id="cb7-11" title="11">  <span class="cf">return</span> dist[n]</a></code></pre></div>
+<p>Topological sort:</p>
+<p>For modeling systems wherein there are subsets of required sequence or dependencies, we can use a topological sort. In the context of a directed graph, the vertices of subgraphs or paths are queried with respect to edge weights. Another term for this is "precedence graph."</p>
+<p>Formally, a topological sort of a directed acyclic graph G = (V, E) is a linear ordering of vertices such that if an edge (u, v) exists in G, then u is listed before v in the linear sequence.</p>
+<p>For the shortest path problem of a weighted acyclic graph G with vertices V, the topological sort can be used as follows:</p>
+<ul>
+<li>Initialize collections:
+<pre><code>for i 1 to n of G:
+dist[i] = maxint
+</code></pre></li>
+<li>Initialize the origin vertex:
+<pre><code>dist[Vo] = 0 . . . the origin vertex
+</code></pre></li>
+<li>Topologically sort all vertices:
+<pre><code>for every vertex V[i]:
+  for every vertex V[j]:
+    if(V[j] is adjacent to V[i]):
+      if(dist[j] &gt; dist[i] + weight(i, j)):
+      dist[j] = dist[i] + weight(i, j) 
+</code></pre></li>
+</ul>
+<p>Minimum spanning tree:</p>
+<p>A tree is an acyclic graph that is connected. When that tree connects all vertices in an undirected weighted graph at minimum distance, we have a minimum spanning tree (MST).</p>
+<p>Formally, given an undirected weighted graph G = (V, E), an MST is the set T of edges in E that connect all vertices with a minimum total distance. These edges form a tree because each vertex has only one parent apart from the root vertex.</p>
+<p>MST algorithm:</p>
+<ol>
+<li>Rank the graph edges from least to most weight, storing the results in list ranked_edges.</li>
+<li>Traverse ranked_edges, removing those that do not disconnect the graph.</li>
+</ol>
+<p>Or:</p>
+<ol>
+<li>Rank the edges from most to least weight, storing the results in list ranked_edges.</li>
+<li>Traverse ranked_edges, summing the weights of edges that do not create a cycle.</li>
+</ol>
+<p>Based on the second version of this algorithm, find the MST of a graph of vertices A, B, C, D, E, and F. | | | | | | | | | | | |--|--|--|--|--|--|--|--|--|--| |Edges: | B-D | A-E | D-F | B-F | C-E | A-C | A-F | B-E | B-C |<br />
+|Weight: | 2 | 4 | 5 | 6 | 7 | 8 | 8 | 9 | 9 |<br />
+|Add? | Yes | Yes | Yes | No | Yes | No | Yes | No | No|</p>
+<p>| | | | | | | |||||| |--|--|--|--|--|--|--|-|-|-|-|-|-| |Edges of MST: | B-D | | A-E | | D-F | | C-E | | A-F | | | Sum of edges: | 2 |+ | 4 |+ |5 |+ |7 |+ | 8 | == | 26</p>
+<h3 id="exercises">Exercises</h3>
+<p>For the following tasks, submit tested code and and related output.</p>
+<p>Tasks:</p>
+<ol>
+<li>Devise a function to determine if a graph is strictly a tree.</li>
+<li>Given any two random vertices in a connected graph, write a Python program to compare Dijkstra and MST approaches for computing the shortest path. See that you get the same results. How doe there processing times compare?</li>
+<li>Write an algorithm to topologically sort a graph. Test your algorithm on graphs that contain a cycle and those that don't. Compare the run times and output of these two scenarios. What do you find most remarkable?</li>
+<li>Euler theorized that the "Eulerian graph" exists if and only if each vertex has an even numbered degree. Write a Python program to prove Euler correct, or not.</li>
+</ol>
+<h3 id="traveling-salesman-problem-summation-of-paths">Traveling salesman problem (summation of paths)</h3>
+<p>Consider a cyclic and connected graph that permits every node to be visited at least once. Such a graph is also called a "Hamiltonian circuit." Unlike a Eulerian circuit, which must traverse each edge exactly once (and can repeat vertex visits), the Hamiltonian circuit must visit each vertex exactly once (and can re-traverse edges).</p>
+<p>Like a Hamiltonian circuit, the traveling salesman problem entails a visit to locations. The challenge is to determine the path that minimizes total distance, for multiple locations. As the number of cities increases, there is a combinatorial explosion in the number of possible routes.</p>
+<p>Total possible routes (Hamiltonian circuits) in a complete graph having n vertices:</p>
+<p>[ H = \frac{(n – 1)!}{2} ]</p>
+<p>Solutions put forth in the programming communuity have included the following techniques:</p>
+<ul>
+<li>Brute force nearest neighbor assessment</li>
+<li>Simulated annealing</li>
+<li>Genetic algorithms</li>
+<li>Minimum spanning trees</li>
+<li>Neural networks</li>
+<li>Implementation of constraints</li>
+<li>Other exotic and sophisticated methods.</li>
+</ul>
+<p>A somewhat naive approach using the nearest neighbor method:</p>
+<ul>
+<li>For every targeted vertex, compute the distance to each of the other targeted vertices</li>
+<li>For each target vertex, sort the other targeted vertices by distance</li>
+<li>Move to the nearest target vertice that has not been visited.</li>
+<li>Repeat, until circuit is complete</li>
+</ul>
+<p>TSP makes for an interesting exploration of computation that might suit a distinct competency module in its own right. Look for working examples in the Big Data Analytics course module.</p>
+
+</div>
+</div>
+</body>
+</html>

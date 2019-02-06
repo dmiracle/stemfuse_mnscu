@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+<h2 id="overview">Overview</h2>
+<p>A graph data structure is a collection of distinct vertices (nodes), connected by lines referred to as edges or arcs. Each vertex may be associated with a label or ID, and it may have a numeric value representing connecting edges.</p>
+<p>The representation of each vertex and edge depends on the data structure employed. In object oriented programming there can be a Vertex class that contains a list of neighboring vertices and associated edges. An understanding of linked lists is prerequisite to formulating graphs as such.</p>
+<p>More formally, a graph G can be described as a set of a sets of vertices V and a set of edges E. We can denote a graph G(V, E) such that V = V(G) and E = E(G).</p>
+<p>When there is an edge e1 that connects two vertices v1 and v2, we say vertices v1 and v2 are "adjacent or neighbors." That is e1 represents the pair v1 and v2, or e1 = {v1, v2}. The term "endpoints" may thus refer to v1 and v2.</p>
+<p>Graphs can also be represented by adjacency matrices and adjacency lists. These data structures can, in turn, be made of parallel lists or arrays or hash tables.</p>
+<p>Properties of graphs in general:</p>
+<ul>
+<li><p>Edge – Connects a distinct pair of vertices.</p></li>
+<li><p>Subgraph – A graph may exist within a graph. Given G = G(V, E), it may be denoted as H = H(V', E').</p></li>
+<li><p>Digraph – A directed graph, wherein edges enforce direction of traversal.</p></li>
+<li><p>Connected graph: Defined by a path between any two vertices.</p></li>
+<li><p>Strongly connected – When a digraph has a path from every vertex to every other vertex.</p></li>
+<li><p>Weighted graph – the edges have numeric values in terms of weight, cost, distance, ....</p></li>
+<li><p>Degree of vertex – The number of edges incident to a vertex. Ex: deg(v1) = 2</p></li>
+<li><p>In-degrees and out-degrees – Pertain to the degrees in a digraph.</p></li>
+<li><p>Isolated vertex – has no degree of incidence.</p></li>
+<li><p>Regular graph – when every vertex has the same degree.</p></li>
+<li><p>Path – A sequence of vertices from an origin vertex to a destination vertex.</p></li>
+<li><p>Distance – Sum of the values for all intermediate edges of a path.</p></li>
+<li><p>Cyclic graph – When a path within a graph returns to a vertex within, a cycle exists.</p></li>
+<li><p>Acyclic graph – When no cycles exist within a graph.</p></li>
+<li><p>Finite path – Any pair of vertices is connected by exactly two end points.</p></li>
+<li><p>Infinite path – One vertex originates paths having more than one distinct end point. (Like a ray)</p></li>
+<li><p>Finite graph – Graph of finite paths and no vertex is in more than one path.</p></li>
+<li><p>Locally finite – Subgraph that if finite.</p></li>
+<li><p>Infinite graph – Graph of infinite paths.</p></li>
+<li><p>Multigraph – When parallel or multiple edges connect the same vertex pairs if a graph.</p></li>
+<li><p>Euler graph (path) – A path through a finite graph that traverses every edge exactly once.</p></li>
+<li><p>Eulerian circuit – Euler path that ends and begins at the same vertex.</p></li>
+<li><p>Loops – When an edge connects to a vertice to itself for self reference. Multiple loops on a single vertex allows it to be multigraph.</p></li>
+<li><p>Sparse graph – Most vertices of the graph are not connected.</p></li>
+<li><p>Dense graph – Most vertices of the graph are connected.</p></li>
+</ul>
+<p>Example of a connected and undirected graph:</p>
+<p><img src="./ch1_overview/2dcd3090ea2b2791a3b080628b6ca4432a234ee9.png" /></p>
+<p>Undirected graphs can be:</p>
+<ul>
+<li><p>Connected</p></li>
+<li><p>Complete</p></li>
+<li><p>Disconnected</p></li>
+</ul>
+<p>Properties of a connected graph:</p>
+<ul>
+<li>Path exits between every pair of vertices.</li>
+<li>Complete – If it has an edge between every distinct vertex pair.</li>
+<li>Directed and complete – If each vertex pair has two directed edges.</li>
+</ul>
+<p>Graph that is a connected simple path from vertex 0 to vertex 7:</p>
+<p><img src="./ch1_overview/e1a5cc3a2c4d68b0ae1b0a658bef8882e7509284.png" /></p>
+<p>Graph that is complete:</p>
+<p><img src="./ch1_overview/8e5f48530f98fb62cc2cc6eb3a9e85a07e845fc7.png" /></p>
+<p>Graph that is disconnected and exhibits a simple cycle:</p>
+<p><img src="./ch1_overview/7e7cc60324b5ca8e71973826b5d447d3f8f923c6.png" /></p>
+<p>Adjacency: Two vertices, such as v3 and v4 above, are adjacent given that there is an undirected edge between them. This is equivalent to parallel directed edges, such that v3 → v4 and v3 ← v4. If the edge is directed only such that v3 → v4, then v4 is adjacent to v3 and v4 is not adjacent to v3.</p>
+<h3 id="graph-construction">Graph construction</h3>
+<p>One way to construct a graph:</p>
+<ul>
+<li><p>Make a class Vertex with attributes:</p>
+<ul>
+<li>label</li>
+<li>degrees</li>
+<li>adjacent neighbor list and associated edge weights</li>
+<li>Possible counter for traversals or "visits"</li>
+</ul></li>
+<li><p>Use a list data structure to contain the Vertex objects. Possibly define a stack or queue. A hash table may be used.</p></li>
+</ul>
+<p>In pseudo code, a Vertex class of a simple graph having implied edges:</p>
+<pre><code>class Vertex:
+  Vertex[] neighbor
+  int[] distance2neighbor 
+  int degrees = 0
+  Vertex(Vertex adjacentNeighbor, int distance):
+    degrees = degrees + 1 
+    neighbor[degrees] = adjacentNeighbor
+    distance2neighbor[degrees] = distance
+</code></pre>
+<p>Conversely, an Edge class can be defined to have Vertex class attributes.</p>
+<p>In Python we can have:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">class</span> Vertex:</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, val ):</a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="va">self</span>.val <span class="op">=</span> val</a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="va">self</span>.edges <span class="op">=</span> []</a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">class</span> Graph:</a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, vertices<span class="op">=</span>[] ):</a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="va">self</span>.vertices <span class="op">=</span> vertices</a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10">  <span class="kw">def</span> add_vertex(<span class="va">self</span>, val ):</a>
+<a class="sourceLine" id="cb2-11" title="11">    new_vertex <span class="op">=</span> Vertex(val )</a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="va">self</span>.vertices.append(new_vertex )</a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="kw">def</span> add_edge(<span class="va">self</span>, vertex1, vertex2 ):</a>
+<a class="sourceLine" id="cb2-14" title="14">    vertex1.edges.append(vertex2)</a>
+<a class="sourceLine" id="cb2-15" title="15">    vertex2.edges.append(vertex1)</a></code></pre></div>
+<h3 id="exercise">Exercise</h3>
+<ol>
+<li>Write a Python program to build a simple connected graph. Populate your graph from data, either hard coded into your program or by file I/O. Run your program to display your graph as standard output. (Optionally, use the Networkx Python library for more visual appeal. See <a href="https://networkx.github.io/">https://networkx.github.io/</a> )</li>
+<li>Write a function in Python to verify that a graph is regular.</li>
+</ol>
+<p>Submit your code and your tested output.</p>
+
+</div>
+</div>
+</body>
+</html>
