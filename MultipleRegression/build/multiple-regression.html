@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+
+<body>
+
+    <!DOCTYPE html>
+    <html>
+      <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+      <meta charset="utf-8" />
+      <title>Multiple Regression</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+    
+      
+      <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+    
+      <style>
+      
+      .warning {
+        visibility: hidden;
+      }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      #leftSideBar {
+          background-color: #003C66;
+          background-repeat: no-repeat;
+          background-position: top center;
+          background-size: 100%;
+          min-height: 100%;
+          width: 200px;
+          float: left;
+          padding-top: 10px;
+          padding-right: 1%;
+          padding-left: 1%;
+          font-size: 1em;
+          line-height: 100%;
+          color: white;
+      }
+      
+      #leftSideBar a {
+          color: white;
+          text-decoration: none;
+      }
+      
+      #leftSideBar li {
+          margin:0 0 1em 0;
+      }
+      </style>
+    </head>
+    
+    <body>
+    <p style="text-align: center;"><a name="top"></a></p>
+    <div id="pageContainer">
+    <div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+    
+    <div id="mainContent">
+    <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<h1 id="multiple-regression-module">Multiple Regression Module </h1>
+<blockquote>
+<p>Dave Jacobson, Ph.D. and Halbana Tarmizi, Ph.D.</p>
+<p>Competency area: Data Analysis</p>
+</blockquote>
+<p><strong>Learning objectives</strong>: After this module, students will be able to:</p>
+<ul>
+<li><p>Hypothesize the general form of the multiple regression model.</p></li>
+<li><p>Specify the model assumptions for a multiple regression model.</p></li>
+<li><p>Use the method of least squares to estimate the coefficients in the multiple regression model.</p></li>
+<li><p>Interpret the regression coefficients.</p></li>
+<li><p>Assess the overall utility of the multiple regression model using the global <em>F</em>-Test.</p></li>
+<li><p>Assess the utility of the multiple regression model by making inferences about the regression coefficients.</p></li>
+<li><p>Use the least squares model to estimate the mean value of the response variable for specific values of the predictor variables.</p></li>
+<li><p>Use the least squares model to predict a particular value of the response variable for given values of the predictor variables.</p></li>
+<li><p>Calculate the multiple coefficients of determination and understand their relationship to multiple regression.</p></li>
+<li><p>Hypothesize the form of an interaction model and interpret the estimated regression coefficients.</p></li>
+<li><p>Hypothesize the form of a multiple regression model with one or more categorical predictor variables and interpret the estimated regression coefficients.</p></li>
+<li><p>Select the most important independent variables for modeling the response variable using several screening methods.</p></li>
+<li><p>Detect when multicollinearity exists in the multiple regression model and apply solutions to reduce the impact.</p></li>
+<li><p>Understand the issues with using the regression model for values of the independent variables that are outside of the region in which the model was developed.</p></li>
+</ul>
+<h3 id="requirements">Requirements</h3>
+<p>The examples, activities, and assessment exercises in this module assume basic knowledge and experience with the R programming language. If you are not familiar with R, a good resource is the R module which is also available on D2L. The code for the examples in this document were produced using Version 1.1.419 of RStudio. To use the non-base packages, such as <strong>car</strong> and <strong>MASS</strong>, you must install them prior to referencing them with a command such as the <strong>library( )</strong> function.</p>
+<p>Prior to undertaking this module, a basic understanding of elementary statistics and simple linear regression is assumed. From introductory statistics, one should be familiar with concepts such as probability and sampling distributions, confidence interval estimation, and hypothesis testing. A Simple Linear Regression module is available on D2L. Another excellent source for refreshing your memory on both basic statistical topics and simple linear regression is provided in the next section.</p>
+<h3 id="supplementary-materials">Supplementary Materials</h3>
+<p>Besides the information provided in this document, a number of other materials are posted on D2L for your use in learning multiple regression. They include:</p>
+<ul>
+<li><p>Code for reproducing all of the examples</p></li>
+<li><p>Code for the 14 activities</p></li>
+<li><p>Code for the Final Assessment questions</p></li>
+<li><p>A pdf file of the third edition of <strong>OpenIntro Statistics</strong> by David M. Diez, Christopher D. Barr, and Mine Cetinkaya-Rundel. In particular, Chapter 8 (pages 372-404) is devoted to “Multiple and Logistic Regression.” Pages 372-385 provide additional examples and exercises on many of the topics that are covered in the module. The first six chapters also can be used as a review of material typically covered in an introductory statistics course. In addition, Chapter 7 (pages 331-371) is an “Introduction to Linear Regression.”</p></li>
+<li><p>Two YouTube videos:</p>
+<ul>
+<li><p>Using R for Multiple Regression</p></li>
+<li><p>Using MS Excel for Multiple Regression</p></li>
+</ul></li>
+</ul>
+<p><strong>Resources:</strong></p>
+<p>Following is a list of online materials which are referenced in the content of this document. Many of them provide additional explanations and examples beyond what is covered in the following sections.</p>
+<p>Statistics open resources: <a href="https://guides.ou.edu/OER/statistics">https://guides.ou.edu/OER/statistics</a></p>
+<p>StatisticsSolutions: <a href="http://www.statisticssolutions.com/assumptions-of-multiple-linear-regression/">http://www.statisticssolutions.com/assumptions-of-multiple-linear-regression/</a></p>
+<p>Real statistics using Excel: <a href="http://www.real-statistics.com/multiple-regression/least-squares-method-multiple-regression/">http://www.real-statistics.com/multiple-regression/least-squares-method-multiple-regression/</a></p>
+<p>Regression coefficients: <a href="https://www.theanalysisfactor.com/interpreting-regression-coefficients/">https://www.theanalysisfactor.com/interpreting-regression-coefficients/</a></p>
+<p>The Analysis Factor - Assessing the fit of regression model: <a href="https://www.theanalysisfactor.com/assessing-the-fit-of-regression-models/">https://www.theanalysisfactor.com/assessing-the-fit-of-regression-models/</a></p>
+<p>Description of the <strong>statex.x77</strong> dataset in base R: <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/state.html">https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/state.html</a></p>
+<p>Description of the <strong>scatterplotMatrix</strong> function in the R <strong>car</strong> package: <a href="https://www.rdocumentation.org/packages/car/versions/3.0-0/topics/scatterplotMatrix">https://www.rdocumentation.org/packages/car/versions/3.0-0/topics/scatterplotMatrix</a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Multiple regression extends simple two-variable regression to the case that still has one response but many predictors (denoted <span class="math inline">\(x_{1}\)</span>, <span class="math inline">\(x_{2},\ x_{3},\)</span>...). The method is motivated by scenarios where many variables may be simultaneously connected to an output.</p>
+<h3 id="multiple-regression-model-and-model-assumptions">Multiple Regression Model and Model Assumptions</h3>
+<h4 id="what-is-multiple-linear-regression">What is Multiple Linear Regression?</h4>
+<p>Multiple linear regression is the most common form of the regression analysis. As a predictive analysis, multiple linear regression is used to describe data and to explain the relationship between one dependent variable and two or more independent variables.</p>
+<p><img src="./media/image1.png" style="width:5.40625in;height:1.19792in" /></p>
+<p><strong>Multiple Linear Regression Assumptions (source:</strong> <a href="http://www.statisticssolutions.com/assumptions-of-multiple-linear-regression/">http://www.statisticssolutions.com/assumptions-of-multiple-linear-regression/</a><strong>) </strong></p>
+<p>First, multiple linear regression requires the relationship between the independent and dependent variables to be linear. The linearity assumption can best be tested with scatterplots.</p>
+<p>Second, the multiple linear regression analysis requires that the errors between observed and predicted values (i.e., the residuals of the regression) should be normally distributed. This assumption may be checked by looking at a histogram or a Q-Q-Plot. Normality can also be checked with a goodness of fit test (e.g., the Kolmogorov-Smirnov test), though this test must be conducted on the residuals themselves.</p>
+<p>Third, multiple linear regression assumes that there is no multicollinearity in the data. Multicollinearity occurs when the independent variables are too highly correlated with each other. Multicollinearity may be checked multiple ways:</p>
+<p>1) Correlation matrix – When computing a matrix of Pearson’s bivariate correlations among all independent variables, the magnitude of the correlation coefficients should be less than .80.</p>
+<p>2) Variance Inflation Factor (VIF) – The VIFs of the linear regression indicate the degree that the variances in the regression estimates are increased due to multicollinearity. VIF values higher than 10 indicate that multicollinearity is a problem.</p>
+<p>If multicollinearity is found in the data, one possible solution is to center the data. To center the data, subtract the mean score from each observation for each independent variable. However, the simplest solution is to identify the variables causing multicollinearity issues (i.e., through correlations or VIF values) and removing those variables from the regression.</p>
+<p>The last assumption of multiple linear regression is homoscedasticity. A scatterplot of residuals versus predicted values is good way to check for homoscedasticity. There should be no clear pattern in the distribution; if there is a cone-shaped pattern (as shown in figure 1), the data is heteroscedastic. If the data are heteroscedastic, a non-linear data transformation or addition of a quadratic term might fix the problem.</p>
+<p><img src="./media/image2.jpeg" alt="http://www.statisticssolutions.com/wp-content/uploads/2010/01/mlr07.jpg" style="width:2.36458in;height:1.90625in" /></p>
+<p>Figure 1. Scatter plot of residuals versus predicted values to check homoscedasticity</p>
+<h3 id="fitting-the-model-the-method-of-least-squares">Fitting the Model: The Method of Least Squares</h3>
+<p>The best fit line is the line for which the sum of the distances between each of the <em>n</em> data points and the line is as small as possible. A mathematically useful approach is therefore to find the line with the property that the sum of the following squares is minimum.</p>
+<p><img src="./media/image3.png" alt="image1671" style="width:0.84375in;height:0.53125in" /></p>
+<p>We will now extend the method of least squares to equations with multiple independent variables of form</p>
+<p><img src="./media/image4.png" alt="Multiple regression model" style="width:2.14583in;height:0.20833in" /></p>
+<p>As in Method of Least Squares, we express this line in the form</p>
+<p><img src="./media/image5.png" alt="image1811" style="width:3.5625in;height:0.20833in" /></p>
+<p>Thus,</p>
+<p><img src="./media/image6.png" alt="image1812" style="width:1.55208in;height:0.5625in" /></p>
+<p>Given a set of <em>n</em> points (<em>x</em><sub>11</sub>, …, <em>x</em><sub>1<em>k</em></sub>, y<sub>1</sub>), … , (<em>x<sub>n</sub></em><sub>1</sub>, …, <em>x<sub>nk</sub></em>, y<em><sub>n</sub></em>), our objective is to find a line of the above form which best fits the points. As in the simple regression case, this means finding the values of the <em>b<sub>j</sub></em> coefficients for which the sum of the squares, expressed as follows, is minimum:</p>
+<p><img src="./media/image3.png" alt="image1671" style="width:0.84375in;height:0.53125in" /></p>
+<p>where ŷ<em><sub>i</sub></em> is the y-value on the best fit line corresponding to <em>x<sub>i1</sub>, …, x<sub>ik</sub>.</em></p>
+<p><strong>Definition</strong>: The best fit line is called the (<strong>multiple</strong>) <strong>regression line</strong></p>
+<p><img src="./media/image7.png" alt="Multiple regression line" style="width:1.48958in;height:0.5625in" /></p>
+<p><strong>Theorem</strong>: The regression line has form</p>
+<p><img src="./media/image7.png" alt="image1817" style="width:1.48958in;height:0.5625in" /></p>
+<p>where the coefficients <em>b<sub>m</sub></em> are the solutions to the following <em>k</em> equations in <em>k</em> unknowns.</p>
+<p><img src="./media/image8.png" alt="image1819" style="width:2.15625in;height:0.54167in" /></p>
+<p><strong>Observation</strong>: We can use either the population or sample formulas for covariance (as long as we stick to one or the other). Thus, we can use, for instance, the Excel function COVAR for the population covariance (or COVARIANCE.P in Excel 2010/2013/2016) or COVARIANCE.S for the sample covariance in Excel 2010/2013/2016 (or the supplemental function COVARS). Note too that where <em>j</em> = <em>m</em></p>
+<p><img src="./media/image9.png" alt="image1821" style="width:2.34375in;height:0.23958in" /></p>
+<p>NOTE: The covariance is similar to the variance, except that the covariance is defined for two variables (<em>x</em> and y above) whereas the variance is defined for only one variable. In fact, <em>cov</em>(<em>x, x</em>) <em>= var</em>(<em>x</em>).</p>
+<p>The <strong>covariance</strong> between two sample random variables <em>x</em> and y is a measure of the linear association between the two variables, and is defined by the formula</p>
+<p><img src="./media/image10.png" alt="Covariance" style="width:2.6875in;height:0.53125in" /></p>
+<p>Example of using MS Excel to calculate coefficients based on covariance calculations: <a href="http://www.real-statistics.com/multiple-regression/least-squares-method-multiple-regression/">http://www.real-statistics.com/multiple-regression/least-squares-method-multiple-regression/</a></p>
+<h4 id="interpretation-of-the-regression-coefficients">Interpretation of the Regression Coefficients</h4>
+<p>A linear regression model with multiple predictor variables can be expressed with the following common equation:</p>
+<p><span class="math inline">\(y\)</span> = <span class="math inline">\(\beta\)</span><sub>0</sub> + <span class="math inline">\(\beta\)</span><sub>1</sub><span class="math inline">\(x\)</span><sub>1</sub> + <span class="math inline">\(\beta\)</span><sub>2</sub><span class="math inline">\(x\)</span><sub>2</sub> +…+<span class="math inline">\(\text{\ β}\)</span><sub>k</sub><span class="math inline">\(x\)</span><sub>k</sub>+ <span class="math inline">\(\varepsilon\)</span></p>
+<p>The variables in the model are:</p>
+<ul>
+<li><p><span class="math inline">\(y\)</span>, the response variable;</p></li>
+<li><p><span class="math inline">\(x\)</span><sub>1</sub>, the first predictor variable;</p></li>
+<li><p><span class="math inline">\(x\)</span><sub>k</sub>, the kth predictor variable; and</p></li>
+<li><p><span class="math inline">\(\varepsilon\)</span>, the residual error, which is an unmeasured variable.</p></li>
+</ul>
+<p>The parameters in the model are:</p>
+<ul>
+<li><p><span class="math inline">\(\beta\)</span><sub>0</sub>, the <span class="math inline">\(y\)</span>-intercept;</p></li>
+<li><p><span class="math inline">\(\beta\)</span><sub>1</sub>, the first regression coefficient; and</p></li>
+<li><p><span class="math inline">\(\beta\)</span><sub>k</sub>, the kth regression coefficient.</p></li>
+</ul>
+<p>One example would be a model of the height of a shrub (<span class="math inline">\(y\)</span>) based on the amount of bacteria in the soil (<span class="math inline">\(x\)</span><sub>1</sub>) and whether the plant is located in partial or full sun (<span class="math inline">\(x\)</span><sub>2</sub>).</p>
+<p>Height is measured in cm, bacteria is measured in thousand per ml of soil, and type of sun = 0 if the plant is in partial sun and type of sun = 1 if the plant is in full sun.</p>
+<p>Let’s say it turned out that the regression equation was estimated as follows:</p>
+<p><span class="math inline">\(y\)</span> = 42 + 2.3<span class="math inline">\(x\)</span><sub>1</sub> + 11<span class="math inline">\(x\)</span><sub>2</sub></p>
+<h4 id="interpreting-the-intercept">Interpreting the Intercept</h4>
+<p><span class="math inline">\(\beta\)</span><sub>0</sub>, the <span class="math inline">\(y\)</span>-intercept, can be interpreted as the value you would predict for <span class="math inline">\(y\)</span> if both <span class="math inline">\(x\)</span><sub>1</sub> = 0 and <span class="math inline">\(x\)</span><sub>2</sub> = 0.</p>
+<p>We would expect an average height of 42 cm for shrubs in partial sun with no bacteria in the soil. However, this is only a meaningful interpretation if it is reasonable that both <span class="math inline">\(x\)</span><sub>1</sub> and <span class="math inline">\(x\)</span><sub>2</sub> can be 0, and if the data set actually included values for <span class="math inline">\(x\)</span><sub>1</sub> and <span class="math inline">\(x\)</span><sub>2</sub> that were near 0.</p>
+<p>If neither of these conditions are true, then <span class="math inline">\(\beta\)</span><sub>0</sub> really has no meaningful interpretation. It just anchors the regression line in the right place. In our case, it is easy to see that <span class="math inline">\(x\)</span><sub>2</sub> sometimes is 0, but if <span class="math inline">\(x\)</span><sub>1</sub>, our bacteria level, never comes close to 0, then our intercept has no real interpretation.</p>
+<h4 id="interpreting-coefficients-of-continuous-predictor-variables">Interpreting Coefficients of Continuous Predictor Variables</h4>
+<p>Since <span class="math inline">\(x\)</span><sub>1</sub> is a continuous variable, <span class="math inline">\(\beta\)</span><sub>1</sub> represents the difference in the predicted value of <span class="math inline">\(\text{y\ }\)</span>for each one-unit difference in <span class="math inline">\(x\)</span><sub>1</sub>, if <span class="math inline">\(x\)</span><sub>2</sub> remains constant.</p>
+<p>This means that if <span class="math inline">\(x\)</span><sub>1</sub> differed by one unit (and <span class="math inline">\(x\)</span><sub>2</sub> did not differ) <span class="math inline">\(y\)</span> will differ by <span class="math inline">\(\beta\)</span><sub>1</sub> units, on average.</p>
+<p>In our example, shrubs with a 5000 bacteria count would, on average, be 2.3 cm taller than those with a 4000/ml bacteria count, which likewise would be about 2.3 cm taller than those with 3000/ml bacteria, as long as they were in the same type of sun.</p>
+<h4 id="interpreting-coefficients-of-categorical-predictor-variables">Interpreting Coefficients of Categorical Predictor Variables</h4>
+<p>Similarly, <span class="math inline">\(\beta\)</span><sub>2</sub> is interpreted as the difference in the predicted value in <span class="math inline">\(y\)</span> for each one-unit difference in <span class="math inline">\(x\)</span><sub>2</sub> if <span class="math inline">\(x\)</span><sub>1</sub> remains constant. However, since <span class="math inline">\(x\)</span><sub>2</sub> is a categorical variable coded as 0 or 1, a one unit difference represents switching from one category to the other.</p>
+<p><span class="math inline">\(\beta\)</span><sub>2</sub> is then the average difference in <span class="math inline">\(y\)</span> between the category for which <span class="math inline">\(x\)</span><sub>2</sub> = 0 (the reference group) and the category for which <span class="math inline">\(x\)</span><sub>2</sub> = 1 (the comparison group).</p>
+<p>So compared to shrubs that were in partial sun, we would expect shrubs in full sun to be 11 cm taller, on average, at the same level of soil bacteria.</p>
+<h4 id="interpreting-coefficients-when-predictor-variables-are-correlated">Interpreting Coefficients when Predictor Variables are Correlated</h4>
+<p>Don’t forget that each coefficient is influenced by the other variables in a regression model. Because predictor variables are nearly always associated, two or more variables may explain some of the same variation in <span class="math inline">\(y\)</span>.</p>
+<p>Therefore, each coefficient does not measure the total effect on <span class="math inline">\(y\)</span> of its corresponding variable, as it would if it were the only variable in the model.</p>
+<p>Rather, each coefficient represents the <em>additional</em> effect of adding that variable to the model, <em>if the effects of all other variables in the model are already accounted for</em>. (This is called Type 3 regression coefficients and is the usual way to calculate them. However, not all software uses Type 3 coefficients, so make sure you check your software manual so you know what you’re getting).</p>
+<p>This means that each coefficient will change when other variables are added to or deleted from the model.</p>
+<h3 id="use-of-r-for-estimating-coefficients">Use of R for Estimating Coefficients</h3>
+<p>Manual calculations of the estimated coefficients requires extensive use of matrix and linear algebra. R automatically builds the matrices and carries out all the necessary calculations when we instruct it to fit a multiple linear regression model. As in simple regression models, we use <strong>lm( )</strong> and just include any additional predictors when we specify the formula in the first argument.</p>
+<p>We’ll use the <strong>state.x77</strong> dataset in the base R package for this example. (<a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/state.html">https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/state.html</a>) The table below (Table 1) shows the contents of the first six rows of the dataset. </p>
+  <embed src="./media/image11.tmp" style="width:6.5in;height:1.20486in" /></p>
+<p>Table 1. First six rows of the state.x77 dataset in base R.</p>
+<p>Suppose we want to explore the relationship between a state’s murder rate and other characteristics of the state, including population, illiteracy rate, average income, and frost levels (mean number of days below freezing).</p>
+<p>Because the <strong>lm( )</strong> function requires a data frame (and the <strong>state.x77</strong> dataset is contained in a matrix), we can simplify our life with the code in Figure 2.</p>
+<p><embed src="./media/image12.tmp" style="width:5.35491in;height:0.32296in" /></p>
+<p>Figure 2. Creation of the <strong>states</strong> data frame to be used for multiple regression.</p>
+<p>This code creates a date frame called <strong>states</strong>, containing the variables we’re interested in. We’ll use this new data frame for the remainder of the module.</p>
+<p>As stated earlier, a good first step in multiple regression is to examine the relationships among the variables two at a time. The bivariate correlations are provided by the <strong>cor( )</strong> function, and scatterplots are generated from the <strong>scatterplotMatrix( )</strong> function in the <strong>car</strong> package (see figures 3 and 4).</p>
+<p><embed src="./media/image13.tmp" style="width:5.84457in;height:1.38561in" /></p>
+<p>Figure 3. Code to generate the bivariate correlations and scatterplots for <strong>states</strong>.</p>
+<p><img src="./media/image14.png" style="width:6.15548in;height:3.75995in" /></p>
+<p>Figure 4. Scatterplot matrix of dependent and independent variables for the <strong>states</strong> data.</p>
+<p>By default, the <strong>scatterplotMatrix( )</strong> function provides scatterplots of the variables with each other in the off-diagonals and superimposes smoothed (loess) and linear fit lines on these plots. The principal diagonal contains density and rug plots for each variable. (<a href="https://www.rdocumentation.org/packages/car/versions/3.0-0/topics/scatterplotMatrix">https://www.rdocumentation.org/packages/car/versions/3.0-0/topics/scatterplotMatrix</a>)</p>
+<p>You can see in figure 4 that murder rate may be bimodal and that each of the predictor variables is skewed to some extent. Murder rates rise with population and illiteracy, and they fall with higher income levels and frost. (This can be seen by inspecting the scatterplots in the first row in figure 4 as the murder rate is the <em>y</em>-axis variable while population, literacy, income level, and frost are the <em>x</em>-axis variables, respectively.) At the same time, colder states have lower illiteracy rates and population ((scatterplot in the third row and last column with literacy rate on the vertical axis) and higher incomes (scatterplot in the third row and fourth column with literacy rate again on the vertical axis).</p>
+<h5>Activity 1</h5><p> The <strong>boot</strong> package is a library of R code that’s included with the standard installation but isn’t automatically loaded. Load <strong>boot</strong> with a call to <strong>library(boot)</strong>. You’ll find a data frame called <strong>nuclear,</strong> which contains data on the construction of nuclear power plants in the United States in the late 1960s.</p>
+<p>Access the documentation by entering <strong>?nuclear</strong> and examine the details of the variables. (Note there is a mistake for <strong>date,</strong> which provides the date that the construction permits were issued – it should read “measured in years since January 1 <strong>1900</strong> to the nearest month.”)</p>
+<p>Generate the bivariate correlations and scatterplots for <strong>nuclear</strong>.</p>
+<p>Now let’s fit the multiple regression model with the <strong>lm( )</strong> function (see figure 5).</p>
+<p><embed src="./media/image15.tmp" style="width:5.57369in;height:4.01098in" /></p>
+<p>Figure 5. Fitting the multiple regression model in R with the <strong>lm( )</strong> function.</p>
+<p>As was pointed out earlier, when there’s more than one predictor variable, the regression coefficients indicate the increase in the dependent variable for a unit change in a predictor variable, holding all other predictor variables constant. For example, the regression coefficient for Illiteracy is 4.14, suggesting that an increase of 1% in illiteracy is associated with a 4.14% increase in the murder rate, controlling for population, income, and temperature.</p>
+<h5>Activity 2</h5><p> For the <strong>nuclear</strong> data frame in Activity 1, one of the original objectives was to predict the cost of further construction of these power plants. Create a fit and summary of a linear regression model that aims to model <strong>cost</strong> by <strong>t1</strong> and <strong>t2</strong>, two variables that describe the different elapsed times associated with the application for and issue of various permits. Take note of the estimated regression coefficients and their significance in the fitted model.</p>
+<h3 id="assessing-the-overall-accuracy-of-the-model">Assessing the Overall Accuracy of the Model</h3>
+<p>Source: <a href="https://www.theanalysisfactor.com/assessing-the-fit-of-regression-models/">https://www.theanalysisfactor.com/assessing-the-fit-of-regression-models/</a></p>
+<p>A well-fitting regression model results in predicted values close to the observed data values. The mean model, which uses the mean for every predicted value, generally would be used if there were no informative predictor variables. The fit of a proposed regression model should therefore be better than the fit of the mean model.</p>
+<p>Three statistics are used in Ordinary Least Squares (OLS) regression to evaluate model fit: R<sup>2</sup>, the overall F-test, and the Root Mean Square Error (RMSE). All three are based on two sums of squares: Sum of Squares Total (SST) and Sum of Squares Error (SSE). SST measures how far the data are from the mean, and SSE measures how far the data are from the model’s predicted values. Different combinations of these two values provide different information about how the regression model compares to the mean model.</p>
+<p>Each of the three evaluation techniques will now be covered in detail starting with R<sup>2</sup> and the associated adjusted R<sup>2</sup>.</p>
+<h4 id="multiple-coefficients-of-determination-r2-and-adjusted-r2">Multiple Coefficients of Determination: R<sup>2</sup> and adjusted R<sup>2</sup></h4>
+<p>The difference between SST and SSE is the improvement in prediction from the regression model, compared to the mean model. Dividing that difference by SST gives R<sup>2</sup>. It is the proportional improvement in prediction from the regression model, compared to the mean model. It indicates the goodness of fit of the model.</p>
+<p>R<sup>2</sup> has the useful property that its scale is intuitive: it ranges from zero to one, with zero indicating that the proposed model does not improve prediction over the mean model, and one indicating perfect prediction. Improvement in the regression model results in proportional increases in R<sup>2</sup>.</p>
+<p>One pitfall of R<sup>2</sup> is that it can only increase as predictors are added to the regression model. This increase is artificial when predictors are not actually improving the model’s fit. For example, a model that contains three parameters will provide a perfect fit to a sample of three data points, and R<sup>2</sup> will equal 1. Likewise, you will always obtain a perfect fit (R<sup>2</sup> = 1) to a set of <span class="math inline">\(n\)</span> data points if the model contains exactly <span class="math inline">\(n\)</span> parameters. Consequently, if you want to use the value of R<sup>2</sup> as a measure of how useful the model will be for predicting <span class="math inline">\(y\)</span>, it should be based on a sample that contains substantially more data points than the number of parameters in the model.</p>
+<p>As an alternative to using R<sup>2</sup> as a measure of model adequacy, a related statistic, adjusted R<sup>2</sup>, incorporates the model’s degrees of freedom. Adjusted R<sup>2</sup> will decrease as predictors are added if the increase in model fit does not make up for the loss of degrees of freedom. Likewise, it will increase as predictors are added if the increase in model fit is worthwhile. Adjusted R<sup>2</sup> should always be used with models with more than one predictor variable. It is interpreted as the proportion of total variance that is explained by the model.</p>
+<p>There are situations in which a high R<sup>2</sup> is not necessary or relevant. When the interest is in the relationship between variables, not in prediction, R<sup>2</sup> is less important. An example is a study on how religiosity affects health outcomes. A good result is a reliable relationship between religiosity and health. No one would expect that religion explains a high percentage of the variation in health, as health is affected by many other factors. Even if the model accounts for other variables known to affect health, such as income and age, an R<sup>2</sup> in the range of 0.10 to 0.15 is reasonable.</p>
+<p>R<sup>2</sup> is often referred to as the multiple coefficient of determination, and the adjusted R<sup>2</sup> as the adjusted multiple coefficient of determination. To illustrate, the value R<sup>2</sup> = 0.567 for the earlier example (figure 6). This value implies that using the independent variables Population, Illiteracy, Income, and Frost explains 56.7% of the total <em>sample variation</em> (measured by SST) in murder rate (<span class="math inline">\(y\)</span>). Thus, R<sup>2</sup> is a sample statistic that tells how well the model fits the data and thereby represents a measure of the usefulness of the entire model.</p>
+<p><embed src="./media/image16.tmp" style="width:5.19864in;height:0.55216in" /></p>
+<p>Figure 6. Portion of the R output showing overall model utility.</p>
+<p>Note that the adjusted R<sup>2</sup> = 0.5285, a value slightly smaller than R<sup>2</sup>. This implies that the least squares model has explained about 52.85% of the total sample variation in <span class="math inline">\(y\)</span>-values (murder rates), after adjusting for sample size and number of independent variables in the model. Analysts prefer the more conservative adjusted R<sup>2</sup> when choosing a measure of model adequacy.</p>
+<p>Despite their utility, R<sup>2</sup> and adjusted R<sup>2</sup> are only sample statistics. Therefore, it is dangerous to judge the global usefulness of a model based solely on these values. A better method is to conduct a test of hypothesis involving <em>all</em> the <span class="math inline">\(\beta\)</span> parameters (except <span class="math inline">\(\beta_{0}\)</span>) in a model.</p>
+<h4 id="testing-global-usefulness-of-the-model-the-analysis-of-variance-f-test">Testing Global Usefulness of the Model: The Analysis of Variance F-Test</h4>
+<p>Hypothesis testing allows us to carry out inferences about population parameters using data from a sample. In order to test a hypothesis in statistics, we must perform the following steps:</p>
+<p>1) Formulate a null hypothesis and an alternative hypothesis on population parameters.</p>
+<p>2) Build a statistic to test the hypothesis made.</p>
+<p>3) Define a decision rule to reject or not to reject the null hypothesis. Next, we will examine each one of these steps.</p>
+<p>It is very important to remark that hypothesis testing is always about population parameters. Hypothesis testing implies making a decision, on the basis of sample data, on whether to reject that certain restrictions are satisfied by the basic assumed model. The restrictions we are going to test are known as the null hypothesis, denoted by H<sub>0</sub>. Thus, null hypothesis is a statement on population parameters.</p>
+<p>In multiple regression, the hypotheses read like this:</p>
+<p>H<sub>0</sub>: β<sub>1</sub> = β<sub>2</sub> = ... = β<sub>k</sub> = 0<br />
+H<sub>A</sub>: At least one β is not zero</p>
+<p>The null hypothesis claims that there is no significant correlation at all. That is, all of the coefficients are zero and none of the variables belong in the model. The alternative hypothesis is not that every variable belongs in the model but that at least one of the variables belongs in the model.</p>
+<p>The test statistic used to test this hypothesis is an <span class="math inline">\(F\)</span>-statistic, and several equivalent versions of the formula can be used (although we will usually rely on R or other statistical software to calculate the <span class="math inline">\(F\)</span>-statistic):</p>
+<p><em>Test statistic:</em> <span class="math inline">\(F = \ \frac{\left( SST - SSE \right)/k}{SSE/\lbrack n - \left( k + 1 \right)\rbrack}\)</span> = <span class="math inline">\(\frac{Mean\ Square\ (Model)}{Mean\ Square\ (Error)}\)</span> = <span class="math inline">\(\frac{R^{2}/k}{\left( 1 - \ R^{2} \right)/\lbrack n - \left( k + 1 \right)\rbrack}\)</span></p>
+<ul>
+<li><p><em>R<sup>2</sup></em>: the Coefficient of Determination. The value of R<sup>2</sup> can range between 0 and 1, and the higher its value the more accurate the regression model is.</p></li>
+<li><p><em>k</em>: the total number of variables in the model</p></li>
+<li><p><em>n</em>: the number of observations in the sample</p></li>
+</ul>
+<p>These formulas indicate that the <em>F</em>-statistic is the ratio of the <em>explained</em> variability divided by the model degrees of freedom to the <em>unexplained</em> variability divided by the error degrees of freedom. Thus, the larger the proportion of the total variability accounted for by the model, the larger the <em>F</em>-statistic.</p>
+<p>A rejection of the null hypothesis H<sub>0</sub>: <span class="math inline">\(\beta_{1}\)</span> = <span class="math inline">\(\beta_{2}\)</span> = <span class="math inline">\(\cdots\)</span> = <span class="math inline">\(\beta_{k}\)</span> = 0 in the <em>global</em> <em>F</em>-test leads to the conclusion [with 100(1 <span class="math inline">\(–\ \alpha\)</span>)% confidence] that the model is statistically useful. That means, there is a statistically significant linear relationship between the response and at least one of the predictors. However, statistically “useful” does not necessarily mean “best.” Another model may prove even more useful in terms of providing more reliable estimates and predictions. This global <em>F</em>-test is usually regarded as a test that the model <em>must</em> pass to merit further consideration.</p>
+<p>After we have determined that the overall model is useful for predicting <span class="math inline">\(y\)</span> using the <em>F</em>-test, we may elect to conduct one or more <em>t</em>-tests on the individual <span class="math inline">\(\beta\)</span> parameters. We will cover these tests in the section on <em>Assessing the Accuracy of the Coefficient Estimates.</em></p>
+<p>The elements of the global test of the model for our ongoing example are:</p>
+<p>H<sub>0</sub>: <span class="math inline">\(\beta_{1}\)</span> = <span class="math inline">\(\beta_{2}\)</span> = <span class="math inline">\(\beta_{3}\)</span> = <span class="math inline">\(\beta_{4}\)</span> = 0</p>
+<p>H<sub>A</sub>: At least one of the four model coefficients, <span class="math inline">\(\beta_{1}\)</span>, <span class="math inline">\(\beta_{2}\)</span>, <span class="math inline">\(\beta_{3}\)</span>, and <span class="math inline">\(\beta_{4}\)</span>, is nonzero.</p>
+<p><em>Test statistic: F =</em> <span class="math inline">\(\frac{MS(Model)}{\text{MSE}}\)</span> = 14.73 (see figures 5 and 6)</p>
+<p><em>p</em>-value <span class="math inline">\(\approx\)</span> 0</p>
+<p><em>Conclusion:</em> Because <span class="math inline">\(\alpha = 0.05\)</span> exceeds the observed significance level, (<em>p</em> <span class="math inline">\(\approx\)</span> 0), the data provide strong evidence that at least one of the model coefficients is nonzero. The overall model appears to be statistically useful for predicting murder rate. There is a statistically significant linear relationship between murder rate and at least one of the predictors.</p>
+<h4 id="root-mean-square-error-rmse">Root Mean Square Error (RMSE)</h4>
+<p>A third measure of the utility of the model is the root mean square error (RMSE). It is often also referred to as the residual standard error, <em>s</em>. One useful interpretation of the estimated residual standard error (equivalently deviation) <em>s</em> is that the interval <span class="math inline">\(\pm 2s\)</span> will provide a rough approximation to the accuracy with which the model will predict future values of <em>y</em> for given values of <em>x</em>.</p>
+<p>From figures 5 and 6, we expect the model to provide predictions of murder rates to within about <span class="math inline">\(\pm 2s\)</span> = <span class="math inline">\(\pm 2\left( 2.535 \right) = 5.07\)</span> per 100,000.</p>
+<p>We use RMSE both to check the utility of the model and to provide a measure of reliability of predictions and estimates when the model is used for those purposes.</p>
+<h3 id="assessing-the-accuracy-of-the-coefficient-estimates">Assessing the Accuracy of the Coefficient Estimates</h3>
+<p>If the model is deemed adequate (that is, if you reject H<sub>0</sub> when conducting a test of overall model adequacy using the <em>F</em>-test), then we can make inferences about some or all of the <span class="math inline">\(\beta\)</span> parameters. Inferences about the individual <span class="math inline">\(\beta\)</span> parameters in a model are obtained using either a confidence interval or a test of hypothesis.</p>
+<h4 id="hypothesis-tests-on-the-coefficients">Hypothesis Tests on the Coefficients</h4>
+<p>Using the properties of the least squares estimators discussed earlier, one can use <span class="math inline">\(t\)</span>-tests in making inferences about the individual <span class="math inline">\(\beta\)</span> parameters in the multiple regression model. The statistic for testing H<sub>0</sub>: <span class="math inline">\(\beta_{j}\)</span> = 0 versus H<sub>A</sub>: <span class="math inline">\(\beta_{j}\)</span> <span class="math inline">\(\neq\)</span> 0 is</p>
+<p><span class="math display">\[t_{j} = \ \frac{{\widehat{\beta}}_{j} - 0}{\text{s.e.}\left( {\widehat{\beta}}_{j} \right)} = \ \frac{{\widehat{\beta}}_{j}}{\text{s.e.}\left( {\widehat{\beta}}_{j} \right)}\]</span></p>
+<p>which has a Student’s <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n - (k + 1)\)</span> degrees of freedom. We compare the <span class="math inline">\(p\)</span>-value of the test with <span class="math inline">\(\alpha\)</span> and reject H<sub>0</sub> if <span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq \ \alpha\)</span>. The <span class="math inline">\(p\)</span>-value is computed and supplied as part of the regression output by statistical software such as R. The standard errors of the coefficients are computed by statistical packages as part of their standard regression output.</p>
+<p>The rejection of H<sub>0</sub>: <span class="math inline">\(\beta_{j}\)</span> = 0 means that <span class="math inline">\(\beta_{j}\)</span> is likely to be different from 0, and hence the predictor variable <span class="math inline">\(x_{j}\)</span> is a statistically significant predictor of the response variable <span class="math inline">\(y\)</span> after adjusting for the other predictor variables.</p>
+<p>In our continuing example, let’s test whether the coefficient for the Illiteracy independent variable differs significantly from 0. The hypotheses of interest concern the parameter <span class="math inline">\(\beta_{2}\)</span>. Specifically,</p>
+<p>H<sub>0</sub>: <span class="math inline">\(\beta_{2}\)</span> <span class="math inline">\(=\)</span> 0</p>
+<p>H<sub>A</sub>: <span class="math inline">\(\beta_{2}\)</span> <span class="math inline">\(\neq\)</span> 0</p>
+<p>The test statistic is a <span class="math inline">\(t\)</span>-statistic formed by dividing the sample estimate <span class="math inline">\({\widehat{\beta}}_{2}\)</span> of the parameter <span class="math inline">\(\beta_{2}\)</span> by the estimated standard error of <span class="math inline">\({\widehat{\beta}}_{2}\)</span>. These estimates, <span class="math inline">\({\widehat{\beta}}_{2}\)</span> = 4.143 and <span class="math inline">\(s.e.({\widehat{\beta}}_{2}\)</span>) = 0.8744, as well as the calculated <span class="math inline">\(t\)</span>-value,</p>
+<p><em>Test statistic:</em> <span class="math inline">\(t = \ \frac{{\widehat{\beta}}_{2}}{\text{s.e.}\left( {\widehat{\beta}}_{2} \right)}\)</span> = <span class="math inline">\(\frac{4.143}{0.8744}\)</span> = 4.738</p>
+<p>are shown in the R output in figure 7. The coefficient is significantly different from zero at the <span class="math inline">\(p\  &lt; 0.001\)</span> level.</p>
+<p><embed src="./media/image17.tmp" style="width:5.5216in;height:1.54188in" /></p>
+<p>Figure 7. Results for tests of the individual multiple regression coefficients.</p>
+<p>Likewise, Population is significantly different at the <span class="math inline">\(p\  &lt; 0.05\ \)</span>level. On the other hand, the coefficient for Frost isn’t significantly different from zero (<span class="math inline">\(p\)</span>-value = 0.9541) suggesting that Frost and Murder aren’t linearly related when controlling for the other predictor variables. Similarly, with a <span class="math inline">\(p\)</span>-value = 0.9253, Income isn’t significantly different from zero. It appears that a multiple regression model with the predictor variables Illiteracy and Population is adequate for predicting the Murder rate.</p>
+<p>One must use caution when conducting <span class="math inline">\(t\)</span>-tests on the <span class="math inline">\(\beta\)</span> parameters. It is dangerous to conduct <span class="math inline">\(t\)</span>-tests on the individual <span class="math inline">\(\beta\)</span> parameters for the purpose of determining which independent variables are useful for predicting <span class="math inline">\(y\)</span> and which are not. If we fail to reject H<sub>0</sub>: <span class="math inline">\(\beta_{j} = 0\)</span>, several conclusions are possible:</p>
+<ol type="1">
+<li><p>There is no relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x_{j}\)</span>.</p></li>
+<li><p>A straight-line relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x_{j}\)</span> exists (holding the other <span class="math inline">\(x\)</span>’s in the model fixed), but a Type II error occurred.</p></li>
+<li><p>A relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x_{j}\)</span> (holding the other <span class="math inline">\(x\)</span>’s in the model fixed) exists but is more complex than a straight-line relationship (e.g., a curvilinear relationship may be appropriate). The most you can say about a <span class="math inline">\(\beta\)</span> parameter test is that there is either sufficient (if you reject H<sub>0</sub>: <span class="math inline">\(\beta_{j} = 0\)</span>) or insufficient (if you do not reject H<sub>0</sub>: <span class="math inline">\(\beta_{j}\)</span> = 0) evidence of a <em>linear(straight-line)</em> relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x_{j}\)</span>.</p></li>
+</ol>
+<p>If we were to conduct a series of <span class="math inline">\(t\)</span>-tests to determine whether the independent variables are contributing to the predictive relationship, we would be very likely to make one or more errors in deciding which terms to retain in the model and which to exclude. For example, suppose we fit a model in 10 <span class="math inline">\(x\)</span> variables and decide to conduct <span class="math inline">\(t\)</span>-tests on all 10 of the individual <span class="math inline">\(\beta\)</span>’s in the model, each at <span class="math inline">\(\alpha = 0.05.\)</span> Even if all the <span class="math inline">\(\beta\)</span> parameters (except <span class="math inline">\(\beta_{0}\)</span>) are equal to 0, approximately 40% the time we will incorrectly reject the null hypothesis at least once and conclude that some <span class="math inline">\(\beta\)</span> parameter differs from 0. Thus, in multiple regression models for which a large number of independent variables are being considered, conducting a series of <span class="math inline">\(t\)</span>-tests may include a large number of insignificant variables and exclude some useful ones.</p>
+<p>In summary, a recommendation for checking the utility of a multiple regression model is:</p>
+<ol type="1">
+<li><p>First, conduct a test of overall model adequacy using the <span class="math inline">\(F\)</span>-test – that is, test</p></li>
+</ol>
+<p>H<sub>0</sub>: <span class="math inline">\(\beta_{1}\)</span> = <span class="math inline">\(\beta_{2}\)</span> = <span class="math inline">\(\cdots\)</span> = <span class="math inline">\(\beta_{k}\)</span> = 0</p>
+<blockquote>
+<p>If the model is deemed adequate (that is, if we reject H<sub>0</sub>), then proceed to step 2. Otherwise, we should hypothesize and fit another model. The new model may include more independent variables or higher-order terms.</p>
+</blockquote>
+<ol start="2" type="1">
+<li><p>Conduct <span class="math inline">\(t\)</span>-tests on those <span class="math inline">\(\beta\)</span> parameters in which you are particularly interested. It is a safe practice to limit the number of <span class="math inline">\(\beta\)</span>’s that are tested. Conducting a series of <span class="math inline">\(t\)</span>-tests leads to a high overall Type I error rate <span class="math inline">\(\alpha\)</span>.</p></li>
+</ol>
+<h4 id="confidence-intervals">Confidence Intervals</h4>
+<p>We can easily find confidence intervals for any of the regression parameters in multiple regression models with the <strong>confint( )</strong> function in R. Using <strong>fit</strong>, the object of the fitted model for Murder rate with the Population, Illiteracy, Income, and Frost predictors, the output of a call to <strong>confint( )</strong> is shown in figure 8.</p>
+<p><embed src="./media/image18.tmp" style="width:3.69843in;height:1.14599in" /></p>
+<p>Figure 8. 95% confidence intervals for the multiple regression coefficients.</p>
+<p>The results suggest that we can be 95% confident that the interval (2.38, 5.90) contains the true change in murder rate for a 1% change in illiteracy rate. Additionally, because the confidence interval for <strong>Frost</strong> contains 0, we can conclude that a change in temperature is unrelated to murder rate, holding the other variables constant.</p>
+<p>Recall that the Population and Illiteracy variables were shown to be statistically significant at the 5% level in the earlier model summary and that their 95% confidence levels do not include the null value of zero. On the other hand, the coefficients for the Income and Frost variables are nonsignificant, and their confidence intervals clearly include zero. This reflects the fact that the Income and Frost variables are not considered statistically significant in this particular model.</p>
+<h5>Activity 3</h5><p> Construct 99% confidence intervals for the regression coefficients for the model that you fit in Activity 2.</p>
+<h3 id="using-the-model-for-estimation-and-prediction">Using the Model for Estimation and Prediction</h3>
+<p>The fitted multiple regression equation can be used to predict the value of the response variable using a set of specific values of the predictor variables, <span class="math inline">\(x_{0} = \ \left( x_{01},\ x_{02},\ \cdots,x_{0k}\  \right)\)</span>. Prediction (or <em>forecasting</em>) for multiple regression follows the same rules as for simple linear regression.</p>
+<p>It’s important to remember that point predictions found for a particular <em>covariate profile</em> – the collection of predictor values for a given individual – are associated with the mean (or <em>expected value</em>) of the response; that confidence intervals provide measures for mean responses; and that prediction intervals provide measures provide measures for raw observations. We also have to consider the issue of <em>interpolation</em> (predictions based on <span class="math inline">\(x\)</span> values that fall within the range of the originally observed covariate data) versus <em>extrapolation</em> (prediction from <span class="math inline">\(x\)</span> values that fall outside the range of said data). Other than that, the R syntax for <strong>predict</strong> is identical to that used in simple linear regression.</p>
+<p>As an example, let’s consider the data frame <strong>survey</strong>, located in the <strong>MASS</strong> package. These data record particular characteristics of 237 first-year undergraduate statistics students collected from a class at the University of Adelaide, South Australia. Load the required package first with a call to <strong>library(MASS)</strong> and then enter <strong>?survey</strong> at the prompt. The help file provides which variables are present in the data frame.</p>
+<p>Using the survey data frame, let’s determine the <em>joint effect</em> of sex and handspan on predicting height. We will include both predictors in a multiple linear model (figure 9).</p>
+<p><embed src="./media/image19.tmp" style="width:5.7508in;height:4.12558in" /></p>
+<p>Figure 9. Multiple regression model relating height to sex and handspan.</p>
+<p>We see that handspan and sex yield very small <span class="math inline">\(p\)</span>-values. Using the above model fitted on student height as a linear function of handspan and sex, we can estimate the mean height of a male student with a writing handspan of 16.5 cm, together with a confidence interval (figure 10).</p>
+<p><embed src="./media/image20.tmp" style="width:5.36533in;height:0.6876in" /></p>
+<p>Figure 10. 95% confidence interval for mean height of a male with a handspan of 16.5 cm.</p>
+<p>The result indicates that we have an mean height value of about 173.49 cm and that you can be 95% confident the true value of height lies somewhere between 170.94 and 176.03 (rounded to 2 decimal places). In the same way, the mean height of a female with a handspan of 13 cm is estimated at 158.41 cm, with a 99% prediction interval of 139.76 to 177.07 (figure 11).</p>
+<h5>Activity 4</h5><p> For the fitted regression model from Activity 2, construct a 98% confidence interval for the mean cost of power plants when t1 = 18 and t2 = 70.</p>
+<p><embed src="./media/image21.tmp" style="width:5.33408in;height:0.64592in" /></p>
+<p>Figure 11. 99% prediction interval for height of a female with a handspan of 13 cm.</p>
+<h5>Activity 5</h5><p> For the fitted regression model from Activity 2, construct a 98% prediction interval for the cost of a power plant when t1 = 18 and t2 = 70.</p>
+<p>There are in fact two female students in the data set with writing handspans of 13 cm, as we can see in figure 12.</p>
+<p><img src="./media/image22.png" style="width:6.15548in;height:3.75995in" /></p>
+<p>Figure 12. Fitted multiple linear model of student height modeled by handspan and sex.</p>
+<p>The code for creating figure 12 is given in figure 13.</p>
+<p><embed src="./media/image23.tmp" style="width:6.5in;height:1.78125in" /></p>
+<p>Figure 13. R code for creating figure 12.</p>
+<p>By subsetting data frames, we can inspect the two records of the female students with writing handspans of 13 cm and select the three variables of interest (figure 14).</p>
+<p><embed src="./media/image24.tmp" style="width:6.5in;height:0.60278in" /></p>
+<p>Figure 14. Records of two females with writing handspans of 13 cm.</p>
+<p>Now, the second female’s height falls well inside the prediction interval, but the first female’s height is significantly higher than the upper limit (177.07 cm). It’s important to realize that, technically nothing has gone wrong here in terms of the model fitting and interpretation – it’s still possible that an observation can fall outside a prediction interval, even a wide 99% interval, though it’s perhaps improbable. There could be any number of reasons for this occurring. First, the model could be inadequate. For example, we might be excluding important predictors in the fitted model and therefore have less predictive power. Second, although the prediction is within the range of the observed data, it has occurred at one extreme end of the range, where it’s less reliable because our data are relatively sparse. Third, the observation itself may be tainted in some way – perhaps the individual recorded her handspan incorrectly, in which case her invalid observation should be removed prior to model fitting.</p>
+<p>It should be noted that we fit a categorical variable, Sex, in the above example. We will discuss the fitting and interpretation of categorical variables in more detail later.</p>
+<h3 id="interaction-model">Interaction Model</h3>
+<p>So far, we’ve looked only at the joint main effects of how predictors affect the response variable. Now we’ll look at interactions between covariates (predictor variables). An <em>interactive effect</em> between predictors is an additional change to the response that occurs at particular combinations of the predictors. In other words, an interactive effect is present if, for a given covariate profile, the values of the predictors are such that they produce an effect that augments the stand-alone main effects associated with those predictors.</p>
+<p>Assuming the case with two independent variables, <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span>, we’ve limited ourselves thus far to the situation where both variables affect <span class="math inline">\(\widehat{y}\)</span> independently of each other. We now consider the case where the effect of <span class="math inline">\(x_{1}\)</span> on <span class="math inline">\(\widehat{y}\)</span> changes completely depending on the value of <span class="math inline">\(x_{2}\)</span>. Likewise, the effect of <span class="math inline">\(x_{2}\)</span> on <span class="math inline">\(\widehat{y}\)</span> changes depending on the value of <span class="math inline">\(x_{1}\)</span>. In our earlier modeling, only main effects of <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span> are needed to determine <span class="math inline">\(\widehat{y}\)</span>. In an interaction model, main effects and an interactive effects between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span> are present.</p>
+<p>It is important to note that when estimating regression models, we always have to accompany interactions with the main effects of the relevant predictors. This is necessary for reasons of interpretability. Since interactions are themselves best understood as an augmentation of the main effects, it makes no sense to remove the latter and leave in the former.</p>
+<p>For a good example of an interaction, think about pharmacology. Interactive effects between medicines are relatively common, which is why health care professionals often ask about other medicines you might be taking. Consider statins – drugs commonly used to reduce cholesterol. Users of statins are told to avoid grapefruit juice because it contains natural chemical compounds that inhibit the efficacy of the enzyme responsible for the correct metabolization of the drug. If an individual is taking statins and not consuming grapefruit, we would expect a negative relationship between cholesterol use and statin use – as statin use increases or is affirmative, the cholesterol level decreases. On the other hand, for an individual on statins who <em>is</em> consuming grapefruit, the nature of the relationship between cholesterol level and statin use could easily be different – weakened negative, neutral, or even positive. If so, since the effect of the statins on cholesterol changes according to the value of another variable – whether or not grapefruit is consumed – this would be considered an interaction between those two predictors.</p>
+<p>As an example, consider the automobile data in the <strong>mtcars</strong> data frame. Let’s say that we’re interested in the impact of automobile weight and horsepower on mileage (MPG). We could fit a regression model that includes both predictors, along with their interaction, as shown in figure 15.</p>
+<p><embed src="./media/image25.tmp" style="width:5.27157in;height:3.563in" /></p>
+<p>Figure 15. Multiple linear regression with a significant interaction term.</p>
+<p>We can see from the <strong>Pr(&gt;|t|)</strong> column that the interaction between horsepower and car weight is significant. What does this mean? A significant interaction between two predictor variables tells us that the relationship between one predictor and the response variable depends on the level of the other predictor. Here it means the relationship between miles per gallon and horsepower varies by car weight.</p>
+<p>The model for predicting <strong>mpg</strong> is</p>
+<p><span class="math inline">\(\widehat{\text{mpg}}\)</span> <span class="math inline">\(= 49.81 - 0.12\  \times hp - 8.22\  \times wt + 0.03\  \times hp\  \times wt.\)</span></p>
+<p>To interpret the interaction, we can plug in various values of <strong>wt</strong> and simplify the equation. For example, we can try the mean of <strong>wt</strong> (3.2) and one standard deviation below and above the mean (2.2 and 4.2, respectively). For <strong>wt = 2.2</strong>, the equation simplifies to</p>
+<p><span class="math inline">\(\widehat{\text{mpg}}\)</span> <span class="math inline">\(= 49.81 - 0.12\  \times hp - 8.22\  \times \left( 2.2 \right) + 0.03\  \times hp\  \times \left( 2.2 \right) = 31.41 - 0.06\  \times \text{hp.}\)</span></p>
+<p>For <strong>wt = 3.2</strong>, this becomes <span class="math inline">\(\widehat{\text{mpg}} = 23.37 - 0.03\  \times \text{hp.}\)</span> Finally, for <strong>wt = 4.2</strong>, the equation becomes <span class="math inline">\(\widehat{\text{mpg}} = 15.33 - 0.003\  \times \text{hp.}\)</span> We see that as weight increases (2.2, 3.2, 4.2), the expected change in <strong>mpg</strong> from a unit increase in <strong>hp</strong> decreases (0.06, 0.03, 0.003).</p>
+<h5>Activity 6</h5><p> <strong>trees</strong> is a standard built-in dataset in R. You can access this dataset simply by typing in <strong>trees</strong> in your R console. This data set provides measurements of the girth, height and volume of timber in 31 felled black cherry trees. Note that girth is the diameter of the tree (in inches) measured at 4 ft 6 in above the ground. Height is measured in feet. The first six observations are shown below.</p>
+<p><embed src="./media/image26.tmp" style="width:4.46937in;height:1.25017in" /></p>
+<p>Fit an interaction model for predicting <strong>Volume</strong> from <strong>Girth</strong> and <strong>Height</strong>.</p>
+<p>We can visualize interactions using the <strong>effect( )</strong> function in the <strong>effects</strong> package. The format is</p>
+<p><strong>plot(effect(<em>term, mod,, xlevels</em>), multiline=TRUE)</strong></p>
+<p>where <em><strong>term</strong></em> is the quoted model term to plot, <em><strong>mod</strong></em> is the fitted model returned by <strong>lm( )</strong>, and <em><strong>xlevels</strong></em> is a list specifying the variables to be set to constant values and the values to employ. The <strong>multiline=TRUE</strong> option superimposes the lines being plotted. For our current model, this becomes the code in figure 16 assuming the <strong>effects</strong> package has been installed.</p>
+<p><embed src="./media/image27.tmp" style="width:6.5in;height:1.16389in" /></p>
+<p>Figure 16. Use of the <strong>effects</strong> package to visualize interactions.</p>
+<p>The resulting graph is displayed in figure 17.</p>
+<p><img src="./media/image28.png" style="width:6.15548in;height:3.75995in" /></p>
+<p>Figure 17. Interaction plot for <strong>hp*wt</strong>.</p>
+<p>We can see form this graph that as the weight of the car increases, the relationship between horsepower and miles per gallon weakens. For <strong>wt = 4.2</strong>, the line is almost horizontal, indicating that as <strong>hp</strong> increases, <strong>mpg</strong> doesn’t change.</p>
+<h5>Activity 7</h5><p> Refer to Activity 6. Construct an interaction plot for <strong>Girth*Height</strong>.</p>
+<h3 id="categorical-predictors">Categorical Predictors</h3>
+<p>Let’s revisit two of our earlier examples. First, in the introduction, we mentioned a two-predictor model where we discussed a relationship between the height of a shrub, response variable, and the amount of bacteria in the soil and whether there was full or partial sun exposure, the two predictor variables. Clearly the amount of bacteria in the soil is a continuous quantitative variable. However, sun exposure is a binary variable: “Full” or “Partial”. Now recall the example where we related the response variable, height, to two predictor variables, writing handspan and sex. Again writing handspan is a continuous quantitative variable measured in cm. On the other hand, sex is classified as “Male” or “Female.</p>
+<p>Sun exposure and sex are referred to as categorical variables. As we have seen, multiple regression models can be written to include both categorical (and qualitative) and numeric (or quantitative) independent variables. Categorical variables (like sun exposure and sex) cannot be measured on a numerical scale unlike quantitative variables. Therefore, we must code the values of the categorical variables (called levels) as numbers before we can fit the model. These coded categorical variables are called dummy (or indicator) variables because the numbers assigned to the various levels are arbitrarily selected.</p>
+<p>Let’s go back to the <strong>survey</strong> data frame where we have a <strong>Sex</strong> variable, where the students recorded their gender. Look at the documentation on the help page <strong>?survey</strong> or enter something like figure 18.</p>
+<p><embed src="./media/image29.tmp" style="width:2.0107in;height:0.93763in" /></p>
+<p>Figure 18. Identification of the class of the <strong>Sex</strong> variable in the <strong>survey</strong> data frame.</p>
+<p>We see that the <strong>Sex</strong> data column is a factor vector with two levels, <strong>Female</strong> and <strong>Male</strong>, and that there happens to be an equal number of the two (one of the 237 records has a missing value for this variable).</p>
+<p>We’re going to determine whether there is statistical evidence that the height of a student is affected by <strong>Sex</strong>. This means that we’re again interested in modeling height as the response variable, but this time, it’s with the categorical sex variable as the single predictor.</p>
+<p>To visualize the data, if we make a call to <strong>plot</strong> as in figure 19, we’ll get a pair of boxplots (figure 20).</p>
+<p><embed src="./media/image30.tmp" style="width:3.03167in;height:0.16669in" /></p>
+<p>Figure 19. Plot of a categorical predictor variable.</p>
+<p><img src="./media/image31.png" style="width:6.15548in;height:3.75995in" /></p>
+<p>Figure 20. Boxplots of the student heights split by sex.</p>
+<p>This is because the response variable specified to the left of the ~ is numeric and the explanatory variable to the right is a factor, and the default behavior of R in that situation is to produce side-by-side boxplots. The plot indicates, overall, that males tend to be taller than females – but is there statistical evidence to back this up? To answer this with a simple linear regression model, we can use <strong>lm( )</strong> to produce least-squares estimates just like with every other model we’ve fitted so far (figure 21).</p>
+<p><embed src="./media/image32.tmp" style="width:5.90707in;height:3.35463in" /></p>
+<p>Figure 21. Linear regression model of binary variables.</p>
+<p>However, because the predictor is a factor vector instead of a numeric vector, the reporting of the coefficients is slightly different. The estimate of <span class="math inline">\(\beta_{0}\)</span> is again reported as <strong>(Intercept)</strong>; this is the estimate of the mean height if a student is female. The estimate of <span class="math inline">\(\beta_{1}\)</span> is reported as <strong>SexMale</strong>. The corresponding regression coefficient of 13.139 is the estimated difference between the mean height of male and the mean height of female. If we look at the corresponding regression equation</p>
+<p><span class="math display">\[y = \ {\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}x = 165.687 + 13.139x\]</span></p>
+<p>we can see that the model has been fitted assuming the variable <span class="math inline">\(x\)</span> is defined as “the individual is male” – 0 for no/false, 1 for yes/true. In other words, the level of “female” for the <strong>Sex</strong> variable is assumed as a reference, and it is the effect of “being male” on mean height that is explicitly estimated. The hypothesis test for <span class="math inline">\(\beta_{0}\)</span> and <span class="math inline">\(\beta_{1}\)</span> is performed with the typical hypotheses:</p>
+<p>H<sub>0</sub>: <span class="math inline">\(\beta_{j} =\)</span> 0</p>
+<p>H<sub>A</sub>: <span class="math inline">\(\beta_{j}\  \neq 0\)</span></p>
+<p>Again, it’s the test for <span class="math inline">\(\beta_{1}\)</span> that’s generally of the most interest since it’s this value that tells us whether there is statistical evidence that the mean response variable is affected by the explanatory variable, that is, if <span class="math inline">\(\beta_{1}\)</span> is significantly different from zero. In the above example, we see that <strong>Height</strong> is affected by the <strong>Sex</strong> of the student since <span class="math inline">\(\beta_{1}\)</span> is highly significant.</p>
+<p>Because there are only two possible values for <span class="math inline">\(x\)</span>, prediction is straight-forward here. When we evaluate the equation, the only decision that needs to be made is whether <span class="math inline">\({\widehat{\beta}}_{1}\)</span> needs to be used (in other words, if an individual is male) or not (if an individual is female). For example, we can enter the code in figure 22 to create a factor of five extra observations with the same level names as the original data and store the new data in <strong>extra.obs</strong>.</p>
+<p><embed src="./media/image33.tmp" style="width:5.60495in;height:0.70843in" /></p>
+<p>Figure 22. Creation of a factor of five extra observations.</p>
+<p>Then, use <strong>predict( )</strong> in the familiar fashion to find the mean heights at those extra values of the predictor. When we pass in new data to <strong>predict</strong> using the <strong>newdata</strong> argument, the predictors must be in the same form as the data that were used to fit the model in the first place (figure 23).</p>
+<p><embed src="./media/image34.tmp" style="width:6.5in;height:1.25625in" /></p>
+<p>Figure 23. 90% confidence intervals of new observations.</p>
+<p>We can see from the output that the predictions are different only between the two sets of values – the point estimates of the two instances of <strong>Female</strong> are identical, simply <span class="math inline">\({\widehat{\beta}}_{0}\)</span>with 90% CIs. The point estimates and CIs for the instances of <strong>Male</strong> are also all the same as each other, based on a point estimate of <span class="math inline">\({\widehat{\beta}}_{0} + \ {\widehat{\beta}}_{1}\)</span>.</p>
+<p>Moving on from the above introductory example, let’s look in more detail at the earlier model fitted on student height as a linear function of handspan and sex. The R output for the regression analysis is shown in figure 24.</p>
+<p><embed src="./media/image35.tmp" style="width:5.8654in;height:3.32338in" /></p>
+<p>Figure 24. Summary of the regression analysis for student height related to handspan and sex.</p>
+<p>We can see that <span class="math inline">\(\widehat{\text{height}}\)</span> = <span class="math inline">\(137.6870 + 1.5944\  \times writing\ handspan + 9.4898\  \times sex.\)</span></p>
+<p>The prediction equation for a female student can be obtained by substituting <span class="math inline">\(x_{2}\)</span> = 0 into the above general prediction equation. Then</p>
+<p><span class="math display">\[\widehat{\text{height}} = 137.6870 + 1.5944\  \times writing\ handspan + 9.4898\  \times 0 = 137.6870 + 1.5944\  \times writing\ handspan\]</span></p>
+<p>Similarly, the prediction equation for a male student can be obtained by substituting <span class="math inline">\(x_{2} = 1\)</span> into the general prediction equation. Then</p>
+<p><span class="math display">\[\widehat{\text{height}} = 137.6870 + 1.5944\  \times writing\ handspan + 9.4898\  \times 1 = \left( 137.6870 + 9.4898 \right) + 1.5944\  \times writing\ handspan = 147.1768 + 1.5944\  \times writing\ handspan\]</span></p>
+<p>We have two parallel lines having a slope of 1.5944. That is, for both males and females, we estimate that height increases by 1.5944 cm for each 1 cm increase in writing handspan. At each value of writing handspan, we estimate that the mean height of males is</p>
+<p>147.1768 - 137.687 = 9.4898 cm greater than the mean height of females.</p>
+<p>Why bother fitting a model that combines the two lines into the same equation? The answer is that we need to use this procedure if we wish to use statistical tests and confidence or prediction intervals to compare the two lines.<span class="math inline">\(898)span\ al\ prediction\ equation.\ \ Then\ \text{student\ can\ be\ obtained\ by\ substituting\ on\ of\ handspan\ and\ sex.\ \ The\ R\ output\ for\ }\)</span></p>
+<p><em>Activity 8</em>: In the <strong>MASS</strong> package, you’ll find the data frame <strong>cats</strong>, which provides data on sex, body weight (in kilograms), and heart weight (in grams) for 144 household cats; you can read the documentation with a call to <strong>?cats</strong>. Load the <strong>MASS</strong> package with a call to <strong>library(MASS)</strong>, and access the object directly by entering <strong>cats</strong> at the console prompt.</p>
+<p>Fit a least-squares multiple linear regression model using heart weight as the response variable and the other two variables as predictors, and view a model summary. Use your model to estimate the mean heart rate and provide a 95% prediction interval for a female cat with a body weight of 3.4 kg.</p>
+<h3 id="variable-screening-methods">Variable Screening Methods</h3>
+<p>When developing a regression equation, we’re implicitly faced with a selection of many possible models. Should we include all the variables under study, or drop ones that don’t make a significant contribution to prediction? Should you add interaction terms to improve the fit? The selection of a final regression model always involves a compromise between predictive accuracy (a model that fits the data as well as possible) and parsimony (a simple and replicable model). All things being equal, if we have two models with approximately equal predictive accuracy, we favor the simpler one. This section describes various methods for choosing among competing models. There’s no single criterion we can use to make the decision. The final decision requires judgment on the part of the investigator.</p>
+<h4 id="comparing-models">Comparing Models</h4>
+<p>We can compare the fit of two nested models using the <strong>anova( )</strong> function in the base R installation. A <em>nested model</em> is one whose terms are completely included in the other model. In the <strong>states</strong> multiple regression model example, we found that the regression coefficients for <strong>Income</strong> and <strong>Frost</strong> were nonsignificant. We can test whether a model without these two variables predicts as well as one that includes them (figure 25).</p>
+<p><embed src="./media/image36.tmp" style="width:5.407in;height:2.03153in" /></p>
+<p>Figure 25. Comparing nested models using the <strong>anova( )</strong> function.</p>
+<p>Here, model 1 is nested within model 2. The <strong>anova( )</strong> function provides a simultaneous test that <strong>Income</strong> and <strong>Frost</strong> add to linear prediction above and beyond <strong>Population</strong> and <strong>Illiteracy</strong>. Because the test is nonsignificant (<span class="math inline">\(p = 0.9939\)</span>), we conclude that they don’t add to the linear prediction and we’re justified in dropping them from our model.</p>
+<h5>Activity 9</h5><p> Returning to the <strong>nuclear</strong> data frame, refit the model. Expand the model that you fit in Activity 2 by including a third predictor variable for the date the construction permit was issued. Compare the two models using the <strong>anova( )</strong> function.</p>
+<p>The Akaike Information Criterion (AIC) provides another method for comparing models. The index takes into account a model’s statistical fit and the number of parameters needed to achieve this fit. Models with <em>smaller</em> AIC values – indicating adequate fit with fewer parameters – are preferred. The criterion is provided by the <strong>AIC( )</strong> function (figure 26).</p>
+<p><embed src="./media/image37.tmp" style="width:5.50077in;height:1.0939in" /></p>
+<p>Figure 26. Comparing models with the AIC.</p>
+<p>The AIC values suggest that the model without <strong>Income</strong> and <strong>Frost</strong> is the better model. Note that although the previous approach requires nested models, the AIC approach doesn’t.</p>
+<h5>Activity 10</h5><p> Compare the two models from Activity 9 with the <strong>AIC( )</strong> function.</p>
+<h4 id="variable-selection">Variable Selection</h4>
+<p>Comparing two models is relatively straightforward, but what do we do when there are 4, or 10, or 100 possible models to consider? Two popular approaches to selecting a final set of predictor variables from a larger pool of candidate variables are stepwise methods and all-subsets regression.</p>
+<p>In stepwise selection, variables are added to or deleted from a model one at a time, until some stopping criterion is reached. For example, in <em>forward stepwise</em> regression, we add predictor variables to the model one at a time, stopping when the addition of variables would no longer improve the model. In <em>backward stepwise</em> regression, we start with a model that includes all predictor variables, and then we delete them one at a time until removing variables would degrade the quality of the model. In <em>stepwise</em> regression, we combine the forward and backward stepwise approaches. Variables are entered one at a time, but at each step, the variables in the model are reevaluated, and those that don’t contribute to the model are deleted. A predictor variable may be added to, and deleted from, a model several times before a final solution is reached.</p>
+<p>The implementation of stepwise regression methods varies by the criteria used to enter or remove variables. The Akaike Information Criterion (AIC) is an estimator of the relative quality of a model for a given data. The AIC score offers information whether the model with certain variables is a better fit compared to other models with other variables. A lower AIC value indicates a better model. The <strong>stepAIC( )</strong> function in the <strong>MASS</strong> package performs stepwise model selection (forward, backward, or stepwise) using an exact AIC criterion. Figure 27 applies backward stepwise regression to the multiple regression problem.</p>
+<p><embed src="./media/image38.tmp" style="width:5.71955in;height:5.69871in" /></p>
+<p>Figure 27. Backward stepwise selection.</p>
+<p>We start with all four predictors in the model. For each step, the AIC column provides the model AIC resulting from the deletion of the variable listed in that row. The AIC value for <strong>&lt;none&gt;</strong> is the model AIC if no variables are removed. In the first step, <strong>Frost</strong> is removed, decreasing the AIC from 97.75 to 95.75. In the second step, <strong>Income</strong> is removed, decreasing the AIC to 93.76. The Mallows Cp statistic is also used as a stopping rule in stepwise regression. It has been widely suggested that a good model is one in which the Cp statistic is close to the number of model parameters (including the intercept).</p>
+<p>Stepwise regression is controversial. Although it may find a good model, there’s no guarantee that it will find the “best” model. This is because not every possible model is evaluated. An approach that attempts to overcome this limitation is <em>all subsets regression</em>.</p>
+<h5>Activity 11</h5><p> Refer to the <strong>nuclear</strong> data frame. Using the fullest model with 10 predictor variables, use the <strong>stepAIC( )</strong> function to find a suitable model for the data. Perform forward, backward, and stepwise selection. Do the resulting variables match for the three approaches?</p>
+<p>In all subsets regression, every possible model is inspected. The analyst can choose to have all possible results displayed or ask for the <em>nbest</em> models of each subset size (one predictor, two predictors, and so on). For example, if <strong>nbest=2</strong>, the two best one-predictor models are displayed, followed by the two best two-predictor models, followed by the two best three-predictor models, up to a model with all predictors.</p>
+<p>All subsets regression is performed using the <strong>regsubsets( )</strong> function from the <strong>leaps</strong> package. We can choose the R<sup>2</sup>, Adjusted R<sup>2</sup>, or Mallows Cp statistic as our criterion for reporting “best” models.</p>
+<p>As we’ve seen, R<sup>2</sup> is the amount of variance accounted for in the response variable by the predictor variables. Adjusted R<sup>2</sup> is similar but takes into account the number of parameters in the model. R<sup>2</sup> always increases with the addition of predictors. When the number of predictors is large compared to the sample size, this can lead to significant overfitting. The Adjusted R<sup>2</sup> is an attempt to provide a more honest estimate of the population R<sup>2</sup> – one that’s less likely to take advantage of chance variation in the data.</p>
+<p>In figure 28, we apply all subsets regression to the <strong>states</strong> data.</p>
+<p><embed src="./media/image39.tmp" style="width:5.61537in;height:1.5523in" /></p>
+<p>Figure 28. All subsets regression.</p>
+<p>The results can be plotted with either the <strong>plot( )</strong> function in the <strong>leaps</strong> package or the <strong>subsets( )</strong> function in the <strong>car( )</strong> package. An example of the former is provided in figure 29, and an example of the latter is given in figure 30.</p>
+<p><img src="./media/image40.png" style="width:6.5in;height:3.97292in" /></p>
+<p>Figure 29. Best four models for each subset size based on Adjusted R<sup>2</sup>.</p>
+<p>Figure 29 can be confusing to read. Looking at the first row (starting at the bottom), we can see that a model with the intercept and <strong>Income</strong> has an Adjusted R<sup>2</sup> of 0.033. A model with the intercept and <strong>Population</strong> has an Adjusted R<sup>2</sup> of 0.1. Jumping to the 12<sup>th</sup> row, a model with the intercept, <strong>Population, Illiteracy</strong>, and <strong>Income</strong> has an Adjusted R<sup>2</sup> of 0.54, whereas one with the intercept, <strong>Population</strong>, and <strong>Illiteracy</strong> alone has an Adjusted R<sup>2</sup> of 0.55. Here we see that a model with fewer predictors has a larger Adjusted R<sup>2</sup> (something that can’t happen with an unadjusted R<sup>2</sup>). The graph suggests that the two-predictor model (<strong>Population</strong> and <strong>Illiteracy</strong>) is the best.</p>
+<p><img src="./media/image41.png" style="width:6.5in;height:3.97292in" /></p>
+<p>Figure 30. Best four models for each subset size based on the Mallows Cp statistic.</p>
+<p>Figure 30 shows the best four models for each subset size based on the Mallows Cp statistic. Better models will fall close to a line with intercept 1 and slope 1. The plot suggests that we consider a two-predictor model with <strong>Population</strong> and <strong>Illiteracy;</strong> a three-predictor model with <strong>Population, Illiteracy</strong>, and <strong>Frost</strong>, <em>or</em> <strong>Population, Illiteracy</strong>, and <strong>Income</strong> (they overlap on the graph and are hard to read); or a four-predictor model with <strong>Population, Illiteracy, Income</strong>, and <strong>Frost.</strong> We can reject the other possible models.</p>
+<p>In most instances, all subsets regression is preferable to stepwise regression, because more models are considered. But when the number of predictors is large, the procedure can require significant computing time. In general, automated variable selection methods should be seen as an aid rather than a directing force in model selection. A well-fitting model that doesn’t make sense doesn’t help us. Ultimately, it’s our knowledge of the subject matter that should guide us.</p>
+<h5>Activity 12</h5><p> Apply all subsets regression to the <strong>nuclear</strong> data frame. Find the best five models for each subset size based on Adjusted R<sup>2</sup>. Also find the best five models for each subset size based on Mallows Cp statistic.</p>
+<h3 id="multicollinearity">Multicollinearity</h3>
+<p>Multicollinearity was discussed briefly in the introductory section on multiple regression assumptions. We now delve into this issue which has substantial potential to adversely affect the validity of any conclusions we draw from a fitted model and occurs frequently enough to warrant detailed coverage. Recall multicollinearity (also simply referred to as collinearity) is when two or more of the explanatory variables are highly correlated with each other.</p>
+<p>Imagine we’re conducting a study of grip strength. Our independent variables include date of birth (DOB) and age. We regress grip strength on DOB and age and find a significant overall <span class="math inline">\(F\)</span>-test at <span class="math inline">\(p\  &lt; 0.001.\ \ \)</span> But when we look at the individual regression coefficients for DOB and age, we find that they’re both nonsignificant (that is, there’s no evidence that either is related to grip strength). What happened?</p>
+<p>The problem is that DOB and age are perfectly correlated within rounding error. A regression coefficient measures the impact of one predictor variable on the response variable, holding all other predictor variables constant. This amounts to looking at the relationship of grip strength and age, holding age constant. The problem is called multicollinearity. It leads to large confidence intervals for model parameters and makes the interpretation of individual coefficients difficult.</p>
+<p>In general, high correlation between two predictors implies there will some level of redundancy in terms of the information they contain when it comes to the response variable. It’s a problem since it can destabilize the ability to reliably fit a model and, as noted above, therefore be detrimental to any subsequent model-based inference.</p>
+<p>The following items serve as potential warnings of multicollinearity when we’re inspecting a model summary:</p>
+<ul>
+<li><p>The global <em>F-</em>test (detailed earlier in assessing the overall utility of the model) result is statistically significant, but none of the individual <span class="math inline">\(t\)</span>-test results for the regression parameters are significant.</p></li>
+<li><p>The sign of a given coefficient estimate contradicts what we would reasonably expect to see, for example, drinking more wine resulting in a lower blood alcohol level.</p></li>
+<li><p>Parameter estimates are associated with unusually high standard errors or vary wildly when the model is fitted to different random record subsets of the data.</p></li>
+</ul>
+<p>As the last point notes, multicollinearity tends to have more of a detrimental effect on the standard errors of the coefficients (and associated outcomes such as confidence intervals, significance tests, and prediction intervals) than it does on point predictions per se. In most cases, we can avoid multicollinearity simply by being careful. Be aware of the variables present and how the data have been collected. For example, we should ensure any given predictors we intend to include in the model don’t just represent a rescaled value of another included predictor. It’s also advisable to perform an explanatory analysis of our data, producing summary statistics and basic statistical plots. We can look at estimated correlation coefficients between variables, for example. As noted in the introduction, as a rough guide, some statisticians suggest that a correlation of 0.8 or more could lead to potential problems.</p>
+<p>Also as indicated in the introductory section, multicollinearity can be detected using a statistic called the <em>variance inflation factor</em> (VIF). VIF values are provided by the <strong>vif( )</strong> function in the <strong>car</strong> package. As stated previously, VIF &gt; 10 indicates a multicollinearity problem. The code for our earlier <strong>states</strong> data frame example is provided in figure 31.</p>
+<p><embed src="./media/image42.tmp" style="width:3.94847in;height:0.93763in" /></p>
+<p>Figure 31. Evaluating multicollinearity with the <strong>vif( )</strong> function in the <strong>car</strong> package.</p>
+<p>The results indicate that multicollinearity isn’t a problem with these predictor variables. We can obtain the entire matrix of correlations between all variables in the <strong>states</strong> data frame by using the code in figure 32.</p>
+<p><embed src="./media/image43.tmp" style="width:5.66746in;height:1.08348in" /></p>
+<p>Figure 32. Correlation matrix for the <strong>states</strong> data frame.</p>
+<p>Since the absolute value of all the pairwise correlations between predictor variables is less than 0.8, again there is no indication of multicollinearity issues.</p>
+<h5>Activity 13</h5><p> Evaluate multicollinearity for the <strong>nuclear</strong> data frame with the <strong>vif( )</strong> function in the <strong>car</strong> package.</p>
+<h5>Activity 14</h5><p> Construct the correlation matrix for the <strong>nuclear</strong> data frame.</p>
+<p>If we detect that multicollinearity exists, there are several alternative measures available for solving the problem. The appropriate measure to take depends on the severity of the multicollinearity and the ultimate goal of the regression analysis.</p>
+<p>As indicated earlier, some researchers, when confronted with highly correlated independent variables, choose to include only one of the correlated variables in the final model. If we are interested in using the model only for estimation and prediction, we may decide not to drop any of the independent variables from the model. In the presence of multicollinearity, we have seen that it is dangerous to interpret the individual <span class="math inline">\(\beta\)</span> parameters. However, confidence intervals for the mean and prediction intervals for individual <span class="math inline">\(y\)</span> values generally remain unaffected <em>as long as the values of the</em> <span class="math inline">\(x\)</span><em>’s used to predict y follow the same pattern of multicollinearity exhibited in the sample data</em> – that is, we must take strict care to ensure that the values of the <span class="math inline">\(x\)</span> variables fall within the range of the sample data.</p>
+<h3 id="extrapolation">Extrapolation</h3>
+<p>It is important to note that the regression model is valid only over the <strong>experimental region</strong>, which is the range of values of the independent variables in the data used to estimate the model. Prediction of the value of the dependent variable outside the experimental region is called <strong>extrapolation</strong> and is risky. Because we have no empirical evidence that the relationship we have found holds true for values of <span class="math inline">\(x\)</span> outside of the range of values of <span class="math inline">\(x\)</span> in the data used to estimate the relationship, extrapolation is risky and should be avoided if possible.</p>
+<p>As an example, many research economists have developed highly technical models to relate the state of the economy to various economic indices and other independent variables. Many of these models are multiple regression models, where, for example, the dependent variable <span class="math inline">\(y\)</span> might be next year’s gross domestic product (GDP) and the independent variables might include this year’s rate of inflation, this year’s consumer price index (CPI), and so on. In other words, the model might be constructed to predict next year’s economy using this year’s knowledge.</p>
+<p>Unfortunately, these models were almost all unsuccessful in predicting the recession in the early 1970s, the late 1990s, and earlier in this century. What went wrong? One of the problems was that many of the regression models were used to <strong>extrapolate</strong> (i.e., predict <span class="math inline">\(y\)</span> values of the independent variables that were outside the region in which the model was developed). For example, the inflation rate in the late 1960s, when the models were developed, ranged from 6% to 8%. When the double-digit inflation of the early 1970s became a reality, some researchers attempted to use the same models to predict future growth in GDP. The model may be very accurate for predicting <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> is in the range of experimentation, but using the model outside that range is a dangerous practice.</p>
+<p>.<strong>Final Assessment</strong></p>
+<ol type="1">
+<li><p>Another of R’s built-in, ready-to-use data sets is <strong>mtcars</strong>, containing a number of descriptive details on performance aspects of 32 automobiles. Access this data frame by entering <strong>mtcars</strong> at the prompt. Then inspect its help file by entering <strong>?mtcars</strong> to get an idea of the types of data present. Generate the bivariate correlations and scatterplot matrix for <strong>mtcars.</strong></p></li>
+<li><p>For the <strong>mtcars</strong> data frame, create a fit and summary of a linear regression model that considers MPG as a function of horsepower and weight.</p></li>
+<li><p>Construct 95% confidence intervals for the regression coefficients for the model that you fit in #2.</p></li>
+<li><p>For the fitted regression model from #2, construct a 99% confidence interval for the mean MPG when gross horsepower is 175 and weight is 3.5 (1000 lbs).</p></li>
+<li><p>For the fitted regression model from #2, construct a 99% prediction interval for the MPG of a car when gross horsepower is 175 and weight is 3.5 (1000 lbs).</p></li>
+<li><p>In the <strong>MASS</strong> package, you’ll find the data frame <strong>cats</strong>, which provides data on sex, body weight (in kilograms), and heart weight (in grams) for 144 household cats; you can read the documentation with a call to <strong>?cats</strong>. Load the <strong>MASS</strong> package with a call to <strong>library(MASS)</strong>, and access the object directly by entering <strong>cats</strong> at the console prompt. Fit an interaction model using heart weight as the response variable and the other two variables as predictors, and view a model summary.</p></li>
+<li><p>Refer to #6. Construct an interaction plot for <strong>Sex*Bwt</strong>.</p></li>
+<li><p>Use your model in #6 to estimate the mean heart rate and provide a 99% prediction interval for a male cat with a body weight of 3.8 kg.</p></li>
+<li><p>For the <strong>cats</strong> data frame, compare the interaction model with the main-effect-only (i.e., no interaction model) using the <strong>anova( )</strong> function.</p></li>
+<li><p>Compare the two models from #9 with the <strong>AIC( )</strong> function.</p></li>
+<li><p>Refer to the <strong>mtcars</strong> data frame. Using the fullest model for estimating MPG with 10 predictor variables, use the <strong>stepAIC( )</strong> function in the <strong>MASS</strong> package to find a suitable model for the data. Perform forward, backward, and stepwise selection.</p></li>
+<li><p>Apply all subsets regression to the <strong>mtcars</strong> data frame. Find the best three models for each subset size based on Adjusted R<sup>2</sup>. Also find the best three models for each subset size based on Mallows Cp statistic.</p></li>
+<li><p>Evaluate multicollinearity for the <strong>mtcars</strong> data frame with the <strong>vif( )</strong> function in the <strong>car</strong> package.</p></li>
+<li><p>Construct the correlation matrix for the <strong>mtcars</strong> data frame.</p></li>
+</ol>
+<p><strong>References:</strong></p>
+<p>Kleinbaum, D.G., Kupper, L.L, Nizam, A., Rosenberg, E.S. Applied Regression Analysis and Other Multivariable Methods, Fifth Edition, Cengage Learning.</p>
+<p>Montgomery, D.C., Peck, E.A., Vining, G.G. Introduction to Linear Regression Analysis, Fifth Edition, Wiley.</p>
+<p>Weisberg, S. Applied Linear Regression, Fourth Edition, Wiley.</p>
+
+
+</div>
+</div>
+</body>
+</html>
