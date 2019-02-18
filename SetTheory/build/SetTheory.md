@@ -649,22 +649,18 @@ Ways to get a union from non-compatible tables:
     values or NULLs (leave blank) where appropriate.
 
 Syntax:
-
-SELECT column\_1, column\_2,... FROM table\_1
-
+```sql
+SELECT column_1, column_2,... FROM table_1
 UNION
-
-SELECT column\_1, column\_2,... FROM table\_2;
-
+SELECT column_1, column_2,... FROM table_2;
+```
 For example, query customers who reside in the same cities as product
 suppliers:
-
+```sql
 SELECT City, PostalCode FROM Customers
-
 UNION
-
 SELECT City, PostalCode FROM Suppliers
-
+```
 The sequential execution of the query means that the SQL interpreter
 (such as SQL Server) runs the first query, then the second, and finally
 combines the results of the two queries while discarding duplicates.
@@ -679,12 +675,11 @@ UNION ALL returns the same information and also includes any duplicates.
 The INTERSECT operator combines two queries such that values common to
 both are returned. In other words, we find elements that are in set A
 that are also in set B. 
-
-SELECT column\_1, column\_2,... FROM table\_1
-
+```sql
+SELECT column_1, column_2,... FROM table_1
 INTERSECT
-
-SELECT column\_1, column\_2,... FROM table\_2;
+SELECT column_1, column_2,... FROM table_2;
+```
 
 #### IN and NOT IN for set operations
 
@@ -781,6 +776,9 @@ INSERT INTO resultSet1 (x, y)
 SELECT DISTINCT x, y from numbers3;
 SELECT DISTINCT x, y FROM resultSet1;
 ```
+
+![Union](./set_theory_images/Slide3.PNG)
+
 This yields in arbitrary order all numbers in each table that is are not
 duplicates. If we want to include duplicates, use the UNION ALL clause
 instead. 
@@ -807,6 +805,8 @@ WHERE NOT EXISTS (
 ); 
 ```
 
+![Except](./set_theory_images/Slide1.PNG)
+
 The INTERSECT operator yields results which are common to both queries. 
 ```sql
 SELECT DISTINCT x, y
@@ -824,6 +824,9 @@ WHERE EXISTS (
   WHERE n2.x = n3.x AND n2.y = n3.y
 ); 
 ```
+
+![Except](./set_theory_images/Slide2.PNG)
+
 ### Exercise
 
 Using SQL, generate three random sets of alphabetical characters (Have
@@ -949,18 +952,14 @@ Using sets A = {1, 3, 5, 7} and B = {1, 3, 4, 6}, get aRb in the context
 of “greater than” and show the range and domain. Mark “x” where this
 condition is satisfied.
 
-B
-
-1 3 4 6
-
-1  
-
-A   3x
-
-5x x x
-
-7x x x x
-
+```
+         B
+      1 3 4 6
+  1  
+A 3   x
+  5   x x x
+  7   x x x x
+```
 Therefore, the relation set R is comprised of the respective pairs
 indicated by the “x” in the table:
 
@@ -989,7 +988,11 @@ connected.
 Here is a relation between elements a and b. Suppose b derives from a,
 or that a is greater than b.
 
+![Graph](./set_theory_images/Slide4.PNG)
+
 Suppose c also derives from a, We then have.
+
+![Graph](./set_theory_images/Slide5.PNG)
 
 To represent the relation R = { (b, a), (c, a) } of a set S = { a, b, c
 }
@@ -998,26 +1001,23 @@ Given an ordered (c, c), we have a self-loop on vertices. If this is the
 case for all vertices, then the graph is said to be “reflexive.” If node
 c in the above graph has a self-loop, it it would look like this:
 
+![Graph](./set_theory_images/Slide6.PNG)
+
 The relation is then R = { (b, a), (c, a), (c, c) } 
 
 Example SML:
 
 Given the following lists and function:
-
-val A = \[1, 2, 3, 4 \];
-
-val B = \[1, 5, 7, 9 \];
-
-fun contains(x, \[\]) = false
-
-| contains(x, y::rest) =
-
-if x = y then true
-
-else contains(x, rest);
+```sml
+val A = [1, 2, 3, 4 ];
+val B = [1, 5, 7, 9 ];
+fun contains(x, []) = false
+  | contains(x, y::rest) =
+    if x = y then true
+    else contains(x, rest);
 
 contains(5, B);
-
+```
 ### Exercises
 
 1. Given three sets, A = {a, b, c}, B = {1, 2} and C = {a, b, d}, and
@@ -1038,18 +1038,18 @@ d, f, i, k}. Use SML for the following:
     - Demonstrate if the relation is Transitive.
     - Demonstrate if the relation is Symmetric.
 
-Matrix traversal may not seem intuitive to you using Standard ML.
-Solutions may seem easier in an imperative language such as C++ or Java,
-or in SQL. 
+    Matrix traversal may not seem intuitive to you using Standard ML.
+    Solutions may seem easier in an imperative language such as C++ or Java,
+    or in SQL. 
 
-For example, given the set A={1, 2, 3, 4}, demonstrate that the relation
-is R = { (1, 2), (2, 1), (3, 2), (2, 3) } is symmetric. Your program
-should display:
+    For example, given the set A={1, 2, 3, 4}, demonstrate that the relation
+    is R = { (1, 2), (2, 1), (3, 2), (2, 3) } is symmetric. Your program
+    should display:
 
-Relation R= { (1, 2), (2, 1), (3, 2), (2, 3) } is symmetric for set A =
-{ 1, 2, 3, 4 }
+    Relation R= { (1, 2), (2, 1), (3, 2), (2, 3) } is symmetric for set A =
+    { 1, 2, 3, 4 }
 
-FUNCTION
+## Function
 
 As defined, a function f is from a set X to a set Y is a relation from X
 to Y such that each x ∈ X is related to exactly one y ∈ Y. 
@@ -1112,7 +1112,7 @@ S' = { x ∈ X : f(x) ∈ S }
 Certain elements of S will map to the image. Those that do are
 identified as the inverse image.
 
-Properties of functions
+### Properties of functions
 
 Every function has a domain and range. 
 
@@ -1194,7 +1194,7 @@ You may have functions that are:
   - One-to-one correspondence
   - Not permitted: one-to-many
 
-Inverse function
+### Inverse function
 
 A function if:A→B is invertible if its inverse g:B→A exists. That is:
 
@@ -1217,7 +1217,7 @@ Try not to confuse an inverse function with an inverse image of a
 function, which is a subset of the domain as applied to a subset of the
 codomain.
 
-Composition of Function
+### Composition of Function
 
 A function can map two sets via a middle third set. Consider the output
 of function f that must go through function g, such as g(f(a)). 
@@ -1247,37 +1247,22 @@ Given f(a) = a + 2 and g(a) = 2a + 1, then (fog)(a) and (gof)(a) are:
 
 Therefore, (fog)(a) ≠ (gof)(a)
 
-Exercises
+### Exercises
 
-1\. Devise SML functions for the following operations on a set:
-
-A. addElement
-
-B. removeElement
-
-C. cardinalityOfSet
-
-D. containsElement
-
-2\. Devise SML functions to affect the following set relations:
-
-A. isRelated
-
-B. makeInverse
-
-C. findImage
-
-3\. Devise SQL queries for the following operations on a set:
-
-A. cardinalityOfSet
-
-B. containsElement
-
-C. isRelated
-
-d. findImage
-
-4\. Devise an SML function that partitions a set (all possible
+1. Devise SML functions for the following operations on a set:
+    - addElement
+    - removeElement
+    - cardinalityOfSet
+    - containsElement
+2. Devise SML functions to affect the following set relations:
+    - isRelated
+    - makeInverse
+    - findImage
+3. Devise SQL queries for the following operations on a set:
+    - cardinalityOfSet
+    - containsElement
+    - isRelated
+    - findImage
+4. Devise an SML function that partitions a set (all possible
 partitions).
-
-5\. Devise an SQL query that partitions a set (all possible partitions).
+5. Devise an SQL query that partitions a set (all possible partitions).
