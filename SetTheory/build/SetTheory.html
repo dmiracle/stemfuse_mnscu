@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>setTheory</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>Module: Set Theory – 1 Credit / 15 hours</p>
+<p>Competency: Mathematical Reasoning of Data </p>
+<p>Author: Jack Pope </p>
+
+
+<p>Instructor overview &amp; objective</p>
+<p>This course module is about set theory. It embodies categorical classes and sets in terms of relations and functions. </p>
+
+<p>Given that this module is to be worth 1 credit, or 15 hours of coursework, the instructor should prepare three to five subtopic discussions. These should account for at least 5 hours of instructional material and might be in the form of lecture notes or lecture videos. The additional hours should be comprised of student labs or assignments.  </p>
+
+<p>Traditionally, a course in Set Theory takes a theoretical approach, on paper. However, the field of Data Science is an empirical endeavor that programmatically emphasizes empirical evidence. </p>
+
+<p>Axioms which we accept as true are what support logical proof. Evidence (data) supports empirical proof, certainty based on a measurement and its statistical significance. A weakness of logical proof occurs when erroneous accepted “facts” support an axiom. A weakness of the empirical proof occurs when the data sample does not represent a population.</p>
+
+<p>To accommodate our purposes, we will use a combination of the programming languages Standard Meta Language (SML) and Structured Query Language (SQLite). To a lesser extent procedural languages are mentioned. SML affords us functional programming and SQL expedites processing larger sets of data in tables. Within the functional paradigm, SML has relatively concise expressions in comparison to procedural languages such as C or Java, better reflecting mathematical expressions. </p>
+
+<p>SML was originally devised by Robin Milner as a computational theorem proving system. Along with SQLite's build-in set operators, we can thoroughly learn set theory using data.</p>
+
+<p>The choice of programming language is ultimately left to the instructor.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Schedule </p>
+<p>weekTopic</p>
+<p>==========================================</p>
+<p>1<strong>Sets – overview</strong></p>
+<p>Installation of software (SML, SQLite)</p>
+<p>Exercise</p>
+
+<p>2<strong>Programming</strong></p>
+<p>Standard ML</p>
+<p>Set operations</p>
+<p>Exercise</p>
+<p>SQL</p>
+<p>Set operations</p>
+<p>Exercise</p>
+
+<p>3<strong>Number types</strong></p>
+<p>Set types</p>
+<p>Set type examples</p>
+<p>Exercise</p>
+
+<p>4<strong>Relation</strong></p>
+<p>Properties of relations</p>
+<p>Domain and range of relations</p>
+<p>Relational graphs </p>
+<p>Exercise</p>
+
+<p>5<strong>Function</strong></p>
+<p>Properties of functions</p>
+<p>Inverse function</p>
+<p>Composition of function</p>
+<p>Exercise</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>SETS – overview</p>
+<p>A set is an unordered collection of distinct elements. It can be represented by a list, string, array, etc. Formally, set elements are denoted in the form { a, b, c, d }. Because order does not matter, the same set is represented as { c, b, d, a }.</p>
+
+<p>The values represented in sets can be the members of some class, such as number types, animals, automobiles, or some other categorical classification. For example, a line may be drawn that connects infinitely many points, together which comprise a set of points. Such a set could also be represented by an equation.</p>
+
+<p>We say that elements constitute sets, and that sets are comprised of elements. However, sets may be empty or comprised of other sets, subsets. </p>
+
+<p>The character S is typically used as a symbol signifying a set. The symbol is arbitrary. It may be A, B, … So, we can have S = { } or E = { e1, e2, … }, such that e1 is in E. </p>
+
+<p>Number types and their conventions:</p>
+<ul>
+<li>N: all natural numbers = { 1, 2, 3, 4, … }… 0 is not in the set of natural numbers</li>
+<li>Z: all integers = { ..., -4, -3, -2, -1, 0, 1, 2, 3, 4, … }</li>
+<li>Z+: all positive integers</li>
+<li>Q: all rational numbers; can be expressed as a ratio of an integer to a non-zero integer.</li>
+<li>I: all irrational numbers</li>
+<li>R: all real numbers; have decimal representation</li>
+<li>W: all whole numbers = { 0, 1, 2, 3, 4, … }</li>
+<li>i: product of a real number and square root of -1. (0 is both real and imaginary.) </li>
+<li>C: all complex numbers; includes real numbers, imaginary numbers and their sums and differences. Form: a + bi, where a + b are real numbers.</li>
+</ul>
+
+<p>If s is an element of set S, then we write: s ∈ S. </p>
+
+<p>If t is not an element of set S, then we write: t ∉ S</p>
+
+<p>If S = {2.2, 3.1, 4.5, 5.8},</p>
+<p>Then 3.1 1 ∈ S AND 2.5 ∉ S</p>
+
+<p>We can represent sets in tables or with “set builder” notation.</p>
+
+<p>Tabular form, where elements can represent fields and different sets represent records (rows):</p>
+
+<p>A = {1, 2 , 3, 4}</p>
+<p>B = {1, 3 , 5, 7}</p>
+<p>C = {2, 4 , 6, 8}</p>
+
+<p>Set builder form:</p>
+
+<p>A = { a : p(a) }, where 'a' is an element of set A.</p>
+
+<p>For example, given a set of integers A = { 1, 2, 3, 4 }, we have A = { a : 1 ≤ a &lt; 5 }, where a is an integer that is greater than or equal to 1 and less than 5.</p>
+
+<p>When you see notation for a set S = { s | s ∈ N }, it indicates that s is an element of S and that S is the set of all natural numbers. The colon “:” or the vertical bar “|” stands for “such that” and allows specification of conditions. </p>
+
+<p>The cardinality (cardinal number) of a set is its element count, denoted with |{}|. For example </p>
+
+<p>| {a, b, c, x, y} | = 5</p>
+
+<p>| { 1, 2, 3, 4 } | = 4</p>
+
+<p>Cardinality may be infinite and expressed such as: </p>
+
+<p>| {1, 2, 3, 4, … } | = ∞</p>
+
+<p>Two sets A and B with the same cardinality are denoted as:</p>
+
+<p>|A| = |B|</p>
+
+<p>Two sets A and B with unequal cardinality are denoted such as:</p>
+
+<p>|A| &gt;= |B|</p>
+
+<p>|A| &lt; |B|</p>
+
+<p>Set equivalence:</p>
+
+<p>if |A| &gt;= |B| AND |A| &lt;= |B| THEN |A| == |B|</p>
+
+<p>Set types</p>
+<ul>
+<li>Universal … U ... all elements and subsets of a particular class. (The alphabet is the universal set of the chars x, a and w.)</li>
+<li>Complement … A′ = (U - A), or A′ = { a | a ∉ A } ... the Universal set of elements which are not in a set. </li>
+<li>Finite: contains a definite number of elements</li>
+<li>Infinite: contains infinite number of elements</li>
+<li>Subset ... A ⊆ B ... if every element of A is an element of set B, then A is a subset of B</li>
+<li>Proper subset ... A ⊂ B ... a set that is subset of a larger set. Given that every element of A is an element of B and |A| &lt; |B|.</li>
+<li>Singleton … unit set {s} ... contains just one element. </li>
+<li>Empty or null … ∅ ... contains no elements. The cardinality is zero.</li>
+<li>Equal... two sets containing the same elements.</li>
+<li>Equivalent … two sets with same cardinality.</li>
+<li>Overlapping ... A∩B ≠ ∅ ... two sets with at least one common element.</li>
+<li>Disjoint ... A∩B = ∅ ... two sets are disjoint if they have no elements in common. </li>
+<li>Pairwise disjoint .. all sets from N sets are disjoint.</li>
+<li>Partitions … various sets within a sets; exist between pairwise disjoint sets.</li>
+<li><p>Cartesian (cross) product … A x B … all possible ordered pairs (a, b) where a ∈ A, b ∈ B. </p>
+<p>Given the sequence (a, b), all elements of A and all elements of B are paired as (a, b). </p>
+<p>A Cartesian Product of more than two sets makes a “tuple” such as (a, b, c).</p></li>
+<li>Union ... A∪B = { a | a∈A OR a∈B } ... elements which are in A, B, or in both A and B. </li>
+</ul>
+<ul>
+<li>Intersection ... A∩B = { a | a∈A AND a∈B } ... set of elements which are in both A and B.</li>
+<li>Difference … A - B = { a | a∈A AND a∉B } ... set of elements which are in A but not in B. </li>
+<li>Power set … P(S) … set of all subsets of S, including the empty set. Its cardinality is 2<sup>n</sup>. </li>
+<li><p>Partitioned set … a collection of disjoint subsets, P1, P2, … Pn, that satisfy:</p>
+<ul>
+<li>P<sub>i</sub> ≠ {∅} for all 0 &lt; i ≤ n</li>
+<li>Union of the subsets is the entire original set … P1 ∪ P2∪ … ∪ Pn = S</li>
+<li>Intersection of any two distinct sets is empty. Pa ∩ Pb = {∅}, for a ≠ b where n ≥ a, b ≥ 0</li>
+<li>Bell numbers … Bn … the number of ways a set of N elements can be partitioned into non-empty subsets. N is the cardinality of the set. Given A = {1, 2, 3}, cardinality n = |A| = 3. There are Bn = 5 possible partitions:</li>
+</ul></li>
+</ul>
+<p>1. {1, 2, 3}</p>
+<p>2. {1}, {2, 3}</p>
+<p>3. {1, 2}, {3}</p>
+<p>4. {1, 3}, {2}</p>
+<p>5. {1}, {2}, {3}</p>
+
+<p><strong>Set type examples</strong><br />
+Finite set:S = { s | s ∈ N AND 0 &lt; s &lt; 100}</p>
+<p>Infinite set:S = { s | s ∈ N AND s &gt; 0}</p>
+<p>Subset:A = { 1, 2, 3 }, B = { 1, 2, 3 }, B ⊆ A</p>
+<p>Proper subset:A = {1, 2, 3, 4 }, B = {1, 2}, |B| &lt; |A|, B ⊂ A</p>
+<p>Empty set:S = { s | s ∈ N AND 0 &lt; s &lt; 1 } = ∅</p>
+<p>Unit set:S = { s | s ∈ N, 0 &lt; s &lt; 2 } = { 1 }</p>
+<p>Equal set: A = { 2, 4, 6 }, B = { 6, 2, 4 }, |B| == |A|, A = B</p>
+<p>Equivalent set:A = { 1, 3, 5, 7 }, B = { 2, 4, 6, 8 }, |B| == |A| == 4 , A == B</p>
+
+<p>Note: While equivalent sets contain the same number of elements, equal sets additionally contain the exact same elements, regardless of order.</p>
+
+<p>Overlapping sets:A = { 1, 2, 3, 4 }, = { 0, 2, 6, 8 }, A∩B = 2</p>
+<p>Disjoint sets:A = { 1, 3, 5, 7 }, B = {2, 4, 6, 8 }, A∩B = ∅</p>
+<p>Union:A = { 1, 2, 3, 5 }, B = {1, 2, 4, 6 }, A∪B = { 1, 2, 3, 4, 5, 6 } </p>
+<p>Intersection:A = { 1, 2, 3, 5 }, B = {1, 2, 4, 6 }, A ∩ B = { 1, 2 } </p>
+<p>Difference: A = { 1, 2, 3, 5 }, = {1, 2, 4, 6 }, A - B = { 3, 5 }, B - A = { 4, 6 } </p>
+<p>Complement:U = { 1, 2, 3, 4 }, A = { 2, 4 }, A' = { 1, 3 } </p>
+<p>Cartesian product:A = { 1, 3 } AND B = { 2, 4 }, AxB = { (1, 2), (1, 4), (3, 2), (3, 4) } </p>
+<p>Power set: For S = { 1, 2, 3, 4}, </p>
+
+<p>P(S) = {{∅}, {1}, {2}, {3}, {4}, {1, 2}, {1, 3}, {1, 4}, {2, 3}, {2, 4},{3, 4}, </p>
+<p>{1, 2 , 3}, {1, 2, 4}, {1, 3, 4}, {2, 3, 4}, {1, 2, 3, 4 }} </p>
+
+<p>|P(S)| = 2<sup>n</sup> = 16</p>
+
+<p>Installation of software (SML and SQLite)</p>
+<p>SML</p>
+<p>SML features:</p>
+<ul>
+<li>Pattern matching</li>
+<li>Strongly-typed: ea expression has a type</li>
+<li>Abstract types and polymorphism</li>
+<li>Modularization</li>
+<li>Higher-order modules (functors)</li>
+<li>Exceptions</li>
+</ul>
+
+<p>Information for the download and install can be found at:</p>
+<p><a href="http://www.smlnj.org/dist/working/110.82/index.html">http://www.smlnj.org/dist/working/110.82/index.html</a> </p>
+
+<p>Start SML in interactive mode (Read Eval Print Loop – REPL):</p>
+
+<p>sml</p>
+
+<p>In an editor, write a test program:</p>
+
+<p>(* hello.sml *)</p>
+<p> </p>
+<p>fun helloWorld() =</p>
+<p> print "Hello World!\n"</p>
+
+<p>val _ = helloWorld()</p>
+
+<p>To load a .sml program in the REPL, enter:</p>
+
+<p>use hello.sml </p>
+
+<p>To exit, enter Ctrl-d</p>
+
+<p>To run a standalone program:</p>
+
+<p>sml &lt; hello.sml</p>
+
+<p>Or:</p>
+
+<p>sml &lt; hello.sml &gt; output.txt</p>
+
+<p>Windows OS: right-click the program icon for options to run, etc.</p>
+
+<p>For a standalone executable, there are commands to use in the REPL (See <a href="http://www.smlnj.org/doc/CM/new.pdf">http://www.smlnj.org/doc/CM/new.pdf</a> ). However, that way is problematic. You are better off installing MLton ( <a href="http://www.mlton.org/">http://www.mlton.org</a> ). </p>
+
+
+
+<p>Then compile as follows:</p>
+
+<p>mlton hello.sml</p>
+<p>./test→ Hello World!</p>
+
+<p><strong>SQLite</strong> </p>
+<p>“SQLite is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. SQLite is the most widely deployed SQL database engine in the world. The source code for SQLite is in the public domain.” – SQLite website</p>
+
+<p>Installation (version 3): <a href="http://sqlite.org/download.html">http://sqlite.org/download.html</a> </p>
+
+<p>At your command prompt, enter: sqlite. Then enter: </p>
+
+<p>sqlite&gt; SELECT "Hello World!";→Hello World!</p>
+
+<p>As a stand along program on the command-line in file hello.sql:</p>
+
+<p>/* hello.sql */</p>
+<p>SELECT "Hello World!";</p>
+
+<p>Run as:</p>
+
+<p>sqlite3 &lt; hello.sql→Hello World!</p>
+
+<p>Or, using a text file:</p>
+
+<p>/* SQLite file IO example */</p>
+<p>.mode csv</p>
+<p>.separator ,</p>
+<p>--.output output.csv   -- optional</p>
+
+<p>CREATE TABLE test(a INTEGER, b INTEGER);</p>
+<p>.import input.csv test</p>
+
+<p>SELECT a FROM test;</p>
+
+<p>This SQLite program would read a text file input.csv consisting of:</p>
+
+<p>1,5</p>
+<p>2,6</p>
+<p>3,7</p>
+<p>4,8</p>
+
+
+
+
+
+
+<p>Exercise</p>
+<p>Given the number types N for all natural numbers, Z for all integers, Z+ for all positive integers, Q for all rational numbers, I for all irrational numbers, R for all real numbers, W for all whole numbers, and C for all complex numbers, write simple programs in SML and SQLite to display your understanding of number types. </p>
+
+<p>Given the numbers 1, -5 and 1/5, your program syntax will simply generate the following output string in “ “ quotes:</p>
+
+<p>SML:print “-5 is an element of N: true”;</p>
+<p>SML:print “1/5 is an element of W: false”;</p>
+<p>SQLite: SELECT “-5 is an element of N: true”;</p>
+<p>SQLite: SELECT “1/5 is an element of W: false”;</p>
+
+<p>Besides introducing number types, this exercise provides an introduction to the SML and SQLite programming languages. Therefore, these programs should be installed on your computer (See the Programming unit below.).</p>
+
+<p>If you think these exercises are trite and redundant using the both SML and SQL, you are correct. Apart from ensuring that your installations work, we want to enforce some basic understanding of number types for now. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>PROGRAMMING</strong></p>
+<p>We can show how different sets of elements have certain relationships in terms of union, intersection and so on. Instead of demonstrating these relationships using pen and paper, we will use SML and SQL to display set elements in these contexts.  </p>
+
+<p><strong>Set operations in Standard ML</strong></p>
+<p>Computer programming languages have data types, or categorical sets of data types such as integer, character and real. So, it behooves the budding programmer to understand what kind of data belong to what broader type. This idea is enforced in textbook from section 1.1 through section 1.7. </p>
+
+<p>When we define a collection, we have a set. We can groups these sets into another set. For example, the set automobile is comprised of sets of sedans, trucks, jeeps, suvs, … In SML, creating our own type as such looks like:</p>
+
+<p>datatype Automobile =  Car | Truck | Jeep;</p>
+
+<p>We assign an element like:</p>
+
+<p>val cj = Jeep;→val cj = Jeep : Automobile</p>
+
+<p>However, to compose distinguishing attributes of a type, we need a feature called a constructor. We define a constructor such as :</p>
+
+<p>datatype Automobile = Transmission * Radio;</p>
+
+<p>Suppose that Transmission might be “standard” or “automatic” and Radio might be AM or FM. The programmer could specify these types by calling the constructor such as:</p>
+
+<p>Automobile(“Standard”, “FM”);→  val it = Automobile (“Standard”,</p>
+<p>“FM”) : Automobile</p>
+
+<p>The definition of the constructor could include default values as well, such as:</p>
+
+<p>datatype Automobile = Transmission of { standard : bool }</p>
+<p>| Radio of { modulation: string, gps : bool };</p>
+
+<p>A union of number types would look like the example on page 40 in the textbook:</p>
+
+<p>datatype num = Int of int | Real of real;→ datatype num = Int of int | Real of real</p>
+
+<p>This allows for alternative contexts:</p>
+
+<p>Int(5);→val it = Int 5 : num</p>
+<p>Real(5.5);→val it = Real 5.5 : num</p>
+
+<p>Set functions in SML</p>
+<p>Not all functions that we want are built into a programming language. Programming may be expedited by creating your own functions. For example, we want a function “f(x) = x + 3” that accommodates various inputs for the variable x. The statement “x + 3” is called a “parametized expression.” </p>
+
+<p>Here we look at functions in terms of user defined functions, recursive operations and function defaults or exceptions.</p>
+
+<p>To define a function in SML, use the “fun” keyword:</p>
+
+<p>fun myFunction(x,y) = x + y + 5;→val myFunction = fn : int * int -&gt; int</p>
+
+<p>Using this function:</p>
+
+<p>myFunction(5, 8);→val it = 18 : integers</p>
+
+<p>The formal parameters above are x and y, with actual parameters of 5 and 8 respectively.</p>
+
+<p>There will be times when a single function should behave differently for certain parameters, much like a switch-statement in Java. In SML this is referred to as “pattern matching,” as the appropriate function signature applies to the user's parameter pattern. For example:</p>
+
+<p>fun f(1) = 0 | f(x) = (x * x - 1) div (x - 1); →val f = fn : int -&gt; int</p>
+
+<p>f(2);→val it = 3 : int</p>
+
+<p>Notice that a supplied parameter of 1 generated output of 0, and input of 2 yields 3.</p>
+
+<p>Using the same approach we can accommodate a different number and type of parameters. In languages like Java we refer to such accommodation as method overloading. Now the function can deal with various linked contexts among categorical sets.</p>
+
+<p>For example, lets consider an example of a car mileage calculator. The formula here is admittedly erroneous, as it it left to you to “correct” it as as an exercise below. First, define two sets of transmission, automatic and standard:</p>
+
+<p>datatype transmission = automatic | standard;</p>
+
+<p>datatype car = sedan | suv | jeep;</p>
+
+<p>Transmissions have different drag (PSI) on the drive train of a vehicle:</p>
+
+<p>fun getDrag(automatic) = 2.4 | getDrag(standard) = 1.5;</p>
+
+<p>How about car weight (pounds/1000), depending on instance of car:</p>
+
+<p>fun getWeight(sedan) = 2.2 | getWeight(suv) = 2.5 | getWeight(jeep) = 2.1;</p>
+
+<p>And the cylinder count per instance of car:</p>
+
+<p>fun getEngine(sedan) = 4.0 | getEngine(suv) = 6.0 | getEngine(jeep) = 8.0;</p>
+
+
+<p>Create a function mpg that computes “miles per gallon” for a car:</p>
+
+<p>fun mpg(car, transmission) = 3.0 * getEngine(car) - getDrag(transmission) - </p>
+<p>getWeight(car); </p>
+
+<p>Now use the mpg function:</p>
+
+<p>mpg(jeep, standard);</p>
+
+<p>Recursion, exceptions and default values:</p>
+<p>Often we need to repeat an operation over and over again. Rather than using an iterative loop of some sort, we can define a function with a call to itself. Building on our function pattern (function overloading) discussion above, here is the obligatory recursive factorial function, in ML:</p>
+
+<p>fun factorial(0) = 1 | factorial(n) = n * factorial(n - 1); </p>
+
+<p> To use the factorial function:</p>
+
+<p>factorial(5);→val it = 120 : int</p>
+
+<p>As you can see in the above example, the case where the parameter is 0 yields output of 1. This is known as the “base case” and it provides and end to the recursive operation. Without it, our program would run indefinitely. Indeed, even in non-recursive functions, we should often should incorporate a case whereby the function halts its work based on a certain value. For example, if the user furnishes an unacceptable parameter, such as:</p>
+
+<p>factorial(goat);→stdIn:34.11 Error: unbound variable or constructor: goat</p>
+
+<p>The “unbound variable” leads here to a compilation error, not an exception. SML does not know what to do with “goat” and so it emitted the error message. We could get around that message by having the function emit a message “use an integer” when one is not provided. In other words, we have a kind of default output for the function.</p>
+
+<p>Exercises</p>
+<p>Write programs in SML for the following exercises:</p>
+
+<p>1. The example that computes gas mileage in out setsSML pdf uses an erroneous formula. Use the Internet to research a correct formula and provide it with SML syntax. Show your test output as well.</p>
+
+<p>2. Make a data type “Animal” which has data constructors for various kinds of animals, such as cat, primate, reptile. Make sure to include a field for the subtype of animal, such as lion.</p>
+
+<p>3. Make a data type “Library” which has data constructors for various kinds of books, such as fiction, reference, biography. Make sure to include a field for the subtype of book, such as science fiction.</p>
+
+<p>4. For exercises 2 and 3, show how you would use the constructors.</p>
+
+
+
+<p>Set operations in SQL (SQLite):</p>
+<p>In SQL, SET operators are used to combine the same type of data from two or more tables. Although more than one SELECT statement is used, only one result set is returned. According to the formal definition of a “set,” elements are to be unique. This is enforced in SQL using the DISTINCT clause. </p>
+
+<p>Set operation rules</p>
+<ul>
+<li>Column names or aliases must be determined by the <em>first</em> select statement.</li>
+<li>Data types of corresponding columns must be compatible.</li>
+<li>Each query must have the same number of columns.</li>
+<li>Each query must have matching columns in the same order.</li>
+<li>Sorting of results should have the ORDER BY clause in the <em>last</em> query statement.</li>
+</ul>
+
+<p>Set operators</p>
+<p>These allow us to combine two or more select statements. All have the same precedence.</p>
+<ul>
+<li>UNION Combine result sets into a single output set, without duplicates.</li>
+<li>UNION ALL Combine result sets into a single output set, including duplicates.</li>
+<li>INTERSECT Retrieve data common to result sets.</li>
+<li>EXCEPT (MINUS)Retrieve data from first result set that is <em>not also in</em> the second</li>
+</ul>
+
+<p>Set operators treat NULLS as equivalent. Other than UNION ALL, their yielded results are distinct. EXCEPT matches NULLS while its cousin, NOT EXISTS, does not.</p>
+
+<p>Unions</p>
+<p>Tables resulting from the component select queries must be compatible for the union operation (<em>union compatibility</em>). They must have the same number of columns with comparable data types. In other words, SELECT statements of a UNION must specify equivalent columns from each table and multiple columns must be in the same order. </p>
+
+<p>Ways to get a union from non-compatible tables:</p>
+<ul>
+<li>Select the same columns from each table</li>
+<li><p>Use subsets of the existing tables</p>
+<ul>
+<li>Create a new table </li>
+<li>Use views</li>
+</ul></li>
+<li>Add columns using common data types and populate with arbitrary values or NULLs (leave blank) where appropriate.</li>
+</ul>
+
+<p>Syntax:</p>
+
+<p>SELECT column_1, column_2,... FROM table_1</p>
+<p>UNION</p>
+<p>SELECT column_1, column_2,... FROM table_2;</p>
+
+<p>For example, query customers who reside in the same cities as product suppliers:</p>
+
+<p>SELECT City, PostalCode FROM Customers</p>
+<p>UNION</p>
+<p>SELECT City, PostalCode FROM Suppliers</p>
+
+<p>The sequential execution of the query means that the SQL interpreter (such as SQL Server) runs the first query, then the second, and finally combines the results of the two queries while discarding duplicates. This contrasts with the apparent parallel operation of a join, where the resulting table is constructed row by row as SQL Server matches rows for the join. </p>
+
+<p>UNION ALL returns the same information and also includes any duplicates.</p>
+
+<p>Intersections</p>
+<p>The INTERSECT operator combines two queries such that values common to both are returned. In other words, we find elements that are in set A that are also in set B. </p>
+
+<p>SELECT column_1, column_2,... FROM table_1</p>
+<p>INTERSECT</p>
+<p>SELECT column_1, column_2,... FROM table_2;</p>
+
+<p>IN and NOT IN for set operations</p>
+<p>The output of the above intersection can be achieved using the IN predicate with DISTINCT. You can use NOT IN to simulate EXCEPT and get the difference between sets. </p>
+
+<p>EXCEPT is functionally equivalent to the MINUS operator and the NOT IN operator, but with simpler syntax. The EXCEPT operator returns results that are in the first query and not also in the second. In other words, it is the difference between two sets. </p>
+
+<p>Like UNION, the output of EXCEPT is unique. Unlike UNION, EXCEPT does <em>not</em> ignore NULL values and treats them as matching. Hence our use of IS NOT NULL above. </p>
+
+<p>Examples</p>
+<p>First generate random sets of data as temporary in-memory tables (there is no need to actually populate a database; see https://sqlite.org/inmemorydb.html ). Based on these virtual sets we will run the our “empirical proofs.”</p>
+
+<p>Here is how to generate three virtual sets in SQLite:</p>
+
+<p>/* each table represents a set of points in an X-Y plane, at the coordinates (x,y) */</p>
+<p>CREATE TEMPORARY TABLE numbers1 (</p>
+<p>  id INTEGER PRIMARY KEY NOT NULL,</p>
+<p>  x REAL NOT NULL,</p>
+<p>  y REAL NOT NULL</p>
+<p>);</p>
+
+<p>CREATE TEMPORARY TABLE numbers2 (</p>
+<p>  id INTEGER PRIMARY KEY NOT NULL,</p>
+<p>  x REAL NOT NULL,</p>
+<p>  y REAL NOT NULL</p>
+<p>);</p>
+
+
+<p>CREATE TEMPORARY TABLE numbers3 (</p>
+<p>  id INTEGER PRIMARY KEY NOT NULL,</p>
+<p>  x REAL NOT NULL,</p>
+<p>  y REAL NOT NULL</p>
+<p>);</p>
+
+<p>INSERT INTO numbers1</p>
+<p>    WITH RECURSIVE</p>
+<p>      tmp( id, x, y) AS (</p>
+<p>      VALUES(1 , random()%11, random()%11) UNION ALL</p>
+<p>      SELECT id+1,random()%11,random()%11 FROM tmp WHERE ID&lt;10)</p>
+<p>      select * from tmp;</p>
+
+<p>INSERT INTO numbers2</p>
+<p>    WITH RECURSIVE</p>
+<p>      tmp( id, x, y) AS (</p>
+<p>      VALUES(1 , random()%11, random()%11) UNION ALL</p>
+<p>      SELECT id+1,random()%11,random()%11 FROM tmp WHERE ID&lt;10)</p>
+<p>      select * from tmp;</p>
+
+<p>INSERT INTO numbers3</p>
+<p>    WITH RECURSIVE</p>
+<p>      tmp( id, x, y) AS (</p>
+<p>      VALUES(1 , random()%11, random()%11) UNION ALL</p>
+<p>      SELECT id+1,random()%11,random()%11 FROM tmp WHERE ID&lt;10)</p>
+<p>      select * from tmp;</p>
+
+<p>/* verify table contents */</p>
+<p>SELECT * FROM numbers1; </p>
+<p>SELECT * FROM numbers2;</p>
+<p>SELECT * FROM numbers3;</p>
+
+<p>Now, run two queries as a UNION of above tables numbers2 and numbers3. </p>
+
+<p>/* setOps.sql */</p>
+<p>.read "../randTemp.sql"</p>
+
+<p>SELECT DISTINCT x, y</p>
+<p>FROM numbers2result set</p>
+<p>UNION</p>
+<p>SELECT DISTINCT x, y</p>
+<p>FROM numbers3;</p>
+
+<p>/* This is the equivalent of: */</p>
+<p>CREATE TEMPORARY TABLE resultSet1 (</p>
+<p> x REAL NOT NULL,</p>
+<p> y REAL NOT NULL</p>
+<p>);</p>
+
+<p>INSERT INTO resultSet1 (x, y)</p>
+<p>SELECT DISTINCT x, y from numbers2;</p>
+<p>INSERT INTO resultSet1 (x, y)</p>
+<p>SELECT DISTINCT x, y from numbers3;</p>
+<p>SELECT DISTINCT x, y FROM resultSet1;</p>
+<p>     </p>
+<p>This yields in arbitrary order all numbers in each table that is are not duplicates. If we want to include duplicates, use the UNION ALL clause instead. </p>
+
+<p>Continuing, try the EXCEPT operator for results which are in the first query and not in the second. </p>
+
+<p>SELECT DISTINCT x, y</p>
+<p>FROM numbers2</p>
+<p>EXCEPT </p>
+<p>SELECT DISTINCT x, y                              </p>
+<p>FROM numbers3;                 result set</p>
+
+<p>/* This is the equivalent of: */</p>
+<p>SELECT DISTINCT n2.x, n2.y</p>
+<p>FROM numbers2 n2</p>
+<p>WHERE NOT EXISTS (</p>
+<p> SELECT n3.x, n3.y</p>
+<p> FROM numbers3 n3</p>
+<p> WHERE (n2.x = n3.x AND n2.y = n3.y) </p>
+<p>   OR (n2.x IS NULL AND n2.y IS NULL) </p>
+<p>   AND (n3.x IS NULL AND n3.y IS NULL)</p>
+<p>); </p>
+
+<p>The INTERSECT operator yields results which are common to both queries. </p>
+
+<p>SELECT DISTINCT x, y</p>
+<p>FROM numbers2</p>
+<p>INTERSECT</p>
+<p>SELECT DISTINCT x, y</p>
+<p>FROM numbers3;   result set</p>
+
+<p>/* This is the equivalent of: */</p>
+<p>SELECT DISTINCT x, y</p>
+<p>FROM numbers2 n2</p>
+<p>WHERE EXISTS (</p>
+<p> SELECT DISTINCT n3.x, n3.y</p>
+<p> FROM numbers3 n3</p>
+<p> WHERE n2.x = n3.x AND n2.y = n3.y</p>
+<p>); </p>
+
+
+
+
+
+<p>Exercise</p>
+<p>Using SQL, generate three random sets of alphabetical characters (Have 10 random letters in each of three tables.). Using these sets, demonstrate the following set operations: union, intersect, except.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>RELATION</p>
+<p>As we see when querying tables in SQL or comparing lists in SML, we can compare elements in a set to other elements in the same set, or those of others sets. </p>
+
+<p>There is a binary relation between sets A and B may be written as R(a,b) or aRb. This relation can be made to depend on certain conditions, such as equivalence, greater than and less than. That means that their order matters. For example, a parent-child pair is only valid for a certain order. </p>
+
+<p>R(parent, child) ≠ R(child, parent)</p>
+
+<p>The pair order matters. The relationship can be said to belong to a set “begets” in that a parent begets a child. The inverse set would be “inherits” since the child inherits from the parent.</p>
+
+<p>R(parent, child) ∈ begets</p>
+<p>R(child, parent) ∈ inherits</p>
+
+<p>While for two sets a relation will be pairwise, relations among more sets may be ternary R(a, b, c) or for a greater number of sets R(a, b, …).  </p>
+
+<p>A relation between two sets A and B is a subset of the cross product of A and B. That means the cardinality will range from 0 to N x M, where N is the number of elements in set A for each i element, and M is the number of elements in set B for each j element. Indeed, the resulting set of a relation between sets A and B can have many more elements.</p>
+
+<p>For testing the equality of sets A = {1, 3, 5, 7} and B = {1, 3, 5, 7}, we test for equal elements from i to N from each set in tandem to get the subset relation:</p>
+
+<p>R = { (1, 1), (3, 3), (5, 5), (7, 7) }</p>
+
+<p>Note that the relation R is itself a set.</p>
+
+<p>Conversely, given non-equivalent sets A = {1, 3, 5, 7} and B = {1, 3, 4, 6}, the subset of equal pairs is:</p>
+
+<p>R = { (1, 1), (3, 3) }</p>
+
+<p>Given three sets A, B and C, we can use the “composition of relation” of A and C to infer a relationship with B. Given a relation R between A to B and another relation S between B to C, we can say elements of A and C such that a(S o R)c iff there exists some elements for which aRb and bSc. </p>
+<p> </p>
+<p>Properties of relations</p>
+<p>Empty: the empty set ∅ or E</p>
+<p>Full: the set AxB</p>
+<p>Inverse: the set R′ ={ (b, a) | ( a, b) ∈ R } … flip all a's and b's</p>
+
+
+
+
+
+
+<p>Properties of self-referential relations</p>
+<p>Identity: the set A { (a, a) | a ∈ A }</p>
+<p>Reflexive: aRa relation holds for every element of A … ∀a ∈A       … ∀a … for all a</p>
+<p>Irreflexive: no aRa; relation holds for any element of A … no a∈A</p>
+<p>Symmetric: a1Ra2 → a2Ra1 or ∀a1 ∈ A AND ∀a2 ∈ A … all pairs of elements</p>
+<p>Anti-Symmetric: a1Ra2 AND a2Ra1 → a = b ∀a1 ∈ A AND ∀a2 ∈ A</p>
+<p>Transitive: a1Ra2 AND a2Ra3 → (a1Ra3, ∀a1, a2, a3) ∈ A </p>
+
+<p>Equivalence: reflexive AND symmetric AND transitive</p>
+
+<p>Domain and range of relations</p>
+<p>Domain:</p>
+<p>Given two sets A and B, the domain Do of their relation R is the set of A's elements that have a relation to elements in set B. This can be written as;</p>
+
+<p>DoR(a, b) = { a | (a, b) ∈ R }</p>
+
+<p>In terms of equal sets A = { 1, 3, 5, 7 } and B = { 1, 3, 5, 7 }:</p>
+
+<p>DoR = { 1, 3, 5, 7 } == A == B</p>
+
+<p>For unequal sets A = { 1, 3, 5, 7 } and B = { 1, 3, 4, 6 }, where aRb is “less than” we have:</p>
+
+<p>R = { (1, 3), (1, 4), (1, 6), (3, 4), (3, 6), (5, 6) }</p>
+
+<p>… and the domain is:</p>
+
+<p>DoR = {1, 3, 5} </p>
+
+<p>Range (image):</p>
+
+<p>RaR(a, b) = {b | (a, b) ∈ A}</p>
+
+<p>For example, for the unequal sets A = {1, 3, 5, 7} and B = {1, 3, 4, 6}, where aRb is “less than” we have R = { (1, 3), (1, 4), (1, 6), (3, 4), (3, 6), (5, 6) }, where the range is:</p>
+
+<p>RaR = { 3, 4, 6 } </p>
+
+<p>Relational graphs </p>
+<p>Visual visual aids help us represent relations. At first, we might use a table with rows representing the domain and columns representing the range. </p>
+
+
+
+
+
+
+
+
+<p>Using sets A = {1, 3, 5, 7} and B = {1, 3, 4, 6}, get aRb in the context of “greater than” and show the range and domain. Mark “x” where this condition is satisfied.</p>
+
+<p>     B</p>
+<p>1 3 4 6</p>
+<p>      1  </p>
+<p>A   3x</p>
+<p>      5x x x</p>
+<p>      7x x x x</p>
+
+<p>Therefore, the relation set R is comprised of the respective pairs indicated by the “x” in the table:</p>
+
+<p>R = { (3, 1), (5, 1), (7, 1), (7, 3), (7, 4), (7, 6), (5, 3), (5, 4) },</p>
+
+<p>The domain of the relation is the list of <em>unique</em> (no duplicates) “a” elements comprising each pair:</p>
+
+<p>DoR = { 3, 5, 7 } </p>
+
+<p>The range of the relation is the list of <em>unique</em> (no duplicates) “b” elements comprising each pair:</p>
+
+<p>RaR = { 1, 3, 4, 6 } </p>
+
+<p>Instead of using a tables, we can represent relations using graphs. (Conversely, when studying graphs, we may want to construct an adjacency matrix.)</p>
+
+<p>In a graph, a set's elements are each represented by a vertex (or node). An ordered pair entails a directed graph with the edge that connects two vertices indicating the condition of the relationship. As we saw where “x” marked a relationship in the table above, not all vertices may be connected.  </p>
+
+<p>Here is a relation between elements a and b. Suppose b derives from a, or that a is greater than b.</p>
+
+
+
+
+
+<p>Suppose c also derives from a, We then have.</p>
+
+
+
+
+
+
+
+<p>To represent the relation R = { (b, a), (c, a) } of a set S = { a, b, c }</p>
+
+
+
+
+<p>Given an ordered (c, c), we have a self-loop on vertices. If this is the case for all vertices, then the graph is said to be “reflexive.” If node c in the above graph has a self-loop, it it would look like this:</p>
+
+
+
+
+
+
+
+
+<p>The relation is then R = { (b, a), (c, a), (c, c) } </p>
+
+<p>Example SML:</p>
+<p>Given the following lists and function:</p>
+
+<p>val A = [1, 2, 3, 4 ];</p>
+<p>val B = [1, 5, 7, 9 ];</p>
+
+<p>fun contains(x, []) = false</p>
+<p> | contains(x, y::rest) =</p>
+<p>   if x = y then true</p>
+<p>   else contains(x, rest);</p>
+
+<p>contains(5, B);</p>
+
+<p>Exercises</p>
+<p>1. Given three sets, A = {a, b, c}, B = {1, 2} and C = {a, b, d}, and the two relations R = { (a, 1), (a, 2), (b, 2), (c, 1) } and S = { (1, a), (2, b), (2, d) }, determine the relation S o R.</p>
+
+<p>2. Given the set A = { 1, 2, 3, 4 } and the relation R = { (1, 2), (2, 3), (3, 4), (2, 1) }, determine the transitive closure of R.</p>
+
+<p>3: Suppose set B = { 10, 12, 14, 8, 7 } and relation R = { (10, 11), (10, 12), (10, 14), (10, 8), (10, 7), (12, 12), (12, 8), (12, 7), (14, 14), (14, 8), (14, 7), (8, 8), (8, 7), (7, 7) }. </p>
+
+<p>Determine is R is:</p>
+<p>A. antisymmetric</p>
+<p>B. reflexive</p>
+<p>C. symmetric</p>
+
+<p>4. Suppose that you have two sets A = {a, c, e, g, h, i} and B = {a, c, d, f, i, k}. Use SML for the following:</p>
+<p>A. Display a relational matrix.</p>
+<p>B. Demonstrate if the relation is Reflexive. </p>
+<p>C. Demonstrate if the relation is Transitive.</p>
+<p>C. Demonstrate if the relation is Symmetric.</p>
+
+<p>Matrix traversal may not seem intuitive to you using Standard ML. Solutions may seem easier in an imperative language such as C++ or Java, or in SQL. </p>
+
+<p>For example, given the set A={1, 2, 3, 4}, demonstrate that the relation is R = { (1, 2), (2, 1), (3, 2), (2, 3) } is symmetric. Your program should display:</p>
+
+<p>Relation R= { (1, 2), (2, 1), (3, 2), (2, 3) } is symmetric for set A = { 1, 2, 3, 4 }</p>
+<p> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>FUNCTION</p>
+<p>As defined, a function f is from a set X to a set Y is a relation from X to Y such that each x ∈ X is related to exactly one y ∈ Y. </p>
+
+<p>X is called the domain and Y is the codomain. </p>
+
+<p>A function is also called a mapping.</p>
+
+<p>The range may be equivalent to the codomain, or the range can be a subset of the codomain if not all elements of the domain are mapped to the codomain.</p>
+
+<p>The function may be denoted as </p>
+
+<p>f(x) = y</p>
+<p>   </p>
+<p>A set can consist of functions as they are evaluated. Consider a line in an XY plane, where one x corresponds to only one y. Accordingly, we can use a programming language like SML to pass functions to other functions, store functions in variables and return them from other functions. This is because functions in SML are what are known as “first class values.” </p>
+
+<p>A function may be considered a relation or an element mapping from domain to range.</p>
+
+<p>Functions map set elements to a set that is related. </p>
+
+<p>f: A → B, where A is the domain of f and B is the codomain.</p>
+
+<p>Range versus image:</p>
+<p>Image is synonymous for range, the output of function. So, if we have:</p>
+
+<p>f : R → R</p>
+<p>with f(x) = x<sup>2</sup></p>
+
+<p>The codomain represents the possible output of a function. The codomain is real numbers (-∞, ∞) and the range is [0, ∞), the real numbers &gt;= 0. </p>
+
+<p>In effect, </p>
+
+<p>f : R → R </p>
+
+<p>... can be defined with a codomain as:</p>
+
+<p>f : R → [0, ∞)</p>
+
+<p>Surjective (onto): When the range and the codomain are the same. </p>
+
+<p>Inverse image (pre-image): Given a subset S of a function's codomain, the inverse image is the set of all elements of the domain that map to the members of S. As defined for a set S with f:X→Y, the inverse image is:</p>
+
+<p>S' = { x ∈ X : f(x) ∈ S }</p>
+
+<p>Certain elements of S will map to the image. Those that do are identified as the inverse image.</p>
+
+<p>Properties of functions</p>
+<p>Every function has a domain and range. </p>
+
+<p>Domain: set of values of the variable for which the function is defined.</p>
+<p> </p>
+<p>Range: set of values of the codomain for which there is some minimum to maximum application of the function. </p>
+
+<p>The interval of a range from its minimum to its maximum is denoted like [5, 20] for values and (a1, a2) for variables. A range of all real numbers is denoted as (-∞, ∞)</p>
+
+<p>Discontinuities: when the range has more than one interval, given that a function is not defined for all values of the variable. Discontinuity can be quickly verified with this on-line calculator: <a href="https://www.wolframalpha.com/calculators/discontinuity-calculator/">https://www.wolframalpha.com/calculators/discontinuity-calculator/</a></p>
+
+<p>Injective (one-to-one): A function that maps from exactly one element of the domain to exactly one element of the range. The range element is mapped to by no more than one domain element.</p>
+
+<p>f(x) = x + 1 is one-to-one </p>
+
+<p>Surjective (onto): a function f from set A to set B is onto if for every element 'b' there is at least one element 'a' such that f(a) = b</p>
+
+<p>Example: all the elements of the range set are applied by all the elements of the domain set. </p>
+
+<p>f(x) = x + 1 is onto because the range is infinite (-∞, ∞). </p>
+
+<p>f(x) = x<sup>2</sup> is not onto because the range ignores negative values.</p>
+
+<p>Onto may also be many-to-one: A function that maps from many elements of A to one element “b.”</p>
+
+<p>f(x) = x<sup>2</sup> is many-to-one because, for both x = -2 and x = 2, f(x) is 4</p>
+
+<p>A function is surjective onto if the image of f is equivalent to its range. That is: </p>
+
+<p>for every b ∈ B there is some a ∈ A such that f(a) = b</p>
+
+<p>For example:</p>
+
+<p>f:N→N, f(x) = x + 1 is not surjective.</p>
+
+<p>The function maps elements from the set of natural numbers to the set a set of natural numbers, yet it excludes 1.</p>
+
+<p>f:N→ [1, ∞), f(x) = 2x is surjective. </p>
+
+<p>The function maps elements from the set of natural numbers to the set of non-negative even numbers.</p>
+
+<p>f:R→R, f(x) = x<sup>2</sup> is not surjective.</p>
+
+<p>The function cannot represent a real number with a square that is negative, as it does not exist.</p>
+
+<p>f:N→ N, f(x) = 2x is not surjective.</p>
+
+<p>The function only maps the set of natural numbers to a set of non-negative even numbers. It excludes odd numbers.</p>
+
+<p>Bijective (one-to-one correspondence; both injective and surjective): iff every possible image is mapped to by exactly one argument. (Each element in the domain maps to exactly one element in the range, and each element in the range is mapped to by only one element in the domain.)</p>
+
+<p>A function is bijective iff it is both injective and surjective.</p>
+
+<p>You may have functions that are:</p>
+<ul>
+<li>Onto but not one-to-one</li>
+<li>One-to-one but not onto</li>
+<li>One-to-one correspondence</li>
+<li>Not permitted: one-to-many</li>
+</ul>
+
+<p>Inverse function</p>
+<p>A function if:A→B is invertible if its inverse g:B→A exists. That is:</p>
+
+<p>f(a) = b ↔ g(b) = a</p>
+
+<p>For example:</p>
+
+<p>For f:Z→Z, f(a) = a + 5</p>
+
+<p>The inverse is g(a) = a - 5, therefore function f is invertible.</p>
+
+<p>Conversely, a function f(a) = a<sup>2</sup> is not invertible because (-a)<sup>2</sup> = a<sup>2</sup> which is not one-to-one like the first.</p>
+
+<p>Two elements in the domain map to one element in the range. Such a function is not invertible. The inverse function requires one-to-one correspondence.</p>
+
+<p>Try not to confuse an inverse function with an inverse image of a function, which is a subset of the domain as applied to a subset of the codomain.</p>
+
+<p>Composition of Function</p>
+<p>A function can map two sets via a middle third set. Consider the output of function f that must go through function g, such as g(f(a)). </p>
+
+<p>Also consider SML's composition operator “o” that is somewhat like a Unix “|” pipe.</p>
+
+<p>Two functions f:A→B and g:B→C can be composed to give a function from A to C such that (gof)(a) = g(f(a)). This is composition and is called gof. </p>
+
+<p>Composition properties:</p>
+<ul>
+<li>If f and g are one-to-one then the function (gof) is also one-to-one.</li>
+<li>If f and g are onto then the function (gof) is also onto.</li>
+<li>Composition is associative (when composing three functions).</li>
+<li>Composition is not commutative.</li>
+</ul>
+
+<p>For example:</p>
+
+<p>Given f(a) = a + 2 and g(a) = 2a + 1, then (fog)(a) and (gof)(a) are:</p>
+
+<p>(fog)(a) = f(g(a)) = f(2a + 1) = 2a + 1 + 2 = 2a + 3</p>
+<p>(gof)(a) = g(f(a)) = g(a + 2) = 2(a + 2) + 1 = 2a + 5</p>
+
+<p>Therefore, (fog)(a) ≠ (gof)(a)</p>
+
+<p>Exercises</p>
+<p>1. Devise SML functions for the following operations on a set:</p>
+<p>A. addElement</p>
+<p>B. removeElement</p>
+<p>C. cardinalityOfSet</p>
+<p>D. containsElement</p>
+
+<p>2. Devise SML functions to affect the following set relations:</p>
+<p>A. isRelated</p>
+<p>B. makeInverse</p>
+<p>C. findImage</p>
+
+<p>3. Devise SQL queries for the following operations on a set:</p>
+<p>A. cardinalityOfSet</p>
+<p>B. containsElement</p>
+<p>C. isRelated</p>
+<p>d. findImage</p>
+
+<p>4. Devise an SML function that partitions a set (all possible partitions).</p>
+
+<p>5. Devise an SQL query that partitions a set (all possible partitions).</p>
+</body>
+</html>
