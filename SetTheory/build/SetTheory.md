@@ -1,6 +1,6 @@
 # Module: Set Theory – 1 Credit / 15 hours
 
-** Competency: Mathematical Reasoning of Data **
+**Competency: Mathematical Reasoning of Data**
 
 Author: Jack Pope 
 
@@ -336,7 +336,8 @@ problematic. You are better off installing MLton (
 Then compile as follows:
 ```sml
 mlton hello.sml
-./test→ Hello World!
+./test
+→ Hello World!
 ```
 #### SQLite
 
@@ -349,44 +350,41 @@ Installation (version 3): <http://sqlite.org/download.html>
 
 At your command prompt, enter: sqlite. Then enter: 
 
-sqlite\> SELECT "Hello World\!";→Hello World\!
-
+```sql
+sqlite> SELECT "Hello World!";
+→ Hello World!
+```
 As a stand along program on the command-line in file hello.sql:
 
-/\* hello.sql \*/
-
+```sql
+/* hello.sql */
 SELECT "Hello World\!";
-
+```
 Run as:
 
-sqlite3 \< hello.sql→Hello World\!
-
+```sql
+sqlite3 < hello.sql
+→ Hello World!
+```
 Or, using a text file:
-
-/\* SQLite file IO example \*/
-
+```sql
+/* SQLite file IO example */
 .mode csv
-
 .separator ,
-
-\--.output output.csv   -- optional
+--.output output.csv   -- optional
 
 CREATE TABLE test(a INTEGER, b INTEGER);
-
 .import input.csv test
 
 SELECT a FROM test;
-
+```
 This SQLite program would read a text file input.csv consisting of:
-
+```csv
 1,5
-
 2,6
-
 3,7
-
 4,8
-
+```
 ### Exercise
 
 Given the number types N for all natural numbers, Z for all integers, Z+
@@ -432,47 +430,52 @@ section 1.7.
 
 When we define a collection, we have a set. We can groups these sets
 into another set. For example, the set automobile is comprised of sets
-of sedans, trucks, jeeps, suvs, … In SML, creating our own type as such
+of sedans, trucks, jeeps, suvs, . . . In SML, creating our own type as such
 looks like:
 
+```sml
 datatype Automobile =  Car | Truck | Jeep;
+```
 
 We assign an element like:
 
+```sml
 val cj = Jeep;→val cj = Jeep : Automobile
-
+```
 However, to compose distinguishing attributes of a type, we need a
-feature called a constructor. We define a constructor such as :
+feature called a constructor. We define a constructor such as:
 
-datatype Automobile = Transmission \* Radio;
-
+```sml
+datatype Automobile = Transmission * Radio;
+```
 Suppose that Transmission might be “standard” or “automatic” and Radio
 might be AM or FM. The programmer could specify these types by calling
 the constructor such as:
 
-Automobile(“Standard”, “FM”);→  val it = Automobile (“Standard”,
-
-“FM”) : Automobile
+```sml
+Automobile(“Standard”, “FM”);
+  →  val it = Automobile (“Standard”, “FM”) : Automobile
+```
 
 The definition of the constructor could include default values as well,
 such as:
 
-datatype Automobile = Transmission of { standard : bool }
-
-| Radio of { modulation: string, gps : bool };
+```sml
+datatype Automobile = Transmission of { standard : bool } | Radio of { modulation: string, gps : bool };
+```
 
 A union of number types would look like the example on page 40 in the
 textbook:
 
-datatype num = Int of int | Real of real;→ datatype num = Int of int |
-Real of real
-
+```sml
+datatype num = Int of int | Real of real;
+  → datatype num = Int of int | Real of real
+```
 This allows for alternative contexts:
-
-Int(5);→val it = Int 5 : num
-
-Real(5.5);→val it = Real 5.5 : num
-
+```sml
+Int(5);         →       val it = Int 5 : num
+Real(5.5);      →       val it = Real 5.5 : num
+```
 Set functions in SML
 
 Not all functions that we want are built into a programming language.
@@ -485,14 +488,15 @@ Here we look at functions in terms of user defined functions, recursive
 operations and function defaults or exceptions.
 
 To define a function in SML, use the “fun” keyword:
-
-fun myFunction(x,y) = x + y + 5;→val myFunction = fn : int \* int -\>
-int
-
+```sml
+fun myFunction(x,y) = x + y + 5;
+  → val myFunction = fn : int * int -> int
+```
 Using this function:
-
-myFunction(5, 8);→val it = 18 : integers
-
+```sml
+myFunction(5, 8);
+  → val it = 18 : integers
+```
 The formal parameters above are x and y, with actual parameters of 5 and
 8 respectively.
 
@@ -501,11 +505,12 @@ certain parameters, much like a switch-statement in Java. In SML this is
 referred to as “pattern matching,” as the appropriate function signature
 applies to the user's parameter pattern. For example:
 
-fun f(1) = 0 | f(x) = (x \* x - 1) div (x - 1); →val f = fn : int -\>
-int
-
-f(2);→val it = 3 : int
-
+```sml
+fun f(1) = 0 | f(x) = (x * x - 1) div (x - 1); 
+    → val f = fn : int -> int
+f(2);   
+    → val it = 3 : int
+```
 Notice that a supplied parameter of 1 generated output of 0, and input
 of 2 yields 3.
 
@@ -519,36 +524,42 @@ formula here is admittedly erroneous, as it it left to you to “correct”
 it as as an exercise below. First, define two sets of transmission,
 automatic and standard:
 
+```sml
 datatype transmission = automatic | standard;
-
 datatype car = sedan | suv | jeep;
+```
 
 Transmissions have different drag (PSI) on the drive train of a vehicle:
 
+```sml
 fun getDrag(automatic) = 2.4 | getDrag(standard) = 1.5;
+```
 
 How about car weight (pounds/1000), depending on instance of car:
 
-fun getWeight(sedan) = 2.2 | getWeight(suv) = 2.5 | getWeight(jeep) =
-2.1;
+```sml
+fun getWeight(sedan) = 2.2 | getWeight(suv) = 2.5 | getWeight(jeep) = 2.1;
+```
 
 And the cylinder count per instance of car:
 
-fun getEngine(sedan) = 4.0 | getEngine(suv) = 6.0 | getEngine(jeep) =
-8.0;
-
+```sml
+fun getEngine(sedan) = 4.0 | getEngine(suv) = 6.0 | getEngine(jeep) = 8.0;
+```
 Create a function mpg that computes “miles per gallon” for a car:
 
-fun mpg(car, transmission) = 3.0 \* getEngine(car) -
-getDrag(transmission) - 
-
+```sml
+fun mpg(car, transmission) = 3.0 \* getEngine(car) - getDrag(transmission) - 
 getWeight(car); 
+```
 
 Now use the mpg function:
 
+```sml
 mpg(jeep, standard);
+```
 
-Recursion, exceptions and default values:
+#### Recursion, exceptions and default values
 
 Often we need to repeat an operation over and over again. Rather than
 using an iterative loop of some sort, we can define a function with a
@@ -556,11 +567,16 @@ call to itself. Building on our function pattern (function overloading)
 discussion above, here is the obligatory recursive factorial function,
 in ML:
 
+```sml
 fun factorial(0) = 1 | factorial(n) = n \* factorial(n - 1); 
+```
 
 To use the factorial function:
 
-factorial(5);→val it = 120 : int
+```sml
+factorial(5); 
+    → val it = 120 : int
+```
 
 As you can see in the above example, the case where the parameter is 0
 yields output of 1. This is known as the “base case” and it provides and
@@ -570,9 +586,10 @@ should incorporate a case whereby the function halts its work based on a
 certain value. For example, if the user furnishes an unacceptable
 parameter, such as:
 
-factorial(goat);→stdIn:34.11 Error: unbound variable or constructor:
-goat
-
+```sml
+factorial(goat);
+    → stdIn:34.11 Error: unbound variable or constructor:goat
+```
 The “unbound variable” leads here to a compilation error, not an
 exception. SML does not know what to do with “goat” and so it emitted
 the error message. We could get around that message by having the
