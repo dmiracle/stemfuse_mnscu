@@ -289,83 +289,56 @@ thereby reducing uncertainty.
 
 If we have only a small set of symbols, the number list \[1, 3, 5, 7\].
 The entropy calculation is:
-
-Element, e from index 1 to 4 
-
-Number of elements, N = 4
-
-Probability of e, P<sub>e</sub> = P<sub>e</sub> / N
-
-Shannon entropy, I = -1 \* (average sum of P<sub>e</sub> \*
-log<sub>2</sub>(Pi) ) == 2 bits
+  <blockquote>
+  Element, e from index 1 to 4<br>
+  Number of elements, N = 4  <br>
+  Probability of e, P<sub>e</sub> = P<sub>e</sub> / N <br>  
+  Shannon entropy, I = -1 \* (average sum of P<sub>e</sub> \* log<sub>2</sub>(Pi) ) == 2 bits
+  </blockquote>
 
 What if the the sample numbers are \[2, 4, 6, 8\], the result is the
 same, 2 bits. If you are confused, think though this general algorithm
 (program code is AWK):
-
+```a
 bitstr = "1111222233334444"
+N = split(bitstr, arr, "")      # create array arr N = length of bitstr
 
-N = split(bitstr, arr, "")     \# create array arr N = length of bitstr
-
-for (i = 1; i \<= N; i++) {   \# assign value of digit to a key in array
-arr2
-
-arr2\[arr\[i\]\]++;               \# Note\! Duplicates == single key;
-yet +1 for each digit
-
+for (i = 1; i <= N; i++) {      # assign value of digit to a key in array arr2
+  arr2[arr[i]]++;               # Note! Duplicates == single key; yet +1 for each digit
 }
 
 for(e in arr2) {
-
-\# now we want count of element relative to total element count
-
-p = arr2\[e\] / N;     \# key e for val = relative count in numerator /
-total count 
-
-I -= p \* log(p);
-
+  # now we want count of element relative to total element count
+  p = arr2[e] / N;     # key e for val = relative count in numerator / total count 
+  I -= p * log(p);
 }
-
 print I / log(2);
-
+```
 In Python the same algorithm can look like this:
 
-\#\!/usr/bin/python3 
-
+```python
+#!/usr/bin/python3 
 import math
-
 def entropy(bitstr):
+  elist = list(bitstr)
+  N = len(elist)
+  I = 0.0
+  S = set(elist) # creates set of distinct elements
 
-elist = list(bitstr)
+  for s in S:
+    frequency = 0.0
+    for e in elist:
+      if(s == e):
+        frequency = frequency + 1
+        p = (1.0 * frequency) / (1.0 * N)
+      I = I - p * math.log(p)
 
-N = len(elist)
+  return I / math.log(2) 
 
-I = 0.0
-
-S = set(elist) \# creates set of distinct elements
-
-for s in S:
-
-frequency = 0.0
-
-for e in elist:
-
-if(s == e):
-
-frequency = frequency + 1
-
-p = (1.0 \* frequency) / (1.0 \* N)
-
-I = I - p \* math.log(p)
-
-return I / math.log(2) 
-
-\#Run a test:
-
+#Run a test:
 bitstr = "1111222233334444"
-
 print(entropy(bitstr))
-
+```
 Whatever language you use, when computing P<sub>e</sub> be careful not
 to confuse the count of distinct elements with the elements themselves.
 If you use an associative array to assist with this task, the manner of
@@ -458,13 +431,11 @@ Exercise
 
 Using Python, write an algorithm to determine the entropy of the
 following lists: 
-
-\[0, 0, 0, 0, 0, 0\]
-
-\[1, 1, 1, 1, 1, 1\]
-
-\[1, 0, 1, 0, 1, 0\]
-
+```python
+[0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1]
+[1, 0, 1, 0, 1, 0]
+```
 Submit your coded algorithm and your output.
 
 What do you deduce about the impact of various element patterns on
@@ -486,76 +457,51 @@ Determining joint entropy is not much different than finding entropy,
 except that you must first determine the intersecting set.
 
 Python gives us some fairly easy to use set operators:
-
-s1, s2 = {1, 3, 5, 7, 8}, {1, 2, 4, 6, 8}\# define 2 sets
-
+```python
+s1, s2 = {1, 3, 5, 7, 8}, {1, 2, 4, 6, 8}   # define 2 sets
 print("union s1 s2: ", s2 | s2)
-
 print("intersection s1 s2: ", s1 & s2)
-
 print("difference s1 s2: ", s1 - s2)
-
+```
 However, for you to better understand the set operations involved, the
 following Python code is more explicit about the set intersection:
-
-\#\!/usr/bin/python3
-
+```python
+#!/usr/bin/python3
 import math
-
 def jointEntopy(bitstr1, bitstr2):
+  S1 = set(bitstr1)
+  S2 = set(bitstr2)
+  L1 = list(bitstr1)
+  L2 = list(bitstr2)
+  N = len(L1)
+  I = 0.0
+  for s1 in S1:
+    for s2 in S2:
+      frequency = 0.0
+      for i in range(N):
+        if(s1 == L1[i] and s2 == L2[i]):     # set intersection 
+          frequency = frequency + 1
+      p = (1.0 * frequency) / (1.0 * N)
+      if p > 0.0:
+        I = I - p * math.log(p)
 
-S1 = set(bitstr1)
+  return ( I / math.log(2) )
 
-S2 = set(bitstr2)
-
-L1 = list(bitstr1)
-
-L2 = list(bitstr2)
-
-N = len(L1)
-
-I = 0.0
-
-for s1 in S1:
-
-for s2 in S2:
-
-frequency = 0.0
-
-for i in range(N):
-
-if(s1 == L1\[i\] and s2 == L2\[i\]):     \# set intersection 
-
-frequency = frequency + 1
-
-p = (1.0 \* frequency) / (1.0 \* N)
-
-if p \> 0.0:
-
-I = I - p \* math.log(p)
-
-return ( I / math.log(2) )
-
-\#Run a test:
-
+#Run a test:
 bitstr1 = "13578"
-
 bitstr2 = "12468"
-
 print( jointEntopy(bitstr1, bitstr2) )
-
+```
 Exercise
 
 Using Python, write an algorithm to determine the joint entropy of the
 following lists: 
-
-S1                  S2
-
-\[0, 0, 0, 0, 0, 0\] and \[1, 1, 1, 1, 1, 1\]
-
-\[1, 0, 1, 0, 1, 0\] and \[0, 1, 0, 1, 0, 1\] 
-
-\[1, 2, 2, 3, 3, 3\] and \[1, 1, 1, 2, 2, 3\]  
+```python
+        S1                     S2
+[0, 0, 0, 0, 0, 0] and [1, 1, 1, 1, 1, 1]
+[1, 0, 1, 0, 1, 0] and [0, 1, 0, 1, 0, 1] 
+[1, 2, 2, 3, 3, 3] and [1, 1, 1, 2, 2, 3]  
+```
 
 Submit your coded algorithm and your output.
 
@@ -600,37 +546,28 @@ there might be set independence or channel noise (see below).
 In Python, using our algorithms above for entropy and joint entropy,
 conditional entropy may be described as follows:
 
-\#\!/usr/bin/python3
-
+```python
+#!/usr/bin/python3
 exec(open("entropy.py").read())
-
 exec(open("jointEntropy.py").read())
-
 def conditionalEntropy(bitstr1, bitstr2):
+  return jointEntropy(bitstr1, bitstr2) - entropy(bitstr2) 
 
-return jointEntropy(bitstr1, bitstr2) - entropy(bitstr2) 
-
-\# Run a test:
-
+# Run a test:
 bitstr1 = "13578765"
-
 bitstr2 = "12468765"
-
 print( conditionalEntropy(bitstr1, bitstr2) )
-
+```
 Exercise
 
 Using Python, write an algorithm to determine the conditional entropy of
 the following lists: 
-
-S1                  S2
-
-\[0, 0, 0, 0, 0, 0\] and \[1, 1, 1, 1, 1, 1\]
-
-\[1, 0, 1, 0, 1, 0\] and \[0, 1, 0, 1, 0, 1\] 
-
-\[1, 2, 2, 3, 3, 3\] and \[1, 1, 1, 2, 2, 3\]  
-
+```python
+        S1                     S2
+[0, 0, 0, 0, 0, 0] and [1, 1, 1, 1, 1, 1]
+[1, 0, 1, 0, 1, 0] and [0, 1, 0, 1, 0, 1] 
+[1, 2, 2, 3, 3, 3] and [1, 1, 1, 2, 2, 3]  
+```
 Submit your coded algorithm and your output.
 
 What do you deduce about the impact of any particular bit pattern on
@@ -645,35 +582,29 @@ message given (prior) knowledge of another message.
 
 Consider the following formula for mutual information:
 
-H(S1 | S2) = entropy(S1) - conditionalEntropy(S1, S2)
-
-\= entropy(S1) - jointEntropy(S1, S2) - entropy(S2)
+<blockquote>
+H(S1 | S2) = entropy(S1) - conditionalEntropy(S1, S2) <br>
+ &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp= entropy(S1) - jointEntropy(S1, S2) - entropy(S2)
+</blockquote>
 
 The mutual information of two sets of symbols gauges in terms of Shannon
 Information how much dependence set S1 has on S2 and how much dependence
 set S2 has on S1. 
 
 In Python, mutual information might look like this:
-
-\#\!/usr/bin/python3
-
+```python
+#!/usr/bin/python3
 exec(open("entropy.py").read())
-
 exec(open("conditionalEntropy.py").read())
 
 def mutualInformation(bitstr1, bitstr2):
+  return entropy(bitstr1) - conditionalEntropy(bitstr1, bitstr2)          
 
-return entropy(bitstr1) - conditionalEntropy(bitstr1, bitstr2)          
-            
-
-\# Run a test:
-
+# Run a test:
 bitstr1 = "13578765"
-
 bitstr2 = "12468765"
-
 print(mutualInformation(bitstr1, bitstr2))
-
+```
 Exercise
 
 Using Python, write an algorithm to compute the mutual information for
@@ -726,24 +657,22 @@ The receipt of “HHOXPP” clearly has an error. This can trigger a
 common word having the pattern “H\_P.”
 
 A more robust scheme is transmit several instances of each character:
-
+```
 H H H H H H H H
-
 O O O O O O O O
-
 P P P P P P P P
-
+```
 Each character actually has its ASCII code represented in binary, as 0
 and 1 bits. The representation of a 1 being in the aforementioned
 redundant 8 bit scheme. These redundant bits provide “7 bit error
 correction.” For example, a single 1 bit is expressed as:
-
+```
 1 1 1 1 1 1 1 
-
+```
 … and a single 0 bit is expressed as:
-
+```
 0 0 0 0 0 0 0 0
-
+```
 Following each of these bit strings with parity bit, such as 00000000 or
 00000001, provides “n-bit error detection.”
 
@@ -813,15 +742,12 @@ channelCapacity(S1, S2) = mutualInformation(S1, S)
 
 Using Python, write an algorithm to determine the channel capacity of
 the following lists: 
-
-S1                  S2
-
-\[0, 0, 0, 0, 0, 0\] and \[1, 1, 1, 1, 1, 1\]
-
-\[1, 0, 1, 0, 1, 0\] and \[0, 1, 0, 1, 0, 1\] 
-
-\[1, 2, 2, 3, 3, 3\] and \[1, 1, 1, 2, 2, 3\]  
-
+```
+        S1                     S2
+[0, 0, 0, 0, 0, 0] and [1, 1, 1, 1, 1, 1]
+[1, 0, 1, 0, 1, 0] and [0, 1, 0, 1, 0, 1] 
+[1, 2, 2, 3, 3, 3] and [1, 1, 1, 2, 2, 3]  
+```
 What values of 0s and 1s for S1 and S2 will maximize channel capacity?
 Does information rate matter?
 
@@ -864,19 +790,14 @@ As an example, suppose we have a text message to send that consists of
 These characters have different frequencies of occurrence in the text.
 So, we itemize their probabilities and entropies as follows: 
 
-*SymbolProbabilityEntropy eaEntropy total*
-
-A27 / 1200.4813.07
-
-B9 / 1200.282.52
-
-C21 / 1200.449.24
-
-X15 / 1200.385.63
-
-Y12 / 1200.333.99
-
-Z16 / 1200.396.20
+|Symbol |Probability |Entropy ea |Entropy total
+|-------|------------|-----------|-------------
+|A |27 / 120 | 0.48 |13.07
+|B |9 / 120 | 0.28 |2.52
+|C |21 / 120 | 0.44 |9.24
+|X |15 / 120 | 0.38 | 5.63
+|Y |12 / 120 | 0.33 | 3.99
+|Z |16 / 120 | 0.39 | 6.20
 
 Building Huffman tree codes result in compression that approximates
 entropy. It cannot be exact because, as you can see, entropy does not
@@ -888,90 +809,71 @@ will be labeled with a 0 and a right branch will be labeled with a 1.
 
 Order the symbols in terms of frequency:
 
+```
 B  Y  X  Z  C  A
-
 9 12 15 16 21 27
-
+```
 Sum the symbols pair-wise, pairing the symbols with the smallest
 probabilities, to create sub trees with their respective root nodes as
 their sums:
 
-21             31             48
-
-/    \\          /    \\          /    \\
-
-B     Y      X     Z      C     A
-
-9     12     15    16    21    27
+```
+  21        31          48
+ /  \      /  \        /  \
+B    Y    X    Z      C    A
+9    12   15   16    21    27
+```
 
 Continue to merge the trees, paring the smallest sums:
 
-52
-
-/           \\
-
-21             31             48
-
-/    \\          /    \\          /    \\
-
-B     Y      X     Z      C     A
-
-9     12     15    16    21    27
+```
+       52
+    /      \
+  21        31          48
+ /  \      /  \        /  \
+B    Y    X    Z      C    A
+9    12   15   16    21    27
+```
 
 Repeat until there is one root. Then label 0s for left branches and 1s
 for right branches, as follows:
-
-100
-
-** 0/             \\1**
-
-52             48 
-
-**  0/        \\1          0/   \\1**
-
-21             31          C     A 
-
-**0/    \\1       0/   \\1 **     21    27 
-
-B     Y      X     Z      
-
-9     12     15    16 
-
+```
+            100
+         /       \  
+       0/         \1
+       /           \
+       52           48
+   0/     \1      0/  \1
+  21       31     C    A 
+0/  \1   0/   \1  21   27 
+B    Y   X     Z      
+9    12  15    16 
+```
 The Huffman code (the compression) for each symbol is found by tracing
 its path from the root node (top) to the symbol. Along this path make a
 list of the 0s and 1s. For the above tree, we get:
 
+```
 B = 000
-
 Y = 001
-
 X = 010
-
 Z = 011
-
 C = 10
-
 A = 11
-
+```
 How much compression did this give us? It takes just 2 to 3 bits to
 represent all the symbols. If the original scheme were to transmit 8 bit
 symbols, the Huffman encoding, saves 5 to 6 bits per symbol.
 
-*SymbolFrequencyBitsFrequency x Bits*
-
-A27254
-
-B9218
-
-C21366
-
-X15345
-
-Y12336
-
-Z16348
-
-267 total bits
+|Symbol |Frequency |Bits |Frequency x Bits
+|-------|----------|-----|-------------
+|A | 27| 2 | 54
+|B |9 |2 | 18
+|C |21 | 3 | 66
+|X|15|3|45
+Y|12|3|36
+Z|16|3|48|
+||||267 total bits
 
 Saved bits = (120 x 8) – 267 / (120 x 8) == 72.2%
 
@@ -992,7 +894,7 @@ In decompression, the sequence order of symbols:bits does not matter
 because each Huffman code is unambiguous, regardless of the bits in its
 parent node (ie: Huffman codes are prefix *free*).
 
-Exercise
+### Exercise
 
 Using Python, write an algorithm to decompress the Huffman codes from
 our example: A:11, C:10, Z:011, X:010, Y:001, B:000. Does your algorithm
