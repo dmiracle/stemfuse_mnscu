@@ -87,6 +87,11 @@
         <li><a href="#programming">2. Programming</a></li>
         <li><a href="#relation">3. Relation</a></li>
         <li><a href="#function">4. Function</a></li>
+        <h2 id="introduction-to-bootstrap-sampling">Introduction to Bootstrap Sampling</h2>
+        <h2 id="theoretical-explanation-of-bootstrap-sampling">Theoretical Explanation of Bootstrap Sampling</h2>
+        <h2 id="bootstrap-confidence-interval">Bootstrap Confidence Interval</h2>
+        <h2 id="confidence-interval-based-on-bootstrap-percentiles">Confidence Interval based on Bootstrap Percentiles</h2>
+        <h2 id="use-r-package-boot-to-generate-bootstrap-sample-statistics">Use R package boot to generate bootstrap sample statistics</h2>
         <!--- end sidebar -->
       </ul>
       <div id="printDiv" style="text-align: center;"><input onclick="window.print(); return false;" alt="Print" src="https://metrostate.learn.minnstate.edu/shared/Admin/Templates/Templates/../../../images/icons/print.png"
@@ -118,7 +123,7 @@
 <p><a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/state.html%20">https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/state.html</a></p>
 <p><a href="https://vincentarelbundock.github.io/Rdatasets/doc/boot/nuclear.html">https://vincentarelbundock.github.io/Rdatasets/doc/boot/nuclear.html</a></p>
 <p><a href="https://www.rdocumentation.org/packages/boot/versions/1.3-20/topics/cv.glm">https://www.rdocumentation.org/packages/boot/versions/1.3-20/topics/cv.glm</a></p>
-<p><strong>Contents</strong></p>
+
 <h3 id="introduction">Introduction</h3>
 <p>Building a model can be a never ending process in which we constantly improve the model by adding interactions, taking away variables, doing transformations and so on. However, at some point we need to confirm that we have the best model at the time, or even a good model. That leads to the question: How do we judge the quality of a model? In almost all cases the answer has to be in relation to other models. This could be an analysis of residuals, the results of an ANOVA test, a Wald test, drop-in deviance, and the AIC or BIC score. In this module, we consider bootstrapping and cross-validation error.</p>
 <p>Sometimes, for one reason or another, there is not a good analytic solution to a problem and another tactic is needed. This is especially true for measuring uncertainty for confidence intervals. To overcome this, Bradley Efron introduced the bootstrap in 1979. Since then the bootstrap has grown to revolutionize modern statistics and is indispensable.</p>
@@ -228,7 +233,7 @@
 </ul>
 <h2 id="confidence-interval-based-on-bootstrap-percentiles">Confidence Interval based on Bootstrap Percentiles</h2>
 <p>Besides the 95% confidence interval, we may be interested in 90% or 99% confidence intervals. If the bootstrap distribution is approximately normal, we can construct a confidence interval by using the percentiles in the bootstrap distribution of statistic to construct a confidence level. This procedure for finding bootstrap confidence intervals are flexible and can be applied in a wide variety of different situations and with many different parameters (Lock, 2013). The process is simple if we already have the bootstrap distribution generated. If we denote the confidence level as <span class="math inline">\(1 - \alpha\)</span>. From the bootstrap distribution, we need to find the end points corresponding to <span class="math inline">\((\frac{\alpha}{2},\ 1 - \frac{\alpha}{2}\)</span>). For example, if we would like to generate a 99% confidence interval, then we need to find the end points under the bootstrap distribution corresponding to the left proportions of <span class="math inline">\(0.005\)</span> and <span class="math inline">\(0.995\)</span> (figure 4)</p>
-<p><img src="media/media/image7.png" style="width:6.5in;height:2.42014in" /></p>
+<p><img src="media/media/image7.png" style="width:100%" /></p>
 <p>Figure 4. The 99% confidence interval using the percentile method. The two red triangle points are corresponding to the left proportion of 0.005, and 0.995. So the 99% confidence interval is (21.655, 62.990).</p>
 <p>The process of generate a bootstrap confidence interval using the percentile method is:</p>
 <ul>
@@ -267,15 +272,15 @@
 <p>In cross-validation, a portion of the data is selected as the training sample, and a portion is selected as the hold-out sample. A regression equation is developed on the training sample and then applied to the hold-out sample. Because the hold-out sample wasn’t involved in the selection of the model parameters, the performance on this sample is a more accurate estimate of the operating characteristics of the model with new data.</p>
 <p>In <em>k-fold cross-validation</em>, the sample is divided into <em>k</em> subsamples. Each of the <em>k</em> subsamples serves as as a hold-out group, and the combined observations from the remaining <span class="math inline">\(k - 1\)</span> subsamples serve as the training group. The performance for the <em>k</em> prediction equations applied to the <em>k</em> hold-out samples is recorded and then averaged. (When <em>k</em> equals <em>n</em>, the total number of observations, this approach is called <em>jackknifing</em>.)</p>
 <p>The following listing provides a function (called <strong>shrinkage( )</strong>) for cross-validating a model’s R-square statistic using <em>k</em>-fold cross-validation.</p>
-<p><embed src="media/media/image10.tmp" style="width:5.89666in;height:2.54202in" /></p>
+<p><embed src="media/media/image10.png" style="width:5.89666in;height:2.54202in" /></p>
 <p>Using the above listing, we define our functions, create a matrix of predictor and predicted values, get the raw R-squared, and get the cross-validated R-squared.</p>
 <p>We’ll use the <strong>state.x77</strong> dataset in the base package for an example. Suppose we want to explore the relationship between a state’s murder rate and other characteristics of the state, including population, illiteracy rate, average income, and frost levels (mean number of days below freezing).</p>
 <p>Because the <strong>lm( )</strong> function requires a data frame (and the <strong>state.x77</strong> dataset is contained in a matrix), we can simplify our life with the code below. This code creates a data frame called <strong>states</strong>, containing the variables we’re interested in. We’ll use this new data frame for the remainder of the example. (<a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/state.html">https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/state.html</a>)</p>
-<p><embed src="media/media/image11.tmp" style="width:5.31324in;height:0.39589in" /></p>
-<p>Now let’s fit the multiple regression model with the <strong>lm( )</strong> function (see figure 5). <embed src="media/media/image12.tmp" style="width:6.42798in;height:3.77136in" /></p>
+<p><embed src="media/media/image11.png" style="width:5.31324in;height:0.39589in" /></p>
+<p>Now let’s fit the multiple regression model with the <strong>lm( )</strong> function (see figure 5). <embed src="media/media/image12.png" style="width:6.42798in;height:3.77136in" /></p>
 <p>Figure 5. Multiple linear regression.</p>
 <p>The <strong>shrinkage( )</strong> function is used to perform a 10-fold cross-validation with the <strong>states</strong> data, using the model with all four predictor variables (figure 6).</p>
-<p><embed src="media/media/image13.tmp" style="width:6.27171in;height:0.95847in" /></p>
+<p><embed src="media/media/image13.png" style="width:6.27171in;height:0.95847in" /></p>
 <p>Figure 6. Use of the <strong>shrinkage( )</strong> function to perform a 10-fold cross-validation with the <strong>states</strong> data.</p>
 <p>We can see that the R-square based on the sample (0.567) is overly optimistic. A better estimate of the amount of variance in murder rates that this model will account for with new data is the cross-validated R-square (0.441). (Note that observations are assigned to the <em>k</em> groups randomly, so we’ll get a slightly different result each time we execute the <strong>shrinkage( )</strong> function.)</p>
 <p><em>Activity 6:</em> The <strong>boot</strong> package is a library of R code that’s included with the standard installation but isn’t automatically loaded. Load <strong>boot</strong> with a call to <strong>library(boot)</strong>. You’ll find a data frame called <strong>nuclear</strong>, which contains data on the construction of nuclear power plants in the United States in the late 1960s. (<a href="https://vincentarelbundock.github.io/Rdatasets/doc/boot/nuclear.html">https://vincentarelbundock.github.io/Rdatasets/doc/boot/nuclear.html</a>)</p>
@@ -283,7 +288,7 @@
 <p>One of the original objectives was to predict the cost of further construction of these power plants. Create a fit and summary of a linear regression model that aims to model <strong>cost</strong> by <strong>t1</strong> and <strong>t2</strong>, two variables that describe the different elapsed times associated with the application for and issue of various permits.</p>
 <p>Use the <strong>shrinkage( )</strong> function to perform a 10-fold cross-validation with the <strong>nuclear</strong> data. Use the above model with two predictor variables.</p>
 <p>We could use cross-validation in variable selection by choosing a model that demonstrates better generalizability. For example, a model with two predictors (<strong>Population</strong> and <strong>Illiteracy</strong>) shows less R-square shrinkage (0.040 versus 0.126) than the full model (figure 7).</p>
-<p><embed src="media/media/image14.tmp" style="width:5.06321in;height:0.78136in" /></p>
+<p><embed src="media/media/image14.png" style="width:5.06321in;height:0.78136in" /></p>
 <p>Figure 7. Use of the <strong>shrinkage( )</strong> function to perform a 10-fold cross-validation with the <strong>states</strong> data (two-predictor model).</p>
 <p>This may make the two-predictor model a more attractive alternative.</p>
 <p>All other things being equal, a regression equation that’s based on a larger training sample and one that’s more representative of the population of interest will cross-validate better. We’ll get less R-squared shrinkage and make more accurate predictions.</p>
@@ -291,66 +296,19 @@
 <h4 id="cv.glm-for-performing-cross-validation"><strong>cv.glm</strong> for Performing Cross-Validation</h4>
 <p>There are a number of packages and functions in R that assist in performing cross-validation. Each has its own limitations or quirks, so rather than going through a number of incomplete functions, we show one that works well for generalized linear models (including linear regression).</p>
 <p>The <strong>boot</strong> package by Brian Ripley has <strong>cv.glm</strong> for performing cross-validation. As the name implies, it works only for generalized linear models, which will suffice for generalized linear models, which will suffice for a number of situations. (<a href="https://www.rdocumentation.org/packages/boot/versions/1.3-20/topics/cv.glm">https://www.rdocumentation.org/packages/boot/versions/1.3-20/topics/cv.glm</a>)</p>
-<p><embed src="media/media/image15.tmp" style="width:5.80289in;height:2.18781in" /></p>
+<p><embed src="media/media/image15.png" style="width:5.80289in;height:2.18781in" /></p>
 <p>The results from <strong>cv.glm</strong> include <strong>delta</strong>, which has two numbers, the raw cross-validation error based on the cost function (in this case the mean squared error, which is a measure of correctness for an estimator) for all the folds and the adjusted cross-validation error. This second number compensates for not using leave-one-out cross-validation, which is like <em>k</em>-fold cross-validation except that each fold is the all but one data point with one point held out.</p>
 <p>While we got a nice number for the error, it helps us only if we can compare it to other models, so we run the same process for the other model we built, rebuilding it with <strong>glm</strong> first.</p>
-<p><embed src="media/media/image16.tmp" style="width:6.28213in;height:2.97958in" /></p>
+<p><embed src="media/media/image16.png" style="width:6.28213in;height:2.97958in" /></p>
 <p>Once again, the second model, <strong>fit2_glm</strong>, is the superior model. Figure 8 shows how much AIC and cross-validation agree on the relative merits of the different models. The scales are all different but the shapes of the plots are identical.</p>
 <p><img src="media/media/image17.png" style="width:6.15548in;height:3.75995in" /></p>
 <p>Figure 8. Plots for cross-validation error (raw and adjusted) and AIC for <strong>states</strong> models. The scales are different, as they should be, but the shapes are identical, indicating that <strong>fit2_glm</strong> is the best model.</p>
 <p>Following is the R code used to generate the plots in figure 8:</p>
-<p><embed src="media/media/image18.tmp" style="width:6.15711in;height:2.59411in" /></p>
+<p><embed src="media/media/image18.png" style="width:6.15711in;height:2.59411in" /></p>
 <p>Determining the quality of a model is an important step in the model building process. This can take the form of traditional tests of fit or more modern techniques like cross-validation. These can all be shaped by helping select which variables are included in a model and which are excluded.</p>
 <p><em>Activity 8:</em> Use the <strong>cv.glm( )</strong> function to compare the two models in activities 6 and 7.</p>
 <p><em>Activity 9:</em> Generate plots for cross-validation error (raw and adjusted) and AIC for the two models that you created for the <strong>nuclear</strong> data.</p>
-<p><strong>Final Assessments</strong></p>
-<ol type="1">
-<li><p>How many ants will climb on a piece of a peanut butter sandwich left on the ground near an ant hill? To study this, a student in Australia left a piece of a sandwich for several minutes, then covered it with a jar and counted the number of ants. He did this eight times, and the results are shown below (Mackisack, 1994)</p></li>
-</ol>
-<blockquote>
-<p>43 59 22 25 36 47 19 21</p>
-<p>a) Find the mean and standard deviation of the original sample</p>
-<p>b) Generate 60 bootstrap samples based on the original sample and calculate the means of all these bootstrap samples.</p>
-<p>c) What is the distribution of the bootstrap sample means? What is the mean and the standard error of the distribution?</p>
-</blockquote>
-<ol start="2" type="1">
-<li><p>Use the <strong>Boston</strong> data set in the R package <strong>MASS</strong> to perform the following:</p></li>
-</ol>
-<ol type="a">
-<li><p>Generate 1000 bootstrap samples of crime rate and calculate the mean crime rate of each sample</p></li>
-<li><p>Generate the 99% confidence interval of the mean crime rate</p></li>
-</ol>
-<ol start="3" type="1">
-<li><p>Use the data <strong>airquality</strong> in R to perform the following:</p></li>
-</ol>
-<ol type="a">
-<li><p>Generate one bootstrap sample for temperature (<strong>Temp</strong>)</p></li>
-<li><p>Generate a bootstrap distribution (histogram) of sample means with 1000 samples</p></li>
-<li><p>Calculate the standard deviation of the sample means</p></li>
-<li><p>Construct a 95% confidence interval of the mean temperature</p></li>
-</ol>
-<ol start="4" type="1">
-<li><p>Suppose that we obtain a bootstrap sample from a set of 5 observations.</p></li>
-</ol>
-<ol type="a">
-<li><p>What is the probability that the first bootstrap observation is not the 5<sup>th</sup> observation from the original sample? Show your calculation to answer the question.</p></li>
-<li><p>What is the probability that the second observation from the original sample is in the bootstrap sample? Show your calculation to answer the question.</p></li>
-</ol>
-<ol start="5" type="1">
-<li><p>Use the <strong>mtcars</strong> data in R to perform the following:</p></li>
-</ol>
-<ol type="a">
-<li><p>Calculate the standard deviation of the mpg for all the cars in the sample</p></li>
-<li><p>Generate 100 bootstrap samples and find the standard deviations of those samples</p></li>
-<li><p>Construct a 98% confidence interval for the standard deviation.</p></li>
-</ol>
-<ol start="6" type="1">
-<li><p>In the <strong>MASS</strong> package, you’ll find the data frame <strong>cats</strong>, which provides data on sex, body weight (in kilograms), and heart weight (in grams) for 144 household cats; you can read the documentation with a call to <strong>?cats</strong>. Load the <strong>MASS</strong> package with a call to <strong>library(MASS)</strong>, and access the object directly by entering <strong>cats</strong> at the console prompt. Fit a least-squares multiple linear regression model using heart weight as the response variable and the other two variables as predictors. Use the <strong>shrinkage( )</strong> function that we created to perform a 10-fold cross-validation using the model with two predictor variables.</p></li>
-<li><p>Refer to #1. Fit an interaction model using heart weight as the response variable and the other two variables as predictors. Use the <strong>shrinkage( )</strong> function to perform a 10-fold cross-validation on this interaction model.</p></li>
-<li><p>Use the <strong>cv.glm( )</strong> function to compare the two models in #1 and #2.</p></li>
-<li><p>Generate plots for cross-validation error (raw and adjusted) and AIC for the two models that you created for the <strong>cats</strong> data.</p></li>
-</ol>
-<p>References:</p>
+<h2 id="references">References</h2>
 <p>Baumer, B.S., Kaplan, D.T., and Horton, N.J., 2017. Modern Data Science with R, CRC Press.</p>
 <p>James, G., Witten, D., Hastie, T., and Tibshirani R., 2014. An Introduction to Statistical Learning with Applications in R. 2<sup>nd</sup> edition, Springer</p>
 <p>Lock, R. H., Lock, P. F., Morgan K.L., Lock E.F., and Lock D.F., 2013. Statistics: Unlock the Power of Data, Wiley.</p>
