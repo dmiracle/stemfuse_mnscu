@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Visualization in R for Qualitative Variables</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+
+<body>
+<p style="text-align: center;"><a name="top"></a></p>
+<div id="pageContainer">
+<div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+
+<div id="mainContent">
+<div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+
+<!-- PASTE HTML HERE-->
+
+<h2 id="final-assessment">Final Assessment</h2>
+<ol type="1">
+<li><p>How many ants will climb on a piece of a peanut butter sandwich left on the ground near an ant hill? To study this, a student in Australia left a piece of a sandwich for several minutes, then covered it with a jar and counted the number of ants. He did this eight times, and the results are shown below (Mackisack, 1994)</p>
+<blockquote>
+<p>43 59 22 25 36 47 19 21</p>
+</blockquote></li>
+  <ol type="a">
+  <li>Find the mean and standard deviation of the original sample</li>
+  <li>Generate 60 bootstrap samples based on the original sample and calculate the means of all these bootstrap samples.</li>
+  <li>What is the distribution of the bootstrap sample means? What is the mean and the standard error of the distribution?</li>
+  </ol>
+<li><p>Use the <strong>Boston</strong> data set in the R package <strong>MASS</strong> to perform the following:</p></li>
+  <ol type="a">
+  <li><p>Generate 1000 bootstrap samples of crime rate and calculate the mean crime rate of each sample</p></li>
+  <li><p>Generate the 99% confidence interval of the mean crime rate</p></li>
+  </ol>
+
+<li><p>Use the data <strong>airquality</strong> in R to perform the following:</p></li>
+
+  <ol type="a">
+  <li><p>Generate one bootstrap sample for temperature (<strong>Temp</strong>)</p></li>
+  <li><p>Generate a bootstrap distribution (histogram) of sample means with 1000 samples</p></li>
+  <li><p>Calculate the standard deviation of the sample means</p></li>
+  <li><p>Construct a 95% confidence interval of the mean temperature</p></li>
+  </ol>
+
+<li><p>Suppose that we obtain a bootstrap sample from a set of 5 observations.</p></li>
+
+  <ol type="a">
+  <li><p>What is the probability that the first bootstrap observation is not the 5<sup>th</sup> observation from the original sample? Show your calculation to answer the question.</p></li>
+  <li><p>What is the probability that the second observation from the original sample is in the bootstrap sample? Show your calculation to answer the question.</p></li>
+  </ol>
+
+<li><p>Use the <strong>mtcars</strong> data in R to perform the following:</p></li>
+
+  <ol type="a">
+  <li><p>Calculate the standard deviation of the mpg for all the cars in the sample</p></li>
+  <li><p>Generate 100 bootstrap samples and find the standard deviations of those samples</p></li>
+  <li><p>Construct a 98% confidence interval for the standard deviation.</p></li>
+  </ol>
+
+<li><p>In the <strong>MASS</strong> package, you’ll find the data frame <strong>cats</strong>, which provides data on sex, body weight (in kilograms), and heart weight (in grams) for 144 household cats; you can read the documentation with a call to <strong>?cats</strong>. Load the <strong>MASS</strong> package with a call to <strong>library(MASS)</strong>, and access the object directly by entering <strong>cats</strong> at the console prompt. Fit a least-squares multiple linear regression model using heart weight as the response variable and the other two variables as predictors. Use the <strong>shrinkage( )</strong> function that we created to perform a 10-fold cross-validation using the model with two predictor variables.</p></li>
+<li><p>Refer to #1. Fit an interaction model using heart weight as the response variable and the other two variables as predictors. Use the <strong>shrinkage( )</strong> function to perform a 10-fold cross-validation on this interaction model.</p></li>
+<li><p>Use the <strong>cv.glm( )</strong> function to compare the two models in #1 and #2.</p></li>
+<li><p>Generate plots for cross-validation error (raw and adjusted) and AIC for the two models that you created for the <strong>cats</strong> data.</p></li>
+</ol>
+</div>
+</div>
+</body>
+</html>
