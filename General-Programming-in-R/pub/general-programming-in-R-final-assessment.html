@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>General Programming in R - Final Assessment</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="person" content="" />
+  <meta name="course" content="" />
+
+
+<!--[if lt IE 9]>
+	<link href="/shared/metroStyleIE8.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+  
+  <link href="inc/metroStyle.css" type="text/css" rel="stylesheet">
+
+
+  <!--LaTex Includes
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+-->
+
+  <style>
+  
+  .warning {
+    visibility: hidden;
+  }
+  
+  </style>
+</head>
+<body>
+
+    <p style="text-align: center;"><a name="top"></a></p>
+    <div id="pageContainer">
+    <div class="toTop"><a href="#top">Top of Page &gt;&gt;</a></div>
+    
+    <div id="mainContent">
+    <div class="warning"><span style="color: #cf2a27;"><strong>Do not delete... If you delete into this warning block, Control + Z to Undo... Do not delete</strong></span></div>
+    
+    <!-- PASTE HTML HERE-->
+<h1 id="module-r-programming">Module R Programming</h1>
+<h2>Final Assessment</h2>
+<ol type="1">
+<li><p>Create the following matrices using R</p></li>
+  <p><span class="math display">\[A = \begin{matrix}
+  3 &amp; 6 &amp; 7 \\
+  12 &amp; 5 &amp; 9 \\
+  - 1 &amp; 6 &amp; - 7 \\
+  \end{matrix}\]</span></p>
+  <p><span class="math display">\[B = \begin{matrix}
+  2 &amp; 12 &amp; 15 \\
+  7 &amp; 11 &amp; 13 \\
+  9 &amp; 22 &amp; 16 \\
+  \end{matrix}\]</span></p>
+  <ol type="a">
+  <li><p>find the transpose of the matrix A</p></li>
+  <li><p>find the multiplication of A*B using A%*%B in R</p></li>
+  </ol>
+<li><p>Create a data frame to show the following data</p></li>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>Name</th>
+  <th>Gender</th>
+  <th>Starting Date</th>
+  <th>Salary</th>
+  <th>Age</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>Jack</td>
+  <td>Male</td>
+  <td>2010-11-1</td>
+  <td>56000</td>
+  <td>51</td>
+  </tr>
+  <tr class="even">
+  <td>Peter</td>
+  <td>Male</td>
+  <td>2012-1-12</td>
+  <td>49000</td>
+  <td>39</td>
+  </tr>
+  <tr class="odd">
+  <td>Julie</td>
+  <td>Female</td>
+  <td>2013-3-2</td>
+  <td>32000</td>
+  <td>41</td>
+  </tr>
+  <tr class="even">
+  <td>Mary</td>
+  <td>Female</td>
+  <td>2014-10-8</td>
+  <td>30000</td>
+  <td>28</td>
+  </tr>
+  </tbody>
+  </table>
+<li><p>Use the data frame created from question 2, export the data to a CSV file and save it on your desktop.</p></li>
+<li><p>Below is the data that recorded systolic blood pressure at baseline and follow-up visit for 9 patients. Create a function <em>treatment</em> and use the if-else statement to do the following:</p></li>
+
+  <ul>
+  <li><p>If the follow-up blood pressure is higher than the baseline, then make the recommendation of “more treatment”</p></li>
+  <li><p>If the follow-up blood pressure is lower than the baseline, then make the recommendation of “recovered”</p></li>
+  <li><p>If the follow-up blood pressure is equal to the baseline, then make the recommendation of “no further treatment needed”</p></li>
+  </ul>
+  <blockquote>
+  <p>Return the recommendation at the end of the function. Run the function using the data from the table.</p>
+  </blockquote>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>Patient</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+  <th>6</th>
+  <th>7</th>
+  <th>8</th>
+  <th>9</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>Baseline SBP</td>
+  <td>100</td>
+  <td>110</td>
+  <td>109</td>
+  <td>99</td>
+  <td>103</td>
+  <td>101</td>
+  <td>125</td>
+  <td>130</td>
+  <td>135</td>
+  </tr>
+  <tr class="even">
+  <td>Follow-up SBP</td>
+  <td>110</td>
+  <td>100</td>
+  <td>112</td>
+  <td>105</td>
+  <td>100</td>
+  <td>121</td>
+  <td>110</td>
+  <td>120</td>
+  <td>109</td>
+  </tr>
+  </tbody>
+  </table>
+
+<li><p>The data <em>airquality</em> is an R dataset. If you type airquality in the console window, you will be able to view the data. The data records daily readings of air quality from May 1, 1973 to September 30, 1973. The variable Temp records the maximum daily temperature at La Guardia airport.</p></li>
+  <ol type="a">
+  <li><p>Use the function sample (data$variable, k) to take 50 sample temperature, where k is the sample size.</p></li>
+  <li><p>Find the mean temperature of the 50 samples</p></li>
+  <li><p>Use a for loop to iterate the process of a) and b) 1000 times, and generate a sampling distribution of the 1000 sample means.</p></li>
+  </ol>
+
+<li><p>The following are a sample of observations on incoming solar radiation at a greenhouse:</p></li>
+  <blockquote>
+  <p>11.1 10.6 6.3 8.8 10.7 11.2 8.9 12.2</p>
+  </blockquote>
+  <ol type="a">
+  <li><p>Assign the data to an object called <strong>solar.radiation</strong>.</p></li>
+  <li><p>Find the mean, median, range, and variance of the radiation observations.</p></li>
+  <li><p>Add 10 to each observation of <strong>solar.radiation</strong> and assign the result to <strong>sr10</strong>. Find the mean, median, range, and variance of <strong>sr10</strong>.</p></li>
+  <li><p>Multiply each observation by <span class="math inline">\(- 2\)</span>, and assign the result to <strong>srm2</strong>. Find the mean, median, range, and variance of <strong>srm2</strong>.</p></li>
+  </ol>
+
+<li><p>Consider the built-in <strong>USArrests</strong> data frame.</p></li>
+
+  <ol type="a">
+  <li><p>Find the average per capita murder rate (<strong>Murder</strong>) in regions where the percentage of the population living in urban areas (<strong>UrbanPop</strong>) exceeds 77%. Compare this with the average per capita murder rate where urban area population is less than 50%.</p></li>
+  <li><p>Construct a new data frame consisting of a random sample of 12 of the records of the <strong>USArrests</strong> data frame, where the records have been sampled without replacement.</p></li>
+  </ol>
+
+<li><p>The <strong>beaver1</strong> and <strong>beaver2</strong> datasets contain body temperatures of two beavers. Add a column named <strong>id</strong> to the <strong>beaver1</strong> dataset, where the value is always 1. Similarly, add an <strong>id</strong> column to <strong>beaver2</strong>, with value 2. Using the <strong>rbind( )</strong> function, vertically concatenate the two data frames. Find the subset where either beaver is active.</p></li>
+<li><p>The function <strong>sd</strong> calculates the standard deviation. Calculate the standard deviation of the numbers from 0 to 100.</p></li>
+<li><p>Create the vector <strong>c(8,8,4,4,5,1,5,6,6,8)</strong> as <strong>bar</strong>. Identify the elements less than or equal to 6 <strong>AND</strong> not equal to 4.</p></li>
+<li><p>The conversion from a temperature measurement in degrees Fahrenheit <span class="math inline">\(F\)</span> to Celsius <span class="math inline">\(C\)</span> is performed using the following equation: <span class="math inline">\(C = \ \frac{5}{9}\left( F - 32 \right)\)</span>. Use vector-oriented behavior in R to convert the temperatures 45, 77, 20, 19, 101, 120, and 212 in degrees Fahrenheit to degrees Celsius.</p></li>
+<li><p>Create and store this data frame as <strong>dframe</strong> in your R workspace:</p>
+  <table>
+  <thead>
+  <tr class="header">
+  <th><strong>person</strong></th>
+  <th><strong>sex</strong></th>
+  <th><strong>funny</strong></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>Stan</td>
+  <td>M</td>
+  <td>High</td>
+  </tr>
+  <tr class="even">
+  <td>Francine</td>
+  <td>F</td>
+  <td>Med</td>
+  </tr>
+  <tr class="odd">
+  <td>Steve</td>
+  <td>M</td>
+  <td>Low</td>
+  </tr>
+  <tr class="even">
+  <td>Roger</td>
+  <td>M</td>
+  <td>High</td>
+  </tr>
+  <tr class="odd">
+  <td>Hayley</td>
+  <td>F</td>
+  <td>Med</td>
+  </tr>
+  <tr class="even">
+  <td>Klaus</td>
+  <td>M</td>
+  <td>Med</td>
+  </tr>
+  </tbody>
+  </table>
+<p><strong>person</strong> should be a character vector, <strong>sex</strong> should be a factor with levels <strong>F</strong> and <strong>M</strong>, and <strong>funny</strong> should be a factor with levels <strong>Low, Med</strong>, and <strong>High</strong>.</p></li>
+  <ol type="a">
+  <li><p>Stan and Francine are 41 years old, Steve is 15, Hayley is 21, and Klaus is 60. Roger is extremely old – 106 years. Append these data as a new numeric column variable in <strong>dframe</strong> called <strong>age</strong>.</p></li>
+  <li><p>Extract from <strong>dframe</strong> just the names and ages of any records where the individual is female and has a level of funniness equal to <strong>Med OR High.</strong></p></li>
+  </ol>
+</ol>
+
+
+</div>
+</div>
+</body>
+</html>
