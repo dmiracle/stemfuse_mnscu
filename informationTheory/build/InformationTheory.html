@@ -267,41 +267,49 @@
 <p>I = -(0.90 x log<sub>2</sub> 0.90 + 0.10 x log<sub>2</sub> 0.10) = 0.20</p>
 <p>This means that there are 0.20 bits of Shannon entropy or uncertainty of 0.20 bits. The constraint effectively limited the amount of information, thereby reducing uncertainty.</p>
 <p>If we have only a small set of symbols, the number list [1, 3, 5, 7]. The entropy calculation is:</p>
-<p>Element, e from index 1 to 4</p>
-<p>Number of elements, N = 4</p>
-<p>Probability of e, P<sub>e</sub> = P<sub>e</sub> / N</p>
-<p>Shannon entropy, I = -1 * (average sum of P<sub>e</sub> * log<sub>2</sub>(Pi) ) == 2 bits</p>
+  <blockquote>
+  Element, e from index 1 to 4<br>
+  Number of elements, N = 4  <br>
+  Probability of e, P<sub>e</sub> = P<sub>e</sub> / N <br>  
+  Shannon entropy, I = -1 \* (average sum of P<sub>e</sub> \* log<sub>2</sub>(Pi) ) == 2 bits
+  </blockquote>
+
 <p>What if the the sample numbers are [2, 4, 6, 8], the result is the same, 2 bits. If you are confused, think though this general algorithm (program code is AWK):</p>
-<p>bitstr = &quot;1111222233334444&quot;</p>
-<p>N = split(bitstr, arr, &quot;&quot;) # create array arr N = length of bitstr</p>
-<p>for (i = 1; i &lt;= N; i++) { # assign value of digit to a key in array arr2</p>
-<p>arr2[arr[i]]++; # Note! Duplicates == single key; yet +1 for each digit</p>
-<p>}</p>
-<p>for(e in arr2) {</p>
-<p># now we want count of element relative to total element count</p>
-<p>p = arr2[e] / N; # key e for val = relative count in numerator / total count</p>
-<p>I -= p * log(p);</p>
-<p>}</p>
-<p>print I / log(2);</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode a"><code class="sourceCode ada"><a class="sourceLine" id="cb1-1" title="1">bitstr = <span class="st">&quot;1111222233334444&quot;</span></a>
+<a class="sourceLine" id="cb1-2" title="2">N = split(bitstr, arr, <span class="st">&quot;&quot;</span>)      # create <span class="kw">array</span> arr N = length <span class="kw">of</span> bitstr</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">for</span> (i = <span class="dv">1</span>; i &lt;= N; i++) {      # assign value <span class="kw">of</span> digit to a key <span class="kw">in</span> <span class="kw">array</span> arr2</a>
+<a class="sourceLine" id="cb1-5" title="5">  arr2[arr[i]]++;               # Note! Duplicates == single key; yet +<span class="dv">1</span> <span class="kw">for</span> each digit</a>
+<a class="sourceLine" id="cb1-6" title="6">}</a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="kw">for</span>(e <span class="kw">in</span> arr2) {</a>
+<a class="sourceLine" id="cb1-9" title="9">  # now we want count <span class="kw">of</span> element relative to total element count</a>
+<a class="sourceLine" id="cb1-10" title="10">  p = arr2[e] / N;     # key e <span class="kw">for</span> val = relative count <span class="kw">in</span> numerator / total count </a>
+<a class="sourceLine" id="cb1-11" title="11">  I -= p * log(p);</a>
+<a class="sourceLine" id="cb1-12" title="12">}</a>
+<a class="sourceLine" id="cb1-13" title="13">print I / log(<span class="dv">2</span>);</a></code></pre></div>
 <p>In Python the same algorithm can look like this:</p>
-<p>#!/usr/bin/python3</p>
-<p>import math</p>
-<p>def entropy(bitstr):</p>
-<p>elist = list(bitstr)</p>
-<p>N = len(elist)</p>
-<p>I = 0.0</p>
-<p>S = set(elist) # creates set of distinct elements</p>
-<p>for s in S:</p>
-<p>frequency = 0.0</p>
-<p>for e in elist:</p>
-<p>if(s == e):</p>
-<p>frequency = frequency + 1</p>
-<p>p = (1.0 * frequency) / (1.0 * N)</p>
-<p>I = I - p * math.log(p)</p>
-<p>return I / math.log(2)</p>
-<p>#Run a test:</p>
-<p>bitstr = &quot;1111222233334444&quot;</p>
-<p>print(entropy(bitstr))</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="co">#!/usr/bin/python3 </span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="im">import</span> math</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">def</span> entropy(bitstr):</a>
+<a class="sourceLine" id="cb2-4" title="4">  elist <span class="op">=</span> <span class="bu">list</span>(bitstr)</a>
+<a class="sourceLine" id="cb2-5" title="5">  N <span class="op">=</span> <span class="bu">len</span>(elist)</a>
+<a class="sourceLine" id="cb2-6" title="6">  I <span class="op">=</span> <span class="fl">0.0</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  S <span class="op">=</span> <span class="bu">set</span>(elist) <span class="co"># creates set of distinct elements</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="cf">for</span> s <span class="kw">in</span> S:</a>
+<a class="sourceLine" id="cb2-10" title="10">    frequency <span class="op">=</span> <span class="fl">0.0</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="cf">for</span> e <span class="kw">in</span> elist:</a>
+<a class="sourceLine" id="cb2-12" title="12">      <span class="cf">if</span>(s <span class="op">==</span> e):</a>
+<a class="sourceLine" id="cb2-13" title="13">        frequency <span class="op">=</span> frequency <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-14" title="14">        p <span class="op">=</span> (<span class="fl">1.0</span> <span class="op">*</span> frequency) <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">*</span> N)</a>
+<a class="sourceLine" id="cb2-15" title="15">      I <span class="op">=</span> I <span class="op">-</span> p <span class="op">*</span> math.log(p)</a>
+<a class="sourceLine" id="cb2-16" title="16"></a>
+<a class="sourceLine" id="cb2-17" title="17">  <span class="cf">return</span> I <span class="op">/</span> math.log(<span class="dv">2</span>) </a>
+<a class="sourceLine" id="cb2-18" title="18"></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#Run a test:</span></a>
+<a class="sourceLine" id="cb2-20" title="20">bitstr <span class="op">=</span> <span class="st">&quot;1111222233334444&quot;</span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="bu">print</span>(entropy(bitstr))</a></code></pre></div>
 <p>Whatever language you use, when computing P<sub>e</sub> be careful not to confuse the count of distinct elements with the elements themselves. If you use an associative array to assist with this task, the manner of extracting a collection's keys and values depends on the language.</p>
 <h2 id="transmission-of-messages">Transmission of messages</h2>
 <p>Our message symbols can be comprised of characters or words.</p>
@@ -330,9 +338,9 @@
 <p>The meaning of information is of no concern to Information Theory. In that context, “more information” does not convey more meaning, but greater uncertainty with a greater number of bits that must be processed.</p>
 <p>Exercise</p>
 <p>Using Python, write an algorithm to determine the entropy of the following lists:</p>
-<p>[0, 0, 0, 0, 0, 0]</p>
-<p>[1, 1, 1, 1, 1, 1]</p>
-<p>[1, 0, 1, 0, 1, 0]</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1">[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb3-2" title="2">[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb3-3" title="3">[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>]</a></code></pre></div>
 <p>Submit your coded algorithm and your output.</p>
 <p>What do you deduce about the impact of various element patterns on entropy?</p>
 <p>Joint entropy</p>
@@ -341,40 +349,42 @@
 <p>H(S1 , S2) = -∑<sub>i</sub>P(S1<sub>i </sub>, S2<sub>j</sub>) x log<sub>2</sub>(P(S1<sub>i</sub> , S2<sub>j</sub>)), where (S1<sub>i </sub>, S2<sub>j </sub>) ∈ S1 × S2</p>
 <p>Determining joint entropy is not much different than finding entropy, except that you must first determine the intersecting set.</p>
 <p>Python gives us some fairly easy to use set operators:</p>
-<p>s1, s2 = {1, 3, 5, 7, 8}, {1, 2, 4, 6, 8}# define 2 sets</p>
-<p>print(&quot;union s1 s2: &quot;, s2 | s2)</p>
-<p>print(&quot;intersection s1 s2: &quot;, s1 &amp; s2)</p>
-<p>print(&quot;difference s1 s2: &quot;, s1 - s2)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1">s1, s2 <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>}, {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>}   <span class="co"># define 2 sets</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="bu">print</span>(<span class="st">&quot;union s1 s2: &quot;</span>, s2 <span class="op">|</span> s2)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="bu">print</span>(<span class="st">&quot;intersection s1 s2: &quot;</span>, s1 <span class="op">&amp;</span> s2)</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="bu">print</span>(<span class="st">&quot;difference s1 s2: &quot;</span>, s1 <span class="op">-</span> s2)</a></code></pre></div>
 <p>However, for you to better understand the set operations involved, the following Python code is more explicit about the set intersection:</p>
-<p>#!/usr/bin/python3</p>
-<p>import math</p>
-<p>def jointEntopy(bitstr1, bitstr2):</p>
-<p>S1 = set(bitstr1)</p>
-<p>S2 = set(bitstr2)</p>
-<p>L1 = list(bitstr1)</p>
-<p>L2 = list(bitstr2)</p>
-<p>N = len(L1)</p>
-<p>I = 0.0</p>
-<p>for s1 in S1:</p>
-<p>for s2 in S2:</p>
-<p>frequency = 0.0</p>
-<p>for i in range(N):</p>
-<p>if(s1 == L1[i] and s2 == L2[i]): # set intersection</p>
-<p>frequency = frequency + 1</p>
-<p>p = (1.0 * frequency) / (1.0 * N)</p>
-<p>if p &gt; 0.0:</p>
-<p>I = I - p * math.log(p)</p>
-<p>return ( I / math.log(2) )</p>
-<p>#Run a test:</p>
-<p>bitstr1 = &quot;13578&quot;</p>
-<p>bitstr2 = &quot;12468&quot;</p>
-<p>print( jointEntopy(bitstr1, bitstr2) )</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" title="1"><span class="co">#!/usr/bin/python3</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="im">import</span> math</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">def</span> jointEntopy(bitstr1, bitstr2):</a>
+<a class="sourceLine" id="cb5-4" title="4">  S1 <span class="op">=</span> <span class="bu">set</span>(bitstr1)</a>
+<a class="sourceLine" id="cb5-5" title="5">  S2 <span class="op">=</span> <span class="bu">set</span>(bitstr2)</a>
+<a class="sourceLine" id="cb5-6" title="6">  L1 <span class="op">=</span> <span class="bu">list</span>(bitstr1)</a>
+<a class="sourceLine" id="cb5-7" title="7">  L2 <span class="op">=</span> <span class="bu">list</span>(bitstr2)</a>
+<a class="sourceLine" id="cb5-8" title="8">  N <span class="op">=</span> <span class="bu">len</span>(L1)</a>
+<a class="sourceLine" id="cb5-9" title="9">  I <span class="op">=</span> <span class="fl">0.0</span></a>
+<a class="sourceLine" id="cb5-10" title="10">  <span class="cf">for</span> s1 <span class="kw">in</span> S1:</a>
+<a class="sourceLine" id="cb5-11" title="11">    <span class="cf">for</span> s2 <span class="kw">in</span> S2:</a>
+<a class="sourceLine" id="cb5-12" title="12">      frequency <span class="op">=</span> <span class="fl">0.0</span></a>
+<a class="sourceLine" id="cb5-13" title="13">      <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</a>
+<a class="sourceLine" id="cb5-14" title="14">        <span class="cf">if</span>(s1 <span class="op">==</span> L1[i] <span class="kw">and</span> s2 <span class="op">==</span> L2[i]):     <span class="co"># set intersection </span></a>
+<a class="sourceLine" id="cb5-15" title="15">          frequency <span class="op">=</span> frequency <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-16" title="16">      p <span class="op">=</span> (<span class="fl">1.0</span> <span class="op">*</span> frequency) <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">*</span> N)</a>
+<a class="sourceLine" id="cb5-17" title="17">      <span class="cf">if</span> p <span class="op">&gt;</span> <span class="fl">0.0</span>:</a>
+<a class="sourceLine" id="cb5-18" title="18">        I <span class="op">=</span> I <span class="op">-</span> p <span class="op">*</span> math.log(p)</a>
+<a class="sourceLine" id="cb5-19" title="19"></a>
+<a class="sourceLine" id="cb5-20" title="20">  <span class="cf">return</span> ( I <span class="op">/</span> math.log(<span class="dv">2</span>) )</a>
+<a class="sourceLine" id="cb5-21" title="21"></a>
+<a class="sourceLine" id="cb5-22" title="22"><span class="co">#Run a test:</span></a>
+<a class="sourceLine" id="cb5-23" title="23">bitstr1 <span class="op">=</span> <span class="st">&quot;13578&quot;</span></a>
+<a class="sourceLine" id="cb5-24" title="24">bitstr2 <span class="op">=</span> <span class="st">&quot;12468&quot;</span></a>
+<a class="sourceLine" id="cb5-25" title="25"><span class="bu">print</span>( jointEntopy(bitstr1, bitstr2) )</a></code></pre></div>
 <p>Exercise</p>
 <p>Using Python, write an algorithm to determine the joint entropy of the following lists:</p>
-<p>S1 S2</p>
-<p>[0, 0, 0, 0, 0, 0] and [1, 1, 1, 1, 1, 1]</p>
-<p>[1, 0, 1, 0, 1, 0] and [0, 1, 0, 1, 0, 1]</p>
-<p>[1, 2, 2, 3, 3, 3] and [1, 1, 1, 2, 2, 3]</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1">        S1                     S2</a>
+<a class="sourceLine" id="cb6-2" title="2">[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] <span class="kw">and</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb6-3" title="3">[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] <span class="kw">and</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>] </a>
+<a class="sourceLine" id="cb6-4" title="4">[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>] <span class="kw">and</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>]  </a></code></pre></div>
 <p>Submit your coded algorithm and your output.</p>
 <p>What do you deduce about the impact of any particular bit pattern on joint entropy?</p>
 <p>What types of patterns increase or decrease joint entropy?</p>
@@ -388,40 +398,46 @@
 <p>Presented with dependence on another variable we have a state of ambiguity. That is why conditional entropy is also called “equivocation.” In the formula above, S1 may be interpreted as a “cause” while S2 is considered an “effect.” H(S1 | S2) is the signal lost between S1 and S2.</p>
 <p>Cause and effect exist when the sender can confirm the receiver's information, or if the receiver can confirm what the sender actually sent. Given uncertainty, where S2 is not likely to reflect a known S1, there might be set independence or channel noise (see below).</p>
 <p>In Python, using our algorithms above for entropy and joint entropy, conditional entropy may be described as follows:</p>
-<p>#!/usr/bin/python3</p>
-<p>exec(open(&quot;entropy.py&quot;).read())</p>
-<p>exec(open(&quot;jointEntropy.py&quot;).read())</p>
-<p>def conditionalEntropy(bitstr1, bitstr2):</p>
-<p>return jointEntropy(bitstr1, bitstr2) - entropy(bitstr2)</p>
-<p># Run a test:</p>
-<p>bitstr1 = &quot;13578765&quot;</p>
-<p>bitstr2 = &quot;12468765&quot;</p>
-<p>print( conditionalEntropy(bitstr1, bitstr2) )</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1"><span class="co">#!/usr/bin/python3</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="bu">exec</span>(<span class="bu">open</span>(<span class="st">&quot;entropy.py&quot;</span>).read())</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="bu">exec</span>(<span class="bu">open</span>(<span class="st">&quot;jointEntropy.py&quot;</span>).read())</a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="kw">def</span> conditionalEntropy(bitstr1, bitstr2):</a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="cf">return</span> jointEntropy(bitstr1, bitstr2) <span class="op">-</span> entropy(bitstr2) </a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co"># Run a test:</span></a>
+<a class="sourceLine" id="cb7-8" title="8">bitstr1 <span class="op">=</span> <span class="st">&quot;13578765&quot;</span></a>
+<a class="sourceLine" id="cb7-9" title="9">bitstr2 <span class="op">=</span> <span class="st">&quot;12468765&quot;</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="bu">print</span>( conditionalEntropy(bitstr1, bitstr2) )</a></code></pre></div>
 <p>Exercise</p>
 <p>Using Python, write an algorithm to determine the conditional entropy of the following lists:</p>
-<p>S1 S2</p>
-<p>[0, 0, 0, 0, 0, 0] and [1, 1, 1, 1, 1, 1]</p>
-<p>[1, 0, 1, 0, 1, 0] and [0, 1, 0, 1, 0, 1]</p>
-<p>[1, 2, 2, 3, 3, 3] and [1, 1, 1, 2, 2, 3]</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" title="1">        S1                     S2</a>
+<a class="sourceLine" id="cb8-2" title="2">[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] <span class="kw">and</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb8-3" title="3">[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>] <span class="kw">and</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>] </a>
+<a class="sourceLine" id="cb8-4" title="4">[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>] <span class="kw">and</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>]  </a></code></pre></div>
 <p>Submit your coded algorithm and your output.</p>
 <p>What do you deduce about the impact of any particular bit pattern on conditional entropy?</p>
 <p>What types of patterns increase or decrease conditional entropy?</p>
 <p>Mutual information</p>
 <p>Mutual information can tell us how much uncertainty is removed from one message given (prior) knowledge of another message.</p>
 <p>Consider the following formula for mutual information:</p>
-<p>H(S1 | S2) = entropy(S1) - conditionalEntropy(S1, S2)</p>
-<p>= entropy(S1) - jointEntropy(S1, S2) - entropy(S2)</p>
+<blockquote>
+H(S1 | S2) = entropy(S1) - conditionalEntropy(S1, S2) <br>
+ &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp= entropy(S1) - jointEntropy(S1, S2) - entropy(S2)
+</blockquote>
+
 <p>The mutual information of two sets of symbols gauges in terms of Shannon Information how much dependence set S1 has on S2 and how much dependence set S2 has on S1.</p>
 <p>In Python, mutual information might look like this:</p>
-<p>#!/usr/bin/python3</p>
-<p>exec(open(&quot;entropy.py&quot;).read())</p>
-<p>exec(open(&quot;conditionalEntropy.py&quot;).read())</p>
-<p>def mutualInformation(bitstr1, bitstr2):</p>
-<p>return entropy(bitstr1) - conditionalEntropy(bitstr1, bitstr2)</p>
-<p># Run a test:</p>
-<p>bitstr1 = &quot;13578765&quot;</p>
-<p>bitstr2 = &quot;12468765&quot;</p>
-<p>print(mutualInformation(bitstr1, bitstr2))</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" title="1"><span class="co">#!/usr/bin/python3</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="bu">exec</span>(<span class="bu">open</span>(<span class="st">&quot;entropy.py&quot;</span>).read())</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="bu">exec</span>(<span class="bu">open</span>(<span class="st">&quot;conditionalEntropy.py&quot;</span>).read())</a>
+<a class="sourceLine" id="cb9-4" title="4"></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="kw">def</span> mutualInformation(bitstr1, bitstr2):</a>
+<a class="sourceLine" id="cb9-6" title="6">  <span class="cf">return</span> entropy(bitstr1) <span class="op">-</span> conditionalEntropy(bitstr1, bitstr2)          </a>
+<a class="sourceLine" id="cb9-7" title="7"></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="co"># Run a test:</span></a>
+<a class="sourceLine" id="cb9-9" title="9">bitstr1 <span class="op">=</span> <span class="st">&quot;13578765&quot;</span></a>
+<a class="sourceLine" id="cb9-10" title="10">bitstr2 <span class="op">=</span> <span class="st">&quot;12468765&quot;</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="bu">print</span>(mutualInformation(bitstr1, bitstr2))</a></code></pre></div>
 <p>Exercise</p>
 <p>Using Python, write an algorithm to compute the mutual information for any two sets, S1 and S2. Show what happens when there is redundant data encoding for overcoming symbol errors. What is the implication for redundancy given mutual information?</p>
 <p>Submit your coded algorithm and your output.</p>
@@ -438,13 +454,16 @@
 <p>Redundant characters can be transmitted. For example, instead of transmitting “HOP” transmit characters as double characters, such as “HHOOPP.”</p>
 <p>The receipt of “HHOXPP” clearly has an error. This can trigger a “re-transmit” request, or the receiver may simply substitute the most common word having the pattern “H_P.”</p>
 <p>A more robust scheme is transmit several instances of each character:</p>
-<p>H H H H H H H H</p>
-<p>O O O O O O O O</p>
-<p>P P P P P P P P</p>
+<pre><code>H H H H H H H H
+O O O O O O O O
+P P P P P P P P
+</code></pre>
 <p>Each character actually has its ASCII code represented in binary, as 0 and 1 bits. The representation of a 1 being in the aforementioned redundant 8 bit scheme. These redundant bits provide “7 bit error correction.” For example, a single 1 bit is expressed as:</p>
-<p>1 1 1 1 1 1 1</p>
+<pre><code>1 1 1 1 1 1 1 
+</code></pre>
 <p>… and a single 0 bit is expressed as:</p>
-<p>0 0 0 0 0 0 0 0</p>
+<pre><code>0 0 0 0 0 0 0 0
+</code></pre>
 <p>Following each of these bit strings with parity bit, such as 00000000 or 00000001, provides “n-bit error detection.”</p>
 <p>The receiver can decode the value S2 = 11111111 as 1 if the sum(S1) &gt; 4 or if the subsequent parity bit is 0.</p>
 <p>Additionally, there could be a certain parity for certain vertical sequences of bit strings for “m-bit error detection.”</p>
@@ -465,10 +484,11 @@
 <p>channelCapacity(S1, S2) = mutualInformation(S1, S)</p>
 <h3 id="exercise">Exercise</h3>
 <p>Using Python, write an algorithm to determine the channel capacity of the following lists:</p>
-<p>S1 S2</p>
-<p>[0, 0, 0, 0, 0, 0] and [1, 1, 1, 1, 1, 1]</p>
-<p>[1, 0, 1, 0, 1, 0] and [0, 1, 0, 1, 0, 1]</p>
-<p>[1, 2, 2, 3, 3, 3] and [1, 1, 1, 2, 2, 3]</p>
+<pre><code>        S1                     S2
+[0, 0, 0, 0, 0, 0] and [1, 1, 1, 1, 1, 1]
+[1, 0, 1, 0, 1, 0] and [0, 1, 0, 1, 0, 1] 
+[1, 2, 2, 3, 3, 3] and [1, 1, 1, 2, 2, 3]  
+</code></pre>
 <p>What values of 0s and 1s for S1 and S2 will maximize channel capacity? Does information rate matter?</p>
 <h2 id="data-compression-and-huffman-encoding">Data Compression and Huffman Encoding</h2>
 <p>Data compression is an achievement of information theory. Compressing data allows us to represent information with fewer bits for transmission and storage. The receiver restores the original information using decompression.</p>
@@ -479,62 +499,156 @@
 <h3 id="compression">Compression</h3>
 <p>Huffman coding is an elegant form of compression that decodes and encodes data using a binary tree data structure called a “Huffman tree.”</p>
 <p>As an example, suppose we have a text message to send that consists of 120 characters, only made up of the characters A, B, C, X, Y, and Z. These characters have different frequencies of occurrence in the text. So, we itemize their probabilities and entropies as follows:</p>
-<p><em>SymbolProbabilityEntropy eaEntropy total</em></p>
-<p>A27 / 1200.4813.07</p>
-<p>B9 / 1200.282.52</p>
-<p>C21 / 1200.449.24</p>
-<p>X15 / 1200.385.63</p>
-<p>Y12 / 1200.333.99</p>
-<p>Z16 / 1200.396.20</p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Probability</th>
+<th>Entropy ea</th>
+<th>Entropy total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>27 / 120</td>
+<td>0.48</td>
+<td>13.07</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>9 / 120</td>
+<td>0.28</td>
+<td>2.52</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>21 / 120</td>
+<td>0.44</td>
+<td>9.24</td>
+</tr>
+<tr class="even">
+<td>X</td>
+<td>15 / 120</td>
+<td>0.38</td>
+<td>5.63</td>
+</tr>
+<tr class="odd">
+<td>Y</td>
+<td>12 / 120</td>
+<td>0.33</td>
+<td>3.99</td>
+</tr>
+<tr class="even">
+<td>Z</td>
+<td>16 / 120</td>
+<td>0.39</td>
+<td>6.20</td>
+</tr>
+</tbody>
+</table>
 <p>Building Huffman tree codes result in compression that approximates entropy. It cannot be exact because, as you can see, entropy does not compute to whole numbers.</p>
 <p>To compress and decompress, start with one of the symbols, such as 'A.' That will signify the root node of the tree. A left branch from a node will be labeled with a 0 and a right branch will be labeled with a 1.</p>
 <p>Order the symbols in terms of frequency:</p>
-<p>B Y X Z C A</p>
-<p>9 12 15 16 21 27</p>
+<pre><code>B  Y  X  Z  C  A
+9 12 15 16 21 27
+</code></pre>
 <p>Sum the symbols pair-wise, pairing the symbols with the smallest probabilities, to create sub trees with their respective root nodes as their sums:</p>
-<p>21 31 48</p>
-<p>/ \ / \ / \</p>
-<p>B Y X Z C A</p>
-<p>9 12 15 16 21 27</p>
+<pre><code>  21        31          48
+ /  \      /  \        /  \
+B    Y    X    Z      C    A
+9    12   15   16    21    27
+</code></pre>
 <p>Continue to merge the trees, paring the smallest sums:</p>
-<p>52</p>
-<p>/ \</p>
-<p>21 31 48</p>
-<p>/ \ / \ / \</p>
-<p>B Y X Z C A</p>
-<p>9 12 15 16 21 27</p>
+<pre><code>       52
+    /      \
+  21        31          48
+ /  \      /  \        /  \
+B    Y    X    Z      C    A
+9    12   15   16    21    27
+</code></pre>
 <p>Repeat until there is one root. Then label 0s for left branches and 1s for right branches, as follows:</p>
-<p>100</p>
-<p>** 0/ \1**</p>
-<p>52 48</p>
-<p>** 0/ \1 0/ \1**</p>
-<p>21 31 C A</p>
-<p>**0/ \1 0/ \1 ** 21 27</p>
-<p>B Y X Z</p>
-<p>9 12 15 16</p>
+<pre><code>            100
+         /       \  
+       0/         \1
+       /           \
+       52           48
+   0/     \1      0/  \1
+  21       31     C    A 
+0/  \1   0/   \1  21   27 
+B    Y   X     Z      
+9    12  15    16 
+</code></pre>
 <p>The Huffman code (the compression) for each symbol is found by tracing its path from the root node (top) to the symbol. Along this path make a list of the 0s and 1s. For the above tree, we get:</p>
-<p>B = 000</p>
-<p>Y = 001</p>
-<p>X = 010</p>
-<p>Z = 011</p>
-<p>C = 10</p>
-<p>A = 11</p>
+<pre><code>B = 000
+Y = 001
+X = 010
+Z = 011
+C = 10
+A = 11
+</code></pre>
 <p>How much compression did this give us? It takes just 2 to 3 bits to represent all the symbols. If the original scheme were to transmit 8 bit symbols, the Huffman encoding, saves 5 to 6 bits per symbol.</p>
-<p><em>SymbolFrequencyBitsFrequency x Bits</em></p>
-<p>A27254</p>
-<p>B9218</p>
-<p>C21366</p>
-<p>X15345</p>
-<p>Y12336</p>
-<p>Z16348</p>
-<p>267 total bits</p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Frequency</th>
+<th>Bits</th>
+<th>Frequency x Bits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>27</td>
+<td>2</td>
+<td>54</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>9</td>
+<td>2</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>21</td>
+<td>3</td>
+<td>66</td>
+</tr>
+<tr class="even">
+<td>X</td>
+<td>15</td>
+<td>3</td>
+<td>45</td>
+</tr>
+<tr class="odd">
+<td>Y</td>
+<td>12</td>
+<td>3</td>
+<td>36</td>
+</tr>
+<tr class="even">
+<td>Z</td>
+<td>16</td>
+<td>3</td>
+<td>48</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td>267 total bits</td>
+</tr>
+</tbody>
+</table>
 <p>Saved bits = (120 x 8) – 267 / (120 x 8) == 72.2%</p>
 <h3 id="decompression">Decompression</h3>
 <p>Decompressing entails rebuilding the Huffman tree. Consider the following Huffman codes and their associated values:</p>
 <p>{ B:000, Y:001, X:010, Z:011, C:10, A:11 }</p>
 <p>We can determine the placement of each symbol. Starting at the root node, the route to a symbol depends on the left-right direction signified by 0 or 1 respectively. Label the end of each such bit path with the associated symbol. Repeat this processes for all of the symbols, starting from the same root node.</p>
 <p>In decompression, the sequence order of symbols:bits does not matter because each Huffman code is unambiguous, regardless of the bits in its parent node (ie: Huffman codes are prefix <em>free</em>).</p>
-<p>Exercise</p>
+<h3 id="exercise-1">Exercise</h3>
 <p>Using Python, write an algorithm to decompress the Huffman codes from our example: A:11, C:10, Z:011, X:010, Y:001, B:000. Does your algorithm verify that symbol sequence matters for decompression? Does it matter for compression? Please explain.</p>
 <p>Create an additional function to compute the effectiveness of the Huffman encoding.</p>
 <p>Submit your test output along with your code.</p>
